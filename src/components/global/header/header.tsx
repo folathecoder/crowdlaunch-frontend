@@ -14,6 +14,8 @@ import { AppLogo } from 'public/images';
 import { APP_NAME } from '@/data/appInfo';
 import HeaderSearchBar from './children/headerSearch/headerSearch';
 import HeaderMenu from './children/headerMenu/headerMenu';
+import { BsHandbag } from 'react-icons/bs';
+import { Button } from '@/components/global';
 
 const Header = () => {
   return (
@@ -32,7 +34,23 @@ const Header = () => {
             <HeaderMenu />
           </HeaderNav>
         </HeaderRight>
-        <HeaderLeft>b</HeaderLeft>
+        <HeaderLeft>
+          <div>
+            <Link href="/">Marketplace</Link>
+          </div>
+          <div>
+            <Button
+              buttonTitle="connect wallet"
+              buttonType="action"
+              buttonFunction={() => {}}
+            />
+          </div>
+          <div>
+            <button type="button">
+              <BsHandbag />
+            </button>
+          </div>
+        </HeaderLeft>
       </HeaderInner>
     </HeaderContainer>
   );
