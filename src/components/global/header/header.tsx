@@ -8,11 +8,12 @@ import {
   HeaderLeft,
   HeaderLogo,
   HeaderSearch,
-  HeaderMenu,
+  HeaderNav,
 } from './headerStyles';
 import { AppLogo } from 'public/images';
 import { APP_NAME } from '@/data/appInfo';
 import HeaderSearchBar from './children/headerSearch/headerSearch';
+import HeaderMenu from './children/headerMenu/headerMenu';
 
 const Header = () => {
   return (
@@ -27,7 +28,9 @@ const Header = () => {
           <HeaderSearch>
             <HeaderSearchBar />
           </HeaderSearch>
-          <HeaderMenu></HeaderMenu>
+          <HeaderNav>
+            <HeaderMenu />
+          </HeaderNav>
         </HeaderRight>
         <HeaderLeft>b</HeaderLeft>
       </HeaderInner>

@@ -23,7 +23,6 @@ export const HeaderInner = styled.div`
   flex: 1;
   height: 40px;
   max-width: 1556px;
-  /* background-color: red; */
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
@@ -48,8 +47,9 @@ export const HeaderLogo = styled.div`
 
 export const HeaderSearch = styled.div`
   /* background-color: black; */
+  padding: 0px 24px;
 `;
 
-export const HeaderMenu = styled.nav`
-  background-color: black;
+export const HeaderNav = styled.nav`
+  /* background-color: black; */
 `;

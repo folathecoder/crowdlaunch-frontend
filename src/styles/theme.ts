@@ -23,13 +23,13 @@ export const darkTheme = {
   bg100: '#212123', // Yes
   bg200: '#161618', // Yes
   bg300: 'hsl(0, 0%, 100%, 0.04)', // Yes
-  accent100: '#c850c0',
+  accent100: '#C2177E',
   accent200: '#13cc78',
   accent300: '#8B44FF',
   accent400: '#634BFA',
   font100: 'hsl(0, 0%, 100%)',
   font200: 'hsl(0, 0%, 40%)', // Yes
-  font300: 'hsl(219, 16%, 61%)',
+  font300: 'rgba(255, 255, 255, 0.6)', //YES
   font400: 'hsl(0, 0%, 40%)',
   font500: 'hsla(218, 80%, 2%, 1)',
   font600: 'rgb(242, 242, 242, 0.3)',

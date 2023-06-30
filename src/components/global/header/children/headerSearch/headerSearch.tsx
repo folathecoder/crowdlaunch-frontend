@@ -8,7 +8,7 @@ interface WordSwitcherTypes {
 }
 
 const WordSwitcher = ({ prefix }: WordSwitcherTypes) => {
-  const words = ['Projects..', 'Startups..', 'NFTs..'];
+  const words = ['Projects...', 'Startups...', 'NFTs...'];
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -22,8 +22,8 @@ const WordSwitcher = ({ prefix }: WordSwitcherTypes) => {
         <span>
           {isMounted && (
             <LoopCircleLoading interval={2000} mask={true} fade={true}>
-              {words.map((word, index) => (
-                <div key={index}>{word}</div>
+              {words.map((word) => (
+                <div key={word}>{word}</div>
               ))}
             </LoopCircleLoading>
           )}

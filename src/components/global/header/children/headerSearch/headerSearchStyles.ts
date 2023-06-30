@@ -1,7 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const SearchContainer = styled.form`
-  /* background-color: red; */
   border-radius: 12px;
   width: 400px;
 
@@ -29,10 +28,5 @@ export const SearchContainer = styled.form`
     font-size: 14px;
     font-weight: 400;
     padding: 0px 8px;
-
-    & > * {
-      position: absolute;
-      background-color: red;
-    }
   }
 `;
