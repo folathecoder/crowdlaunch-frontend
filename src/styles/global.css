@@ -22,3 +22,7 @@
     background-position: 0% 50%;
   }
 }
+
+main {
+  min-height: calc(100vh - 160px);
+}
