@@ -28,7 +28,6 @@ export const FooterInner = styled.div`
 `;
 export const FooterCopyright = styled.div`
   p {
-    opacity: 0.3;
     text-align: center;
   }
 `;
