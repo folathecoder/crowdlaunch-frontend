@@ -2,7 +2,7 @@ import '@/styles/global.css';
 import type { AppProps } from 'next/app';
 import { GlobalStyles } from '@/styles/globalStyles';
 import { darkTheme } from '@/styles/theme';
-import { Header } from '@/components/global';
+import { Header, Footer } from '@/components/global';
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <GlobalStyles theme={darkTheme} />
           <Header />
           <Component {...pageProps} />
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          <Footer />
           <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
         </WagmiConfig>
       </QueryClientProvider>
