@@ -1,11 +1,5 @@
-import { useState, useEffect } from 'react';
-import {
-  useAccount,
-  useConnect,
-  useEnsName,
-  useDisconnect,
-  useBalance,
-} from 'wagmi';
+import { useEffect } from 'react';
+import { useAccount, useDisconnect, useBalance } from 'wagmi';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/redux/store';
 import {
@@ -18,8 +12,13 @@ const useWallet = () => {
   const dispatch = useDispatch();
   const wallet = useSelector((state: RootState) => state.wallet.activeWallet);
 
-  const { address, isConnected, isDisconnected, isReconnecting, isConnecting } =
-    useAccount();
+  const {
+    address,
+    isConnected: walletIsConnected,
+    isDisconnected: walletIsDisconnected,
+    isReconnecting: walletIsReconnecting,
+    isConnecting: walletIsConnecting,
+  } = useAccount();
 
   const {
     data: balance,
@@ -29,13 +28,19 @@ const useWallet = () => {
     isError: balanceIsError,
     isFetched: balanceIsFetched,
   } = useBalance({
-    address: '0x1d3d3fbfa8a6d1a24b651f8cac6859d4589c9d49',
+    address: address,
   });
 
   const { disconnect: disconnectWallet } = useDisconnect();
 
   useEffect(() => {
     const walletData: ActiveWalletTypes = {
+      walletStatus: {
+        isConnected: walletIsConnected,
+        isDisconnected: walletIsDisconnected,
+        isReconnecting: walletIsReconnecting,
+        isConnecting: walletIsConnecting,
+      },
       walletName: 'My Wallet',
       walletAddress: address,
       balance: balance,
@@ -48,6 +53,7 @@ const useWallet = () => {
       },
     };
     dispatch(setActiveWallet(walletData));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     address,
@@ -57,6 +63,10 @@ const useWallet = () => {
     balanceIsFetching,
     balanceIsLoading,
     balanceIsSuccess,
+    walletIsConnected,
+    walletIsConnecting,
+    walletIsDisconnected,
+    walletIsReconnecting,
   ]);
 
   const handleClearWallet = () => {
