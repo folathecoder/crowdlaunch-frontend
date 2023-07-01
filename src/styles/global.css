@@ -1,0 +1,24 @@
+.gradient-link {
+  font-size: 15px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+  background-image: radial-gradient(#fcc914, #fe6f37, #c66add, #9a74f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: waveAnimation 2s linear infinite;
+  background-size: 200% auto;
+}
+
+@keyframes waveAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
