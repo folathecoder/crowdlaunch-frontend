@@ -19,17 +19,12 @@ import { useBreakPointUp } from '@/hooks/useBreakPoint';
 import { MdMenu } from 'react-icons/md';
 import MobileMenu from './children/mobileMenu/mobileMenu';
 import { useWeb3Modal } from '@web3modal/react';
-import {
-  useAccount,
-  useConnect,
-  useEnsName,
-  useDisconnect,
-  useBalance,
-} from 'wagmi';
 import useWallet from '@/wallet/useWallet';
 
 const Header = () => {
   const { wallet, handleClearWallet, disconnectWallet } = useWallet();
+
+  console.log('my wallet', wallet);
 
   const { open, close } = useWeb3Modal();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
