@@ -82,7 +82,7 @@ const Header = () => {
           )}
         </HeaderLeft>
       </HeaderInner>
-      {showMobileMenu && !removeMenuOnTablet && (
+      {!removeMenuOnTablet && (
         <MobileMenu
           showMobileMenu={showMobileMenu}
           setShowMobileMenu={setShowMobileMenu}

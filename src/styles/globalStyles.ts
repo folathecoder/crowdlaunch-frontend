@@ -8,6 +8,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
         --color-bg-200: ${(props) => props.theme.bg200};
         --color-bg-300: ${(props) => props.theme.bg300};
         --color-bg-400: ${(props) => props.theme.bg400};
+        --color-bg-500: ${(props) => props.theme.bg500};
         --color-accent-100: ${(props) => props.theme.accent100};
         --color-accent-200: ${(props) => props.theme.accent200};
         --color-accent-300: ${(props) => props.theme.accent300};
@@ -179,6 +180,10 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
       background-image: var(--color-accent-100);
       -webkit-text-fill-color: transparent;
       -webkit-background-clip: text;
+    }
+
+    button:focus {
+       outline: none;
     }
     
 `;

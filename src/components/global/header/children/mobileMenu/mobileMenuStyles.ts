@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 import { QUERIES } from '@/styles/mediaQueries';
+import { motion } from 'framer-motion';
 
-export const NavContainer = styled.nav`
+export const NavContainer = styled(motion.nav)`
   position: absolute;
-  background: rgba(22, 22, 24);
+  background: var(--color-bg-500);
   top: 0;
-  left: 0;
+  left: auto;
   right: 0;
   bottom: 0;
   height: 100vh;
+  overflow: hidden;
+  width: 100vw;
 
-  @media ${QUERIES.tabletMini} {
+  @media ${QUERIES.mobile} {
     top: 0;
     left: auto;
     right: 0;
@@ -39,5 +42,3 @@ export const NavHeader = styled.div`
 export const NavSearchContainer = styled.div`
   padding: 0px 20px;
 `;
-
-export const NavMenu = styled.div``;

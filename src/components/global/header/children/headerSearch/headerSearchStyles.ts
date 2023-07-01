@@ -6,6 +6,7 @@ interface HeaderSearchStyleTypes {
 
 export const SearchContainer = styled.form<HeaderSearchStyleTypes>`
   border-radius: 12px;
+  overflow: hidden;
 
   ${({ fullWidth }) =>
     fullWidth
@@ -28,6 +29,7 @@ export const SearchContainer = styled.form<HeaderSearchStyleTypes>`
     font-size: 14px;
     font-weight: 400;
     padding: 0px 8px;
+    line-break: no-break;
   }
 
   input {

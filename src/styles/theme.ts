@@ -25,6 +25,7 @@ export const darkTheme = {
   bg200: 'rgba(22, 22, 24, 0.5)', // Yes
   bg300: 'hsl(0, 0%, 100%, 0.04)', // Yes
   bg400: 'hsl(0, 0%, 100%)', // Yes
+  bg500: 'rgba(22, 22, 24)', //Yes
   accent100: '#C2177E',
   accent200: '#13cc78',
   accent300: '#8B44FF',
