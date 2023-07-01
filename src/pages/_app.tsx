@@ -5,13 +5,30 @@ import { darkTheme } from '@/styles/theme';
 import { Header } from '@/components/global';
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import {
+  ethereumClient,
+  projectId,
+  wagmiConfig,
+  Web3Modal,
+  WagmiConfig,
+} from '@/wallet/walletConfig';
+
+const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <GlobalStyles theme={darkTheme} />
-      <Header />
-      <Component {...pageProps} />
+      <QueryClientProvider client={queryClient}>
+        <WagmiConfig config={wagmiConfig}>
+          <GlobalStyles theme={darkTheme} />
+          <Header />
+          <Component {...pageProps} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+        </WagmiConfig>
+      </QueryClientProvider>
     </Provider>
   );
 }

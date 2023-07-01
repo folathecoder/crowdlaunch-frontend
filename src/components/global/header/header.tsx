@@ -18,9 +18,16 @@ import { Button, CartButton } from '@/components/global';
 import { useBreakPointUp } from '@/hooks/useBreakPoint';
 import { MdMenu } from 'react-icons/md';
 import MobileMenu from './children/mobileMenu/mobileMenu';
+import { useWeb3Modal } from '@web3modal/react';
+import useWallet from '@/wallet/useWallet';
 
 const Header = () => {
-  const [showMobileMenu, setShowMobileMenu] = useState(true);
+  const { wallet, handleClearWallet, disconnectWallet } = useWallet();
+
+  console.log('my wallet', wallet);
+
+  const { open, close } = useWeb3Modal();
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const { breakPoint: removeMenuOnTablet } = useBreakPointUp({
     breakMark: 1117,
@@ -31,6 +38,10 @@ const Header = () => {
   const { breakPoint: removeOnMobile } = useBreakPointUp({
     breakMark: 539,
   });
+
+  const openWalletConnectionModal = async () => {
+    await open();
+  };
 
   return (
     <HeaderContainer>
@@ -64,7 +75,7 @@ const Header = () => {
             <Button
               buttonTitle={removeOnMobile ? 'connect wallet' : 'connect'}
               buttonType="action"
-              buttonFunction={() => {}}
+              buttonFunction={openWalletConnectionModal}
             />
           </div>
           <div>
