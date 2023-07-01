@@ -1,11 +1,12 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
+import { QUERIES } from '@/styles/mediaQueries';
 
 export const ButtonContainer = styled.button`
   display: inline-flex;
-  height: 40px;
-  padding: 11px 12.703px 12px 17px;
+  height: 35px;
+  padding: 9px 9.703px 10px 13px;
   justify-content: flex-end;
   align-items: center;
   flex-shrink: 0;
@@ -29,6 +30,11 @@ export const ButtonContainer = styled.button`
 
   &:focus {
     outline: none;
+  }
+
+  @media ${QUERIES.mobile} {
+    height: 40px;
+    padding: 11px 12.703px 12px 17px;
   }
 `;
 

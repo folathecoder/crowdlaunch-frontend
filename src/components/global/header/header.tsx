@@ -14,10 +14,21 @@ import { AppLogo } from 'public/images';
 import { APP_NAME } from '@/data/appInfo';
 import HeaderSearchBar from './children/headerSearch/headerSearch';
 import HeaderMenu from './children/headerMenu/headerMenu';
-import { BsHandbag } from 'react-icons/bs';
-import { Button } from '@/components/global';
+import { Button, CartButton } from '@/components/global';
+import { useBreakPointUp } from '@/hooks/useBreakPoint';
+import { MdMenu } from 'react-icons/md';
 
 const Header = () => {
+  const { breakPoint: removeMenuOnTablet } = useBreakPointUp({
+    breakMark: 1073,
+  });
+  const { breakPoint: removeSearchOnTablet } = useBreakPointUp({
+    breakMark: 864,
+  });
+  const { breakPoint: removeOnMobile } = useBreakPointUp({
+    breakMark: 539,
+  });
+
   return (
     <HeaderContainer>
       <HeaderInner>
@@ -27,27 +38,38 @@ const Header = () => {
               <Image src={AppLogo} alt={APP_NAME} width={35} height={35} />
             </Link>
           </HeaderLogo>
-          <HeaderSearch>
-            <HeaderSearchBar />
-          </HeaderSearch>
-          <HeaderNav>
-            <HeaderMenu />
-          </HeaderNav>
+          {removeSearchOnTablet && (
+            <HeaderSearch>
+              <HeaderSearchBar />
+            </HeaderSearch>
+          )}
+          {removeMenuOnTablet && (
+            <HeaderNav>
+              <HeaderMenu />
+            </HeaderNav>
+          )}
         </HeaderRight>
         <HeaderLeft>
-          <div>
-            <Link href="/">Marketplace</Link>
-          </div>
+          {removeOnMobile && (
+            <div className="gradient-link">
+              <Link href="/marketplace" className="gradient-link">
+                Marketplace
+              </Link>
+            </div>
+          )}
           <div>
             <Button
-              buttonTitle="connect wallet"
+              buttonTitle={removeOnMobile ? 'connect wallet' : 'connect'}
               buttonType="action"
               buttonFunction={() => {}}
             />
           </div>
           <div>
-            <button type="button">
-              <BsHandbag />
+            <CartButton cartItemCount={93} />
+          </div>
+          <div>
+            <button className="mobile-nav_btn">
+              <MdMenu />
             </button>
           </div>
         </HeaderLeft>

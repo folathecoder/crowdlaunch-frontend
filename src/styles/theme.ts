@@ -22,7 +22,7 @@ export interface ThemeTypes {
 
 export const darkTheme = {
   bg100: '#212123', // Yes
-  bg200: '#161618', // Yes
+  bg200: 'rgba(22, 22, 24, 0.5)', // Yes
   bg300: 'hsl(0, 0%, 100%, 0.04)', // Yes
   bg400: 'hsl(0, 0%, 100%)', // Yes
   accent100: '#C2177E',
