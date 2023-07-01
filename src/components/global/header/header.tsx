@@ -19,6 +19,13 @@ import { useBreakPointUp } from '@/hooks/useBreakPoint';
 import { MdMenu } from 'react-icons/md';
 import MobileMenu from './children/mobileMenu/mobileMenu';
 import { useWeb3Modal } from '@web3modal/react';
+import {
+  useAccount,
+  useConnect,
+  useEnsName,
+  useDisconnect,
+  useBalance,
+} from 'wagmi';
 
 const Header = () => {
   const { open, close } = useWeb3Modal();
@@ -37,6 +44,12 @@ const Header = () => {
   const openWalletConnectionModal = async () => {
     await open();
   };
+
+  const { data, isError, isLoading } = useBalance({
+    address: '0xA0Cf798816D4b9b9866b5330EEa46a18382f251e',
+  });
+
+  console.log(data, isError, isLoading);
 
   return (
     <HeaderContainer>

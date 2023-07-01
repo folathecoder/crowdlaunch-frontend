@@ -6,6 +6,7 @@ import { Header } from '@/components/global';
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import useWallet from '@/wallet/useWallet';
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <GlobalStyles theme={darkTheme} />
           <Header />
           <Component {...pageProps} />
+          <ReactQueryDevtools initialIsOpen={false} />
           <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
         </Provider>
       </WagmiConfig>

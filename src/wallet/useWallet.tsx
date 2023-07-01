@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useAccount, useConnect, useEnsName, useDisconnect } from 'wagmi';
+import { useState, useEffect } from 'react';
+import {
+  useAccount,
+  useConnect,
+  useEnsName,
+  useDisconnect,
+  useBalance,
+} from 'wagmi';
 import {
   EthereumClient,
   w3mConnectors,
@@ -35,7 +41,9 @@ interface ActiveWalletTypes {
 }
 
 const useWallet = () => {
-  const { address, isConnected, isDisconnected } = useAccount();
+  const { address, isConnected, isDisconnected, isReconnecting, isConnecting } =
+    useAccount();
+
   // const { disconnect: disconnectWallet } = useDisconnect();
   const [activeWallet, setActiveWallet] = useState<ActiveWalletTypes>({
     walletName: null,
@@ -48,6 +56,8 @@ const useWallet = () => {
       walletAddress: address,
     });
   }, [address, isConnected, isDisconnected]);
+
+  // console.log(data);
 
   return {
     chains,
