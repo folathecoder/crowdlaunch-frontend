@@ -1,11 +1,4 @@
-import styled, { css } from 'styled-components';
-
-// interface HeaderStylesTypes {
-//   lastMenu?: boolean;
-//   mobileNavToggle?: boolean;
-//   mobileMenuToggle?: boolean;
-//   isActive?: boolean;
-// }
+import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
   max-width: 100%;

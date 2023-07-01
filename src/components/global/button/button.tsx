@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { QUERIES } from '@/styles/mediaQueries';
 
 export const ButtonContainer = styled.button`

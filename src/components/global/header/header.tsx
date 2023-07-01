@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -17,10 +17,13 @@ import HeaderMenu from './children/headerMenu/headerMenu';
 import { Button, CartButton } from '@/components/global';
 import { useBreakPointUp } from '@/hooks/useBreakPoint';
 import { MdMenu } from 'react-icons/md';
+import MobileMenu from './children/mobileMenu/mobileMenu';
 
 const Header = () => {
+  const [showMobileMenu, setShowMobileMenu] = useState(true);
+
   const { breakPoint: removeMenuOnTablet } = useBreakPointUp({
-    breakMark: 1073,
+    breakMark: 1117,
   });
   const { breakPoint: removeSearchOnTablet } = useBreakPointUp({
     breakMark: 864,
@@ -67,13 +70,24 @@ const Header = () => {
           <div>
             <CartButton cartItemCount={93} />
           </div>
-          <div>
-            <button className="mobile-nav_btn">
-              <MdMenu />
-            </button>
-          </div>
+          {!removeMenuOnTablet && (
+            <div>
+              <button
+                className="mobile-nav_btn"
+                onClick={() => setShowMobileMenu(true)}
+              >
+                <MdMenu />
+              </button>
+            </div>
+          )}
         </HeaderLeft>
       </HeaderInner>
+      {showMobileMenu && !removeMenuOnTablet && (
+        <MobileMenu
+          showMobileMenu={showMobileMenu}
+          setShowMobileMenu={setShowMobileMenu}
+        />
+      )}
     </HeaderContainer>
   );
 };

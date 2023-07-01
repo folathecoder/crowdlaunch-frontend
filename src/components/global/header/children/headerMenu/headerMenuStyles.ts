@@ -7,6 +7,11 @@ interface HeaderMenuStyleTypes {
 export const MenuList = styled.ul`
   display: flex;
   gap: 24px;
+
+  @media screen and (max-width: 1117px) {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
 `;
 
 export const MenuItem = styled.li<HeaderMenuStyleTypes>`
@@ -14,6 +19,11 @@ export const MenuItem = styled.li<HeaderMenuStyleTypes>`
     font-size: 15px;
     font-weight: 700;
     line-height: 22px;
+
+    @media screen and (max-width: 1117px) {
+      font-size: 30px;
+      line-height: 35px;
+    }
 
     ${({ active }) =>
       active

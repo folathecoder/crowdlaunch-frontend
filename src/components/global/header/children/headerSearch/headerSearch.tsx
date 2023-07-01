@@ -7,6 +7,10 @@ interface WordSwitcherTypes {
   prefix: string;
 }
 
+interface HeaderSearchTypes {
+  fullWidth?: boolean;
+}
+
 const WordSwitcher = ({ prefix }: WordSwitcherTypes) => {
   const words = ['Projects...', 'Startups...', 'NFTs...'];
   const [isMounted, setIsMounted] = useState(false);
@@ -33,7 +37,7 @@ const WordSwitcher = ({ prefix }: WordSwitcherTypes) => {
   );
 };
 
-const HeaderSearchBar = () => {
+const HeaderSearchBar = ({ fullWidth }: HeaderSearchTypes) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showPlaceHolder, setShowPlaceHolder] = useState(true);
 
@@ -52,6 +56,7 @@ const HeaderSearchBar = () => {
       <SearchContainer
         onSubmit={handleSearchSubmit}
         onClick={() => setShowPlaceHolder(false)}
+        fullWidth={fullWidth}
       >
         <div>
           <input

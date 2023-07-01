@@ -1,8 +1,20 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const SearchContainer = styled.form`
+interface HeaderSearchStyleTypes {
+  fullWidth?: boolean;
+}
+
+export const SearchContainer = styled.form<HeaderSearchStyleTypes>`
   border-radius: 12px;
-  width: 400px;
+
+  ${({ fullWidth }) =>
+    fullWidth
+      ? css`
+          width: 100%;
+        `
+      : css`
+          width: 400px;
+        `}
 
   & > * {
     position: relative;
