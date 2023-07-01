@@ -26,8 +26,11 @@ import {
   useDisconnect,
   useBalance,
 } from 'wagmi';
+import useWallet from '@/wallet/useWallet';
 
 const Header = () => {
+  const { wallet, handleClearWallet, disconnectWallet } = useWallet();
+
   const { open, close } = useWeb3Modal();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
@@ -44,12 +47,6 @@ const Header = () => {
   const openWalletConnectionModal = async () => {
     await open();
   };
-
-  const { data, isError, isLoading } = useBalance({
-    address: '0xA0Cf798816D4b9b9866b5330EEa46a18382f251e',
-  });
-
-  console.log(data, isError, isLoading);
 
   return (
     <HeaderContainer>

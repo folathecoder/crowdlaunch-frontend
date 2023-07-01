@@ -6,71 +6,69 @@ import {
   useDisconnect,
   useBalance,
 } from 'wagmi';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '@/redux/store';
 import {
-  EthereumClient,
-  w3mConnectors,
-  w3mProvider,
-} from '@web3modal/ethereum';
-import { Web3Modal, useWeb3Modal } from '@web3modal/react';
-import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import {
-  arbitrum,
-  mainnet,
-  polygon,
-  bsc,
-  avalanche,
-  fantom,
-} from 'wagmi/chains';
-
-const chains = [arbitrum, mainnet, polygon, bsc, avalanche, fantom];
-const projectId = '201547027406abdbd2521d63a4c827af';
-
-const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
-
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors: w3mConnectors({ projectId, version: 1, chains }),
-  publicClient,
-});
-
-const ethereumClient = new EthereumClient(wagmiConfig, chains);
-
-interface ActiveWalletTypes {
-  walletName: string | null;
-  walletAddress?: `0x${string}` | null;
-}
+  setActiveWallet,
+  clearActiveWallet,
+  type ActiveWalletTypes,
+} from '@/redux/slices/walletSlice';
 
 const useWallet = () => {
+  const dispatch = useDispatch();
+  const wallet = useSelector((state: RootState) => state.wallet.activeWallet);
+
   const { address, isConnected, isDisconnected, isReconnecting, isConnecting } =
     useAccount();
 
-  // const { disconnect: disconnectWallet } = useDisconnect();
-  const [activeWallet, setActiveWallet] = useState<ActiveWalletTypes>({
-    walletName: null,
-    walletAddress: null,
+  const {
+    data: balance,
+    isLoading: balanceIsLoading,
+    isFetching: balanceIsFetching,
+    isSuccess: balanceIsSuccess,
+    isError: balanceIsError,
+    isFetched: balanceIsFetched,
+  } = useBalance({
+    address: '0x1d3d3fbfa8a6d1a24b651f8cac6859d4589c9d49',
   });
 
-  useEffect(() => {
-    setActiveWallet({
-      walletName: null,
-      walletAddress: address,
-    });
-  }, [address, isConnected, isDisconnected]);
+  const { disconnect: disconnectWallet } = useDisconnect();
 
-  // console.log(data);
+  useEffect(() => {
+    const walletData: ActiveWalletTypes = {
+      walletName: 'My Wallet',
+      walletAddress: address,
+      balance: balance,
+      balanceStatus: {
+        isLoading: balanceIsLoading,
+        isFetching: balanceIsFetching,
+        isSuccess: balanceIsSuccess,
+        isError: balanceIsError,
+        isFetched: balanceIsFetched,
+      },
+    };
+    dispatch(setActiveWallet(walletData));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    address,
+    balance,
+    balanceIsError,
+    balanceIsFetched,
+    balanceIsFetching,
+    balanceIsLoading,
+    balanceIsSuccess,
+  ]);
+
+  const handleClearWallet = () => {
+    dispatch(clearActiveWallet());
+  };
+
+  console.log('my wallet', wallet);
 
   return {
-    chains,
-    ethereumClient,
-    projectId,
-    wagmiConfig,
-    Web3Modal,
-    WagmiConfig,
-    useWeb3Modal,
-    address,
-    isConnected,
-    isDisconnected,
-    activeWallet,
+    wallet,
+    handleClearWallet,
+    disconnectWallet,
   };
 };
 

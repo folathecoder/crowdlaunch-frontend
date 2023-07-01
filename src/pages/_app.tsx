@@ -7,36 +7,29 @@ import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import useWallet from '@/wallet/useWallet';
+import {
+  ethereumClient,
+  projectId,
+  wagmiConfig,
+  Web3Modal,
+  WagmiConfig,
+} from '@/wallet/walletConfig';
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const {
-    ethereumClient,
-    projectId,
-    wagmiConfig,
-    Web3Modal,
-    WagmiConfig,
-    isConnected,
-    isDisconnected,
-    activeWallet,
-  } = useWallet();
-
-  console.log(activeWallet);
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <WagmiConfig config={wagmiConfig}>
-        <Provider store={store}>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <WagmiConfig config={wagmiConfig}>
           <GlobalStyles theme={darkTheme} />
           <Header />
           <Component {...pageProps} />
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
-        </Provider>
-      </WagmiConfig>
-    </QueryClientProvider>
+        </WagmiConfig>
+      </QueryClientProvider>
+    </Provider>
   );
 }
 
