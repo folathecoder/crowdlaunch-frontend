@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -20,6 +20,8 @@ import { MdMenu } from 'react-icons/md';
 import MobileMenu from './children/mobileMenu/mobileMenu';
 import { useWeb3Modal } from '@web3modal/react';
 import useWallet from '@/wallet/useWallet';
+import Lottie from 'react-lottie';
+import { ProfileLottie } from 'public/images';
 
 const Header = () => {
   const { wallet, handleClearWallet, disconnectWallet } = useWallet();
@@ -42,6 +44,12 @@ const Header = () => {
   const openWalletConnectionModal = async () => {
     await open();
   };
+
+  const animationRef = useRef(null);
+
+  useEffect(() => {
+    if (animationRef?.current) animationRef.current.play();
+  }, []);
 
   return (
     <HeaderContainer>
@@ -72,11 +80,23 @@ const Header = () => {
             </div>
           )}
           <div>
-            <Button
+            <button className="profile-icon">
+              <Lottie
+                ref={animationRef}
+                options={{
+                  loop: true,
+                  autoplay: false,
+                  animationData: ProfileLottie,
+                }}
+                width={35}
+                height={35}
+              />
+            </button>
+            {/* <Button
               buttonTitle={removeOnMobile ? 'connect wallet' : 'connect'}
               buttonType="action"
               buttonFunction={openWalletConnectionModal}
-            />
+            /> */}
           </div>
           <div>
             <CartButton cartItemCount={93} />
