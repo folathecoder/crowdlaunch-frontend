@@ -19,6 +19,7 @@ export const MenuItem = styled.li<HeaderMenuStyleTypes>`
     font-size: 15px;
     font-weight: 700;
     line-height: 22px;
+    white-space: nowrap;
 
     @media screen and (max-width: 1117px) {
       font-size: 30px;

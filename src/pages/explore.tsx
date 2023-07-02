@@ -2,9 +2,9 @@ import React from 'react';
 
 const Explore = () => {
   return (
-    <div>
+    <main>
       <h1>Explore</h1>
-    </div>
+    </main>
   );
 };
 

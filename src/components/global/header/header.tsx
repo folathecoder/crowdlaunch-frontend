@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -14,20 +14,23 @@ import { AppLogo } from 'public/images';
 import { APP_NAME } from '@/data/appInfo';
 import HeaderSearchBar from './children/headerSearch/headerSearch';
 import HeaderMenu from './children/headerMenu/headerMenu';
+import UserMenu from './children/userMenu/userMenu';
 import { Button, CartButton } from '@/components/global';
 import { useBreakPointUp } from '@/hooks/useBreakPoint';
 import { MdMenu } from 'react-icons/md';
 import MobileMenu from './children/mobileMenu/mobileMenu';
 import { useWeb3Modal } from '@web3modal/react';
 import useWallet from '@/wallet/useWallet';
+import Lottie from 'react-lottie';
+import { ProfileLottie } from 'public/images';
 
 const Header = () => {
-  const { wallet, handleClearWallet, disconnectWallet } = useWallet();
+  const { wallet } = useWallet();
 
-  console.log('my wallet', wallet);
+  const { open } = useWeb3Modal();
 
-  const { open, close } = useWeb3Modal();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
   const { breakPoint: removeMenuOnTablet } = useBreakPointUp({
     breakMark: 1117,
@@ -42,6 +45,12 @@ const Header = () => {
   const openWalletConnectionModal = async () => {
     await open();
   };
+
+  const animationRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (animationRef?.current) animationRef.current.play();
+  }, []);
 
   return (
     <HeaderContainer>
@@ -72,11 +81,29 @@ const Header = () => {
             </div>
           )}
           <div>
-            <Button
-              buttonTitle={removeOnMobile ? 'connect wallet' : 'connect'}
-              buttonType="action"
-              buttonFunction={openWalletConnectionModal}
-            />
+            {wallet.walletStatus.isConnected ? (
+              <button
+                className="profile-icon"
+                onClick={() => setShowUserMenu(true)}
+              >
+                <Lottie
+                  ref={animationRef}
+                  options={{
+                    loop: true,
+                    autoplay: false,
+                    animationData: ProfileLottie,
+                  }}
+                  width={35}
+                  height={35}
+                />
+              </button>
+            ) : (
+              <Button
+                buttonTitle={removeOnMobile ? 'connect wallet' : 'connect'}
+                buttonType="action"
+                buttonFunction={openWalletConnectionModal}
+              />
+            )}
           </div>
           <div>
             <CartButton cartItemCount={93} />
@@ -99,6 +126,7 @@ const Header = () => {
           setShowMobileMenu={setShowMobileMenu}
         />
       )}
+      <UserMenu showUserMenu={showUserMenu} setShowUserMenu={setShowUserMenu} />
     </HeaderContainer>
   );
 };

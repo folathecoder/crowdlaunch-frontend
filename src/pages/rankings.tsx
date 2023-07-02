@@ -2,9 +2,9 @@ import React from 'react';
 
 const Rankings = () => {
   return (
-    <div>
+    <main>
       <h1>Rankings</h1>
-    </div>
+    </main>
   );
 };
 

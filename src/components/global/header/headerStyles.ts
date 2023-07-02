@@ -35,6 +35,12 @@ export const HeaderLeft = styled.div`
   display: flex;
   gap: 24px;
 
+  .profile-icon {
+    border-radius: 100%;
+    border: 2px solid var(--color-accent-100);
+    cursor: pointer;
+  }
+
   .mobile-nav_btn {
     background: transparent;
     border: none;

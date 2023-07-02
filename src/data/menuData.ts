@@ -5,6 +5,7 @@ import {
   FaLinkedinIn,
   FaFacebookF,
   FaTelegramPlane,
+  FaPlusCircle,
 } from 'react-icons/fa';
 
 const currentYear: number = new Date().getFullYear();
@@ -53,3 +54,22 @@ export const footerMenu = {
     },
   ],
 };
+
+export const profileMenu = [
+  {
+    id: 1,
+    pageName: 'Create Project',
+    pageLink: '/create-project',
+    icon: FaPlusCircle,
+  },
+  { id: 2, pageName: 'Profile', pageLink: '/profile', icon: null },
+  { id: 3, pageName: 'My NFTs', pageLink: '/profile/#nfts', icon: null },
+  {
+    id: 4,
+    pageName: 'My Projects',
+    pageLink: '/profile/#projects',
+    icon: null,
+  },
+  { id: 5, pageName: 'Watchlist', pageLink: '/profile/#watchlist', icon: null },
+  { id: 6, pageName: 'Orders', pageLink: '/profile/#orders', icon: null },
+];
