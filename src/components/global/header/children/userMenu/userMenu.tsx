@@ -33,10 +33,12 @@ const UserMenu = ({ showUserMenu, setShowUserMenu }: UserMenuTypes) => {
     breakMark: 576,
   });
 
-  const animationRef = useRef(null);
+  const animationRef = useRef<any>(null);
 
   useEffect(() => {
-    if (animationRef?.current) animationRef.current.play();
+    if (animationRef.current) {
+      animationRef.current.play();
+    }
   }, []);
 
   const router = useRouter();

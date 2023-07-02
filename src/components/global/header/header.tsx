@@ -46,7 +46,7 @@ const Header = () => {
     await open();
   };
 
-  const animationRef = useRef(null);
+  const animationRef = useRef<any>(null);
 
   useEffect(() => {
     if (animationRef?.current) animationRef.current.play();
