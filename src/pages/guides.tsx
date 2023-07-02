@@ -2,9 +2,9 @@ import React from 'react';
 
 const Guides = () => {
   return (
-    <div>
+    <main>
       <h1>Guides</h1>
-    </div>
+    </main>
   );
 };
 

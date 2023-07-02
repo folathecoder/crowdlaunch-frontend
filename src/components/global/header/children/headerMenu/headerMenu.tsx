@@ -4,14 +4,26 @@ import { MenuList, MenuItem } from './headerMenuStyles';
 import { headerMenu } from '@/data/menuData';
 import { useRouter } from 'next/router';
 
-const HeaderMenu = () => {
+interface HeaderMenuTypes {
+  setShowMobileMenu?: React.Dispatch<boolean>;
+}
+
+const HeaderMenu = ({ setShowMobileMenu }: HeaderMenuTypes) => {
   const router = useRouter();
   const activeRoute = router.pathname;
+
+  const handleCloseMenu = () => {
+    if (setShowMobileMenu) setShowMobileMenu(false);
+  };
 
   return (
     <MenuList>
       {headerMenu.map((nav) => (
-        <MenuItem key={nav.id} active={activeRoute === nav.pageLink}>
+        <MenuItem
+          key={nav.id}
+          active={activeRoute === nav.pageLink}
+          onClick={handleCloseMenu}
+        >
           <Link href={nav.pageLink}>{nav.pageName}</Link>
         </MenuItem>
       ))}

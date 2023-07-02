@@ -12,6 +12,8 @@ export const NavContainer = styled(motion.nav)`
   height: 100vh;
   overflow: hidden;
   width: 100vw;
+  z-index: 999999;
+  white-space: nowrap;
 
   @media ${QUERIES.mobile} {
     top: 0;
@@ -19,6 +21,7 @@ export const NavContainer = styled(motion.nav)`
     right: 0;
     bottom: 0;
     width: 500px;
+    border-radius: 20px 0px 0px 20px;
   }
 `;
 

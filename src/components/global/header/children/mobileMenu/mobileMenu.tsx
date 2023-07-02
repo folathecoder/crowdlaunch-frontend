@@ -1,4 +1,5 @@
 import React from 'react';
+import Backdrop from '@mui/material/Backdrop';
 import Link from 'next/link';
 import { MdClose } from 'react-icons/md';
 import {
@@ -30,34 +31,45 @@ const MobileMenu = ({ showMobileMenu, setShowMobileMenu }: MobileMenuTypes) => {
   });
 
   return (
-    <ClickAwayListener onClickAway={() => setShowMobileMenu(false)}>
-      <AnimatePresence>
-        <NavContainer
-          variants={mobileNavVariant(switchNavWidth ? '500px' : '100vw')}
-          initial={showMobileMenu ? 'hidden' : 'normal'}
-          animate={showMobileMenu ? 'show' : 'hidden'}
-        >
-          <NavHeader>
-            <div className="gradient-link">
-              <Link href="/marketplace" className="gradient-link">
-                Marketplace
-              </Link>
-            </div>
+    <>
+      <Backdrop
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          height: '100vh',
+        }}
+        open={showMobileMenu}
+        onClick={() => setShowMobileMenu(false)}
+      />
+      <ClickAwayListener onClickAway={() => setShowMobileMenu(false)}>
+        <AnimatePresence>
+          <NavContainer
+            variants={mobileNavVariant(switchNavWidth ? '400px' : '100vw')}
+            initial="hidden"
+            animate={showMobileMenu ? 'show' : 'hidden'}
+            exit="exit"
+          >
+            <NavHeader>
+              <div className="gradient-link">
+                <Link href="/marketplace" className="gradient-link">
+                  Marketplace
+                </Link>
+              </div>
+              <div>
+                <button onClick={() => setShowMobileMenu(false)}>
+                  <MdClose />
+                </button>
+              </div>
+            </NavHeader>
+            <NavSearchContainer>
+              <HeaderSearchBar fullWidth />
+            </NavSearchContainer>
             <div>
-              <button onClick={() => setShowMobileMenu(false)}>
-                <MdClose />
-              </button>
+              <HeaderMenu setShowMobileMenu={setShowMobileMenu} />
             </div>
-          </NavHeader>
-          <NavSearchContainer>
-            <HeaderSearchBar fullWidth />
-          </NavSearchContainer>
-          <div>
-            <HeaderMenu />
-          </div>
-        </NavContainer>
-      </AnimatePresence>
-    </ClickAwayListener>
+          </NavContainer>
+        </AnimatePresence>
+      </ClickAwayListener>
+    </>
   );
 };
 
