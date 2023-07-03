@@ -6,32 +6,32 @@ interface AdCardStylesTypes {
 
 export const CardContainer = styled.div`
   background-color: var(--color-bg-300);
-  width: 18.75rem;
-  min-height: 18.75rem;
+  width: 300px;
+  min-height: 300px;
   position: sticky;
-  top: 6.25rem;
-  border-radius: 0.5rem;
-  padding: 0.5rem;
+  top: 100px;
+  border-radius: 8px;
+  padding: 8px;
   cursor: pointer;
-  margin-left: 1.25rem;
+  margin-left: 20px;
 `;
 
 export const CardImage = styled.div`
   width: 100%;
-  height: 15.625rem;
-  border-radius: 0.5rem;
+  height: 250px;
+  border-radius: 8px;
 `;
 
 export const CardImageInner = styled.div<AdCardStylesTypes>`
   width: 100%;
-  height: 15.625rem;
-  border-radius: 0.5rem;
+  height: 250px;
+  border-radius: 8px;
   position: relative;
   transition: var(--transition);
 
   img {
     object-fit: fill;
-    border-radius: 0.5rem;
+    border-radius: 8px;
   }
 
   ${({ hoverCard }) =>
@@ -46,12 +46,12 @@ export const CardContent = styled.div`
   padding: 16px 0px;
 
   h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+    font-size: 16px;
+    margin-bottom: 8px;
     color: var(--color-font-100);
   }
 
   p {
-    font-size: 0.875rem;
+    font-size: 14px;
   }
 `;

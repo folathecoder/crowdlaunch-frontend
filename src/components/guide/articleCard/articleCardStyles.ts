@@ -7,8 +7,8 @@ interface ArticleCardStylesTypes {
 export const CardContainer = styled.div<ArticleCardStylesTypes>`
   background-color: var(--color-bg-300);
   max-width: 100%;
-  min-height: 22.5rem;
-  border-radius: 0.5rem;
+  min-height: 360px;
+  border-radius: 8px;
   transition: var(--transition);
   cursor: pointer;
 
@@ -32,23 +32,23 @@ export const CardContainer = styled.div<ArticleCardStylesTypes>`
 
 export const CardImageWrap = styled.div`
   width: 100%;
-  height: 14.37rem;
-  border-radius: 0.5rem 0.5rem 0px 0px;
+  height: 230px;
+  border-radius: 8px 8px 0px 0px;
   position: relative;
 
   img {
     object-fit: cover;
-    border-radius: 0.5rem 0.5rem 0px 0px;
+    border-radius: 8px 8px 0px 0px;
   }
 `;
 
 export const CardContent = styled.div`
-  height: 8.13rem;
-  border-radius: 0px 0px 0.5rem 0.5rem;
+  height: 130px;
+  border-radius: 0px 0px 8px 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1.2rem;
+  padding: 19.2px;
 `;
 
 export const CardContentCategory = styled.div`
@@ -56,13 +56,13 @@ export const CardContentCategory = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  margin: 1rem;
+  margin: 16px;
 `;
 export const CardContentTitle = styled.div`
   h3 {
-    font-size: 1.2rem;
+    font-size: 19.2px;
     font-weight: 700;
-    max-width: 25ch;
+    max-width: 400px;
     color: var(--color-font-100);
   }
 `;
@@ -77,10 +77,10 @@ export const CardContentAuthor = styled.div`
   }
 `;
 export const CardAuthor = styled.div`
-  width: 2rem;
-  height: 2rem;
+  width: 32px;
+  height: 32px;
   border-radius: 100%;
-  margin-right: 0.5rem;
+  margin-right: 8px;
   position: relative;
 
   img {

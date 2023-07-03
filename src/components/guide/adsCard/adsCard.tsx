@@ -19,7 +19,7 @@ const AdsCard = () => {
       >
         <CardImage>
           <CardImageInner hoverCard={hoverCard}>
-            <Image src={GuideBannerPlaceholder} layout="fill" alt="featured image" />
+            <Image src={GuideBannerPlaceholder} alt="featured image" />
           </CardImageInner>
         </CardImage>
         <CardContent>

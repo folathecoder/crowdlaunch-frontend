@@ -10,21 +10,21 @@ const Container = styled.div<CategoryTagTypes>`
   background-color: var(--color-font-100);
   color: var(--color-font-500);
   display: inline-flex;
-  padding: 0px 0.5rem;
+  padding: 0px 8px;
   border-radius: 100px;
-  height: 1.37rem;
+  height: 22px;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
-  line-height: 0rem;
+  font-size: 12px;
+  line-height: 0px;
   font-weight: 500;
   margin-right: 4px;
 
   ${({ small }) =>
     small &&
     css`
-      height: 1.25rem;
-      font-size: 0.75rem;
+      height: 20px;
+      font-size: 12px;
     `}
 `;
 

@@ -6,9 +6,6 @@ import {
   CardThree,
   CardFour,
   CardFive,
-  CardSix,
-  CardSeven,
-  CardEight,
   SectionWrap,
   SectionHeader,
   ContainerWrap,
@@ -42,15 +39,6 @@ const LatestSection = () => {
             <ArticleSmallCard />
             <ArticleSmallCard />
           </CardFive>
-          {/* <CardSix>
-            <ArticleCard />
-          </CardSix>
-          <CardSeven>
-            <ArticleCard />
-          </CardSeven>
-          <CardEight>
-            <ArticleCard />
-          </CardEight> */}
         </SectionContainer>
       </ContainerWrap>
     </SectionWrap>

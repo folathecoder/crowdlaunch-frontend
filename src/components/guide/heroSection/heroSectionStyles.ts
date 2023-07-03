@@ -65,7 +65,7 @@ export const HeroFeatured = styled.div`
 
   &:hover {
     h2 {
-      color: var(--color-accent-100);
+      color: var(--color--100);
     }
   }
 `;

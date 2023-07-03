@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const CardContainer = styled.div`
   background-color: var(--color-bg-300);
   max-width: 100%;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   display: flex;
   transition: var(--transition);
   cursor: pointer;
@@ -19,25 +19,26 @@ export const CardContainer = styled.div`
 `;
 
 export const CardImageWrap = styled.div`
-  width: 6.875rem;
-  height: 6.875rem;
-  border-radius: 0.5rem;
+  width: 110px;
+  height: 110px;
+  border-radius: 8px;
   position: relative;
 
   img {
     object-fit: cover;
-    border-radius: 0.5rem;
+    border-radius: 8px;
   }
 `;
 
 export const CardContent = styled.div`
   flex: 3;
-  border-radius: 0px 0px 0.5rem 0.5rem;
+  border-radius: 0px 0px 8px 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0.5rem 0.8rem;
+  padding: 8px 12.8px;
 `;
+
 export const CardContentCategory = styled.div``;
 export const CardContentTitle = styled.div`
   h3 {
@@ -58,10 +59,10 @@ export const CardContentAuthor = styled.div`
   }
 `;
 export const CardAuthor = styled.div`
-  width: 1.56rem;
-  height: 1.56rem;
+  width: 25px;
+  height: 25px;
   border-radius: 100%;
-  margin-right: 0.5rem;
+  margin-right: 8px;
   position: relative;
 
   img {
