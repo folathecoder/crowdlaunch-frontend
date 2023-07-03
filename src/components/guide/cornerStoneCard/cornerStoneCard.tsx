@@ -12,8 +12,7 @@ import {
   CardAuthor,
   CardDetails,
 } from '@/components/guide/cornerStoneCard/cornerStoneCardStyles';
-import FeaturedImage from 'public/images/metaverse-img.png';
-import AuthorImage from 'public/images/author.png';
+import { GuideBannerPlaceholder } from 'public/images';
 import CatgoryTag from '@/components/guide/slices/categoryTag';
 import ArticleCard from '@/components/guide/articleCard/articleCard';
 
@@ -24,7 +23,11 @@ const CornerStoneCard = () => {
         <ArticleCard cornerStone />
         <CardContainer>
           <CardImageWrap>
-            <Image src={FeaturedImage} layout="fill" alt="featured image" />
+            <Image
+              src={GuideBannerPlaceholder}
+              layout="fill"
+              alt="featured image"
+            />
           </CardImageWrap>
           <CardContent>
             <CardContentCategory>
@@ -51,7 +54,7 @@ const CornerStoneCard = () => {
                 <div>
                   <CardAuthor>
                     <Image
-                      src={AuthorImage}
+                      src={""}
                       layout="fill"
                       alt="featured image"
                     />

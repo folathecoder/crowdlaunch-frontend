@@ -9,7 +9,7 @@ import {
   CardContentTitle,
   CardContentDate,
 } from '@/components/guide/articleCard/articleCardStyles';
-import nftImg from 'public/images/nft-img.png';
+import { GuideBannerPlaceholder } from 'public/images';
 import CatgoryTag from '@/components/guide/slices/categoryTag';
 import { BiTime } from 'react-icons/bi';
 
@@ -22,7 +22,11 @@ const ArticleCard = ({ cornerStone }: ArticleCardTypes) => {
     <Link href="/blog/article" passHref>
       <CardContainer cornerStone={cornerStone}>
         <CardImageWrap>
-          <Image src={''} layout="fill" alt="featured image" />
+          <Image
+            src={GuideBannerPlaceholder}
+            layout="fill"
+            alt="featured image"
+          />
           <CardContentCategory>
             <CatgoryTag title="Hosting" />
             <CatgoryTag title="Blockchain" />

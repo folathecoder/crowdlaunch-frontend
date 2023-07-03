@@ -6,7 +6,7 @@ import {
   CardContent,
   CardImageInner,
 } from './adsCardStyles';
-import AdBanner from 'public/images/imagecube.png';
+import { GuideBannerPlaceholder } from 'public/images';
 
 const AdsCard = () => {
   const [hoverCard, setHoverCard] = useState(false);
@@ -19,7 +19,7 @@ const AdsCard = () => {
       >
         <CardImage>
           <CardImageInner hoverCard={hoverCard}>
-            <Image src={AdBanner} layout="fill" alt="featured image" />
+            <Image src={GuideBannerPlaceholder} layout="fill" alt="featured image" />
           </CardImageInner>
         </CardImage>
         <CardContent>

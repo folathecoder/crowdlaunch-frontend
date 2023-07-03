@@ -12,8 +12,7 @@ import {
   CardAuthor,
   CardDetails,
 } from '@/components/guide/articleSmallCard/articleSmallCardStyles';
-import FeaturedImage from 'public/images/metaverse-img.png';
-import AuthorImage from 'public/images/author.png';
+import { GuideBannerPlaceholder } from 'public/images';
 import CatgoryTag from '@/components/guide/slices/categoryTag';
 
 const ArticleSmallCard = () => {
@@ -21,7 +20,11 @@ const ArticleSmallCard = () => {
     <Link href="/blog/article" passHref>
       <CardContainer>
         <CardImageWrap>
-          <Image src={''} layout="fill" alt="featured image" />
+          <Image
+            src={GuideBannerPlaceholder}
+            layout="fill"
+            alt="featured image"
+          />
         </CardImageWrap>
         <CardContent>
           <CardContentTitle>
