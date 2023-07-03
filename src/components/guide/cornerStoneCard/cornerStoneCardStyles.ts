@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const CardContainer = styled.div`
   background-color: var(--color-bg-300);
   max-width: 100%;
-  height: 380px;
+  height: 360px;
   border-radius: 0.5rem;
   transition: var(--transition);
   display: flex;
@@ -58,10 +58,12 @@ export const CardContentTitle = styled.div`
     font-size: 1.5rem;
     line-height: 1.93rem;
     font-weight: 700;
+    color: var(--color-font-100);
   }
 
   p {
     margin-top: 1rem;
+    color: var(--color-font-300);
   }
 `;
 export const CardContentAuthor = styled.div`
@@ -72,6 +74,12 @@ export const CardContentAuthor = styled.div`
     font-size: 0.875rem;
     font-weight: 400;
     color: var(--color-accent-200);
+  }
+
+  h4 {
+    color: var(--color-font-300);
+    font-weight: 400;
+    font-size: 12px;
   }
 `;
 export const CardAuthor = styled.div`
@@ -84,12 +92,17 @@ export const CardAuthor = styled.div`
   img {
     object-fit: cover;
   }
+
+  img {
+    border-radius: 100%;
+  }
 `;
 export const CardContentDate = styled.div`
   p {
-    font-size: 14px;
-    color: var(--color-font-400);
     letter-spacing: 0.2px;
+    color: var(--color-font-300);
+    font-weight: 400;
+    font-size: 12px;
   }
 `;
 

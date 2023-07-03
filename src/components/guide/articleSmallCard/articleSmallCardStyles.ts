@@ -44,6 +44,7 @@ export const CardContentTitle = styled.div`
     font-size: 16px;
     line-height: 20px;
     font-weight: 700;
+    color: var(--color-font-100);
   }
 `;
 export const CardContentAuthor = styled.div`
@@ -53,7 +54,7 @@ export const CardContentAuthor = styled.div`
   h4 {
     font-size: 12px;
     font-weight: 400;
-    color: var(--color-font-200);
+    color: var(--color-font-300);
   }
 `;
 export const CardAuthor = styled.div`
@@ -65,13 +66,15 @@ export const CardAuthor = styled.div`
 
   img {
     object-fit: cover;
+    border-radius: 100%;
   }
 `;
 export const CardContentDate = styled.div`
   p {
-    font-size: 12px;
-    color: var(--color-font-400);
     letter-spacing: 0.2px;
+    color: var(--color-font-300);
+    font-weight: 400;
+    font-size: 12px;
   }
 `;
 

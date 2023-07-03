@@ -48,6 +48,7 @@ export const CardContent = styled.div`
   h3 {
     font-size: 1rem;
     margin-bottom: 0.5rem;
+    color: var(--color-font-100);
   }
 
   p {

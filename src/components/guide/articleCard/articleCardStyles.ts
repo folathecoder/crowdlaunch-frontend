@@ -8,7 +8,7 @@ export const CardContainer = styled.div<ArticleCardStylesTypes>`
   background-color: var(--color-bg-300);
   max-width: 100%;
   min-height: 22.5rem;
-  border-radius: 1.25rem;
+  border-radius: 0.5rem;
   transition: var(--transition);
   cursor: pointer;
 
@@ -63,6 +63,7 @@ export const CardContentTitle = styled.div`
     font-size: 1.2rem;
     font-weight: 700;
     max-width: 25ch;
+    color: var(--color-font-100);
   }
 `;
 export const CardContentAuthor = styled.div`
@@ -90,12 +91,14 @@ export const CardContentDate = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   p {
-    font-size: 0.875rem;
-    color: var(--color-font-400);
     letter-spacing: 0.2px;
     display: flex;
     align-items: center;
+    color: var(--color-font-300);
+    font-weight: 400;
+    font-size: 12px;
   }
 
   span {

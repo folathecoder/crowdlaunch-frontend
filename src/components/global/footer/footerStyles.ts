@@ -10,6 +10,7 @@ export const FooterContainer = styled.footer`
   background-color: var(--color-bg-200);
   font-family: var(--font-pry-300);
   font-weight: 400;
+  border-top: 0.1rem solid var(--color-border-100);
 `;
 
 export const FooterInner = styled.div`

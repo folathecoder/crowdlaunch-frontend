@@ -2,7 +2,7 @@ import React from 'react';
 import { ArchiveContainer } from '@/components/guide/guideArchive/guideArchiveStyles';
 import LatestSection from '@/components/guide/latestSection/latestSection';
 import HeroSection from '@/components/guide/heroSection/heroSection';
-// import CtaSection from 'components/global/CtaSection/CtaSection';
+import CtaSection from '@/components/global/ctaSection/ctaSection';
 
 const GuideArchive = () => {
   return (
@@ -11,7 +11,7 @@ const GuideArchive = () => {
         <HeroSection />
         <LatestSection />
       </ArchiveContainer>
-      {/* <CtaSection /> */}
+      <CtaSection />
     </>
   );
 };

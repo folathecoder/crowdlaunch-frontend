@@ -12,7 +12,7 @@ import {
   CardAuthor,
   CardDetails,
 } from '@/components/guide/articleSmallCard/articleSmallCardStyles';
-import { GuideBannerPlaceholder } from 'public/images';
+import { GuideBannerPlaceholder, AuthorPlaceholder } from 'public/images';
 import CatgoryTag from '@/components/guide/slices/categoryTag';
 
 const ArticleSmallCard = () => {
@@ -33,11 +33,15 @@ const ArticleSmallCard = () => {
           <CardContentAuthor>
             <div>
               <CardAuthor>
-                <Image src={''} layout="fill" alt="featured image" />
+                <Image
+                  src={AuthorPlaceholder}
+                  layout="fill"
+                  alt="featured image"
+                />
               </CardAuthor>
             </div>
             <div>
-              <h4>Joan Webster</h4>
+              <h4>Folarin Akinloye</h4>
             </div>
           </CardContentAuthor>
           <CardDetails>

@@ -8,7 +8,6 @@ export const HeroContainer = styled.section`
 export const HeroInner = styled.div`
   margin: var(--center-container);
   width: min(89.61%, 67.6rem);
-
   display: grid;
   gap: 1.5rem;
 
@@ -60,9 +59,13 @@ export const HeroFeatured = styled.div`
     padding-bottom: 16px;
   }
 
+  p {
+    color: var(--color-font-300);
+  }
+
   &:hover {
     h2 {
-      color: var(--gradient-bg-100);
+      color: var(--color-accent-100);
     }
   }
 `;
@@ -72,8 +75,8 @@ export const CardContentDate = styled.div`
   align-items: center;
 
   p {
-    font-size: 14px;
-    color: var(--color-font-400);
+    font-size: 12px;
+    color: var(--color-font-300);
     letter-spacing: 0.2px;
     display: flex;
     align-items: center;
@@ -127,6 +130,12 @@ export const CardContentAuthor = styled.div`
     font-weight: 400;
     color: var(--color-accent-200);
   }
+
+  h4 {
+    color: var(--color-font-300);
+    font-weight: 400;
+    font-size: 12px;
+  }
 `;
 
 export const CardAuthor = styled.div`
@@ -139,5 +148,6 @@ export const CardAuthor = styled.div`
 
   img {
     object-fit: cover;
+    border-radius: 100%;
   }
 `;

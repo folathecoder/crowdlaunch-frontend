@@ -22,7 +22,7 @@ const LatestSection = () => {
     <SectionWrap>
       <ContainerWrap>
         <SectionHeader>
-          <h2>Latest Posts</h2>
+          <h2>Latest Guides</h2>
         </SectionHeader>
         <SectionContainer>
           <CardOne>
@@ -42,7 +42,7 @@ const LatestSection = () => {
             <ArticleSmallCard />
             <ArticleSmallCard />
           </CardFive>
-          <CardSix>
+          {/* <CardSix>
             <ArticleCard />
           </CardSix>
           <CardSeven>
@@ -50,7 +50,7 @@ const LatestSection = () => {
           </CardSeven>
           <CardEight>
             <ArticleCard />
-          </CardEight>
+          </CardEight> */}
         </SectionContainer>
       </ContainerWrap>
     </SectionWrap>

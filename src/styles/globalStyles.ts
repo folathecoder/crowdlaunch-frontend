@@ -105,7 +105,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
         font-family: var(--font-pry-100);
         font-weight: 700;
         background-color: var(--color-bg-100);
-        color: var(--color-font-200);
+        color: var(--color-font-100);
         overflow-y: auto;
         overflow-x: hidden;
         min-height: 100vh;

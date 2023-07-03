@@ -14,8 +14,9 @@ import {
   CardAuthor,
 } from '@/components/guide/heroSection/heroSectionStyles';
 import CatgoryTag from '@/components/guide/slices/categoryTag';
-import { GuideBannerPlaceholder } from 'public/images';
+import { GuideBannerPlaceholder, AuthorPlaceholder } from 'public/images';
 import { Button } from '@/components/global';
+import { FaRegClock } from 'react-icons/fa';
 
 const HeroSection = () => {
   return (
@@ -56,19 +57,19 @@ const HeroSection = () => {
                   labore ea magni placeat.
                 </p>
               </div>
-              {/* <FeaturedDetail>
+              <FeaturedDetail>
                 <CardContentAuthor>
                   <div>
                     <CardAuthor>
                       <Image
-                        src={AuthorImage}
+                        src={AuthorPlaceholder}
                         layout="fill"
                         alt="featured image"
                       />
                     </CardAuthor>
                   </div>
                   <div>
-                    <h4>Joan Webster</h4>
+                    <h4>Folarin Akinloye</h4>
                   </div>
                 </CardContentAuthor>
                 <CardContentDate>
@@ -78,13 +79,13 @@ const HeroSection = () => {
                   <div>
                     <p>
                       <span>
-                        <BiTime />
+                        <FaRegClock />
                       </span>
                       10m
                     </p>
                   </div>
                 </CardContentDate>
-              </FeaturedDetail> */}
+              </FeaturedDetail>
             </HeroFeatured>
           </Link>
         </>
