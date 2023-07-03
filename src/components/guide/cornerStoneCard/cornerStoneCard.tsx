@@ -18,7 +18,7 @@ import ArticleCard from '@/components/guide/articleCard/articleCard';
 
 const CornerStoneCard = () => {
   return (
-    <Link href="/blog/article" passHref>
+    <Link href="/guides/guide" passHref>
       <div>
         <ArticleCard cornerStone />
         <CardContainer>

@@ -1,23 +1,9 @@
 import styled from 'styled-components';
-import { QUERIES } from 'styles/mediaQueries';
+import { QUERIES } from '@/styles/mediaQueries';
 
 export const ArticleContainer = styled.main`
   min-height: 100vh;
   position: relative;
-
-  &::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: radial-gradient(
-      circle at 45% 17%,
-      var(--color-accent-100) -60%,
-      var(--color-bg-100) 27%
-    );
-  }
 `;
 
 export const ArticleImageContainer = styled.section`
@@ -33,8 +19,7 @@ export const ArticleImageContainer = styled.section`
 
 export const ArticleMainWrap = styled.section`
   max-width: 100%;
-
-  padding-top: 3.12rem;
+  padding-top: 1.12rem;
 `;
 
 export const ArticleInnerWrap = styled.div`
@@ -120,6 +105,7 @@ export const ArticleContent = styled.div`
     font-size: 1.2rem;
     line-height: 1.7rem;
     margin-bottom: 1.5rem;
+    color: var(--color-font-100);
   }
 
   h2 {
@@ -127,14 +113,10 @@ export const ArticleContent = styled.div`
   }
 `;
 
-export const ArticleRelated = styled.div`
-  padding: 1.2rem 0rem;
-`;
-
 export const ArticleRelatedCards = styled.div`
-  & > * {
-    margin-bottom: 1rem;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `;
 
 export const CategoryTags = styled.div`

@@ -12,7 +12,6 @@ import {
   ArticleHeader,
   ArticleContent,
   CategoryTags,
-  ArticleRelated,
   ArticleRelatedCards,
   ArticleShareMobile,
 } from './guideTemplateStyles';
@@ -23,21 +22,16 @@ import {
   CardAuthor,
 } from '@/components/guide/heroSection/heroSectionStyles';
 import CornerStoneCard from '@/components/guide/cornerStoneCard/cornerStoneCard';
-import { Button } from '@/components/global';
 import { BiTime } from 'react-icons/bi';
-import CatgoryTag from '@/components/guide/slices/catgoryTag';
-import AuthorImage from 'public/images/author.png';
+import CatgoryTag from '@/components/guide/slices/categoryTag';
 import AdsCard from '@/components/guide/adsCard/adsCard';
-// import ArticleShare from 'components/blog/ArticleShare/ArticleShare';
-import Tooltip from '@mui/material/Tooltip';
+import ArticleShare from '@/components/guide/articleShare/articleShare';
 import CtaSection from '@/components/global/ctaSection/ctaSection';
-// import NewsLetter from 'components/global/news-letter/NewsLetter';
 import { GuideBannerPlaceholder, AuthorPlaceholder } from 'public/images';
 
 const GuideTemplate = () => {
   return (
     <>
-      {/* <ArticleHead title="How dapps can be used for online voting and e-democracy" /> */}
       <ArticleContainer>
         <ArticleMainWrap>
           <ArticleInnerWrap>
@@ -48,55 +42,27 @@ const GuideTemplate = () => {
               <ArticleInner>
                 <ArticleHeader>
                   <CategoryTags>
-                    <CatgoryTag title="Hosting" />
                     <CatgoryTag title="Blockchain" />
-                    <CatgoryTag title="Affiliate Marketing" />
                     <CatgoryTag title="Money" />
                     <CatgoryTag title="Invest" />
                     <CatgoryTag title="Business" />
                   </CategoryTags>
                   <div>
                     <h1>
-                      How dapps can be used for online voting and e-democracy
+                      How to Create a Metamask De-Fi Wallet
                     </h1>
                   </div>
                   <FeaturedDetail>
-                    <Tooltip
-                      title="Joan Webster, is an example of author bio/description. Beard fashion axe trust fund, post-ironic listicle scenester. Uniquely mesh maintainable users rather than plug-and-play testing procedures."
-                      placement="bottom"
-                      arrow
-                      PopperProps={{
-                        sx: {
-                          '& .MuiTooltip-tooltip': {
-                            border: 'none',
-                            color: 'var(--color-font-200)',
-                            fontSize: '14px',
-                            padding: '16px',
-                            lineHeight: '21px',
-                            backgroundColor: 'var(--color-bg-200)',
-                          },
-
-                          '& .MuiTooltip-popperArrow': {
-                            backgroundColor: 'var(--color-bg-200) !important',
-                          },
-                        },
-                      }}
-                    >
-                      <CardContentAuthor style={{ cursor: 'pointer' }}>
-                        <div>
-                          <CardAuthor>
-                            <Image
-                              src={AuthorImage}
-                              layout="fill"
-                              alt="featured image"
-                            />
-                          </CardAuthor>
-                        </div>
-                        <div>
-                          <h4>Joan Webster</h4>
-                        </div>
-                      </CardContentAuthor>
-                    </Tooltip>
+                    <CardContentAuthor style={{ cursor: 'pointer' }}>
+                      <div>
+                        <CardAuthor>
+                          <Image src={AuthorPlaceholder} alt="featured image" />
+                        </CardAuthor>
+                      </div>
+                      <div>
+                        <h4>Folarin Akinloye</h4>
+                      </div>
+                    </CardContentAuthor>
                     <CardContentDate>
                       <div>
                         <p>13 Sept, 2021</p>
@@ -114,7 +80,7 @@ const GuideTemplate = () => {
                 </ArticleHeader>
                 <ArticleImage>
                   <Image
-                    src={FeaturedImage}
+                    src={GuideBannerPlaceholder}
                     layout="fill"
                     alt="featured image"
                   />
@@ -221,15 +187,13 @@ const GuideTemplate = () => {
                   <ArticleShare shareUrl="/" />
                 </ArticleShareMobile>
 
-                <NewsLetter />
-
-                <ArticleRelated>
+                <div>
                   <ArticleRelatedCards>
                     <CornerStoneCard />
                     <CornerStoneCard />
                     <CornerStoneCard />
                   </ArticleRelatedCards>
-                </ArticleRelated>
+                </div>
               </ArticleInner>
             </Article>
             <ArticleSidebar>

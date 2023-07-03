@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
+    "@types/react-share": "^4.0.0",
     "@types/styled-components": "^5.1.26"
   }
 }

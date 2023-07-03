@@ -6,24 +6,24 @@ import {
   CardContent,
   CardImageInner,
 } from './adsCardStyles';
-import { GuideBannerPlaceholder } from 'public/images';
+import { AuthorPlaceholder } from 'public/images';
 
 const AdsCard = () => {
   const [hoverCard, setHoverCard] = useState(false);
 
   return (
-    <a href="/blog/article" rel="noreferrer" target="_blank">
+    <a href="/guide/guide" rel="noreferrer" target="_blank">
       <CardContainer
         onMouseEnter={() => setHoverCard(true)}
         onMouseLeave={() => setHoverCard(false)}
       >
         <CardImage>
           <CardImageInner hoverCard={hoverCard}>
-            <Image src={GuideBannerPlaceholder} alt="featured image" />
+            <Image src={AuthorPlaceholder} alt="featured image" />
           </CardImageInner>
         </CardImage>
         <CardContent>
-          <h3>Sponsored</h3>
+          <h3>Featured Project</h3>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore
             debitis temporibus nulla doloremque ducimus dignissimos.

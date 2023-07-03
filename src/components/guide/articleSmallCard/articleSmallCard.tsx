@@ -17,7 +17,7 @@ import CatgoryTag from '@/components/guide/slices/categoryTag';
 
 const ArticleSmallCard = () => {
   return (
-    <Link href="/blog/article" passHref>
+    <Link href="/guides/guide" passHref>
       <CardContainer>
         <CardImageWrap>
           <Image

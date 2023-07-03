@@ -9,6 +9,14 @@ import {
 } from 'react-share';
 import { useClipboard } from 'use-clipboard-copy';
 import Tooltip from '@mui/material/Tooltip';
+import {
+  FaTwitter,
+  FaFacebookF,
+  FaPinterestP,
+  FaRedditAlien,
+  FaLinkedinIn,
+  FaLink,
+} from 'react-icons/fa';
 
 interface ArticleShareTypes {
   shareUrl: string;
@@ -35,12 +43,12 @@ const ArticleShare = ({ shareUrl }: ArticleShareTypes) => {
     <ShareContainer>
       <FacebookShareButton url={shareUrl}>
         <div style={{ backgroundColor: '#3A579A' }}>
-          <i className="fa-brands fa-facebook-f"></i>
+          <FaFacebookF />
         </div>
       </FacebookShareButton>
       <TwitterShareButton url={shareUrl}>
         <div style={{ backgroundColor: '#00ABF0' }}>
-          <i className="fa-brands fa-twitter"></i>
+          <FaTwitter />
         </div>
       </TwitterShareButton>
       <PinterestShareButton
@@ -49,17 +57,17 @@ const ArticleShare = ({ shareUrl }: ArticleShareTypes) => {
         description="/"
       >
         <div style={{ backgroundColor: '#CD1C1F' }}>
-          <i className="fa-brands fa-pinterest"></i>
+          <FaPinterestP />
         </div>
       </PinterestShareButton>
       <RedditShareButton url={shareUrl}>
         <div style={{ backgroundColor: '#FC461E' }}>
-          <i className="fa-brands fa-reddit-alien"></i>
+          <FaRedditAlien />
         </div>
       </RedditShareButton>
       <LinkedinShareButton title="" summary="" source={shareUrl} url={shareUrl}>
         <div style={{ backgroundColor: '#127BB6' }}>
-          <i className="fa-brands fa-linkedin-in"></i>
+          <FaLinkedinIn />
         </div>
       </LinkedinShareButton>
       <Tooltip
@@ -84,7 +92,7 @@ const ArticleShare = ({ shareUrl }: ArticleShareTypes) => {
         }}
       >
         <div style={{ backgroundColor: '#790b56cf' }} onClick={handleCopyClick}>
-          <i className="fa-solid fa-link"></i>
+          <FaLink />
         </div>
       </Tooltip>
     </ShareContainer>

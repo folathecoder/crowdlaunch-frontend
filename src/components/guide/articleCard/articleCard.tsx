@@ -19,7 +19,7 @@ interface ArticleCardTypes {
 
 const ArticleCard = ({ cornerStone }: ArticleCardTypes) => {
   return (
-    <Link href="/blog/article" passHref>
+    <Link href="/guides/guide" passHref>
       <CardContainer cornerStone={cornerStone}>
         <CardImageWrap>
           <Image

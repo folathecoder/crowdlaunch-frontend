@@ -35,7 +35,7 @@ const HeroSection = () => {
         </HeroContent>
 
         <>
-          <Link href="/blog/article" passHref>
+          <Link href="/guide/guide" passHref>
             <HeroFeatured>
               <CardImageWrap>
                 <Image
@@ -50,7 +50,7 @@ const HeroSection = () => {
                 </CardContentCategory>
               </CardImageWrap>
               <div>
-                <h2>What is the Metaverse?</h2>
+                <h2>How to Create a Metamask De-Fi Wallet</h2>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Voluptate nemo sit veniam animi doloremque sed, provident
