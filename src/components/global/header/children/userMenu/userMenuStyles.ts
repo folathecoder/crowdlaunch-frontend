@@ -84,13 +84,8 @@ export const NavHeader = styled.div`
   }
 `;
 
-export const NavSearchContainer = styled.div`
-  padding: 0px 20px;
-`;
-
 export const MenuList = styled.ul`
   display: flex;
-  gap: 24px;
   flex-direction: column;
   padding: 0px 20px;
   overflow: hidden;
@@ -117,7 +112,7 @@ export const MenuItem = styled.li<UserMenuStyleTypes>`
             padding: 20px 0px;
           `
         : css`
-            margin-bottom: 0px;
+            margin-bottom: 20px;
           `}
 
     ${({ active }) =>
