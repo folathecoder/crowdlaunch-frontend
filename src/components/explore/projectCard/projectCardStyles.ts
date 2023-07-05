@@ -1,10 +1,19 @@
 import styled, { css } from 'styled-components';
 
 export const ProjectContainer = styled.div`
-  height: 421px;
+  min-height: 421px;
   border-radius: 8px;
   padding: 9px;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: 0.3s linear;
+
+  &:hover {
+    img {
+      opacity: 0.5;
+      transition: 0.3s linear;
+    }
+  }
 `;
 
 export const ProjectImage = styled.div`
@@ -12,6 +21,10 @@ export const ProjectImage = styled.div`
   height: 267px;
   border-radius: 8px;
   position: relative;
+
+  img {
+    border-radius: 8px;
+  }
 `;
 
 export const ProjectTitle = styled.div`
@@ -30,6 +43,10 @@ export const ProjectTitle = styled.div`
     font-weight: 700;
     line-height: 22px;
   }
+`;
+
+export const ProjectProgress = styled.div`
+  margin-top: 12px;
 `;
 
 export const ProjectInfo = styled.div`
