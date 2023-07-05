@@ -2,5 +2,12 @@ import AppLogo from 'public/images/header/AppLogo.svg';
 import ProfileLottie from 'public/images/header/ProfileLottie.json';
 import GuideBannerPlaceholder from 'public/images/guide/guide-placeholder.webp';
 import AuthorPlaceholder from 'public/images/guide/author-placeholder.png';
+import ProjectPlaceholder from 'public/images/global/project-placeholder.png';
 
-export { AppLogo, ProfileLottie, GuideBannerPlaceholder, AuthorPlaceholder };
+export {
+  AppLogo,
+  ProfileLottie,
+  GuideBannerPlaceholder,
+  AuthorPlaceholder,
+  ProjectPlaceholder,
+};

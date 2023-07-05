@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { ExplorerLayout } from '@/components/layouts';
 
-const Explore: NextPage = () => {
+const Marketplace: NextPage = () => {
   return (
     <main>
       <ExplorerLayout />
@@ -9,4 +9,4 @@ const Explore: NextPage = () => {
   );
 };
 
-export default Explore;
+export default Marketplace;
