@@ -32,7 +32,7 @@ export const MenuItem = styled.li<HeaderMenuStyleTypes>`
             color: var(--color-accent-100);
           `
         : css`
-            color: var(--color-font-300);
+            color: var(--color-font-100);
           `}
 
     &:hover {

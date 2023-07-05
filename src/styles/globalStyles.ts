@@ -115,7 +115,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
     a {
       text-decoration: none;
       font-size: 1rem;
-      color: var(--color-font-200);
+      color: var(--color-font-100);
       font-weight: 400;
       transition: var(--transition);
       font-family: var(--font-pry-300);

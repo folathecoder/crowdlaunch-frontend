@@ -1,7 +1,7 @@
 import '@/styles/global.css';
 import type { AppProps } from 'next/app';
 import { GlobalStyles } from '@/styles/globalStyles';
-import { darkTheme } from '@/styles/theme';
+import { brownTheme, blackTheme, lightTheme } from '@/styles/theme';
 import { Header, Footer } from '@/components/global';
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <WagmiConfig config={wagmiConfig}>
-          <GlobalStyles theme={darkTheme} />
+          <GlobalStyles theme={blackTheme} />
           <Header />
           <Component {...pageProps} />
           <Footer />
