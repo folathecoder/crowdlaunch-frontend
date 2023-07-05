@@ -29,59 +29,10 @@ import harmony from 'public/images/global/Harmony-svg.svg';
 import iotex from 'public/images/global/iotex-svg.svg';
 import moonbeam from 'public/images/global/Moonbeam-svg.svg';
 
-export const servicesData = [
-  {
-    id: 1,
-    title: 'Smart Contract Auditing',
-    subTitle: 'For Developers & dApps',
-    text: 'Join 40,000 developers using Ankr',
-    icon: magnifyIcon,
-    link: '/',
-  },
-
-  {
-    id: 2,
-    title: 'Dapp Development',
-    subTitle: 'For Stakers & Integrators',
-    text: 'TVL: $145 million',
-    icon: pieIcon,
-    link: '/',
-  },
-  {
-    id: 3,
-    title: 'NFT Marketplace Development',
-    subTitle: 'For Complex Use-cases',
-    icon: chainIcon,
-    link: '/',
-  },
-  {
-    id: 4,
-    title: 'Dapp Maintenance',
-    subTitle: 'For Game Studios',
-    icon: toolIcon,
-    link: '/',
-  },
-  {
-    id: 5,
-    title: 'Launch Your Own Blockchain',
-    subTitle: 'For Tailor-made solutions',
-    icon: coinIcon,
-    link: '/',
-  },
-  {
-    id: 6,
-    title: 'Smart Contract Auditing',
-    subTitle: 'For Developers & dApps',
-    text: 'Join 40,000 developers using Ankr',
-    icon: magnifyIcon,
-    link: '/',
-  },
-];
-
 /////BENEFIT SECTION DATA
 export const benefitData = {
   subHeading: 'Benefits',
-  mainHeading: "Why CrowdLaunch?",
+  mainHeading: 'Why CrowdLaunch?',
   description:
     'Developers can now build on a custom dedicated blockchain serving only their application. With scalability issues out of the way, devs can focus on creating dApps that defy expectations.',
   mainBenefit: [
