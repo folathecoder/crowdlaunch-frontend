@@ -7,8 +7,10 @@ import {
   ExploreMain,
   ExploreFilterContainer,
   ExploreCardsContainer,
+  ExploreSearchWrap,
+  ExploreOptions,
 } from './explorerLayoutStyles';
-import { ProjectCard } from '@/components/explore';
+import { ProjectCard, ExploreSearch } from '@/components/explore';
 
 const ExplorerLayout = () => {
   return (
@@ -18,7 +20,12 @@ const ExplorerLayout = () => {
           <h1>Explore Projects</h1>
         </ExploreHeader>
         <ExploreMenu>
-          <p>Explore Menu</p>
+          <ExploreOptions>
+            <button>Active</button>
+          </ExploreOptions>
+          <ExploreSearchWrap>
+            <ExploreSearch />
+          </ExploreSearchWrap>
         </ExploreMenu>
         <ExploreMain>
           <ExploreFilterContainer>

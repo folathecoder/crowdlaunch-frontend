@@ -21,10 +21,22 @@ export const ExploreHeader = styled.section`
 `;
 
 export const ExploreMenu = styled.section`
-  height: 40px;
   width: 100%;
   margin: 20px 0px;
-  background-color: blue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+`;
+
+export const ExploreOptions = styled.div`
+  min-width: 376px;
+  background-color: red;
+`;
+
+export const ExploreSearchWrap = styled.div`
+  height: 40px;
+  width: 100%;
 `;
 
 export const ExploreMain = styled.section`
