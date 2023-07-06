@@ -37,9 +37,9 @@ export default class MyDocument extends Document {
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="/public/vercel.svg"
+            href="public/AppLogo.svg"
           />
-          <meta name="theme-color" content="#000000" />
+          <meta name="theme-color" content="#C2177E" />
           <meta name="twitter:card" content="summary" key="twcard" />
           <meta name="twitter:creator" content="crowdlaunch" key="twhandle" />
           <meta
@@ -59,7 +59,10 @@ export default class MyDocument extends Document {
           />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
-          <link rel="apple-touch-icon" href="/favicon.ico" />
+          <link
+            rel="apple-touch-icon"
+            href="/public/images/header/AppLogo.svg"
+          />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"
