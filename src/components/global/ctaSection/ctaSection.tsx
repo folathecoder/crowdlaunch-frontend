@@ -14,7 +14,7 @@ const CtaSection = () => {
           <Button
             buttonTitle="Explore Projects"
             buttonType="link"
-            buttonLink="/"
+            buttonLink="/explore"
           />
         </div>
       </CtaInner>

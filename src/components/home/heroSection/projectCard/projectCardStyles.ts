@@ -33,7 +33,7 @@ export const ProjectWrapperScroll = styled.div`
 
 export const UniqueProject = styled.div<UniqueTokenStylesTypes>`
   padding: 0.5rem 0.5rem 1.25rem 0.5rem;
-  border-radius: 0.875rem;
+  border-radius: 0.5rem;
   background: ${(props) => props.bgColor};
 
   &:hover {
@@ -53,7 +53,10 @@ export const ProjectLink = styled.a`
 `;
 
 export const ImageWrapper = styled.div`
+  border-radius: 0.5rem;
+
   img {
+    border-radius: 0.5rem;
     object-fit: cover;
   }
 `;
@@ -68,7 +71,7 @@ export const ContentWrapper = styled.div`
 
     p {
       font-size: 0.8125rem;
-      opacity: 0.6;
+      opacity: 0.9;
     }
   }
 
@@ -90,7 +93,7 @@ export const ContentWrapper = styled.div`
 
     p {
       font-size: 0.8125rem;
-      opacity: 0.6;
+      opacity: 0.9;
     }
   }
 `;

@@ -10,7 +10,7 @@ export const NftMarketWrapper = styled.div`
   margin: var(--center-container);
   width: min(89.61%, 116.5625rem);
   padding: 1rem;
-  border-radius: 1.5rem;
+  border-radius: 0.5rem;
   background: #161618;
 
   @media ${QUERIES.desktop} {
@@ -80,18 +80,19 @@ export const NftMarketHeader = styled.div`
     padding-inline: 1.01875rem 1.4375rem;
     height: 3.5rem;
     place-items: center;
-
-    border-radius: 1rem;
-    border: 1px solid #fff;
-    background: #fff;
+    border-radius: 0.5rem;
     font-family: inherit;
     transition: all 0.2s ease-in;
-    border: 1px solid #fff;
     cursor: pointer;
+    transition: 0.5s linear;
+    border: 1px solid var(--color-bg-400);
+    background: var(--color-bg-400);
+    color: var(--color-font-500);
+    font-weight: 900;
 
     &:hover {
-      background: #000;
-      color: #fff;
+      opacity: 0.8;
+      transition: 0.5s linear;
     }
   }
 `;

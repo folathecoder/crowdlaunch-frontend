@@ -1,9 +1,8 @@
 import { ProjectPlaceholder } from 'public/images';
-//Steps section Icons
-// import pickProjectIcon from 'public/images/pick-project-icon.svg';
-// import fundIcon from 'public/images/funds-invest-icon.svg';
-// import dividendsIcon from 'public/images/nft-dividends-icon.svg';
-// import growthIcon from 'public/images/track-growth-icon.svg';
+import pickProjectIcon from 'public/images/global/pick-project-icon.svg';
+import fundIcon from 'public/images/global/funds-invest-icon.svg';
+import dividendsIcon from 'public/images/global/nft-dividends-icon.svg';
+import growthIcon from 'public/images/global/track-growth-icon.svg';
 
 export const nftArrayData = [
   {
@@ -280,25 +279,25 @@ export const nftArrayData = [
   },
 ];
 
-// export const stepsData = [
-//   {
-//     img: pickProjectIcon,
-//     title: '1. Pick a project',
-//     paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
-//   },
-//   {
-//     img: fundIcon,
-//     title: '2. Fund & Invest',
-//     paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
-//   },
-//   {
-//     img: dividendsIcon,
-//     title: '3. NFT Dividends',
-//     paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
-//   },
-//   {
-//     img: growthIcon,
-//     title: '4. Track Growth',
-//     paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
-//   },
-// ];
+export const stepsData = [
+  {
+    img: pickProjectIcon,
+    title: '1. Pick a project',
+    paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
+  },
+  {
+    img: fundIcon,
+    title: '2. Fund & Invest',
+    paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
+  },
+  {
+    img: dividendsIcon,
+    title: '3. NFT Dividends',
+    paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
+  },
+  {
+    img: growthIcon,
+    title: '4. Track Growth',
+    paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
+  },
+];

@@ -1,11 +1,13 @@
 import React from 'react';
-import { nftArrayData } from '@/data/home/heroData';
+import Link from 'next/link';
+import { nftArrayData, stepsData } from '@/data/home/heroData';
 import {
   NftMarketContainer,
   NftMarketHeader,
   NftMarketWrapper,
 } from './heroSectionStyles';
 import ProjectCard from './projectCard/projectCard';
+import StepsSection from '../stepsSection/stepsSection';
 
 const HeroSection = () => {
   return (
@@ -18,12 +20,13 @@ const HeroSection = () => {
             Revolutionize your business with our expert Dapp development
             services.
           </p>
-          <button>Explore Projects</button>
+          <Link href="/explore">
+            <button>Explore Projects</button>
+          </Link>
         </NftMarketHeader>
         <ProjectCard data={nftArrayData} />
       </NftMarketWrapper>
-
-      {/* <Steps data={stepsData} /> */}
+      <StepsSection data={stepsData} />
     </NftMarketContainer>
   );
 };
