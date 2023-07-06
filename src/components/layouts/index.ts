@@ -1,3 +1,3 @@
-import ExplorerLayout from '@/components/layouts/explorerLayout/explorerLayout';
+import ExplorerLayout from '@/components/explore/explorerLayout/explorerLayout';
 
 export { ExplorerLayout };

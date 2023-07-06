@@ -1,0 +1,160 @@
+import image from 'public/images/nft';
+import { NFTCardTypes } from '@/types/nftTypes';
+
+export const nftStatus = [
+  {
+    id: 1,
+    title: 'New',
+    bgColor: 'rgba(237, 233, 7, 0.5)',
+    borderColor: 'rgba(237, 233, 7)',
+  },
+  {
+    id: 2,
+    title: 'Listed',
+    bgColor: 'rgba(126, 227, 68, 0.5)',
+    borderColor: 'rgba(126, 227, 68)',
+  },
+  {
+    id: 3,
+    title: 'Closed',
+    bgColor: 'rgba(33, 180, 209, 0.5)',
+    borderColor: 'rgba(33, 180, 209)',
+  },
+  {
+    id: 4,
+    title: 'Loved',
+    bgColor: 'rgba(184, 22, 154, 0.5)',
+    borderColor: 'rgba(184, 22, 154)',
+  },
+];
+
+export const holders = [
+  { id: 1, collectorName: 'The Preacher', collectorImage: image.creator1 },
+  { id: 2, collectorName: 'Luggwick', collectorImage: image.creator2 },
+  { id: 3, collectorName: 'Lamdar Rush', collectorImage: image.creator3 },
+  { id: 4, collectorName: 'Yoruba Boy', collectorImage: image.creator4 },
+  { id: 5, collectorName: 'Jugger Runs', collectorImage: image.creator5 },
+  { id: 6, collectorName: 'Sterling', collectorImage: image.creator6 },
+  { id: 7, collectorName: 'Cris Messi', collectorImage: image.creator7 },
+  { id: 8, collectorName: 'Ape Hunter', collectorImage: image.creator8 },
+  { id: 9, collectorName: 'Ragnar Lothbrok', collectorImage: image.creator9 },
+  { id: 10, collectorName: 'Jeffery', collectorImage: image.creator5 },
+  { id: 11, collectorName: 'London Canary', collectorImage: image.creator1 },
+  { id: 12, collectorName: 'JJ Smoov', collectorImage: image.creator2 },
+  { id: 13, collectorName: 'Ola', collectorImage: image.creator3 },
+];
+
+export const NFTData: NFTCardTypes[] = [
+  {
+    id: 1,
+    NFTName: 'Lynch',
+    NFTImage: image.nft2,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator1,
+  },
+  {
+    id: 2,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft3,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator2,
+  },
+  {
+    id: 3,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft5,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator3,
+  },
+  {
+    id: 4,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft4,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator4,
+  },
+  {
+    id: 5,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft5,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator5,
+  },
+  {
+    id: 6,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft6,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator6,
+  },
+  {
+    id: 7,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft7,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator7,
+  },
+  {
+    id: 8,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft8,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator8,
+  },
+  {
+    id: 9,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft9,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator9,
+  },
+  {
+    id: 10,
+    NFTName: 'Lynch',
+    NFTImage: image.nft2,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator1,
+  },
+  {
+    id: 11,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft3,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator2,
+  },
+  {
+    id: 12,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft4,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator3,
+  },
+  {
+    id: 13,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft4,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator4,
+  },
+  {
+    id: 14,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft5,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator5,
+  },
+  {
+    id: 15,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft6,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator6,
+  },
+  {
+    id: 16,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft7,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator7,
+  },
+];
