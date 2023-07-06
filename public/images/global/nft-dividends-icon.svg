@@ -1,0 +1,23 @@
+<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="6336f99e90b9dbaf7a7ac841_edit-content-card-icon-darkweb-webflow-ecommerce-template.svg" clip-path="url(#clip0_185_567)">
+<g id="Clip path group">
+<mask id="mask0_185_567" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
+<g id="clip0_3366_13607">
+<path id="Vector" d="M60 0H0V60H60V0Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask0_185_567)">
+<g id="Group">
+<path id="Vector_2" opacity="0.12" d="M30 60C46.5685 60 60 46.5685 60 30C60 13.4315 46.5685 0 30 0C13.4315 0 0 13.4315 0 30C0 46.5685 13.4315 60 30 60Z" fill="#FF4264"/>
+<path id="Vector_3" d="M17.0333 44.8876L25.6895 43.1563C26.0055 43.0931 26.2957 42.9378 26.5236 42.71L37.3775 31.8559C38.015 31.2185 38.0149 30.185 37.3775 29.5476L30.4526 22.6227C29.8152 21.9852 28.7817 21.9852 28.1443 22.6227L17.2903 33.4767C17.0625 33.7046 16.9071 33.9948 16.844 34.3108L15.1127 42.9669C14.8843 44.109 15.8912 45.116 17.0333 44.8876Z" fill="#FF4264"/>
+<path id="Vector_4" d="M43.4856 18.8216L41.1773 16.5133C39.265 14.601 36.1646 14.601 34.2523 16.5133L32.6441 18.1215C32.0067 18.7589 32.0067 19.7924 32.6441 20.4298L39.5691 27.3548C40.2065 27.9922 41.24 27.9922 41.8774 27.3548L43.4856 25.7465C45.3979 23.8343 45.3979 20.7339 43.4856 18.8216Z" fill="#FF4264"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_185_567">
+<rect width="60" height="60" fill="white"/>
+</clipPath>
+</defs>
+</svg>

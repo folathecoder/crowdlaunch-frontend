@@ -143,8 +143,6 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
       font-size: 2.2rem;
       line-height: 3rem;
       font-weight: 700;
-      
-      
 
       @media ${QUERIES.tabletMini} {
         font-size: 3rem;
