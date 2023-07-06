@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { ExplorerLayout } from '@/components/layouts';
+import { ExplorerLayout } from '@/components/explore';
 
 const Explore: NextPage = () => {
   return (
