@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import {
   ExploreContainer,
   ExploreWrapper,
   ExploreHeader,
-  ExploreHolders,
-  Holder,
   ExploreMain,
   ExploreFilterContainer,
   ExploreCardsContainer,
@@ -19,7 +16,7 @@ import { projectStatus } from '@/data/explore/exploreFilters';
 import ExploreFilter from '@/components/explore/exploreFilter/exploreFilter';
 import { GoFilter } from 'react-icons/go';
 import { useBreakPointDown } from '@/hooks/useBreakPoint';
-import { AuthorPlaceholder } from 'public/images';
+import HoldersSection from '@/components/marketplace/children/HoldersSection/holdersSection';
 
 const ExplorerLayout = () => {
   const [filterToggle, setFilterToggle] = useState(false);
@@ -46,20 +43,7 @@ const ExplorerLayout = () => {
         <ExploreHeader>
           <h1>Top Holders</h1>
         </ExploreHeader>
-        <ExploreHolders>
-          {[
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-            20,
-          ].map((item) => (
-            <Holder key={item}>
-              <Image
-                src={AuthorPlaceholder}
-                layout="fill"
-                alt="featured image"
-              />
-            </Holder>
-          ))}
-        </ExploreHolders>
+        <HoldersSection />
         <ExploreHeader>
           <h1>Explore NFTs</h1>
         </ExploreHeader>

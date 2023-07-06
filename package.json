@@ -23,6 +23,7 @@
     "eslint-config-next": "13.4.7",
     "ethers": "^6.6.0",
     "framer-motion": "^10.12.18",
+    "lodash": "^4.17.21",
     "next": "13.4.7",
     "next-redux-wrapper": "^8.1.0",
     "react": "18.2.0",
@@ -41,6 +42,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
+    "@types/lodash": "^4.14.195",
     "@types/react-share": "^4.0.0",
     "@types/styled-components": "^5.1.26"
   }

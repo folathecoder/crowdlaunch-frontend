@@ -20,7 +20,8 @@ import creator8 from './creator8.png';
 import creator9 from './creator9.png';
 import creator10 from './creator10.jpg';
 
-export {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
   nft1,
   nft2,
   nft3,
@@ -42,5 +43,4 @@ export {
   creator8,
   creator9,
   creator10,
- 
 };

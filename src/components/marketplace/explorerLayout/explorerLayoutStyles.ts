@@ -8,10 +8,11 @@ export const ExploreContainer = styled.section`
 export const ExploreWrapper = styled.section`
   max-width: 1556px;
   margin: 0 auto;
-  padding: 36px 20px;
+  padding: 36px 0px;
 `;
 
 export const ExploreHeader = styled.section`
+  padding: 0px 20px;
   h1 {
     border-left: unset;
     color: #fff;
@@ -79,9 +80,12 @@ export const ExploreMain = styled.section`
 
 export const ExploreWrap = styled.section`
   flex: 10;
+  padding: 0px 20px;
 `;
 
 export const ExploreFilterContainer = styled.section`
+  padding: 0px 20px;
+
   & > * {
     position: sticky;
     top: 90px;
@@ -116,6 +120,22 @@ export const ExploreHolders = styled.section`
   overflow-x: scroll !important;
   white-space: nowrap;
   margin-bottom: 70px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  overflow: -moz-scrollbars-horizontal;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
 `;
 
 export const Holder = styled.div`
@@ -125,6 +145,7 @@ export const Holder = styled.div`
   border-radius: 100%;
   border: 2px solid var(--color-accent-100);
   position: relative;
+  margin-bottom: 10px;
 
   img {
     border-radius: 100%;
