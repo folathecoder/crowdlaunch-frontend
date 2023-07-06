@@ -1,4 +1,5 @@
 import image from 'public/images/nft';
+import { NFTCardTypes } from '@/types/nftTypes';
 
 export const holders = [
   { id: 1, collectorName: 'The Preacher', collectorImage: image.creator1 },
@@ -16,68 +17,117 @@ export const holders = [
   { id: 13, collectorName: 'Ola', collectorImage: image.creator3 },
 ];
 
-export const NFTData = [
+export const NFTData: NFTCardTypes[] = [
   {
     id: 1,
-    NFTName: 'Lynch #78',
+    NFTName: 'Lynch',
     NFTImage: image.nft2,
     NFTCreatorName: 'The Preacher',
     NFTCreatorImage: image.creator1,
   },
   {
     id: 2,
-    NFTName: 'Knight Owl #11',
+    NFTName: 'Knight Owl',
     NFTImage: image.nft3,
     NFTCreatorName: 'The Preacher',
     NFTCreatorImage: image.creator2,
   },
   {
     id: 3,
-    NFTName: 'Knight Owl #11',
-    NFTImage: image.nft1,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft5,
     NFTCreatorName: 'The Preacher',
     NFTCreatorImage: image.creator3,
   },
   {
     id: 4,
-    NFTName: 'Knight Owl #11',
+    NFTName: 'Knight Owl',
     NFTImage: image.nft4,
     NFTCreatorName: 'The Preacher',
     NFTCreatorImage: image.creator4,
   },
   {
     id: 5,
-    NFTName: 'Knight Owl #11',
+    NFTName: 'Knight Owl',
     NFTImage: image.nft5,
     NFTCreatorName: 'The Preacher',
     NFTCreatorImage: image.creator5,
   },
   {
     id: 6,
-    NFTName: 'Knight Owl #11',
+    NFTName: 'Knight Owl',
     NFTImage: image.nft6,
     NFTCreatorName: 'The Preacher',
     NFTCreatorImage: image.creator6,
   },
   {
     id: 7,
-    NFTName: 'Knight Owl #11',
+    NFTName: 'Knight Owl',
     NFTImage: image.nft7,
     NFTCreatorName: 'The Preacher',
     NFTCreatorImage: image.creator7,
   },
   {
     id: 8,
-    NFTName: 'Knight Owl #11',
+    NFTName: 'Knight Owl',
     NFTImage: image.nft8,
     NFTCreatorName: 'The Preacher',
     NFTCreatorImage: image.creator8,
   },
   {
     id: 9,
-    NFTName: 'Knight Owl #11',
+    NFTName: 'Knight Owl',
     NFTImage: image.nft9,
     NFTCreatorName: 'The Preacher',
     NFTCreatorImage: image.creator9,
+  },
+  {
+    id: 10,
+    NFTName: 'Lynch',
+    NFTImage: image.nft2,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator1,
+  },
+  {
+    id: 11,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft3,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator2,
+  },
+  {
+    id: 12,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft4,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator3,
+  },
+  {
+    id: 13,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft4,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator4,
+  },
+  {
+    id: 14,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft5,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator5,
+  },
+  {
+    id: 15,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft6,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator6,
+  },
+  {
+    id: 16,
+    NFTName: 'Knight Owl',
+    NFTImage: image.nft7,
+    NFTCreatorName: 'The Preacher',
+    NFTCreatorImage: image.creator7,
   },
 ];
