@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ExploreContainer,
   ExploreWrapper,
@@ -16,8 +16,27 @@ import { ColorButton } from '@/components/global';
 import { projectStatus } from '@/data/explore/exploreFilters';
 import ExploreFilter from '@/components/explore/exploreFilter/exploreFilter';
 import { GoFilter } from 'react-icons/go';
+import { useBreakPointDown } from '@/hooks/useBreakPoint';
 
 const ExplorerLayout = () => {
+  const [filterToggle, setFilterToggle] = useState(false);
+  const [noOfStatus, setNoOfStatus] = useState(4);
+
+  const { breakPoint: switchToggleMode } = useBreakPointDown({
+    breakMark: 798,
+  });
+  const { breakPoint: reduceFilterTags } = useBreakPointDown({
+    breakMark: 360,
+  });
+
+  useEffect(() => {
+    if (reduceFilterTags) {
+      setNoOfStatus(3);
+    } else {
+      setNoOfStatus(4);
+    }
+  }, [reduceFilterTags]);
+
   return (
     <ExploreContainer>
       <ExploreWrapper>
@@ -29,7 +48,7 @@ const ExplorerLayout = () => {
             <div>
               <ExploreOptions>
                 <div>
-                  {projectStatus.map((item) => (
+                  {projectStatus.slice(0, noOfStatus).map((item) => (
                     <ColorButton
                       key={item.id}
                       buttonTitle={item.title}
@@ -40,13 +59,23 @@ const ExplorerLayout = () => {
                     />
                   ))}
                 </div>
-                <div>
-                  <button className="filter_button" type="button" role="button">
-                    <GoFilter />
-                  </button>
-                </div>
+                {switchToggleMode && (
+                  <div>
+                    <button
+                      className="filter_button"
+                      type="button"
+                      role="button"
+                      onClick={() => setFilterToggle(!filterToggle)}
+                    >
+                      <GoFilter />
+                    </button>
+                  </div>
+                )}
               </ExploreOptions>
-              <ExploreFilter />
+              <ExploreFilter
+                filterToggle={filterToggle}
+                setFilterToggle={setFilterToggle}
+              />
             </div>
           </ExploreFilterContainer>
           <ExploreWrap>

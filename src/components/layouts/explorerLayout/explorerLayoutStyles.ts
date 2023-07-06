@@ -13,6 +13,7 @@ export const ExploreWrapper = styled.section`
 
 export const ExploreHeader = styled.section`
   h1 {
+    border-left: unset;
     color: #fff;
     font-size: 22px;
     font-weight: 700;
@@ -76,7 +77,9 @@ export const ExploreMain = styled.section`
   }
 `;
 
-export const ExploreWrap = styled.section``;
+export const ExploreWrap = styled.section`
+  flex: 10;
+`;
 
 export const ExploreFilterContainer = styled.section`
   & > * {

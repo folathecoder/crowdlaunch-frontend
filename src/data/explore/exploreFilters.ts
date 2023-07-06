@@ -13,7 +13,7 @@ export const projectStatus = [
   },
   {
     id: 3,
-    title: 'VC-Backed',
+    title: 'Closed',
     bgColor: 'rgba(33, 180, 209, 0.5)',
     borderColor: 'rgba(33, 180, 209)',
   },

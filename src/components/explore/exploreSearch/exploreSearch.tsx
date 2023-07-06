@@ -19,12 +19,12 @@ const WordSwitcher = ({ prefix }: WordSwitcherTypes) => {
     'High-Yield Investments...',
     'Innovative Initiatives...',
     'Emerging Ventures...',
-    'Lucrative Investment Opportunities...',
+    'Lucrative Investments...',
     'Cutting-edge Technologies...',
     'Disruptive Solutions...',
     'Promising Ventures...',
     'Profitable Projects...',
-    'Groundbreaking Innovations...',
+    'Innovations...',
     'VC Opportunities...',
   ];
   const [isMounted, setIsMounted] = useState(false);
