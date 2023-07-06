@@ -19,7 +19,7 @@ interface NFTCardComponentTypes {
 const NFTCard = ({ data }: NFTCardComponentTypes) => {
   const { id, NFTName, NFTImage, NFTCreatorImage, NFTCreatorName } = data;
   return (
-    <Link href="/" passHref>
+    <Link href="/nft/12" passHref>
       <NFTContainer>
         <NFTImageContainer>
           <Image src={NFTImage} alt={NFTName} layout="fill" objectFit="cover" />
