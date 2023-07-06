@@ -7,18 +7,22 @@ interface HeaderSearchStyleTypes {
 export const SearchContainer = styled.form<HeaderSearchStyleTypes>`
   border-radius: 12px;
   overflow: hidden;
-
-  ${({ fullWidth }) =>
-    fullWidth
-      ? css`
-          width: 100%;
-        `
-      : css`
-          width: 400px;
-        `}
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-bg-300);
 
   & > * {
     position: relative;
+  }
+
+  .search_input {
+    flex: 100;
+  }
+
+  .search_icons {
+    margin: 0px 20px;
+    flex: 1;
   }
 
   .input-overlay {
@@ -30,7 +34,7 @@ export const SearchContainer = styled.form<HeaderSearchStyleTypes>`
     font-weight: 400;
     padding: 0px 8px;
     line-break: no-break;
-    opacity: 0.4;
+    opacity: 0.4
   }
 
   input {
@@ -43,5 +47,13 @@ export const SearchContainer = styled.form<HeaderSearchStyleTypes>`
     font-size: 14px;
     font-weight: 400;
     padding: 0px 8px;
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      border: none;
+    }
   }
 `;
