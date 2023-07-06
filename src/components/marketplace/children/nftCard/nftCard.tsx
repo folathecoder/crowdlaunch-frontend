@@ -22,7 +22,7 @@ const NFTCard = ({ data }: NFTCardComponentTypes) => {
     <Link href="/" passHref>
       <NFTContainer>
         <NFTImageContainer>
-          <Image src={NFTImage} alt={NFTName} />
+          <Image src={NFTImage} alt={NFTName} layout="fill" objectFit="cover" />
         </NFTImageContainer>
         <NFTTitle>
           <div>

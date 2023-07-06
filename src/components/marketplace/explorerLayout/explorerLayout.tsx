@@ -10,7 +10,7 @@ import {
   ExploreOptions,
   ExploreWrap,
 } from './explorerLayoutStyles';
-import { NFTCard } from '@/components/marketplace';
+import { NFTCard, NFTSearch } from '@/components/marketplace';
 import { ProjectCard, ExploreSearch } from '@/components/explore';
 import { ColorButton } from '@/components/global';
 import { projectStatus } from '@/data/explore/exploreFilters';
@@ -18,7 +18,7 @@ import ExploreFilter from '@/components/explore/exploreFilter/exploreFilter';
 import { GoFilter } from 'react-icons/go';
 import { useBreakPointDown } from '@/hooks/useBreakPoint';
 import HoldersSection from '@/components/marketplace/children/HoldersSection/holdersSection';
-import { NFTData } from '@/data/marketplace/marketplaceData';
+import { NFTData, nftStatus } from '@/data/marketplace/marketplaceData';
 
 const ExplorerLayout = () => {
   const [filterToggle, setFilterToggle] = useState(false);
@@ -54,7 +54,7 @@ const ExplorerLayout = () => {
             <div>
               <ExploreOptions>
                 <div>
-                  {projectStatus.slice(0, noOfStatus).map((item) => (
+                  {nftStatus.slice(0, noOfStatus).map((item) => (
                     <ColorButton
                       key={item.id}
                       buttonTitle={item.title}
@@ -86,7 +86,7 @@ const ExplorerLayout = () => {
           </ExploreFilterContainer>
           <ExploreWrap>
             <ExploreSearchWrap>
-              <ExploreSearch />
+              <NFTSearch />
             </ExploreSearchWrap>
             <ExploreCardsContainer>
               {NFTData.map((nft) => (

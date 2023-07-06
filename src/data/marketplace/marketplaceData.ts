@@ -1,6 +1,33 @@
 import image from 'public/images/nft';
 import { NFTCardTypes } from '@/types/nftTypes';
 
+export const nftStatus = [
+  {
+    id: 1,
+    title: 'New',
+    bgColor: 'rgba(237, 233, 7, 0.5)',
+    borderColor: 'rgba(237, 233, 7)',
+  },
+  {
+    id: 2,
+    title: 'Listed',
+    bgColor: 'rgba(126, 227, 68, 0.5)',
+    borderColor: 'rgba(126, 227, 68)',
+  },
+  {
+    id: 3,
+    title: 'Closed',
+    bgColor: 'rgba(33, 180, 209, 0.5)',
+    borderColor: 'rgba(33, 180, 209)',
+  },
+  {
+    id: 4,
+    title: 'Loved',
+    bgColor: 'rgba(184, 22, 154, 0.5)',
+    borderColor: 'rgba(184, 22, 154)',
+  },
+];
+
 export const holders = [
   { id: 1, collectorName: 'The Preacher', collectorImage: image.creator1 },
   { id: 2, collectorName: 'Luggwick', collectorImage: image.creator2 },
