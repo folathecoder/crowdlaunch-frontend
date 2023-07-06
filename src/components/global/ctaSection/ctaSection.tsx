@@ -10,7 +10,7 @@ const CtaSection = () => {
     <CtaContainer>
       <CtaInner>
         <div>
-          <h2>Take your business to the next level with a dapp.</h2>
+          <h2>Empower Creativity. Revolutionize Funding.</h2>
           <Button
             buttonTitle="Explore Projects"
             buttonType="link"

@@ -53,7 +53,7 @@ export const benefitData = {
     },
   ],
   primaryContent: {
-    heading: 'Prepare for your exchange listing.',
+    heading: 'Prepare for your project listing.',
     mainDescription:
       "Get exchange-ready with a partner that has helped many projects meet listing requirements. CrowdLaunch's exclusive Exchange Scorecard gets your project ready to hit every requirement for:",
     miniDescription:
