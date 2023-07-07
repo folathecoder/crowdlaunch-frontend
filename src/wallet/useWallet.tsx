@@ -73,8 +73,6 @@ const useWallet = () => {
     dispatch(clearActiveWallet());
   };
 
-  console.log('my wallet', wallet);
-
   return {
     wallet,
     handleClearWallet,
