@@ -1,6 +1,10 @@
 import React from 'react';
 import { ProfileContainer } from '@/components/profile/ProfileStyles';
-import { ProfileHeaderSection, ProfileInfo } from '@/components/profile';
+import {
+  ProfileHeaderSection,
+  ProfileInfo,
+  ProfileTabSection,
+} from '@/components/profile';
 import { ProfileProvider } from '@/components/profile/context/ProfileContext';
 
 const Profile = () => {
@@ -9,6 +13,7 @@ const Profile = () => {
       <ProfileContainer>
         <ProfileHeaderSection />
         <ProfileInfo />
+        <ProfileTabSection />
       </ProfileContainer>
     </ProfileProvider>
   );

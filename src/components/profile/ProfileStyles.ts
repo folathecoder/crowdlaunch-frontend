@@ -38,13 +38,13 @@ export const ProfileHeader = styled.section<Props>`
 export const ProfileImage = styled.div`
   width: 150px;
   height: 150px;
-  background-color: var(--color-bg-200);
+  background-color: var(--color-bg-400);
   position: absolute;
   max-width: var(--max-container);
   bottom: 0;
   transform: translateY(25px);
   border-radius: 8px;
-  border: 5px solid var(--color-bg-100);
+  border: 2px solid var(--color-accent-100);
 
   img {
     border-radius: 8px;

@@ -4,7 +4,13 @@ import Image from 'next/image';
 import { ProfileInfoContainer } from '@/components/profile/ProfileStyles';
 import { ProfileContext } from '@/components/profile/context/ProfileContext';
 
-import { BsGlobe, BsTwitter, BsDiscord, BsTelegram } from 'react-icons/bs';
+import {
+  BsGlobe,
+  BsTwitter,
+  BsDiscord,
+  BsTelegram,
+  BsShare,
+} from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
 
 const ProfileInfo = () => {
@@ -22,26 +28,11 @@ const ProfileInfo = () => {
           </h1>
         </div>
         <div className="info_address">
-          <p>
-            <span className="info_address-image">
-              {/* <Image
-                src={MaticIcon}
-                alt={'matic token'}
-                layout="intrinsic"
-                height={14}
-                width={14}
-              /> */}
-            </span>
-            0xFC92a..d8
-          </p>
-          <p>Joined March 2021</p>
+          <p>0xFC92a..d8</p>
+          <p>Joined July 2023</p>
         </div>
         <div>
-          <p className="info_description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-            eveniet fuga culpa tenetur soluta aperiam architecto sit assumenda
-            dolores quos
-          </p>
+          <p className="info_description">**Account Metrics**</p>
         </div>
       </div>
       <div>
@@ -68,6 +59,11 @@ const ProfileInfo = () => {
           </li>
           <li onClick={() => setToggleSettings(true)}>
             <FiSettings />
+          </li>
+          <li>
+            <Link href={'/'} target="_blank" title="share profile">
+              <BsShare />
+            </Link>
           </li>
         </ul>
       </div>
