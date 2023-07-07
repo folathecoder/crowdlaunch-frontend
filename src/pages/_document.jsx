@@ -39,7 +39,7 @@ export default class MyDocument extends Document {
             sizes="32x32"
             href="public/AppLogo.svg"
           />
-          <meta name="theme-color" content="#C2177E" />
+          <meta name="theme-color" content="#000000" />
           <meta name="twitter:card" content="summary" key="twcard" />
           <meta name="twitter:creator" content="crowdlaunch" key="twhandle" />
           <meta
