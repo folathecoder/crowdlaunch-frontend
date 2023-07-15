@@ -5,12 +5,13 @@ import {
   TabHeader,
   TabButton,
 } from './ProfileTabSectionStyles';
+import { Portfolio } from './children';
 
 const tabs = [
   {
     id: 'portfolio',
     title: 'Portfolio',
-    content: 'All projects invested and status, with yield report',
+    content: <Portfolio />,
   },
   {
     id: 'nfts',

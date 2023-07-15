@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import { QUERIES } from '@/styles/mediaQueries';
+import styled from 'styled-components';
 
 export const ExploreContainer = styled.section`
   width: 100%;

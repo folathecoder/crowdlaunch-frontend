@@ -48,3 +48,31 @@ export const TabButton = styled.button<ProfileTabTypes>`
       border-bottom: 2px solid var(--color-accent-100);
     `}
 `;
+
+export const PortfolioSection = styled.div`
+  max-width: var(--max-container);
+  margin: var(--center-container);
+  padding: 20px 0px 50px 0px;
+
+  .portfolio-header {
+    margin-bottom: 20px;
+  }
+
+  .portfolio-cards {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(4, 1fr);
+
+    @media screen and (max-width: 1231px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media screen and (max-width: 1006px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 513px) {
+      grid-template-columns: 1fr;
+    }
+  }
+`;
