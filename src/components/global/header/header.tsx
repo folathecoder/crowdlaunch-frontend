@@ -10,19 +10,18 @@ import {
   HeaderSearch,
   HeaderNav,
 } from './headerStyles';
-import { AppLogo } from 'public/images';
+import { AppLogo, ProfileLottie } from 'public/images';
 import { APP_NAME } from '@/data/appInfo';
 import HeaderSearchBar from './children/headerSearch/headerSearch';
 import HeaderMenu from './children/headerMenu/headerMenu';
 import UserMenu from './children/userMenu/userMenu';
-import { Button, CartButton } from '@/components/global';
+import { Button } from '@/components/global';
 import { useBreakPointUp } from '@/hooks/useBreakPoint';
 import { MdMenu } from 'react-icons/md';
 import MobileMenu from './children/mobileMenu/mobileMenu';
 import { useWeb3Modal } from '@web3modal/react';
 import useWallet from '@/wallet/useWallet';
 import Lottie from 'react-lottie';
-import { ProfileLottie } from 'public/images';
 
 const Header = () => {
   const { wallet } = useWallet();
@@ -104,9 +103,6 @@ const Header = () => {
                 buttonFunction={openWalletConnectionModal}
               />
             )}
-          </div>
-          <div>
-            <CartButton cartItemCount={93} />
           </div>
           {!removeMenuOnTablet && (
             <div>

@@ -93,7 +93,7 @@ export const NoNFTContainer = styled.section`
 
 export const ProfileInfoContainer = styled.section`
   max-width: var(--max-container);
-  margin: 50px auto;
+  margin: 50px auto 0px auto;
   min-height: 100px;
   padding: 0px 20px;
   display: flex;
@@ -160,7 +160,7 @@ export const SettingsContainer = styled.section<Props>`
   transform: ${(props) =>
     props.toggleSettings ? 'translateX(0%)' : 'translateX(100%)'};
   transition: ${(props) =>
-    props.toggleSettings ? 'all 0.3s linear' : 'all 0.3s linear'};
+    props.toggleSettings ? 'all 0s linear' : 'all 0.3s linear'};
 
   @media screen and (min-width: 401px) {
     width: 400px;
@@ -241,3 +241,37 @@ export const SettingsContainer = styled.section<Props>`
 `;
 
 export const Form = styled.form``;
+
+export const MetricsContainer = styled.section`
+  max-width: var(--max-container);
+  margin: var(--center-container);
+  margin-bottom: 40px;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+
+  .metrics_left {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+`;
+
+export const MetricsCard = styled.div`
+  h3 {
+    font-size: 14px;
+    opacity: 0.6;
+    font-weight: 500;
+  }
+
+  h4 {
+    font-size: 30px;
+  }
+
+  span {
+    font-size: 14px;
+    color: green;
+  }
+`;
