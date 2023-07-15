@@ -10,6 +10,7 @@ import {
   NFTCollection,
   ListedProjects,
   Watchlist,
+  Order,
 } from './children';
 
 const tabs = [
@@ -36,7 +37,7 @@ const tabs = [
   {
     id: 'orders',
     title: 'Orders',
-    content: 'All filled and pending orders',
+    content: <Order />,
   },
 ];
 
