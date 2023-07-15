@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ProfileInfoContainer } from '@/components/profile/ProfileStyles';
 import { ProfileContext } from '@/components/profile/context/ProfileContext';
 
@@ -30,9 +29,6 @@ const ProfileInfo = () => {
         <div className="info_address">
           <p>0xFC92a..d8</p>
           <p>Joined July 2023</p>
-        </div>
-        <div>
-          <p className="info_description">**Account Metrics**</p>
         </div>
       </div>
       <div>

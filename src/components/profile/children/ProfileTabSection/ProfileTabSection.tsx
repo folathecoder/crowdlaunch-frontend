@@ -5,32 +5,39 @@ import {
   TabHeader,
   TabButton,
 } from './ProfileTabSectionStyles';
+import {
+  Portfolio,
+  NFTCollection,
+  ListedProjects,
+  Watchlist,
+  Order,
+} from './children';
 
 const tabs = [
   {
     id: 'portfolio',
     title: 'Portfolio',
-    content: 'All projects invested and status, with yield report',
+    content: <Portfolio />,
   },
   {
     id: 'nfts',
     title: 'Collected NFTs',
-    content: 'All NFT collections and status',
+    content: <NFTCollection />,
   },
   {
     id: 'listed-projects',
     title: 'Listed Projects',
-    content: 'Your personal listed projects for crowdfunding',
+    content: <ListedProjects />,
   },
   {
     id: 'watchlist',
     title: 'Watchlist',
-    content: 'All projects and NFTs you have liked',
+    content: <Watchlist />,
   },
   {
     id: 'orders',
     title: 'Orders',
-    content: 'All filled and pending orders',
+    content: <Order />,
   },
 ];
 
