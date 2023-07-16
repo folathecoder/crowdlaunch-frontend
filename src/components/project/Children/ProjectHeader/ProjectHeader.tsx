@@ -12,7 +12,7 @@ import {
   FundWrapper,
   ImageWrapper,
 } from './ProjectHeaderStyles';
-import { MdFavorite } from 'react-icons/md';
+import { MdFavorite, MdReport, MdEdit } from 'react-icons/md';
 import { BsShare } from 'react-icons/bs';
 import { FaEthereum } from 'react-icons/fa';
 
@@ -26,13 +26,22 @@ const ProjectHeader = () => {
             <h2>AI, Robotics, Technology</h2>
           </div>
           <IconWrapper>
-            <button>
+            <button aria-label="Edit Button" title="Edit Project">
+              <MdEdit />
+            </button>
+            <button
+              aria-label="Etherscan Button"
+              title="Check Project on Etherscan"
+            >
               <FaEthereum />
             </button>
-            <button>
+            <button aria-label="Favorite Button" title="Like Project">
               <MdFavorite />
             </button>
-            <button>
+            <button aria-label="Report Button" title="Report Project">
+              <MdReport />
+            </button>
+            <button aria-label="Share Button" title="Share Project">
               <BsShare />
             </button>
           </IconWrapper>

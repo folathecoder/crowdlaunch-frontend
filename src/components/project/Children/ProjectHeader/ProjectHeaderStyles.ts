@@ -4,6 +4,7 @@ import { QUERIES } from '@/styles/mediaQueries';
 export const HeaderSection = styled.section`
   margin-block: 2.62rem 1.84rem;
 `;
+
 export const HeaderWrapper = styled.div`
   width: min(89.61%, 79rem);
   margin-inline: auto;
