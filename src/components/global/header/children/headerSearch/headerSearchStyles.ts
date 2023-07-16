@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 
 interface HeaderSearchStyleTypes {
   fullWidth?: boolean;
@@ -7,6 +8,7 @@ interface HeaderSearchStyleTypes {
 export const SearchContainer = styled.form<HeaderSearchStyleTypes>`
   border-radius: 12px;
   overflow: hidden;
+  position: relative;
 
   ${({ fullWidth }) =>
     fullWidth
@@ -44,4 +46,17 @@ export const SearchContainer = styled.form<HeaderSearchStyleTypes>`
     font-weight: 400;
     padding: 0px 8px;
   }
+`;
+
+export const SearchDropdown = styled(motion.div)`
+  position: fixed;
+  border-radius: 12px;
+  top: 70px;
+  height: 300px;
+  width: 400px;
+  background: var(--color-bg-500);
+  border: 0.1rem solid var(--color-border-100);
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
+  z-index: 100;
 `;

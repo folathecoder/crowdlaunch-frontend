@@ -16,7 +16,7 @@ const raisedAmount = 194555490;
 
 const ProjectCard = () => {
   return (
-    <Link href="/" passHref>
+    <Link href="/project/1" passHref>
       <ProjectContainer>
         <ProjectImage>
           <Image

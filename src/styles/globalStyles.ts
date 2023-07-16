@@ -133,6 +133,8 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
       font-weight: 400;
     }
 
+    
+
     h1, h2, h3 {
        text-transform: capitalize;
        font-family: var(--font-pry-200);

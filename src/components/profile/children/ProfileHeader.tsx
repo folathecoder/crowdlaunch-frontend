@@ -25,7 +25,6 @@ const ProfileHeaderSection = () => {
         layout="fill"
         objectFit="cover"
         quality={100}
-        // width={`200%`}
       />
       <div className="main_section">
         <ProfileImage>
@@ -39,7 +38,6 @@ const ProfileHeaderSection = () => {
             width={150}
             height={150}
           />
-          {/* <Image src={image.creator8} alt="" layout="fill" objectFit="cover" /> */}
         </ProfileImage>
       </div>
     </ProfileHeader>

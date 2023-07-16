@@ -44,18 +44,22 @@ const HoldersSection = () => {
       );
     }
   };
-
   useEffect(() => {
     const checkScrollPositionDebounced = debounce(checkScrollPosition, 100);
+
+    const handleScroll = () => {
+      checkScrollPositionDebounced();
+    };
+
     if (ref.current) {
-      ref.current.addEventListener('scroll', checkScrollPositionDebounced);
-      return () => {
-        ref.current?.removeEventListener(
-          'scroll',
-          checkScrollPositionDebounced
-        );
-      };
+      ref.current.addEventListener('scroll', handleScroll);
     }
+
+    return () => {
+      if (ref.current) {
+        ref.current.removeEventListener('scroll', handleScroll);
+      }
+    };
   }, []);
 
   return (

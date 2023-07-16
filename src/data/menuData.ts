@@ -12,8 +12,7 @@ const currentYear: number = new Date().getFullYear();
 
 export const headerMenu = [
   { id: 1, pageName: 'Explore', pageLink: '/explore' },
-  { id: 2, pageName: 'Rankings', pageLink: '/rankings' },
-  { id: 3, pageName: 'Guides', pageLink: '/guides' },
+  { id: 2, pageName: 'Guides', pageLink: '/guides' },
 ];
 
 export const footerMenu = {
