@@ -1,7 +1,9 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import { SearchContainer } from './headerSearchStyles';
+import { SearchContainer, SearchDropdown } from './headerSearchStyles';
 import LoopCircleLoading from 'react-text-loop';
 import { ClickAwayListener } from '@mui/material';
+import { AnimatePresence } from 'framer-motion';
+import { searchToggleVariant } from '@/styles/animation/searchToggleVariant';
 
 interface WordSwitcherTypes {
   prefix: string;
@@ -76,6 +78,16 @@ const HeaderSearchBar = ({ fullWidth }: HeaderSearchTypes) => {
             </div>
           )}
         </div>
+        <AnimatePresence>
+          <SearchDropdown
+            variants={searchToggleVariant('300px')}
+            initial="hidden"
+            animate={!showPlaceHolder ? 'show' : 'hidden'}
+            exit="exit"
+          >
+            <p>Search</p>
+          </SearchDropdown>
+        </AnimatePresence>
       </SearchContainer>
     </ClickAwayListener>
   );
