@@ -7,7 +7,7 @@ const Dividend = (props: Props) => {
   return (
     <OverviewContainer>
       <Content>
-        <h2>About Company's NFT Dividend</h2>
+        <h2>About Company NFT Dividend</h2>
         <p>
           InnoTech operates in a market with several key players that provide
           AI-powered chatbot solutions for customer service in the e-commerce
@@ -37,7 +37,7 @@ const Dividend = (props: Props) => {
         </p>
         <h2>Dividend Payout Period</h2>
         <p>
-          InnoTech's project offers several advantages and unique features that
+          InnoTech project offers several advantages and unique features that
           set us apart from competitors in the market.
         </p>
         <ol>
@@ -52,7 +52,7 @@ const Dividend = (props: Props) => {
             relationships, and increase customer satisfaction.
           </li>
           <li>
-            Scalability: InnoTech's chatbot solution is designed to be highly
+            Scalability: InnoTech chatbot solution is designed to be highly
             scalable. It can handle a large volume of customer inquiries
             simultaneously, ensuring that businesses can provide efficient and
             timely support even during peak periods. Our chatbots can seamlessly
@@ -64,18 +64,18 @@ const Dividend = (props: Props) => {
             Integration Capabilities: Our project offers seamless integration
             with existing systems and platforms. We understand that businesses
             may already have established CRM systems, ticketing systems, or
-            other customer support tools in place. InnoTech's chatbot solution
-            is designed to integrate with these systems, enabling businesses to
+            other customer support tools in place. InnoTech chatbot solution is
+            designed to integrate with these systems, enabling businesses to
             leverage their existing infrastructure while enhancing their
             capabilities with AI-powered chatbots. This integration capability
             minimizes disruption and ensures a smooth transition to our
             solution.
           </li>
           <li>
-            Continuous Learning and Improvement: InnoTech's chatbots are built
-            on a foundation of continuous learning and improvement. Our
-            algorithms analyze customer interactions, gather feedback, and adapt
-            to changing customer needs and market trends. By constantly learning
+            Continuous Learning and Improvement: InnoTech chatbots are built on
+            a foundation of continuous learning and improvement. Our algorithms
+            analyze customer interactions, gather feedback, and adapt to
+            changing customer needs and market trends. By constantly learning
             and evolving, our chatbots become more accurate, efficient, and
             effective over time, delivering an ever-improving customer
             experience. This ongoing refinement and optimization give us an edge
@@ -83,8 +83,8 @@ const Dividend = (props: Props) => {
           </li>
         </ol>
         <p>
-          In summary, InnoTech's project differentiates itself from competitors
-          by offering specialized chatbot solutions for e-commerce, advanced NLP
+          In summary, InnoTech project differentiates itself from competitors by
+          offering specialized chatbot solutions for e-commerce, advanced NLP
           algorithms for intelligent responses, personalization capabilities,
           scalability, seamless integration, and continuous learning. These
           advantages and unique features position us as a leader in the market,

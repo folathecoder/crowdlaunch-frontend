@@ -42,7 +42,7 @@ const Overview = (props: Props) => {
         </p>
         <h3>Unique Value Proposition</h3>
         <p>
-          InnoTech's project offers a unique value proposition through our AI
+          InnoTech project offers a unique value proposition through our AI
           chatbot solution. Our chatbots are equipped with advanced NLP
           algorithms that enable them to understand and interpret natural
           language queries, allowing for intelligent responses and
@@ -67,7 +67,7 @@ const Overview = (props: Props) => {
           value-added activities, improving their productivity and efficiency.
         </p>
         <p>
-          By deploying InnoTech's AI chatbot solution, e-commerce businesses can
+          By deploying InnoTech AI chatbot solution, e-commerce businesses can
           significantly reduce response times, handle a large volume of
           inquiries, and provide round-the-clock support. This not only improves
           customer satisfaction but also drives sales conversions, increases
@@ -75,9 +75,9 @@ const Overview = (props: Props) => {
           competitive market.
         </p>
         <p>
-          In summary, InnoTech's project aims to address the challenge of
-          managing customer inquiries in e-commerce by offering an AI chatbot
-          solution that leverages advanced NLP algorithms, delivers personalized
+          In summary, InnoTech project aims to address the challenge of managing
+          customer inquiries in e-commerce by offering an AI chatbot solution
+          that leverages advanced NLP algorithms, delivers personalized
           interactions, and enhances overall customer satisfaction. By providing
           instant and intelligent support, businesses can build stronger
           customer relationships, optimize their support operations, and gain a
