@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Campaign from '../MiniChildren/Campaign/Campaign';
-import FaqMini from '../MiniChildren/Faq/FaqMini';
 import Updates from '../MiniChildren/Updates/Updates';
-import Reviews from '../MiniChildren/Reviews/Reviews';
-
+import { VoteProject } from '@/components/project';
+import {
+  votingData,
+  votingData2,
+} from '@/components/project/Children/VoteProject/VoteProject';
 import {
   MajorSection,
   TabsContainer,
   TabsWrapper,
   ActiveTab,
   TabContentsWrapper,
+  TabContentLayout,
+  VotingWrapper,
 } from './MainProjectStyles';
 
 interface InternalDataTypes {
@@ -65,7 +69,15 @@ const MainProject: React.FC = () => {
             </Link>
           </TabsContainer>
         </TabsWrapper>
-        <TabContentsWrapper>{contents[activeContent]}</TabContentsWrapper>
+        <TabContentLayout>
+          <TabContentsWrapper>{contents[activeContent]}</TabContentsWrapper>
+          <VotingWrapper>
+            <div>
+              <VoteProject {...votingData} />
+              <VoteProject {...votingData2} />
+            </div>
+          </VotingWrapper>
+        </TabContentLayout>
       </div>
     </MajorSection>
   );

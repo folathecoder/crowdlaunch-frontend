@@ -6,15 +6,12 @@ import Financials from './Children/Financials';
 import Dividend from './Children/Dividend';
 import Performance from './Children/Performance';
 import Risks from './Children/Risks';
-import VoteProject from '../../VoteProject/VoteProject';
-import { votingData, votingData2 } from '../../VoteProject/VoteProject';
 
 import {
   CampaignContainer,
   ActiveMiniTab,
   MiniTabContainer,
   ActiveContentWrapper,
-  VotingWrapper,
 } from './CampaignStyles';
 
 type Props = {};
@@ -69,13 +66,6 @@ const Campaign = (props: Props) => {
       </MiniTabContainer>
 
       <ActiveContentWrapper>{contents[activeContent]}</ActiveContentWrapper>
-
-      <VotingWrapper>
-        <div>
-          <VoteProject {...votingData} />
-          <VoteProject {...votingData2} />
-        </div>
-      </VotingWrapper>
     </CampaignContainer>
   );
 };

@@ -14,6 +14,7 @@ import {
 } from './ProjectHeaderStyles';
 import { MdFavorite } from 'react-icons/md';
 import { BsShare } from 'react-icons/bs';
+import { FaEthereum } from 'react-icons/fa';
 
 const ProjectHeader = () => {
   return (
@@ -25,6 +26,9 @@ const ProjectHeader = () => {
             <h2>AI, Robotics, Technology</h2>
           </div>
           <IconWrapper>
+            <button>
+              <FaEthereum />
+            </button>
             <button>
               <MdFavorite />
             </button>

@@ -20,11 +20,11 @@ export const TabsContainer = styled.div`
   height: 4.60375rem;
   justify-content: space-between;
   overflow-x: auto;
-  gap: 2.15rem;
+  gap: 1rem;
 
   ul {
     display: flex;
-    gap: 2.15rem;
+    gap: 1rem;
   }
 
   a {
@@ -62,7 +62,36 @@ export const ActiveTab = styled.li<UniqueLinkType>`
     `}
 `;
 
+export const TabContentLayout = styled.section`
+  display: flex;
+  flex-direction: column;
+  max-width: 83rem;
+  margin: 0 auto;
+
+  @media ${QUERIES.tablet} {
+    flex-direction: row;
+  }
+`;
+
 export const TabContentsWrapper = styled.div`
-  width: min(89.61%, 79rem);
   margin-inline: auto;
+  max-width: 100%;
+  padding: 0 20px;
+
+  @media ${QUERIES.tablet} {
+    width: min(60%, 83rem);
+  }
+`;
+
+export const VotingWrapper = styled.div`
+  max-width: 100%;
+  padding: 20px;
+  position: relative;
+
+  & > div {
+    display: grid;
+    gap: 1.5rem;
+    position: sticky;
+    top: 90px;
+  }
 `;

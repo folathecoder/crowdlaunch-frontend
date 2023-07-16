@@ -78,7 +78,7 @@ const HeaderSearchBar = ({ fullWidth }: HeaderSearchTypes) => {
             </div>
           )}
         </div>
-        <AnimatePresence>
+        {/* <AnimatePresence>
           <SearchDropdown
             variants={searchToggleVariant('300px')}
             initial="hidden"
@@ -87,7 +87,7 @@ const HeaderSearchBar = ({ fullWidth }: HeaderSearchTypes) => {
           >
             <p>Search</p>
           </SearchDropdown>
-        </AnimatePresence>
+        </AnimatePresence> */}
       </SearchContainer>
     </ClickAwayListener>
   );

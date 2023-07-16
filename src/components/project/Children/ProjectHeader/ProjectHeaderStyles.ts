@@ -45,6 +45,10 @@ export const IconWrapper = styled.div`
     color: var(--font-color-100);
     cursor: pointer;
     font-size: 1.5rem;
+
+    &:hover {
+      color: var(--color-accent-100);
+    }
   }
 `;
 
