@@ -26,3 +26,11 @@
 main {
   min-height: calc(100vh - 160px);
 }
+
+form .quill:nth-child(2) {
+  /* display: none !important; */
+}
+
+.ql-editor {
+  min-height: 400px;
+}

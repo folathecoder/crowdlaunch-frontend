@@ -77,8 +77,6 @@ export const HeaderRight = styled.div``;
 
 export const HeaderLogo = styled.div``;
 
-export const HeaderSearch = styled.div`
-  padding: 0px 24px;
+export const HeaderNav = styled.nav`
+  margin-left: 2rem;
 `;
-
-export const HeaderNav = styled.nav``;

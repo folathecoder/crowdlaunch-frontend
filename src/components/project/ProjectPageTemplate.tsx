@@ -1,6 +1,6 @@
-import React from 'react'
-import ProjectHeader from './Children/ProjectHeader/ProjectHeader'
-import MainProject from './Children/MainProject/MainProject'
+import React from 'react';
+import ProjectHeader from './Children/ProjectHeader/ProjectHeader';
+import MainProject from './Children/MainProject/MainProject';
 
 const ProjectPageTemplate = () => {
   return (
@@ -8,7 +8,7 @@ const ProjectPageTemplate = () => {
       <ProjectHeader />
       <MainProject />
     </main>
-  )
-}
+  );
+};
 
-export default ProjectPageTemplate
+export default ProjectPageTemplate;
