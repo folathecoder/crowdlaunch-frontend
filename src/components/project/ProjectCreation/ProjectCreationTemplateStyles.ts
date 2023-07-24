@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components';
-import { QUERIES } from '@/styles/mediaQueries';
+import styled from 'styled-components';
 
 export const ProjectSection = styled.section`
   max-width: 79rem;
@@ -13,7 +12,7 @@ export const FormHeaderNav = styled.div`
   display: flex;
   gap: 0.5rem;
   overflow-x: scroll;
-  border-bottom: 2px solid var(--color-border-100);
+  border-bottom: 1px solid var(--color-border-100);
 
   button {
     background-color: transparent;
@@ -23,6 +22,7 @@ export const FormHeaderNav = styled.div`
     color: var(--color-font-100);
     white-space: nowrap;
     padding-bottom: 1rem;
+    cursor: pointer;
   }
 
   .active {

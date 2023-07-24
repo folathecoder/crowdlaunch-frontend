@@ -1,14 +1,17 @@
 import React from 'react';
 import { ProjectSection } from './ProjectCreationTemplateStyles';
 import { FormHeader, FormBody } from '@/components/project/ProjectCreation';
+import ProjectCreactionProvider from './ProjectCreationContext';
 
 const ProjectCreationTemplate = () => {
   return (
     <main>
-      <ProjectSection>
-        <FormHeader />
-        <FormBody />
-      </ProjectSection>
+      <ProjectCreactionProvider>
+        <ProjectSection>
+          <FormHeader />
+          <FormBody />
+        </ProjectSection>
+      </ProjectCreactionProvider>
     </main>
   );
 };

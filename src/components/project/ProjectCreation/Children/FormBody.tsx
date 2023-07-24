@@ -1,12 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import {
+  ProjectCreactionContext,
+  ProjectCreactionContextReturnTypes,
+} from '../ProjectCreationContext';
 import { FormBodyContainer } from '../ProjectCreationTemplateStyles';
-import { OverviewTab } from './FormBodyTabs';
+import {
+  OverviewTab,
+  CompetitorTab,
+  StrategyTab,
+  DividendTab,
+  PerformanceTab,
+  FinancialTab,
+  RiskTab,
+  ProjectCreatorTab,
+} from './FormBodyTabs';
 
 const FormBody = () => {
+  const { activeTab } = useContext(
+    ProjectCreactionContext
+  ) as ProjectCreactionContextReturnTypes;
+
   const [tabPanels] = useState<React.ReactNode[]>([
     <OverviewTab key="overview" />,
+    <CompetitorTab key="competitor" />,
+    <StrategyTab key="strategy" />,
+    <FinancialTab key="financial" />,
+    <DividendTab key="dividend" />,
+    <PerformanceTab key="performance" />,
+    <RiskTab key="risk" />,
+    <ProjectCreatorTab key="project" />,
   ]);
-  const [activeTab, setActiveTab] = useState<number>(0);
 
   return <FormBodyContainer>{tabPanels[activeTab]}</FormBodyContainer>;
 };
