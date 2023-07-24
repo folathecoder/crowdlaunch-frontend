@@ -4,7 +4,7 @@ import Button from '@/components/global/button/button';
 import CartButton from '@/components/global/button/cartButton';
 import ProgressBar from '@/components/global/progressBar/progressBar';
 import ColorButton from '@/components/global/button/colorButton';
-import RichTextField from '@/components/global/form/richTextField';
+import RichTextEditor from './form/RichTextEditor/RichTextEditor';
 
 export {
   Header,
@@ -13,5 +13,5 @@ export {
   Footer,
   ProgressBar,
   ColorButton,
-  RichTextField,
+  RichTextEditor,
 };

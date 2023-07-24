@@ -8,12 +8,7 @@ const FormBody = () => {
   ]);
   const [activeTab, setActiveTab] = useState<number>(0);
 
-  return (
-    <FormBodyContainer>
-      {tabPanels[activeTab]}
-      <OverviewTab />
-    </FormBodyContainer>
-  );
+  return <FormBodyContainer>{tabPanels[activeTab]}</FormBodyContainer>;
 };
 
 export default FormBody;
