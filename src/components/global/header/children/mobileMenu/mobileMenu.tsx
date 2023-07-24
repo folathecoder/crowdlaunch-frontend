@@ -2,12 +2,7 @@ import React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Link from 'next/link';
 import { MdClose } from 'react-icons/md';
-import {
-  NavContainer,
-  NavHeader,
-  NavSearchContainer,
-} from './mobileMenuStyles';
-import HeaderSearchBar from '@/components/global/header/children/headerSearch/headerSearch';
+import { NavContainer, NavHeader } from './mobileMenuStyles';
 import HeaderMenu from '@/components/global/header/children/headerMenu/headerMenu';
 import { ClickAwayListener } from '@mui/material';
 import useEscapeKeyToggle from '@/hooks/useEscapeKeyToggle';
@@ -60,9 +55,6 @@ const MobileMenu = ({ showMobileMenu, setShowMobileMenu }: MobileMenuTypes) => {
                 </button>
               </div>
             </NavHeader>
-            <NavSearchContainer>
-              <HeaderSearchBar fullWidth />
-            </NavSearchContainer>
             <div>
               <HeaderMenu setShowMobileMenu={setShowMobileMenu} />
             </div>

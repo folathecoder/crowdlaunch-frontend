@@ -7,7 +7,6 @@ import {
   HeaderRight,
   HeaderLeft,
   HeaderLogo,
-  HeaderSearch,
   HeaderNav,
 } from './headerStyles';
 import { AppLogo, ProfileLottie } from 'public/images';
@@ -60,11 +59,6 @@ const Header = () => {
               <Image src={AppLogo} alt={APP_NAME} width={35} height={35} />
             </Link>
           </HeaderLogo>
-          {removeSearchOnTablet && (
-            <HeaderSearch>
-              <HeaderSearchBar />
-            </HeaderSearch>
-          )}
           {removeMenuOnTablet && (
             <HeaderNav>
               <HeaderMenu />

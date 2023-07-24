@@ -36,6 +36,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
         --gradient-200: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
         --gradient-bg-100: #b721ff;
         --gradient-bg-200:#4158d0;
+        --color-border-100: rgba(255, 255, 255, 0.08);
     }
 
     html {
