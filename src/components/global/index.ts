@@ -4,7 +4,8 @@ import Button from '@/components/global/button/button';
 import CartButton from '@/components/global/button/cartButton';
 import ProgressBar from '@/components/global/progressBar/progressBar';
 import ColorButton from '@/components/global/button/colorButton';
-import RichTextEditor from './form/RichTextEditor/RichTextEditor';
+import RichTextEditor from '@/components/global/form/RichTextEditor/RichTextEditor';
+import NFTImageTemplate from '@/components/global/nft/NFTImageTemplate';
 
 export {
   Header,
@@ -14,4 +15,5 @@ export {
   ProgressBar,
   ColorButton,
   RichTextEditor,
+  NFTImageTemplate,
 };

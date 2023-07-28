@@ -6,6 +6,7 @@ import FinancialTab from './FinancialTab';
 import PerformanceTab from './PerformanceTab';
 import RiskTab from './RiskTab';
 import ProjectCreatorTab from './ProjectCreatorTab';
+import NFTCreatorTab from './NFTCreatorTab';
 
 export {
   OverviewTab,
@@ -16,4 +17,5 @@ export {
   FinancialTab,
   RiskTab,
   ProjectCreatorTab,
+  NFTCreatorTab,
 };

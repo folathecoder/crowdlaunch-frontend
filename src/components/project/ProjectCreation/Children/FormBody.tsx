@@ -13,6 +13,7 @@ import {
   FinancialTab,
   RiskTab,
   ProjectCreatorTab,
+  NFTCreatorTab,
 } from './FormBodyTabs';
 
 const FormBody = () => {
@@ -28,6 +29,7 @@ const FormBody = () => {
     <DividendTab key="dividend" />,
     <PerformanceTab key="performance" />,
     <RiskTab key="risk" />,
+    <NFTCreatorTab key="creator" />,
     <ProjectCreatorTab key="project" />,
   ]);
 
