@@ -6,5 +6,6 @@ export const campaignCategories = [
   { id: 4, title: 'Dividend' },
   { id: 5, title: 'Performance' },
   { id: 6, title: 'Risks' },
-  { id: 7, title: 'Get Funded' },
+  { id: 7, title: 'Create NFT' },
+  { id: 8, title: 'Get Funded' },
 ];
