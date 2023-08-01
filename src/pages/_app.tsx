@@ -1,7 +1,7 @@
 import '@/styles/global.css';
 import type { AppProps } from 'next/app';
 import { GlobalStyles } from '@/styles/globalStyles';
-import { brownTheme, blackTheme, lightTheme } from '@/styles/theme';
+import { blackTheme } from '@/styles/theme';
 import { Header, Footer } from '@/components/global';
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';

@@ -20,29 +20,6 @@ export interface ThemeTypes {
   scrollBar100: string;
 }
 
-export const brownTheme = {
-  bg100: '#212123',
-  bg200: 'rgba(22, 22, 24, 0.5)',
-  bg300: 'hsl(0, 0%, 100%, 0.04)',
-  bg400: 'hsl(0, 0%, 100%)',
-  bg500: 'rgba(22, 22, 24)',
-  accent100: '#C2177E',
-  accent200: '#13cc78',
-  accent300: '#8B44FF',
-  accent400: '#634BFA',
-  font100: 'hsl(0, 0%, 100%)',
-  font200: 'hsl(0, 0%, 40%)',
-  font300: 'rgba(255, 255, 255, 0.6)',
-  font400: '#191c1f',
-  font500: 'hsla(218, 80%, 2%, 1)',
-  font600: 'rgb(242, 242, 242, 0.3)',
-  shadow100: 'rgba(0, 0, 0, 0.08) 0px 0px 20px',
-  shadow200: '0 -2px 10px rgb(242, 242, 242, 0.05)',
-  shadow300: '0 -2px 10px rgb(242, 242, 242, 0.05)',
-  border100: 'rgb(242, 242, 242, 0.03)',
-  scrollBar100: 'hsl(0, 0%, 15%)',
-};
-
 export const blackTheme = {
   bg100: 'hsla(218, 80%, 2%, 1)',
   bg200: 'rgba(83, 83, 83, 0.05)',
@@ -64,27 +41,4 @@ export const blackTheme = {
   shadow300: '0 -2px 10px rgb(242, 242, 242, 0.05)',
   border100: 'rgb(242, 242, 242, 0.03)',
   scrollBar100: 'hsl(0, 0%, 15%)',
-};
-
-export const lightTheme = {
-  bg100: 'hsla(218, 80%, 98%, 1)',
-  bg200: 'rgba(83, 83, 83, 0.05)',
-  bg300: 'rgba(83, 83, 83, 0.05)',
-  bg400: 'hsl(0, 0%, 0%)',
-  bg500: '#f0f0f0',
-  accent100: '#C2177E',
-  accent200: '#13cc78',
-  accent300: '#8B44FF',
-  accent400: '#634BFA',
-  font100: 'hsl(0, 0%, 0%)',
-  font200: 'hsl(0, 0%, 20%)',
-  font300: 'hsl(219, 16%, 39%)',
-  font400: 'hsl(0, 0%, 60%)',
-  font500: 'hsla(218, 80%, 98%, 1)',
-  font600: 'rgba(0, 0, 0, 0.7)',
-  shadow100: 'rgba(0, 0, 0, 0.08) 0px 0px 20px',
-  shadow200: '0 2px 10px rgba(0, 0, 0, 0.1)',
-  shadow300: '0 2px 10px rgba(0, 0, 0, 0.1)',
-  border100: 'rgba(0, 0, 0, 0.1)',
-  scrollBar100: 'hsl(0, 0%, 85%)',
 };

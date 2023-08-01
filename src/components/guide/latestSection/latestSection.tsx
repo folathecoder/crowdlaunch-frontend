@@ -2,19 +2,15 @@ import React from 'react';
 import {
   SectionContainer,
   CardOne,
-  CardTwo,
-  CardThree,
-  CardFour,
-  CardFive,
   SectionWrap,
   SectionHeader,
   ContainerWrap,
 } from '@/components/guide/latestSection/latestSectionStyles';
 import ArticleCard from '@/components/guide/articleCard/articleCard';
-import ArticleSmallCard from '@/components/guide/articleSmallCard/articleSmallCard';
 import CornerStoneCard from '@/components/guide/cornerStoneCard/cornerStoneCard';
+import { ApiDataType } from '@/types/blogTypes';
 
-const LatestSection = () => {
+const LatestSection = ({ posts }: ApiDataType) => {
   return (
     <SectionWrap>
       <ContainerWrap>
@@ -23,22 +19,15 @@ const LatestSection = () => {
         </SectionHeader>
         <SectionContainer>
           <CardOne>
-            <CornerStoneCard />
+            <CornerStoneCard post={posts[1].node} />
           </CardOne>
-          <CardTwo>
-            <ArticleCard />
-          </CardTwo>
-          <CardThree>
-            <ArticleCard />
-          </CardThree>
-          <CardFour>
-            <ArticleCard />
-          </CardFour>
-          <CardFive>
-            <ArticleSmallCard />
-            <ArticleSmallCard />
-            <ArticleSmallCard />
-          </CardFive>
+          {posts.slice(2, 5).map((post) => {
+            return (
+              <div key={post.node.id}>
+                <ArticleCard data={post.node} />
+              </div>
+            );
+          })}
         </SectionContainer>
       </ContainerWrap>
     </SectionWrap>

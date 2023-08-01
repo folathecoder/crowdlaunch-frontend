@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import moment from 'moment';
 import {
   ArticleContainer,
   ArticleMainWrap,
@@ -22,176 +23,79 @@ import {
   CardAuthor,
 } from '@/components/guide/heroSection/heroSectionStyles';
 import CornerStoneCard from '@/components/guide/cornerStoneCard/cornerStoneCard';
-import { BiTime } from 'react-icons/bi';
+import { tags } from '@/data/guide/guideData';
 import CatgoryTag from '@/components/guide/slices/categoryTag';
 import AdsCard from '@/components/guide/adsCard/adsCard';
 import ArticleShare from '@/components/guide/articleShare/articleShare';
 import CtaSection from '@/components/global/ctaSection/ctaSection';
-import { GuideBannerPlaceholder, AuthorPlaceholder } from 'public/images';
+import HTMLReactParser from 'html-react-parser';
+import { PostDetailDataType } from '@/types/blogTypes';
+import { APP_URL } from '@/data/appInfo';
 
-const GuideTemplate = () => {
+const GuideTemplate = ({
+  title,
+  slug,
+  publishedAt,
+  coverImage,
+  content,
+  author,
+}: PostDetailDataType) => {
   return (
     <>
       <ArticleContainer>
         <ArticleMainWrap>
           <ArticleInnerWrap>
             <ArticleShareContainer>
-              <ArticleShare shareUrl="/" />
+              <ArticleShare shareUrl={`${APP_URL}/guides/${slug}`} />
             </ArticleShareContainer>
             <Article>
               <ArticleInner>
                 <ArticleHeader>
                   <CategoryTags>
-                    <CatgoryTag title="Blockchain" />
-                    <CatgoryTag title="Money" />
-                    <CatgoryTag title="Invest" />
-                    <CatgoryTag title="Business" />
+                    {tags.map((tag, index) => {
+                      return <CatgoryTag title={tag} key={index} />;
+                    })}
                   </CategoryTags>
                   <div>
-                    <h1>
-                      How to Create a Metamask De-Fi Wallet
-                    </h1>
+                    <h1>{title}</h1>
                   </div>
                   <FeaturedDetail>
                     <CardContentAuthor style={{ cursor: 'pointer' }}>
                       <div>
                         <CardAuthor>
-                          <Image src={AuthorPlaceholder} alt="featured image" />
+                          <Image
+                            src={author.picture.url}
+                            layout="fill"
+                            alt="author image"
+                          />
                         </CardAuthor>
                       </div>
                       <div>
-                        <h4>Folarin Akinloye</h4>
+                        <h4>{author.name}</h4>
                       </div>
                     </CardContentAuthor>
                     <CardContentDate>
                       <div>
-                        <p>13 Sept, 2021</p>
-                      </div>
-                      <div>
-                        <p>
-                          <span>
-                            <BiTime />
-                          </span>
-                          10m
-                        </p>
+                        <p>{moment(publishedAt).format('DD MMM, YYYY')}</p>
                       </div>
                     </CardContentDate>
                   </FeaturedDetail>
                 </ArticleHeader>
                 <ArticleImage>
-                  <Image
-                    src={GuideBannerPlaceholder}
-                    layout="fill"
-                    alt="featured image"
-                  />
+                  <Image src={coverImage.url} layout="fill" alt={title} />
                 </ArticleImage>
-                <ArticleContent>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                  </p>
-                  <h2>Heading 2</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                  </p>
-                  <h2>Heading 2</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                  </p>
-                  <h2>Heading 2</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                  </p>
-                  <h2>Heading 2</h2>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Consequuntur perspiciatis nisi culpa saepe minima fugiat
-                    perferendis reiciendis, modi dolorem eius natus cumque iusto
-                    sunt hic dolores voluptatibus, possimus quidem quibusdam.
-                  </p>
-                </ArticleContent>
+                <ArticleContent>{HTMLReactParser(content.html)}</ArticleContent>
                 <ArticleShareMobile>
                   <ArticleShare shareUrl="/" />
                 </ArticleShareMobile>
-
                 <div>
                   <ArticleRelatedCards>
-                    <CornerStoneCard />
-                    <CornerStoneCard />
-                    <CornerStoneCard />
+                    {author?.posts
+                      ?.filter((post) => post.slug !== slug)
+                      .slice(0, 3)
+                      .map((post) => (
+                        <CornerStoneCard post={post} key={post.id} />
+                      ))}
                   </ArticleRelatedCards>
                 </div>
               </ArticleInner>

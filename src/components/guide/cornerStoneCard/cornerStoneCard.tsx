@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import moment from 'moment';
 import {
   CardContainer,
   CardImageWrap,
@@ -12,56 +13,54 @@ import {
   CardAuthor,
   CardDetails,
 } from '@/components/guide/cornerStoneCard/cornerStoneCardStyles';
-import { GuideBannerPlaceholder, AuthorPlaceholder } from 'public/images';
+import { tags } from '@/data/guide/guideData';
 import CatgoryTag from '@/components/guide/slices/categoryTag';
 import ArticleCard from '@/components/guide/articleCard/articleCard';
+import { DataType } from '@/types/blogTypes';
 
-const CornerStoneCard = () => {
+interface cornerStoneType {
+  post: DataType;
+}
+
+const CornerStoneCard = ({ post }: cornerStoneType) => {
   return (
-    <Link href="/guides/guide" passHref>
+    <Link href={`/guides/${post.slug}`} passHref>
       <div>
-        <ArticleCard cornerStone />
+        <ArticleCard cornerStone data={post} />
         <CardContainer>
           <CardImageWrap>
             <Image
-              src={GuideBannerPlaceholder}
+              src={post.coverImage.url}
               layout="fill"
               alt="featured image"
             />
           </CardImageWrap>
           <CardContent>
             <CardContentCategory>
-              <CatgoryTag title="Hosting" />
-              <CatgoryTag title="Blockchain" />
-              <CatgoryTag title="+5" />
+              {tags.slice(0, 3).map((tag: string) => {
+                return <CatgoryTag title={tag} key={`tag-${tag}`} />;
+              })}
             </CardContentCategory>
-
             <CardContentTitle>
-              <h3>
-                Porttitor pharetra, consectetur viverra est nisl a, vulputate
-                id...
-              </h3>
-              <p>
-                Dui massa sapien ornare leo. Sagittis, sollicitudin sed integer
-                maecenas sit. Nibh suspendisse lectus hendrerit pretium...
-              </p>
+              <h3>{post.title}</h3>
+              <p>{post.excerpt}</p>
             </CardContentTitle>
             <CardDetails>
               <CardContentDate>
-                <p>13 Sept, 2021</p>
+                <p>{moment(post.createdAt).format('DD MMM, YYYY')}</p>
               </CardContentDate>
               <CardContentAuthor>
                 <div>
                   <CardAuthor>
                     <Image
-                      src={AuthorPlaceholder}
+                      src={post.author.picture.url}
                       layout="fill"
-                      alt="featured image"
+                      alt="author image"
                     />
                   </CardAuthor>
                 </div>
                 <div>
-                  <h4>Folarin Akinloye</h4>
+                  <h4>{post.author.name}</h4>
                 </div>
               </CardContentAuthor>
             </CardDetails>
