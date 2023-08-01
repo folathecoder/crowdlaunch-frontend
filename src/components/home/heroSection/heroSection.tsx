@@ -14,11 +14,11 @@ const HeroSection = () => {
     <NftMarketContainer>
       <NftMarketWrapper>
         <NftMarketHeader>
-          <h3>Dominate Your Industry</h3>
+          <h3>Funding Startups</h3>
           <h1>Unleash the Power of Crowdfunding with NFTs</h1>
           <p>
-            Revolutionize your business with our expert Dapp development
-            services.
+            Raise the required funds to build and grow your project with
+            decentralised technology.
           </p>
           <Link href="/explore">
             <button>Explore Projects</button>
