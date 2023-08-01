@@ -3,13 +3,14 @@ import { ArchiveContainer } from '@/components/guide/guideArchive/guideArchiveSt
 import LatestSection from '@/components/guide/latestSection/latestSection';
 import HeroSection from '@/components/guide/heroSection/heroSection';
 import CtaSection from '@/components/global/ctaSection/ctaSection';
+import { ApiDataType } from '@/types/blogTypes';
 
-const GuideArchive = () => {
+const GuideArchive = ({ posts }: ApiDataType) => {
   return (
     <>
       <ArchiveContainer>
-        <HeroSection />
-        <LatestSection />
+        <HeroSection {...posts[0].node} />
+        <LatestSection posts={posts} />
       </ArchiveContainer>
       <CtaSection />
     </>

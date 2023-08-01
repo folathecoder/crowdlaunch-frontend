@@ -33,9 +33,7 @@ const ExploreFilter = ({
       >
         {[1, 2, 3, 4, 5].map((item) => (
           <FilterItem key={item} removeBorder={item === 5}>
-            <FilterItemShow>
-              {/* <p>Filter by Category</p> */}
-            </FilterItemShow>
+            <FilterItemShow>{/* <p>Filter by Category</p> */}</FilterItemShow>
             {/* <FilterItemHidden>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Praesentium sunt repellat ut facere ab. Nisi ullam expedita

@@ -54,7 +54,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeTypes }>`
     textarea,
     select {
         font: inherit;
-}
+   }
 
     img {
         display: block;

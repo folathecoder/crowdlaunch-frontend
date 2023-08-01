@@ -7,5 +7,4 @@ export const FLASH_DURATION = 0.05;
 export const TRANSITION_TYPE = `tween`;
 
 // Animation Ease
-
 export const DEFAULT_EASE = [0, 0.75, 0.25, 1];

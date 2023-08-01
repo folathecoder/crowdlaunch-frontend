@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import moment from 'moment';
 import {
   HeroContainer,
   HeroContent,
@@ -13,12 +14,19 @@ import {
   CardContentAuthor,
   CardAuthor,
 } from '@/components/guide/heroSection/heroSectionStyles';
+import { tags } from '@/data/guide/guideData';
 import CatgoryTag from '@/components/guide/slices/categoryTag';
-import { GuideBannerPlaceholder, AuthorPlaceholder } from 'public/images';
 import { Button } from '@/components/global';
-import { FaRegClock } from 'react-icons/fa';
+import { DataType } from '@/types/blogTypes';
 
-const HeroSection = () => {
+const HeroSection = ({
+  title,
+  createdAt,
+  slug,
+  excerpt,
+  coverImage,
+  author,
+}: DataType) => {
   return (
     <HeroContainer>
       <HeroInner>
@@ -28,61 +36,48 @@ const HeroSection = () => {
           <div>
             <Button
               buttonTitle="Explore Guides"
-              buttonLink=""
+              buttonLink={`/guides/${slug}`}
               buttonType="link"
             />
           </div>
         </HeroContent>
 
         <>
-          <Link href="/guide/guide" passHref>
+          <Link href={`/guides/${slug}`} passHref>
             <HeroFeatured>
               <CardImageWrap>
-                <Image
-                  src={GuideBannerPlaceholder}
-                  layout="fill"
-                  alt="featured image"
-                />
+                <Image src={coverImage.url} layout="fill" alt="cover image" />
                 <CardContentCategory>
-                  <CatgoryTag title="Hosting" />
-                  <CatgoryTag title="Blockchain" />
-                  <CatgoryTag title="+5" />
+                  {tags.slice(0, 2).map((tag: string) => {
+                    return <CatgoryTag title={tag} key={`tag-${tag}`} />;
+                  })}
+                  {tags.length > 2 && (
+                    <CatgoryTag title={`+${tags.length - 2}`} />
+                  )}
                 </CardContentCategory>
               </CardImageWrap>
               <div>
-                <h2>How to Create a Metamask De-Fi Wallet</h2>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Voluptate nemo sit veniam animi doloremque sed, provident
-                  labore ea magni placeat.
-                </p>
+                <h2>{title}</h2>
+                <p>{excerpt}</p>
               </div>
               <FeaturedDetail>
                 <CardContentAuthor>
                   <div>
                     <CardAuthor>
                       <Image
-                        src={AuthorPlaceholder}
+                        src={author.picture.url}
                         layout="fill"
-                        alt="featured image"
+                        alt="Author image"
                       />
                     </CardAuthor>
                   </div>
                   <div>
-                    <h4>Folarin Akinloye</h4>
+                    <h4>{author.name}</h4>
                   </div>
                 </CardContentAuthor>
                 <CardContentDate>
                   <div>
-                    <p>13 Sept, 2021</p>
-                  </div>
-                  <div>
-                    <p>
-                      <span>
-                        <FaRegClock />
-                      </span>
-                      10m
-                    </p>
+                    <p>{moment(createdAt).format('DD MMM, YYYY')}</p>
                   </div>
                 </CardContentDate>
               </FeaturedDetail>
