@@ -9,7 +9,7 @@ export const getAllPosts = async () => {
   // Define the GraphQL query to get all posts
   const query = gql`
     query MyQuery {
-      postsConnection(orderBy: publishedAt_DESC) {
+      postsConnection(orderBy: publishedAt_ASC) {
         edges {
           node {
             title

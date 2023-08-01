@@ -52,7 +52,7 @@ export const Article = styled.article`
   flex: 1;
 
   @media screen and (max-width: 1000px) {
-    max-width: 40.625rem;
+    max-width: 30.625rem;
     margin: 0 auto;
   }
 `;
@@ -101,15 +101,26 @@ export const ArticleImage = styled.div`
 export const ArticleContent = styled.div`
   padding: 2rem 0rem;
 
-  p {
+  p,
+  li {
     font-size: 1.2rem;
     line-height: 1.7rem;
     margin-bottom: 1.5rem;
+  }
+
+  li {
+    list-style: lower-alpha;
+    margin-left: 1rem;
+  }
+
+  h2,
+  h3 {
+    margin-bottom: 1.2rem;
     color: var(--color-font-100);
   }
 
-  h2 {
-    margin-bottom: 1.2rem;
+  img {
+    margin-bottom: 2rem;
   }
 `;
 
