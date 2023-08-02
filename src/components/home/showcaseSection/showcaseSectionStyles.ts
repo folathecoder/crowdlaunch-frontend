@@ -68,4 +68,10 @@ export const Uniquenology = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
+
+  img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+  }
 `;

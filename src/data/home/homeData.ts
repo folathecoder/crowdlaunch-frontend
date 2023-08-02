@@ -14,20 +14,20 @@ import transactionIcon from 'public/images/global/transactions-f.svg';
 import requestIcon from 'public/images/global/requests-3e.svg';
 
 ////BLOCKCHAIN ICONS/IMAGES
-import ethereum from 'public/images/global/ethereum.svg.svg';
-import solana from 'public/images/global/Solana-svg.svg';
-import fandom from 'public/images/global/fandom.svg.svg';
-import gnosis from 'public/images/global/Gnosis-svg.svg';
-import celo from 'public/images/global/celo.svg.svg';
-import arbitrum from 'public/images/global/ArbitrumNova-svg.svg';
-import avalanche from 'public/images/global/Avalanche.svg.svg';
-import near from 'public/images/global/Near-svg.svg';
-import nervos from 'public/images/global/Nervos-svg.svg';
-import optimism from 'public/images/global/Optimism-svg.svg';
-import polygon from 'public/images/global/polygon.svg.svg';
-import harmony from 'public/images/global/Harmony-svg.svg';
-import iotex from 'public/images/global/iotex-svg.svg';
-import moonbeam from 'public/images/global/Moonbeam-svg.svg';
+import Project1 from 'public/images/home/projects/1.png';
+import Project2 from 'public/images/home/projects/2.png';
+import Project3 from 'public/images/home/projects/3.png';
+import Project4 from 'public/images/home/projects/4.png';
+import Project5 from 'public/images/home/projects/5.png';
+import Project6 from 'public/images/home/projects/6.png';
+import Project7 from 'public/images/home/projects/7.png';
+import Project8 from 'public/images/home/projects/8.png';
+import Project9 from 'public/images/home/projects/9.png';
+import Project10 from 'public/images/home/projects/10.png';
+import Project11 from 'public/images/home/projects/11.png';
+import Project12 from 'public/images/home/projects/12.png';
+import Project13 from 'public/images/home/projects/13.png';
+import Project14 from 'public/images/home/projects/14.png';
 
 /////BENEFIT SECTION DATA
 export const benefitData = {
@@ -101,283 +101,171 @@ export const benefitData = {
 ////BLOCKCHAIN TECHNOLOGIES
 export const blockchainTechData = [
   {
-    icon: ethereum,
-    title: 'Ethereum',
+    icon: Project1,
+    title: 'Brain AI',
   },
   {
-    icon: solana,
-    title: 'Solana',
+    icon: Project2,
+    title: 'Puzzler',
   },
   {
-    icon: fandom,
-    title: 'Fantom',
+    icon: Project3,
+    title: 'More Inc',
   },
   {
-    icon: gnosis,
-    title: 'Gnosis',
+    icon: Project4,
+    title: 'Bord',
   },
   {
-    icon: celo,
-    title: 'Celo',
+    icon: Project5,
+    title: 'Daniel Gallego',
   },
   {
-    icon: arbitrum,
-    title: 'Arbitrum Nova',
+    icon: Project6,
+    title: 'Arowwai',
   },
   {
-    icon: avalanche,
-    title: 'Avalanche',
+    icon: Project7,
+    title: 'King Inc',
   },
   {
-    icon: near,
-    title: 'Near',
+    icon: Project8,
+    title: 'BB Donuts',
   },
   {
-    icon: nervos,
-    title: 'Nervos',
+    icon: Project9,
+    title: 'Borcelle',
   },
   {
-    icon: optimism,
-    title: 'Optimism',
+    icon: Project10,
+    title: 'Fauget',
   },
   {
-    icon: polygon,
-    title: 'Polygon',
+    icon: Project11,
+    title: 'Hummingbird',
   },
   {
-    icon: harmony,
-    title: 'Harmony',
+    icon: Project12,
+    title: 'Katrina',
   },
   {
-    icon: iotex,
-    title: 'IoTeX',
+    icon: Project13,
+    title: 'Stream',
   },
   {
-    icon: moonbeam,
-    title: 'Moonbeam',
+    icon: Project14,
+    title: 'Shodwe',
   },
   {
-    icon: ethereum,
-    title: 'Ethereum',
+    icon: Project1,
+    title: 'Brain AI',
   },
   {
-    icon: solana,
-    title: 'Solana',
+    icon: Project2,
+    title: 'Puzzler',
   },
   {
-    icon: fandom,
-    title: 'Fantom',
+    icon: Project3,
+    title: 'More Inc',
   },
   {
-    icon: gnosis,
-    title: 'Gnosis',
+    icon: Project4,
+    title: 'Bord',
   },
   {
-    icon: celo,
-    title: 'Celo',
+    icon: Project5,
+    title: 'Daniel Gallego',
   },
   {
-    icon: arbitrum,
-    title: 'Arbitrum Nova',
+    icon: Project6,
+    title: 'Arowwai',
   },
   {
-    icon: avalanche,
-    title: 'Avalanche',
+    icon: Project7,
+    title: 'King Inc',
   },
   {
-    icon: near,
-    title: 'Near',
+    icon: Project8,
+    title: 'BB Donuts',
   },
   {
-    icon: nervos,
-    title: 'Nervos',
+    icon: Project9,
+    title: 'Borcelle',
   },
   {
-    icon: optimism,
-    title: 'Optimism',
+    icon: Project10,
+    title: 'Fauget',
   },
   {
-    icon: polygon,
-    title: 'Polygon',
+    icon: Project11,
+    title: 'Hummingbird',
   },
   {
-    icon: harmony,
-    title: 'Harmony',
+    icon: Project12,
+    title: 'Katrina',
   },
   {
-    icon: iotex,
-    title: 'IoTeX',
+    icon: Project13,
+    title: 'Stream',
   },
   {
-    icon: moonbeam,
-    title: 'Moonbeam',
+    icon: Project14,
+    title: 'Shodwe',
   },
   {
-    icon: ethereum,
-    title: 'Ethereum',
+    icon: Project1,
+    title: 'Brain AI',
   },
   {
-    icon: solana,
-    title: 'Solana',
+    icon: Project2,
+    title: 'Puzzler',
   },
   {
-    icon: fandom,
-    title: 'Fantom',
+    icon: Project3,
+    title: 'More Inc',
   },
   {
-    icon: gnosis,
-    title: 'Gnosis',
+    icon: Project4,
+    title: 'Bord',
   },
   {
-    icon: celo,
-    title: 'Celo',
+    icon: Project5,
+    title: 'Daniel Gallego',
   },
   {
-    icon: arbitrum,
-    title: 'Arbitrum Nova',
+    icon: Project6,
+    title: 'Arowwai',
   },
   {
-    icon: avalanche,
-    title: 'Avalanche',
+    icon: Project7,
+    title: 'King Inc',
   },
   {
-    icon: near,
-    title: 'Near',
+    icon: Project8,
+    title: 'BB Donuts',
   },
   {
-    icon: nervos,
-    title: 'Nervos',
+    icon: Project9,
+    title: 'Borcelle',
   },
   {
-    icon: optimism,
-    title: 'Optimism',
+    icon: Project10,
+    title: 'Fauget',
   },
   {
-    icon: polygon,
-    title: 'Polygon',
+    icon: Project11,
+    title: 'Hummingbird',
   },
   {
-    icon: harmony,
-    title: 'Harmony',
+    icon: Project12,
+    title: 'Katrina',
   },
   {
-    icon: iotex,
-    title: 'IoTeX',
+    icon: Project13,
+    title: 'Stream',
   },
   {
-    icon: moonbeam,
-    title: 'Moonbeam',
-  },
-  {
-    icon: ethereum,
-    title: 'Ethereum',
-  },
-  {
-    icon: solana,
-    title: 'Solana',
-  },
-  {
-    icon: fandom,
-    title: 'Fantom',
-  },
-  {
-    icon: gnosis,
-    title: 'Gnosis',
-  },
-  {
-    icon: celo,
-    title: 'Celo',
-  },
-  {
-    icon: arbitrum,
-    title: 'Arbitrum Nova',
-  },
-  {
-    icon: avalanche,
-    title: 'Avalanche',
-  },
-  {
-    icon: near,
-    title: 'Near',
-  },
-  {
-    icon: nervos,
-    title: 'Nervos',
-  },
-  {
-    icon: optimism,
-    title: 'Optimism',
-  },
-  {
-    icon: polygon,
-    title: 'Polygon',
-  },
-  {
-    icon: harmony,
-    title: 'Harmony',
-  },
-  {
-    icon: iotex,
-    title: 'IoTeX',
-  },
-  {
-    icon: moonbeam,
-    title: 'Moonbeam',
-  },
-  {
-    icon: ethereum,
-    title: 'Ethereum',
-  },
-  {
-    icon: solana,
-    title: 'Solana',
-  },
-  {
-    icon: fandom,
-    title: 'Fantom',
-  },
-  {
-    icon: gnosis,
-    title: 'Gnosis',
-  },
-  {
-    icon: celo,
-    title: 'Celo',
-  },
-  {
-    icon: arbitrum,
-    title: 'Arbitrum Nova',
-  },
-  {
-    icon: avalanche,
-    title: 'Avalanche',
-  },
-  {
-    icon: near,
-    title: 'Near',
-  },
-  {
-    icon: nervos,
-    title: 'Nervos',
-  },
-  {
-    icon: optimism,
-    title: 'Optimism',
-  },
-  {
-    icon: polygon,
-    title: 'Polygon',
-  },
-  {
-    icon: harmony,
-    title: 'Harmony',
-  },
-  {
-    icon: iotex,
-    title: 'IoTeX',
-  },
-  {
-    icon: moonbeam,
-    title: 'Moonbeam',
+    icon: Project14,
+    title: 'Shodwe',
   },
 ];

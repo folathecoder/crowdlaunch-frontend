@@ -27,13 +27,14 @@ export const UniqueStep = styled.div`
   background: rgba(33, 33, 35, 0.4);
   padding: 1.5rem;
   height: 19rem;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
 
   img {
+    width: 5rem;
+    height: auto;
   }
 
   h3 {

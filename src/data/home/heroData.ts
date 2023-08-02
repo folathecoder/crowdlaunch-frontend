@@ -1,8 +1,8 @@
 import { ProjectPlaceholder } from 'public/images';
-import pickProjectIcon from 'public/images/global/pick-project-icon.svg';
-import fundIcon from 'public/images/global/funds-invest-icon.svg';
-import dividendsIcon from 'public/images/global/nft-dividends-icon.svg';
-import growthIcon from 'public/images/global/track-growth-icon.svg';
+import pickProjectIcon from 'public/images/home/search-icon.svg';
+import fundIcon from 'public/images/home/rocket-icon.svg';
+import dividendsIcon from 'public/images/home/nft-icon.svg';
+import growthIcon from 'public/images/home/chart-icon.svg';
 
 export const nftArrayData = [
   {
