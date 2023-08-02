@@ -283,21 +283,21 @@ export const stepsData = [
   {
     img: pickProjectIcon,
     title: '1. Pick a project',
-    paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
+    paragraph: 'Dive into a sea of projects and discover your perfect match.',
   },
   {
     img: fundIcon,
     title: '2. Fund & Invest',
-    paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
+    paragraph: 'Be a backer, fund the project and share in its success.',
   },
   {
     img: dividendsIcon,
     title: '3. NFT Dividends',
-    paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
+    paragraph: 'Experience direct returns funneled straight to your NFT.',
   },
   {
     img: growthIcon,
     title: '4. Track Growth',
-    paragraph: 'Duis aute irure dolor inolme reprehende in voluptate.',
+    paragraph: 'Track investments and vest via your dashboard.',
   },
 ];

@@ -17,8 +17,8 @@ const HeroSection = () => {
           <h3>Funding Startups</h3>
           <h1>Unleash the Power of Crowdfunding with NFTs</h1>
           <p>
-            Raise the required funds to build and grow your project with
-            decentralised technology.
+            Unlock a global network of investors and empower your startup to
+            soar.
           </p>
           <Link href="/explore">
             <button>Explore Projects</button>
