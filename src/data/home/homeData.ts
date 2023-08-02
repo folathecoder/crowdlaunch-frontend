@@ -39,55 +39,56 @@ export const benefitData = {
     {
       id: 1,
       icon: streamlinedBuildingIcon,
-      title: 'Streamlined Building',
+      title: 'Instant Transactions',
     },
     {
       id: 2,
       icon: scalabilityIcon,
-      title: 'Enhanced Scalability',
+      title: 'Decentralised System',
     },
     {
       id: 3,
       icon: featuredIcon,
-      title: 'Customizable Features',
+      title: 'Ultimate Control',
     },
   ],
   primaryContent: {
-    heading: 'Prepare for your project listing.',
+    heading: 'Transparent Investment on the Blockchain.',
     mainDescription:
-      "Get exchange-ready with a partner that has helped many projects meet listing requirements. CrowdLaunch's exclusive Exchange Scorecard gets your project ready to hit every requirement for:",
+      'Crowdlaunch empowers you to directly support and profit from groundbreaking projects, all while retaining control via your personal dashboard and the transformative power of NFTs.',
     miniDescription:
-      'Ankr will share our industry expertise and help you prepare to present your project to exchange listing teams.',
+      'Jumpstart success: Seamless Funding, Unparalleled Profits!',
     miniService: [
       {
         id: 1,
         icon: validatorIcon,
-        title: 'Number of validators',
+        title: 'Decentralised systems',
       },
       {
         id: 2,
         icon: transactionIcon,
-        title: 'Transactions per second',
+        title: 'Fast Transactions',
       },
       {
         id: 3,
         icon: requestIcon,
-        title: 'RPC requests',
+        title: 'Audited Contracts',
       },
     ],
   },
   secondaryContent: {
     marketContent: {
-      heading: 'Get to market faster.',
+      heading: 'Jumpstart success.',
       icon: 'fa-solid fa-play',
-      title: 'Bring your project to market in days — not months or years',
+      title: 'Seamless Funding, Unparalleled Profits!',
     },
     experienceContent: {
-      heading: 'Give your users the best experience.',
+      heading: 'Ethereum Chain',
       miniContent: [
-        'Always-low gas fees',
-        'Security features',
-        'Blazing-fast transactions',
+        'Low gas fee',
+        'Secure contracts',
+        'ERC standards',
+        'Proof of stack',
       ],
     },
     revenueContent: {
