@@ -14,20 +14,20 @@ import transactionIcon from 'public/images/global/transactions-f.svg';
 import requestIcon from 'public/images/global/requests-3e.svg';
 
 ////BLOCKCHAIN ICONS/IMAGES
-import ethereum from 'public/images/global/ethereum.svg.svg';
-import solana from 'public/images/global/Solana-svg.svg';
-import fandom from 'public/images/global/fandom.svg.svg';
-import gnosis from 'public/images/global/Gnosis-svg.svg';
-import celo from 'public/images/global/celo.svg.svg';
-import arbitrum from 'public/images/global/ArbitrumNova-svg.svg';
-import avalanche from 'public/images/global/Avalanche.svg.svg';
-import near from 'public/images/global/Near-svg.svg';
-import nervos from 'public/images/global/Nervos-svg.svg';
-import optimism from 'public/images/global/Optimism-svg.svg';
-import polygon from 'public/images/global/polygon.svg.svg';
-import harmony from 'public/images/global/Harmony-svg.svg';
-import iotex from 'public/images/global/iotex-svg.svg';
-import moonbeam from 'public/images/global/Moonbeam-svg.svg';
+import Project1 from 'public/images/home/projects/1.png';
+import Project2 from 'public/images/home/projects/2.png';
+import Project3 from 'public/images/home/projects/3.png';
+import Project4 from 'public/images/home/projects/4.png';
+import Project5 from 'public/images/home/projects/5.png';
+import Project6 from 'public/images/home/projects/6.png';
+import Project7 from 'public/images/home/projects/7.png';
+import Project8 from 'public/images/home/projects/8.png';
+import Project9 from 'public/images/home/projects/9.png';
+import Project10 from 'public/images/home/projects/10.png';
+import Project11 from 'public/images/home/projects/11.png';
+import Project12 from 'public/images/home/projects/12.png';
+import Project13 from 'public/images/home/projects/13.png';
+import Project14 from 'public/images/home/projects/14.png';
 
 /////BENEFIT SECTION DATA
 export const benefitData = {
@@ -39,55 +39,56 @@ export const benefitData = {
     {
       id: 1,
       icon: streamlinedBuildingIcon,
-      title: 'Streamlined Building',
+      title: 'Instant Transactions',
     },
     {
       id: 2,
       icon: scalabilityIcon,
-      title: 'Enhanced Scalability',
+      title: 'Decentralised System',
     },
     {
       id: 3,
       icon: featuredIcon,
-      title: 'Customizable Features',
+      title: 'Ultimate Control',
     },
   ],
   primaryContent: {
-    heading: 'Prepare for your project listing.',
+    heading: 'Transparent Investment on the Blockchain.',
     mainDescription:
-      "Get exchange-ready with a partner that has helped many projects meet listing requirements. CrowdLaunch's exclusive Exchange Scorecard gets your project ready to hit every requirement for:",
+      'Crowdlaunch empowers you to directly support and profit from groundbreaking projects, all while retaining control via your personal dashboard and the transformative power of NFTs.',
     miniDescription:
-      'Ankr will share our industry expertise and help you prepare to present your project to exchange listing teams.',
+      'Jumpstart success: Seamless Funding, Unparalleled Profits!',
     miniService: [
       {
         id: 1,
         icon: validatorIcon,
-        title: 'Number of validators',
+        title: 'Decentralised systems',
       },
       {
         id: 2,
         icon: transactionIcon,
-        title: 'Transactions per second',
+        title: 'Fast Transactions',
       },
       {
         id: 3,
         icon: requestIcon,
-        title: 'RPC requests',
+        title: 'Audited Contracts',
       },
     ],
   },
   secondaryContent: {
     marketContent: {
-      heading: 'Get to market faster.',
+      heading: 'Jumpstart success.',
       icon: 'fa-solid fa-play',
-      title: 'Bring your project to market in days — not months or years',
+      title: 'Seamless Funding, Unparalleled Profits!',
     },
     experienceContent: {
-      heading: 'Give your users the best experience.',
+      heading: 'Ethereum Chain',
       miniContent: [
-        'Always-low gas fees',
-        'Security features',
-        'Blazing-fast transactions',
+        'Low gas fee',
+        'Secure contracts',
+        'ERC standards',
+        'Proof of stack',
       ],
     },
     revenueContent: {
@@ -101,283 +102,171 @@ export const benefitData = {
 ////BLOCKCHAIN TECHNOLOGIES
 export const blockchainTechData = [
   {
-    icon: ethereum,
-    title: 'Ethereum',
+    icon: Project1,
+    title: 'Brain AI',
   },
   {
-    icon: solana,
-    title: 'Solana',
+    icon: Project2,
+    title: 'Puzzler',
   },
   {
-    icon: fandom,
-    title: 'Fantom',
+    icon: Project3,
+    title: 'More Inc',
   },
   {
-    icon: gnosis,
-    title: 'Gnosis',
+    icon: Project4,
+    title: 'Bord',
   },
   {
-    icon: celo,
-    title: 'Celo',
+    icon: Project5,
+    title: 'Daniel Gallego',
   },
   {
-    icon: arbitrum,
-    title: 'Arbitrum Nova',
+    icon: Project6,
+    title: 'Arowwai',
   },
   {
-    icon: avalanche,
-    title: 'Avalanche',
+    icon: Project7,
+    title: 'King Inc',
   },
   {
-    icon: near,
-    title: 'Near',
+    icon: Project8,
+    title: 'BB Donuts',
   },
   {
-    icon: nervos,
-    title: 'Nervos',
+    icon: Project9,
+    title: 'Borcelle',
   },
   {
-    icon: optimism,
-    title: 'Optimism',
+    icon: Project10,
+    title: 'Fauget',
   },
   {
-    icon: polygon,
-    title: 'Polygon',
+    icon: Project11,
+    title: 'Hummingbird',
   },
   {
-    icon: harmony,
-    title: 'Harmony',
+    icon: Project12,
+    title: 'Katrina',
   },
   {
-    icon: iotex,
-    title: 'IoTeX',
+    icon: Project13,
+    title: 'Stream',
   },
   {
-    icon: moonbeam,
-    title: 'Moonbeam',
+    icon: Project14,
+    title: 'Shodwe',
   },
   {
-    icon: ethereum,
-    title: 'Ethereum',
+    icon: Project1,
+    title: 'Brain AI',
   },
   {
-    icon: solana,
-    title: 'Solana',
+    icon: Project2,
+    title: 'Puzzler',
   },
   {
-    icon: fandom,
-    title: 'Fantom',
+    icon: Project3,
+    title: 'More Inc',
   },
   {
-    icon: gnosis,
-    title: 'Gnosis',
+    icon: Project4,
+    title: 'Bord',
   },
   {
-    icon: celo,
-    title: 'Celo',
+    icon: Project5,
+    title: 'Daniel Gallego',
   },
   {
-    icon: arbitrum,
-    title: 'Arbitrum Nova',
+    icon: Project6,
+    title: 'Arowwai',
   },
   {
-    icon: avalanche,
-    title: 'Avalanche',
+    icon: Project7,
+    title: 'King Inc',
   },
   {
-    icon: near,
-    title: 'Near',
+    icon: Project8,
+    title: 'BB Donuts',
   },
   {
-    icon: nervos,
-    title: 'Nervos',
+    icon: Project9,
+    title: 'Borcelle',
   },
   {
-    icon: optimism,
-    title: 'Optimism',
+    icon: Project10,
+    title: 'Fauget',
   },
   {
-    icon: polygon,
-    title: 'Polygon',
+    icon: Project11,
+    title: 'Hummingbird',
   },
   {
-    icon: harmony,
-    title: 'Harmony',
+    icon: Project12,
+    title: 'Katrina',
   },
   {
-    icon: iotex,
-    title: 'IoTeX',
+    icon: Project13,
+    title: 'Stream',
   },
   {
-    icon: moonbeam,
-    title: 'Moonbeam',
+    icon: Project14,
+    title: 'Shodwe',
   },
   {
-    icon: ethereum,
-    title: 'Ethereum',
+    icon: Project1,
+    title: 'Brain AI',
   },
   {
-    icon: solana,
-    title: 'Solana',
+    icon: Project2,
+    title: 'Puzzler',
   },
   {
-    icon: fandom,
-    title: 'Fantom',
+    icon: Project3,
+    title: 'More Inc',
   },
   {
-    icon: gnosis,
-    title: 'Gnosis',
+    icon: Project4,
+    title: 'Bord',
   },
   {
-    icon: celo,
-    title: 'Celo',
+    icon: Project5,
+    title: 'Daniel Gallego',
   },
   {
-    icon: arbitrum,
-    title: 'Arbitrum Nova',
+    icon: Project6,
+    title: 'Arowwai',
   },
   {
-    icon: avalanche,
-    title: 'Avalanche',
+    icon: Project7,
+    title: 'King Inc',
   },
   {
-    icon: near,
-    title: 'Near',
+    icon: Project8,
+    title: 'BB Donuts',
   },
   {
-    icon: nervos,
-    title: 'Nervos',
+    icon: Project9,
+    title: 'Borcelle',
   },
   {
-    icon: optimism,
-    title: 'Optimism',
+    icon: Project10,
+    title: 'Fauget',
   },
   {
-    icon: polygon,
-    title: 'Polygon',
+    icon: Project11,
+    title: 'Hummingbird',
   },
   {
-    icon: harmony,
-    title: 'Harmony',
+    icon: Project12,
+    title: 'Katrina',
   },
   {
-    icon: iotex,
-    title: 'IoTeX',
+    icon: Project13,
+    title: 'Stream',
   },
   {
-    icon: moonbeam,
-    title: 'Moonbeam',
-  },
-  {
-    icon: ethereum,
-    title: 'Ethereum',
-  },
-  {
-    icon: solana,
-    title: 'Solana',
-  },
-  {
-    icon: fandom,
-    title: 'Fantom',
-  },
-  {
-    icon: gnosis,
-    title: 'Gnosis',
-  },
-  {
-    icon: celo,
-    title: 'Celo',
-  },
-  {
-    icon: arbitrum,
-    title: 'Arbitrum Nova',
-  },
-  {
-    icon: avalanche,
-    title: 'Avalanche',
-  },
-  {
-    icon: near,
-    title: 'Near',
-  },
-  {
-    icon: nervos,
-    title: 'Nervos',
-  },
-  {
-    icon: optimism,
-    title: 'Optimism',
-  },
-  {
-    icon: polygon,
-    title: 'Polygon',
-  },
-  {
-    icon: harmony,
-    title: 'Harmony',
-  },
-  {
-    icon: iotex,
-    title: 'IoTeX',
-  },
-  {
-    icon: moonbeam,
-    title: 'Moonbeam',
-  },
-  {
-    icon: ethereum,
-    title: 'Ethereum',
-  },
-  {
-    icon: solana,
-    title: 'Solana',
-  },
-  {
-    icon: fandom,
-    title: 'Fantom',
-  },
-  {
-    icon: gnosis,
-    title: 'Gnosis',
-  },
-  {
-    icon: celo,
-    title: 'Celo',
-  },
-  {
-    icon: arbitrum,
-    title: 'Arbitrum Nova',
-  },
-  {
-    icon: avalanche,
-    title: 'Avalanche',
-  },
-  {
-    icon: near,
-    title: 'Near',
-  },
-  {
-    icon: nervos,
-    title: 'Nervos',
-  },
-  {
-    icon: optimism,
-    title: 'Optimism',
-  },
-  {
-    icon: polygon,
-    title: 'Polygon',
-  },
-  {
-    icon: harmony,
-    title: 'Harmony',
-  },
-  {
-    icon: iotex,
-    title: 'IoTeX',
-  },
-  {
-    icon: moonbeam,
-    title: 'Moonbeam',
+    icon: Project14,
+    title: 'Shodwe',
   },
 ];
