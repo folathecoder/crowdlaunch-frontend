@@ -11,12 +11,18 @@ import {
   ExploreOptions,
   ExploreWrap,
 } from './explorerLayoutStyles';
-import { ProjectCard, ExploreSearch } from '@/components/explore';
+import {
+  ProjectCard,
+  ExploreSearch,
+  ProjectCardSkeleton,
+} from '@/components/explore';
 import { ColorButton } from '@/components/global';
 import { projectStatus } from '@/data/explore/exploreFilters';
 import ExploreFilter from '@/components/explore/exploreFilter/exploreFilter';
 import { GoFilter } from 'react-icons/go';
 import { useBreakPointDown } from '@/hooks/useBreakPoint';
+import useGetProjects from '@/hooks/RequestHooks/GET/useGetProjects';
+import { BiError } from 'react-icons/bi';
 
 const ExplorerLayout = () => {
   const [filterToggle, setFilterToggle] = useState(false);
@@ -36,6 +42,10 @@ const ExplorerLayout = () => {
       setNoOfStatus(4);
     }
   }, [reduceFilterTags]);
+
+  const { projects, error, fetchingStatus } = useGetProjects();
+
+  console.log(projects, error, fetchingStatus);
 
   return (
     <ExploreContainer>
@@ -83,12 +93,31 @@ const ExplorerLayout = () => {
               <ExploreSearch />
             </ExploreSearchWrap>
             <ExploreCardsContainer>
-              {[
-                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                19, 20,
-              ].map((project) => (
-                <ProjectCard key={project} />
-              ))}
+              {fetchingStatus === 1 &&
+                new Array(14)
+                  .fill(null)
+                  .map((item) => <ProjectCardSkeleton key={item} />)}
+              {fetchingStatus === 2 &&
+                projects?.map((project) => (
+                  <ProjectCard
+                    key={project.projectId}
+                    projectName={project.projectName}
+                    projectId={project.projectId}
+                    bannerImageUrl={project.bannerImageUrl}
+                    targetAmount={project.targetAmount}
+                    amountRaised={project.amountRaised}
+                    minInvestment={project.minInvestment}
+                    noOfLikes={project.noOfLikes}
+                  />
+                ))}
+              {fetchingStatus === 3 && (
+                <p className="error-msg">
+                  <span>
+                    <BiError />
+                  </span>
+                  Oops! Projects could not be fetched. Try again later!
+                </p>
+              )}
             </ExploreCardsContainer>
           </ExploreWrap>
         </ExploreMain>

@@ -105,4 +105,8 @@ export const ExploreCardsContainer = styled.section`
   @media screen and (max-width: 513px) {
     grid-template-columns: 1fr;
   }
+
+  .error-msg {
+    width: 100%;
+  }
 `;
