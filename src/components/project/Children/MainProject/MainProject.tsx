@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import {
+  ProjectDetailContext,
+  ProjectDetailContextReturnTypes,
+} from '@/contexts/ProjectDetailContext';
 import Link from 'next/link';
 import Campaign from '../MiniChildren/Campaign/Campaign';
 import Updates from '../MiniChildren/Updates/Updates';

@@ -1,29 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FetchingStatus } from '@/types/fetchingTypes';
-
-interface ProjectType {
-  projectId: string;
-  userId: string;
-  categoryId: string;
-  projectName: string;
-  bannerImageUrl: string;
-  targetAmount: number;
-  amountRaised: number;
-  minInvestment: number;
-  noOfInvestors: number;
-  noOfDaysLeft: number;
-  noOfLikes: number;
-  projectWalletAddress: string;
-  customColour: {
-    fontColour: string;
-    bgColour1: string;
-    bgColour2: string;
-  };
-  projectStatus: number;
-  createdAt: string;
-  updatedAt: string;
-}
+import { ProjectType } from '@/types/projectTypes';
 
 interface ProjectReturnType {
   projects: ProjectType[] | null;
