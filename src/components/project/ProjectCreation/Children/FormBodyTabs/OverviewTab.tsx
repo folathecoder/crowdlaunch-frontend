@@ -7,7 +7,7 @@ import {
   FormButtonContainer,
 } from './FormStyles';
 import { projectCategories } from '@/data/project/projectCategories';
-import useGetCategories from '@/hooks/useGetCategories';
+import useGetCategories from '@/hooks/RequestHooks/GET/useGetCategories';
 
 const OverviewTab = () => {
   const { register, handleSubmit, control } = useForm();

@@ -27,7 +27,6 @@ const useGetCategories = (): CategoryReturnType => {
   useEffect(() => {
     setFetchingStatus(FetchingStatus.Loading);
 
-    // Make a GET request to the configured backend URL
     axios
       .get<CategoryType[]>(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories/Category`
