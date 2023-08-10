@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useState, useCallback, useRef, ChangeEvent } from 'react';
-import { Button, NFTImageTemplate } from '@/components/global';
+import { Button } from '@/components/global';
 import { toPng } from 'html-to-image';
 import {
   CreatorContainer,

@@ -7,6 +7,7 @@ import {
   FormButtonContainer,
 } from './FormStyles';
 import { projectCategories } from '@/data/project/projectCategories';
+import useGetCategories from '@/hooks/useGetCategories';
 
 const OverviewTab = () => {
   const { register, handleSubmit, control } = useForm();
@@ -21,6 +22,8 @@ const OverviewTab = () => {
       selectedOption: event.target.value,
     });
   };
+
+  const { categories } = useGetCategories();
 
   return (
     <div>
@@ -50,9 +53,12 @@ const OverviewTab = () => {
               name="projectCategory"
             >
               <option value="">Select a project category</option>
-              {projectCategories.map((category) => (
-                <option value={`option-${category.id}`} key={category.id}>
-                  {category.name}
+              {categories?.map((category) => (
+                <option
+                  key={category.categoryId}
+                  value={`option-${category.categoryId}`}
+                >
+                  {category.categoryName}
                 </option>
               ))}
             </select>

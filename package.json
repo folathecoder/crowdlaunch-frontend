@@ -22,6 +22,7 @@
     "@web3modal/ethereum": "^2.4.7",
     "@web3modal/react": "^2.4.7",
     "@zeit/next-css": "^1.0.1",
+    "axios": "^1.4.0",
     "draft-js": "^0.11.7",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
