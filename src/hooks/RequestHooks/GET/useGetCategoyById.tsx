@@ -4,37 +4,46 @@ import { FetchingStatus } from '@/types/fetchingTypes';
 import { CategoryType } from '@/types/projectTypes';
 
 interface CategoryReturnType {
-  categories: CategoryType[] | null;
+  category: CategoryType | null;
   fetchingStatus: FetchingStatus;
   error: string | null;
 }
 
-const useGetCategories = (): CategoryReturnType => {
-  const [categories, setCategories] = useState<CategoryType[] | null>(null);
+interface PropsType {
+  categoryId: string;
+}
+
+const useGetCategoryById = ({ categoryId }: PropsType): CategoryReturnType => {
+  const [category, setCategory] = useState<CategoryType | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [fetchingStatus, setFetchingStatus] = useState<FetchingStatus>(
     FetchingStatus.Default
   );
 
-  // Effect hook to make the API call when the component using this hook mounts
   useEffect(() => {
     setFetchingStatus(FetchingStatus.Loading);
 
     axios
-      .get<CategoryType[]>(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories/Category`
+      .get<CategoryType>(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories/Category/${categoryId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEFAULT_JWT}`,
+            accept: 'application/json',
+          },
+        }
       )
       .then((response) => {
-        setCategories(response.data);
+        setCategory(response.data);
         setFetchingStatus(FetchingStatus.Fetched);
       })
       .catch((error) => {
         setError(error.message);
         setFetchingStatus(FetchingStatus.Error);
       });
-  }, []);
+  }, [categoryId]);
 
-  return { categories, fetchingStatus, error };
+  return { category, fetchingStatus, error };
 };
 
-export default useGetCategories;
+export default useGetCategoryById;

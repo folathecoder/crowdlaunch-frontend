@@ -8,9 +8,8 @@ import {
   ProjectInfo,
   ProjectProgress,
 } from './projectCardStyles';
-import { ProjectPlaceholder } from 'public/images';
 import { ProgressBar } from '@/components/global';
-import { MdFavorite } from 'react-icons/md';
+import useGetCategoryById from '@/hooks/RequestHooks/GET/useGetCategoyById';
 
 interface ProjectCardTypes {
   projectName: string;
@@ -20,6 +19,7 @@ interface ProjectCardTypes {
   amountRaised: number;
   minInvestment: number;
   noOfLikes: number;
+  categoryId: string;
 }
 
 const ProjectCard = ({
@@ -30,7 +30,10 @@ const ProjectCard = ({
   amountRaised,
   minInvestment,
   noOfLikes,
+  categoryId,
 }: ProjectCardTypes) => {
+  const { category, fetchingStatus } = useGetCategoryById({ categoryId });
+
   return (
     <Link href={`/project/${projectId}`} passHref>
       <ProjectContainer>
@@ -44,7 +47,9 @@ const ProjectCard = ({
           />
         </ProjectImage>
         <ProjectTitle>
-          <h3 aria-label="project category">AI</h3>
+          {fetchingStatus === 2 && (
+            <h3 aria-label="project category">{category?.categoryName}</h3>
+          )}
           <h4 aria-label="project name">{projectName}</h4>
         </ProjectTitle>
         <ProjectProgress>

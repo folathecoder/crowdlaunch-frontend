@@ -43,9 +43,7 @@ const ExplorerLayout = () => {
     }
   }, [reduceFilterTags]);
 
-  const { projects, error, fetchingStatus } = useGetProjects();
-
-  console.log(projects, error, fetchingStatus);
+  const { projects, fetchingStatus } = useGetProjects();
 
   return (
     <ExploreContainer>
@@ -108,6 +106,7 @@ const ExplorerLayout = () => {
                     amountRaised={project.amountRaised}
                     minInvestment={project.minInvestment}
                     noOfLikes={project.noOfLikes}
+                    categoryId={project.categoryId}
                   />
                 ))}
               {fetchingStatus === 3 && (
