@@ -63,9 +63,9 @@ export interface UserProfileType {
   user: UserType;
   portfolios: ProjectType[];
   listedProjects: ProjectType[];
-  ownedNfts: [];
+  ownedNfts: OwnedNFTsType[];
   projectWatchlist: ProjectType[];
-  nftWatchlist: [];
+  nftWatchlist: OwnedNFTsType[];
   createdAt: string;
   updatedAt: string;
 }
@@ -82,4 +82,42 @@ export interface UserType {
   };
   createdAt: string;
   updatedAt: string;
+}
+
+export interface OwnedNFTsType {
+  userNftId: string;
+  userId: string;
+  nftId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProjectWatchlistType {
+  projectLikeId: string;
+  userId: string;
+  projectId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface NftType {
+  nft: {
+    nftId: string;
+    creatorId: string;
+    nftName: string;
+    nftDescription: string;
+    price: number;
+    noOfLikes: number;
+    ownerId: string;
+    categoryId: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  category: {
+    categoryId: string;
+    categoryName: string;
+    categoryDescription: string;
+    createdAt: string;
+    updatedAt: string;
+  };
 }

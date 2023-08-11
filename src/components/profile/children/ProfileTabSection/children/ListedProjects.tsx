@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {
+  ProfileContext,
+  ProfileReturnTypes,
+} from '@/components/profile/context/ProfileContext';
 import { PortfolioSection } from '@/components/profile/children/ProfileTabSection/ProfileTabSectionStyles';
-import { ProjectCard } from '@/components/explore';
+import { PortfolioCard } from '@/components/explore';
 
 const ListedProjects = () => {
+  const { user } = useContext(ProfileContext) as ProfileReturnTypes;
+  const { listedProjects } = user || {};
+
   return (
     <PortfolioSection>
-      <div className="portfolio-header">
-        <p>Total Listed Projects: 4 projects</p>
-      </div>
-      {/* <div className="portfolio-cards">
-        {[1, 2, 3, 4].map((item) => (
-          <ProjectCard key={item} />
+      <div className="portfolio-cards">
+        {listedProjects?.map((portfolio) => (
+          <PortfolioCard
+            key={portfolio.projectId}
+            projectId={portfolio.projectId}
+          />
         ))}
-      </div> */}
+      </div>
     </PortfolioSection>
   );
 };

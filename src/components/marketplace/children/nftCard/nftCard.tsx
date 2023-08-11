@@ -8,45 +8,51 @@ import {
   NFTInfo,
   NFTCreator,
 } from './nftCardStyles';
-import { NFTCardTypes } from '@/types/nftTypes';
+import useGetNftById from '@/hooks/RequestHooks/GET/useGetNftById';
 
-const nftPrice = 19;
-
-interface NFTCardComponentTypes {
-  data: NFTCardTypes;
+interface PropType {
+  nftId: string;
 }
 
-const NFTCard = ({ data }: NFTCardComponentTypes) => {
-  const { id, NFTName, NFTImage, NFTCreatorImage, NFTCreatorName } = data;
+const NFTCard = ({ nftId }: PropType) => {
+  const { nft, fetchingStatus } = useGetNftById({ nftId });
+  const { nft: data } = nft || {};
+
   return (
-    <Link href="/nft/12" passHref>
-      <NFTContainer>
-        <NFTImageContainer>
-          <Image src={NFTImage} alt={NFTName} layout="fill" objectFit="cover" />
-        </NFTImageContainer>
-        <NFTTitle>
-          <div>
-            <h3 aria-label="NFT number tag">#{id}</h3>
-            <h4 aria-label="NFT name">{NFTName}</h4>
-          </div>
-          <div>
-            <NFTCreator>
-              <Image src={NFTCreatorImage} alt={NFTCreatorName} />
-            </NFTCreator>
-          </div>
-        </NFTTitle>
-        <NFTInfo>
-          <div>
-            <h5>Chain</h5>
-            <p>Ethereum</p>
-          </div>
-          <div>
-            <h5>Price</h5>
-            <p>{nftPrice.toLocaleString()} ETH</p>
-          </div>
-        </NFTInfo>
-      </NFTContainer>
-    </Link>
+    <>
+      {fetchingStatus === 2 && data && (
+        <Link href={`/nft/${data?.nftId}`} passHref>
+          <NFTContainer>
+            <NFTImageContainer>
+              <Image
+                src="https://media.graphassets.com/aDjrS7P6SuON0hcjBGk8"
+                alt={data.nftName}
+                layout="fill"
+                objectFit="cover"
+              />
+            </NFTImageContainer>
+            <NFTTitle>
+              <div>
+                <h3 aria-label="NFT number tag">
+                  {data.noOfLikes} {data.noOfLikes > 1 ? 'Likes' : 'Like'}
+                </h3>
+                <h4 aria-label="NFT name">{data.nftName}</h4>
+              </div>
+            </NFTTitle>
+            <NFTInfo>
+              <div>
+                <h5>Chain</h5>
+                <p>Ethereum</p>
+              </div>
+              <div>
+                <h5>Price</h5>
+                <p>{data.price.toLocaleString()} ETH</p>
+              </div>
+            </NFTInfo>
+          </NFTContainer>
+        </Link>
+      )}
+    </>
   );
 };
 

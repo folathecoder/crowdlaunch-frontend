@@ -40,23 +40,25 @@ const usePostAuth = (): AuthReturnType => {
 
     setFetchingStatus(FetchingStatus.Loading);
 
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/Auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEFAULT_JWT}`,
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setUserData(data);
-        setFetchingStatus(FetchingStatus.Fetched);
+    if (wallet.walletAddress) {
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/Auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEFAULT_JWT}`,
+        },
+        body: JSON.stringify(data),
       })
-      .catch((error) => {
-        setError(error);
-        setFetchingStatus(FetchingStatus.Error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          setUserData(data);
+          setFetchingStatus(FetchingStatus.Fetched);
+        })
+        .catch((error) => {
+          setError(error);
+          setFetchingStatus(FetchingStatus.Error);
+        });
+    }
   }, [wallet]);
 
   return { userData, error, fetchingStatus };
