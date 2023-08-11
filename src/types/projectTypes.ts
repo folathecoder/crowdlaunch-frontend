@@ -59,9 +59,20 @@ export interface ProjectDetailType {
   projectDetails: DetailsType;
 }
 
+export interface PortfolioType {
+  portfolioId: string;
+  userId: string;
+  projectId: string;
+  status: number;
+  investmentDate: string;
+  amountInvested: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface UserProfileType {
   user: UserType;
-  portfolios: ProjectType[];
+  portfolios: PortfolioType[];
   listedProjects: ProjectType[];
   ownedNfts: OwnedNFTsType[];
   projectWatchlist: ProjectType[];
