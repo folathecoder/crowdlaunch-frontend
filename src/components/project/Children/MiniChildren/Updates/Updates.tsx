@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import moment from 'moment';
+import {
+  ProjectDetailContext,
+  ProjectDetailContextReturnTypes,
+} from '@/contexts/ProjectDetailContext';
 import { useForm } from 'react-hook-form';
 import {
   UpdateSection,
@@ -6,14 +11,13 @@ import {
   UpdateFeedContainer,
   FeedContainer,
 } from './UpdatesStyles';
-import { Button } from '@/components/global';
 
-type Props = {};
+const Updates = () => {
+  const { project: data, fetchingStatus } = useContext(
+    ProjectDetailContext
+  ) as ProjectDetailContextReturnTypes;
 
-const Updates = (props: Props) => {
   const { register, handleSubmit } = useForm();
-
-  const onSubmit = () => {};
 
   return (
     <UpdateSection>
@@ -39,19 +43,21 @@ const Updates = (props: Props) => {
         </form>
       </UpdateFormContainer>
       <UpdateFeedContainer>
-        {[10, 9, 8, 7, 6, 5, 4, 3, 2, 1].map((item) => (
-          <FeedContainer key={item}>
-            <h3>Launched 0.{item} Release</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
-              rem sint ut voluptas iste, magni reprehenderit quis adipisci ad
-              dicta aliquam eum dolorem a minima optio assumenda ipsa eos atque.
-            </p>
-            <p className="update-date">
-              <i>{item} July, 2023</i>
-            </p>
+        {fetchingStatus === 2 && data?.projectUpdates.length === 0 && (
+          <FeedContainer>
+            <p>Updates are not available!</p>
           </FeedContainer>
-        ))}
+        )}
+        {fetchingStatus === 2 &&
+          data?.projectUpdates.reverse().map((update) => (
+            <FeedContainer key={update.projectUpdateId}>
+              <h3>{update.updateTitle}</h3>
+              <p>{update.updateMessage}</p>
+              <p className="update-date">
+                {moment(update.createdAt).format('DD MMM, YYYY')}
+              </p>
+            </FeedContainer>
+          ))}
       </UpdateFeedContainer>
     </UpdateSection>
   );

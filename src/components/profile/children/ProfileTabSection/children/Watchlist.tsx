@@ -11,9 +11,9 @@ const Watchlist = () => {
         <p>Project Watchlist: 4 projects</p>
       </div>
       <div className="portfolio-cards">
-        {[1, 2, 3, 4].map((item) => (
+        {/* {[1, 2, 3, 4].map((item) => (
           <ProjectCard key={item} />
-        ))}
+        ))} */}
       </div>
       <div className="nft-header">
         <p>NFT Watchlist: 3 NFTs</p>

@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import {
+  ProjectDetailContext,
+  ProjectDetailContextReturnTypes,
+} from '@/contexts/ProjectDetailContext';
 import Link from 'next/link';
 import Campaign from '../MiniChildren/Campaign/Campaign';
 import Updates from '../MiniChildren/Updates/Updates';
@@ -33,6 +37,10 @@ const internalLinkData: InternalDataTypes[] = [
 ];
 
 const MainProject: React.FC = () => {
+  const { project } = useContext(
+    ProjectDetailContext
+  ) as ProjectDetailContextReturnTypes;
+
   const [contents, setContents] = useState<React.ReactNode[]>([
     <Campaign key="campaign" />,
     <Updates key="updates" />,
@@ -59,7 +67,9 @@ const MainProject: React.FC = () => {
                     onClick={() => handleActive(index)}
                   >
                     <p>{data.link}</p>
-                    {data.value && <span>{data.value}</span>}
+                    {data.value && (
+                      <span>{project?.projectUpdates.length}</span>
+                    )}
                   </ActiveTab>
                 );
               })}

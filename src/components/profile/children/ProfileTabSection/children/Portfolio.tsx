@@ -9,9 +9,9 @@ const Portfolio = () => {
         <p>Active Investments: 4 projects</p>
       </div>
       <div className="portfolio-cards">
-        {[1, 2, 3, 4].map((item) => (
+        {/* {[1, 2, 3, 4].map((item) => (
           <ProjectCard key={item} />
-        ))}
+        ))} */}
       </div>
     </PortfolioSection>
   );

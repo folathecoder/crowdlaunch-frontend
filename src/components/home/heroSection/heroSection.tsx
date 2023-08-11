@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { nftArrayData, stepsData } from '@/data/home/heroData';
+import { stepsData } from '@/data/home/heroData';
 import {
   NftMarketContainer,
   NftMarketHeader,
@@ -24,7 +24,7 @@ const HeroSection = () => {
             <button>Explore Projects</button>
           </Link>
         </NftMarketHeader>
-        <ProjectCard data={nftArrayData} />
+        <ProjectCard />
       </NftMarketWrapper>
       <StepsSection data={stepsData} />
     </NftMarketContainer>

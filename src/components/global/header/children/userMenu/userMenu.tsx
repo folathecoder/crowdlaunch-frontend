@@ -15,6 +15,7 @@ import { shortenWalletAddress } from '@/helpers/formatters';
 import { profileMenu } from '@/data/menuData';
 import { useRouter } from 'next/router';
 import { FaPowerOff } from 'react-icons/fa';
+import usePostAuth from '@/hooks/RequestHooks/POST/usePostAuth';
 
 interface UserMenuTypes {
   showUserMenu: boolean;
@@ -23,6 +24,7 @@ interface UserMenuTypes {
 
 const UserMenu = ({ showUserMenu, setShowUserMenu }: UserMenuTypes) => {
   const { wallet, handleClearWallet, disconnectWallet } = useWallet();
+  const { userData, error, fetchingStatus } = usePostAuth();
 
   useEscapeKeyToggle({
     state: showUserMenu,

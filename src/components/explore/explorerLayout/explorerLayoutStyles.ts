@@ -89,7 +89,6 @@ export const ExploreFilterContainer = styled.section`
 
 export const ExploreCardsContainer = styled.section`
   width: 100%;
-  min-height: 100vh;
   gap: 15px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -104,5 +103,9 @@ export const ExploreCardsContainer = styled.section`
 
   @media screen and (max-width: 513px) {
     grid-template-columns: 1fr;
+  }
+
+  .error-msg {
+    width: 100%;
   }
 `;

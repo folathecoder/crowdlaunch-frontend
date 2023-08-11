@@ -69,4 +69,19 @@ export const ProjectInfo = styled.div`
     font-size: 13px;
     color: rgba(255, 255, 255, 0.6);
   }
+
+  div:last-of-type {
+    p {
+      text-align: right;
+    }
+  }
+`;
+
+export const SkeletonContainer = styled.div`
+  height: 421px;
+  border-radius: 8px;
+  padding: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
 `;

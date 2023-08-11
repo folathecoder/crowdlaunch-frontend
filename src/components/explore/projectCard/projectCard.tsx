@@ -8,40 +8,61 @@ import {
   ProjectInfo,
   ProjectProgress,
 } from './projectCardStyles';
-import { ProjectPlaceholder } from 'public/images';
 import { ProgressBar } from '@/components/global';
+import useGetCategoryById from '@/hooks/RequestHooks/GET/useGetCategoyById';
 
-const targetAmount = 230200000;
-const raisedAmount = 194555490;
+interface ProjectCardTypes {
+  projectName: string;
+  projectId: string;
+  bannerImageUrl: string;
+  targetAmount: number;
+  amountRaised: number;
+  minInvestment: number;
+  noOfLikes: number;
+  categoryId: string;
+}
 
-const ProjectCard = () => {
+const ProjectCard = ({
+  projectName,
+  projectId,
+  bannerImageUrl,
+  targetAmount,
+  amountRaised,
+  minInvestment,
+  noOfLikes,
+  categoryId,
+}: ProjectCardTypes) => {
+  const { category, fetchingStatus } = useGetCategoryById({ categoryId });
+
   return (
-    <Link href="/project/1" passHref>
+    <Link href={`/project/${projectId}`} passHref>
       <ProjectContainer>
         <ProjectImage>
           <Image
-            src={ProjectPlaceholder}
-            alt="NeuroSynth Robotics"
+            src={bannerImageUrl}
+            alt={projectName}
             layout="fill"
             objectFit="cover"
             objectPosition="center"
           />
         </ProjectImage>
         <ProjectTitle>
-          <h3 aria-label="project category">AI & Robotics</h3>
-          <h4 aria-label="project name">NeuroSynth Robotics</h4>
+          {fetchingStatus === 2 && (
+            <h3 aria-label="project category">{category?.categoryName}</h3>
+          )}
+          <h4 aria-label="project name">{projectName}</h4>
         </ProjectTitle>
         <ProjectProgress>
-          <ProgressBar max={targetAmount} value={raisedAmount} />
+          <ProgressBar max={targetAmount} value={amountRaised} />
         </ProjectProgress>
         <ProjectInfo>
           <div>
             <h5>Min Investment</h5>
-            <p>{`> $293`}</p>
+            {minInvestment && <p>{`> ${minInvestment}`}</p>}
           </div>
           <div>
             <h5>Amount Raised</h5>
-            <p>${raisedAmount.toLocaleString()}</p>
+            {amountRaised && <p>${amountRaised.toLocaleString()}</p>}
           </div>
         </ProjectInfo>
       </ProjectContainer>
