@@ -29,6 +29,15 @@ export interface ProjectType {
   updatedAt: string;
 }
 
+export interface UpdateType {
+  projectUpdateId: string;
+  projectId: string;
+  updateTitle: string;
+  updateMessage: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface DetailsType {
   projectDetailId: string;
   projectId: string;
@@ -46,6 +55,6 @@ export interface DetailsType {
 export interface ProjectDetailType {
   project: ProjectType;
   category: CategoryType;
-  projectUpdates: [];
+  projectUpdates: UpdateType[];
   projectDetails: DetailsType;
 }

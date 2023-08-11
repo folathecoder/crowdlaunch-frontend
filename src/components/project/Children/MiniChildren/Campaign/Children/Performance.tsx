@@ -13,7 +13,7 @@ const Performance = () => {
 
   return (
     <OverviewContainer>
-      {data?.projectDetails.performance && (
+      {data?.projectDetails?.performance && (
         <Content>{HTMLReactParser(data?.projectDetails.performance)}</Content>
       )}
     </OverviewContainer>

@@ -14,7 +14,7 @@ const Risks = () => {
   return (
     <OverviewContainer>
       <Content>
-        {data?.projectDetails.risks && (
+        {data?.projectDetails?.risks && (
           <Content>{HTMLReactParser(data?.projectDetails.risks)}</Content>
         )}
       </Content>

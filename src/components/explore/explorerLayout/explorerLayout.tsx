@@ -96,19 +96,21 @@ const ExplorerLayout = () => {
                   .fill(null)
                   .map((item) => <ProjectCardSkeleton key={item} />)}
               {fetchingStatus === 2 &&
-                projects?.map((project) => (
-                  <ProjectCard
-                    key={project.projectId}
-                    projectName={project.projectName}
-                    projectId={project.projectId}
-                    bannerImageUrl={project.bannerImageUrl}
-                    targetAmount={project.targetAmount}
-                    amountRaised={project.amountRaised}
-                    minInvestment={project.minInvestment}
-                    noOfLikes={project.noOfLikes}
-                    categoryId={project.categoryId}
-                  />
-                ))}
+                projects
+                  ?.reverse()
+                  .map((project) => (
+                    <ProjectCard
+                      key={project.projectId}
+                      projectName={project.projectName}
+                      projectId={project.projectId}
+                      bannerImageUrl={project.bannerImageUrl}
+                      targetAmount={project.targetAmount}
+                      amountRaised={project.amountRaised}
+                      minInvestment={project.minInvestment}
+                      noOfLikes={project.noOfLikes}
+                      categoryId={project.categoryId}
+                    />
+                  ))}
               {fetchingStatus === 3 && (
                 <p className="error-msg">
                   <span>

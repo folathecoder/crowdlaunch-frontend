@@ -14,7 +14,7 @@ const Strategy = () => {
   return (
     <OverviewContainer>
       <Content>
-        {data?.projectDetails.strategy && (
+        {data?.projectDetails?.strategy && (
           <Content>{HTMLReactParser(data?.projectDetails.strategy)}</Content>
         )}
       </Content>

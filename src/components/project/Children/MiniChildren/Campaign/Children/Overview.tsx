@@ -15,7 +15,7 @@ const Overview = (props: Props) => {
 
   return (
     <OverviewContainer>
-      {data?.projectDetails.overview && (
+      {data?.projectDetails?.overview && (
         <Content>{HTMLReactParser(data?.projectDetails.overview)}</Content>
       )}
     </OverviewContainer>

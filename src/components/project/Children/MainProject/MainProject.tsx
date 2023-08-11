@@ -37,6 +37,10 @@ const internalLinkData: InternalDataTypes[] = [
 ];
 
 const MainProject: React.FC = () => {
+  const { project } = useContext(
+    ProjectDetailContext
+  ) as ProjectDetailContextReturnTypes;
+
   const [contents, setContents] = useState<React.ReactNode[]>([
     <Campaign key="campaign" />,
     <Updates key="updates" />,
@@ -63,7 +67,9 @@ const MainProject: React.FC = () => {
                     onClick={() => handleActive(index)}
                   >
                     <p>{data.link}</p>
-                    {data.value && <span>{data.value}</span>}
+                    {data.value && (
+                      <span>{project?.projectUpdates.length}</span>
+                    )}
                   </ActiveTab>
                 );
               })}

@@ -7,13 +7,13 @@ import { OverviewContainer, Content } from './MiniChildrenStyles';
 import HTMLReactParser from 'html-react-parser';
 
 const Competitors = () => {
-  const { project: data, fetchingStatus } = useContext(
+  const { project: data } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
 
   return (
     <OverviewContainer>
-      {data?.projectDetails.competitors && (
+      {data?.projectDetails?.competitors && (
         <Content>{HTMLReactParser(data?.projectDetails.competitors)}</Content>
       )}
     </OverviewContainer>

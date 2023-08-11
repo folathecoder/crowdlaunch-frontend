@@ -14,7 +14,7 @@ const Dividend = () => {
   return (
     <OverviewContainer>
       <Content>
-        {data?.projectDetails.dividend && (
+        {data?.projectDetails?.dividend && (
           <Content>{HTMLReactParser(data?.projectDetails.dividend)}</Content>
         )}
       </Content>
