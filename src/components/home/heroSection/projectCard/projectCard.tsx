@@ -41,6 +41,7 @@ const ProjectCard = () => {
                   <ContentWrapper>
                     <div>
                       <h3>{project.projectName}</h3>
+                      <p>{project.noOfInvestors.toLocaleString()} investors</p>
                     </div>
                     <div>
                       <div>

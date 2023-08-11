@@ -65,7 +65,7 @@ export const ImageWrapper = styled.div`
 `;
 export const ContentWrapper = styled.div`
   display: grid;
-  gap: 1.62rem;
+  gap: 1rem;
 
   & > *:first-child {
     h3 {

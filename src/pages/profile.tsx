@@ -1,4 +1,5 @@
 import React from 'react';
+import withAuth from '@/components/profile/auth/withAuth';
 import { ProfileLayout } from '@/components/profile';
 
 const Profile = () => {
@@ -9,4 +10,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

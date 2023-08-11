@@ -58,11 +58,11 @@ const ProjectCard = ({
         <ProjectInfo>
           <div>
             <h5>Min Investment</h5>
-            <p>{`> ${minInvestment}`}</p>
+            {minInvestment && <p>{`> ${minInvestment}`}</p>}
           </div>
           <div>
             <h5>Amount Raised</h5>
-            <p>${amountRaised.toLocaleString()}</p>
+            {amountRaised && <p>${amountRaised.toLocaleString()}</p>}
           </div>
         </ProjectInfo>
       </ProjectContainer>

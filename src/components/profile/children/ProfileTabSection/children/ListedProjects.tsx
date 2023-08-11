@@ -8,11 +8,11 @@ const ListedProjects = () => {
       <div className="portfolio-header">
         <p>Total Listed Projects: 4 projects</p>
       </div>
-      <div className="portfolio-cards">
+      {/* <div className="portfolio-cards">
         {[1, 2, 3, 4].map((item) => (
           <ProjectCard key={item} />
         ))}
-      </div>
+      </div> */}
     </PortfolioSection>
   );
 };
