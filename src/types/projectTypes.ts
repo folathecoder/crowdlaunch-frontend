@@ -58,3 +58,28 @@ export interface ProjectDetailType {
   projectUpdates: UpdateType[];
   projectDetails: DetailsType;
 }
+
+export interface UserProfileType {
+  user: UserType;
+  portfolios: ProjectType[];
+  listedProjects: ProjectType[];
+  ownedNfts: [];
+  projectWatchlist: ProjectType[];
+  nftWatchlist: [];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserType {
+  userId: string;
+  userName: string;
+  walletAddress: string;
+  socials: {
+    websiteUrl: string;
+    twitterUrl: string;
+    telegramUrl: string;
+    discordUrl: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
