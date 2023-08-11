@@ -9,56 +9,54 @@ import {
   ContentWrapper,
   ProjectLink,
 } from './projectCardStyles';
+import useGetProjects from '@/hooks/RequestHooks/GET/useGetProjects';
+import { heroCardColors } from '@/data/home/heroData';
 
-interface ProjectCardTypes {
-  data: ProjectCardObjTypes[];
-}
+const ProjectCard = () => {
+  const { projects, fetchingStatus: fetchingProjects } = useGetProjects();
 
-interface ProjectCardObjTypes {
-  img: StaticImageData;
-  title: string;
-  link: string;
-  bgColor: string;
-  paragraph: string;
-  invest: INVESTMENT[];
-}
-
-interface INVESTMENT {
-  title: string;
-  amount: number;
-}
-
-const ProjectCard = ({ data }: ProjectCardTypes) => {
   return (
     <ProjectContainer>
       <ProjectWrapperScroll>
-        {data.map((nft, index) => {
-          return (
-            <UniqueProject key={index} bgColor={nft.bgColor}>
-              <ProjectLink href={nft.link} target="_blank">
-                <ImageWrapper>
-                  <Image src={nft.img} alt="token" layout="responsive" />
-                </ImageWrapper>
-                <ContentWrapper>
-                  <div>
-                    <h3>{nft.title}</h3>
-                    <p>{nft.paragraph}</p>
-                  </div>
-                  <div>
-                    {nft.invest.map(({ amount, title }, index) => {
-                      return (
-                        <div key={index}>
-                          <p>{title}</p>
-                          <h3>{`$${amount.toLocaleString()}`}</h3>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </ContentWrapper>
-              </ProjectLink>
-            </UniqueProject>
-          );
-        })}
+        {fetchingProjects === 2 &&
+          projects?.slice(0, 6).map((project, index) => {
+            return (
+              <UniqueProject
+                key={project.projectId}
+                bgColor={heroCardColors[index]}
+              >
+                <ProjectLink
+                  href={`/project/${project.projectId}`}
+                  target="_blank"
+                >
+                  <ImageWrapper>
+                    <Image
+                      src={project.bannerImageUrl}
+                      alt={project.projectName}
+                      layout="fill"
+                      objectFit="cover"
+                      objectPosition="center"
+                    />
+                  </ImageWrapper>
+                  <ContentWrapper>
+                    <div>
+                      <h3>{project.projectName}</h3>
+                    </div>
+                    <div>
+                      <div>
+                        <p>Min Investment</p>
+                        <h3>{`$${project.minInvestment.toLocaleString()}`}</h3>
+                      </div>
+                      <div className="amount_raised">
+                        <p>Amount Raised</p>
+                        <h3>{`$${project.amountRaised.toLocaleString()}`}</h3>
+                      </div>
+                    </div>
+                  </ContentWrapper>
+                </ProjectLink>
+              </UniqueProject>
+            );
+          })}
       </ProjectWrapperScroll>
     </ProjectContainer>
   );

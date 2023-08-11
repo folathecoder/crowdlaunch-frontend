@@ -54,6 +54,9 @@ export const ProjectLink = styled.a`
 
 export const ImageWrapper = styled.div`
   border-radius: 0.5rem;
+  position: relative;
+  width: 100%;
+  height: 300px;
 
   img {
     border-radius: 0.5rem;
@@ -95,5 +98,9 @@ export const ContentWrapper = styled.div`
       font-size: 0.8125rem;
       opacity: 0.9;
     }
+  }
+
+  .amount_raised {
+    text-align: right;
   }
 `;
