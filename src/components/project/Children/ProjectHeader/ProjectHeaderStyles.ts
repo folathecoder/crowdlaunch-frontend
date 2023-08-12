@@ -51,6 +51,37 @@ export const IconWrapper = styled.div`
       color: var(--color-accent-100);
     }
   }
+
+  .favorite_btn {
+    position: relative;
+
+    div {
+      position: absolute;
+      top: -0.3rem;
+      right: -0.4rem;
+      background-color: var(--color-bg-400);
+      font-size: 0.6rem;
+      height: 1rem;
+      width: 1rem;
+      display: grid;
+      place-items: center;
+      border-radius: 100%;
+      color: var(--color-font-500);
+      border: 0.05rem solid var(--color-accent-100);
+    }
+  }
+
+  .favorite_btn_liked {
+    color: var(--color-accent-100);
+  }
+
+  .favorite_btn_unliked {
+    color: var(--color-bg-400);
+  }
+
+  .share_btn {
+    position: relative;
+  }
 `;
 
 export const HeaderMainContent = styled.div`

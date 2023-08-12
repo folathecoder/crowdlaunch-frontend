@@ -132,3 +132,11 @@ export interface NftType {
     updatedAt: string;
   };
 }
+
+export interface LikedProjectType {
+  projectLikeId: string;
+  userId: string;
+  projectId: string;
+  createdAt: string;
+  updatedAt: string;
+}

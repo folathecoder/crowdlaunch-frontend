@@ -6,6 +6,7 @@ import ProgressBar from '@/components/global/progressBar/progressBar';
 import ColorButton from '@/components/global/button/colorButton';
 import RichTextEditor from '@/components/global/form/RichTextEditor/RichTextEditor';
 import NFTImageTemplate from '@/components/global/nft/NFTImageTemplate';
+import ShareModal from '@/components/global/shareModal/shareModal';
 
 export {
   Header,
@@ -16,4 +17,5 @@ export {
   ColorButton,
   RichTextEditor,
   NFTImageTemplate,
+  ShareModal,
 };

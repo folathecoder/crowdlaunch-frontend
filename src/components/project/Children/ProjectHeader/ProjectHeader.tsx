@@ -19,11 +19,28 @@ import { MdFavorite, MdReport, MdEdit } from 'react-icons/md';
 import { BsShare } from 'react-icons/bs';
 import { FaEthereum } from 'react-icons/fa';
 import { ETHERSCAN_URL } from '@/data/appInfo';
+import usePostLikeProject from '@/hooks/RequestHooks/POST/usePostLikeProject';
+import { ShareModal } from '@/components/global';
+import { APP_URL } from '@/data/appInfo';
 
 const ProjectHeader = () => {
   const { project: data, fetchingStatus } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
+  const { project: projectData, category } = data || {};
+
+  const { handleLikeProject, userLikes, handleUnLikeProject, likeStatus } =
+    usePostLikeProject({
+      projectId: projectData?.projectId,
+    });
+
+  const handleFavoriteClick = () => {
+    if (userLikes) {
+      handleUnLikeProject();
+    } else {
+      handleLikeProject();
+    }
+  };
 
   return (
     <>
@@ -32,15 +49,15 @@ const ProjectHeader = () => {
           <HeaderWrapper>
             <HeaderMinContent>
               <div>
-                <h1>{data.project.projectName}</h1>
-                <h2>{data.category.categoryName}</h2>
+                <h1>{projectData?.projectName}</h1>
+                <h2>{category?.categoryName}</h2>
               </div>
               <IconWrapper>
                 <button aria-label="Edit Button" title="Edit Project">
                   <MdEdit />
                 </button>
                 <a
-                  href={`${ETHERSCAN_URL}/address/${data.project.projectWalletAddress}`}
+                  href={`${ETHERSCAN_URL}/address/${projectData?.projectWalletAddress}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -51,26 +68,43 @@ const ProjectHeader = () => {
                     <FaEthereum />
                   </button>
                 </a>
-                <button aria-label="Favorite Button" title="Like Project">
+                <button
+                  aria-label="Favorite Button"
+                  title="Like Project"
+                  className={
+                    userLikes
+                      ? 'favorite_btn favorite_btn_liked'
+                      : 'favorite_btn favorite_btn_unliked'
+                  }
+                  onClick={handleFavoriteClick}
+                >
                   <MdFavorite />
+                  <div>{projectData?.noOfLikes}</div>
                 </button>
                 <button aria-label="Report Button" title="Report Project">
                   <MdReport />
                 </button>
-                <button aria-label="Share Button" title="Share Project">
-                  <BsShare />
-                </button>
+                <div className="share_btn">
+                  <button aria-label="Share Button" title="Share Project">
+                    <BsShare />
+                  </button>
+                  <ShareModal
+                    shareUrl={`${APP_URL}/project/${projectData?.projectId}`}
+                  />
+                </div>
               </IconWrapper>
             </HeaderMinContent>
             <HeaderMainContent>
               <ImageWrapper>
-                <Image
-                  src={data.project.bannerImageUrl}
-                  alt={data.project.projectName}
-                  layout="fill"
-                  objectFit="cover"
-                  objectPosition="center"
-                />
+                {projectData?.bannerImageUrl && projectData?.projectName && (
+                  <Image
+                    src={projectData.bannerImageUrl}
+                    alt={projectData.projectName}
+                    layout="fill"
+                    objectFit="cover"
+                    objectPosition="center"
+                  />
+                )}
               </ImageWrapper>
               <FundWrapper>
                 <FundProject {...fundings} />
