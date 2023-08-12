@@ -69,23 +69,46 @@ const FundProject = ({
       </ProgressWrapper>
       <div className="fund-item_container">
         <FundItem>
-          <h3>${data?.project.targetAmount.toLocaleString()}</h3>
+          <h3>
+            {data?.project.targetAmount
+              ? `$
+              ${data?.project.targetAmount.toLocaleString()}`
+              : '--'}
+          </h3>
           <p>{target.title}</p>
         </FundItem>
         <FundItem>
-          <h3>${data?.project.amountRaised.toLocaleString()}</h3>
+          <h3>
+            {data?.project.amountRaised
+              ? `$
+              ${data?.project.amountRaised.toLocaleString()}`
+              : '--'}
+          </h3>
           <p>{raised.title}</p>
         </FundItem>
         <FundItem>
-          <h3>${data?.project.minInvestment.toLocaleString()}</h3>
+          <h3>
+            {data?.project.minInvestment
+              ? `$
+              ${data?.project.minInvestment.toLocaleString()}`
+              : '--'}
+          </h3>
           <p>{investment.title}</p>
         </FundItem>
         <FundItem>
-          <h3>{data?.project.noOfInvestors.toLocaleString()}</h3>
+          <h3>
+            {data?.project.noOfInvestors
+              ? `${data?.project.noOfInvestors.toLocaleString()}`
+              : '--'}
+          </h3>
           <p>{investors.title}</p>
         </FundItem>
         <FundItem>
-          <h3>{data?.project.noOfDaysLeft.toLocaleString()}</h3>
+          <h3>
+            {data?.project.noOfDaysLeft
+              ? `${data?.project.noOfDaysLeft.toLocaleString()}`
+              : '--'}
+          </h3>
           <p>{deadline.title}</p>
         </FundItem>
       </div>

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Skeleton } from '@mui/material';
 import moment from 'moment';
 import {
   ProjectDetailContext,
@@ -142,6 +143,35 @@ const Updates = () => {
         </UpdateFormContainer>
       )}
       <UpdateFeedContainer>
+        {fetchingStatus === 1 && (
+          <React.Fragment>
+            {new Array(3).fill(null).map((item, index) => (
+              <FeedContainer key={index}>
+                <div>
+                  <Skeleton
+                    variant="rounded"
+                    height={30}
+                    width="100%"
+                    animation="wave"
+                    sx={{
+                      background: 'rgb(211 194 194 / 10%)',
+                    }}
+                  />
+                  <Skeleton
+                    variant="rounded"
+                    height={100}
+                    width="100%"
+                    animation="wave"
+                    sx={{
+                      background: 'rgb(211 194 194 / 10%)',
+                      marginTop: '1rem',
+                    }}
+                  />
+                </div>
+              </FeedContainer>
+            ))}
+          </React.Fragment>
+        )}
         {fetchingStatus === 2 && data?.projectUpdates.length === 0 && (
           <FeedContainer>
             <p>Updates are not available!</p>

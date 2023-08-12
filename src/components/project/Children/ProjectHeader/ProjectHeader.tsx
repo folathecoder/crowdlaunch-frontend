@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { Skeleton } from '@mui/material';
 import {
   ProjectDetailContext,
   ProjectDetailContextReturnTypes,
@@ -54,93 +55,101 @@ const ProjectHeader = () => {
     }
   };
 
+  {
+    /* {fetchingStatus === 2 && data && ( */
+  }
   return (
-    <>
-      {fetchingStatus === 2 && data && (
-        <HeaderSection>
-          <HeaderWrapper>
-            <HeaderMinContent>
-              <div>
-                <h1>{projectData?.projectName}</h1>
-                <h2>{category?.categoryName}</h2>
-              </div>
-              <IconWrapper>
-                {isProjectCreator && (
-                  <button aria-label="Edit Button" title="Edit Project">
-                    <MdEdit />
-                  </button>
-                )}
-                <a
-                  href={`${ETHERSCAN_URL}/address/${projectData?.projectWalletAddress}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <button
-                    aria-label="Etherscan Button"
-                    title="Check Project on Etherscan"
-                  >
-                    <FaEthereum />
-                  </button>
-                </a>
-                <button
-                  aria-label="Favorite Button"
-                  title="Like Project"
-                  className={
-                    userLikes
-                      ? 'favorite_btn favorite_btn_liked'
-                      : 'favorite_btn favorite_btn_unliked'
-                  }
-                  onClick={handleFavoriteClick}
-                >
-                  <MdFavorite />
-                  <div>{projectData?.noOfLikes}</div>
-                </button>
-                <button aria-label="Report Button" title="Report Project">
-                  <MdReport />
-                </button>
-                <div className="share_btn">
-                  <button
-                    aria-label="Share Button"
-                    title="Share Project"
-                    onClick={() => setToggleShareModal(!toggleShareModal)}
-                  >
-                    <BsShare />
-                  </button>
-                  {toggleShareModal && (
-                    <ShareModal
-                      shareUrl={`${APP_URL}/project/${projectData?.projectId}`}
-                      setState={setToggleShareModal}
-                    />
-                  )}
-                </div>
-              </IconWrapper>
-            </HeaderMinContent>
-            <HeaderMainContent>
-              <ImageWrapper>
-                {projectData?.bannerImageUrl && projectData?.projectName && (
-                  <Image
-                    src={projectData.bannerImageUrl}
-                    alt={projectData.projectName}
-                    layout="fill"
-                    objectFit="cover"
-                    objectPosition="center"
-                  />
-                )}
-              </ImageWrapper>
-              <FundWrapper>
-                <FundProject {...fundings} />
-                <p>
-                  Investments made on this platform are speculative, involve a
-                  high level of risk, and you may lose all of your investment;
-                  please invest wisely and only as much as you can afford to
-                  lose.
-                </p>
-              </FundWrapper>
-            </HeaderMainContent>
-          </HeaderWrapper>
-        </HeaderSection>
-      )}
-    </>
+    <HeaderSection>
+      <HeaderWrapper>
+        <HeaderMinContent>
+          <div>
+            <h1>{projectData?.projectName}</h1>
+            <h2>{category?.categoryName}</h2>
+          </div>
+          <IconWrapper>
+            {isProjectCreator && (
+              <button aria-label="Edit Button" title="Edit Project">
+                <MdEdit />
+              </button>
+            )}
+            <a
+              href={`${ETHERSCAN_URL}/address/${projectData?.projectWalletAddress}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button
+                aria-label="Etherscan Button"
+                title="Check Project on Etherscan"
+              >
+                <FaEthereum />
+              </button>
+            </a>
+            <button
+              aria-label="Favorite Button"
+              title="Like Project"
+              className={
+                userLikes
+                  ? 'favorite_btn favorite_btn_liked'
+                  : 'favorite_btn favorite_btn_unliked'
+              }
+              onClick={handleFavoriteClick}
+            >
+              <MdFavorite />
+              <div>{projectData?.noOfLikes}</div>
+            </button>
+            <button aria-label="Report Button" title="Report Project">
+              <MdReport />
+            </button>
+            <div className="share_btn">
+              <button
+                aria-label="Share Button"
+                title="Share Project"
+                onClick={() => setToggleShareModal(!toggleShareModal)}
+              >
+                <BsShare />
+              </button>
+              {toggleShareModal && (
+                <ShareModal
+                  shareUrl={`${APP_URL}/project/${projectData?.projectId}`}
+                  setState={setToggleShareModal}
+                />
+              )}
+            </div>
+          </IconWrapper>
+        </HeaderMinContent>
+        <HeaderMainContent>
+          <ImageWrapper>
+            {projectData?.bannerImageUrl && projectData?.projectName ? (
+              <Image
+                src={projectData.bannerImageUrl}
+                alt={projectData.projectName}
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center"
+              />
+            ) : (
+              <Skeleton
+                variant="rounded"
+                height="100%"
+                width="100%"
+                animation="wave"
+                sx={{
+                  background: 'rgb(211 194 194 / 10%)',
+                }}
+              />
+            )}
+          </ImageWrapper>
+          <FundWrapper>
+            <FundProject {...fundings} />
+            <p>
+              Investments made on this platform are speculative, involve a high
+              level of risk, and you may lose all of your investment; please
+              invest wisely and only as much as you can afford to lose.
+            </p>
+          </FundWrapper>
+        </HeaderMainContent>
+      </HeaderWrapper>
+    </HeaderSection>
   );
 };
 
