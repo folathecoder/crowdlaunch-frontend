@@ -34,7 +34,7 @@ const ProfileInfo = () => {
       <div>
         <div>
           <h1>
-            {userName}
+            {userName || 'Anonymous'}
             <span>
               <i className="fa-solid fa-badge-check"></i>
             </span>
