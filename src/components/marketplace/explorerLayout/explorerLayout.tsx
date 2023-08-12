@@ -89,9 +89,9 @@ const ExplorerLayout = () => {
               <NFTSearch />
             </ExploreSearchWrap>
             <ExploreCardsContainer>
-              {NFTData.map((nft) => (
+              {/* {NFTData.map((nft) => (
                 <NFTCard key={nft.id} data={nft} />
-              ))}
+              ))} */}
             </ExploreCardsContainer>
           </ExploreWrap>
         </ExploreMain>

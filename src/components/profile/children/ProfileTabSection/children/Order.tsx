@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import moment from 'moment';
+import {
+  ProfileContext,
+  ProfileReturnTypes,
+} from '@/components/profile/context/ProfileContext';
 import {
   OrderSection,
   OrderTable,
 } from '@/components/profile/children/ProfileTabSection/ProfileTabSectionStyles';
+import useGetProjectById from '@/hooks/RequestHooks/GET/useGetProjectById';
 
+interface ProjectOrderType {
+  projectId: string;
+  amountInvested: number;
+  createdAt: string;
+}
+
+interface NftOrderType {
+  projectId: string;
+  amountInvested: number;
+  createdAt: string;
+}
 const Order = () => {
+  const { user } = useContext(ProfileContext) as ProfileReturnTypes;
+  const { portfolios, ownedNfts } = user || {};
+
   return (
     <OrderSection>
       <div>
@@ -13,17 +33,24 @@ const Order = () => {
           <tr>
             <th>Project</th>
             <th>Amount</th>
-            <th>Status</th>
             <th>Date</th>
           </tr>
-          {[1, 2, 3, 4, 5].map((item) => (
-            <tr key={item}>
-              <td>Neurosynth Robotics</td>
-              <td>$3,329</td>
-              <td>Complete</td>
-              <td>12 July, 2023</td>
+          {portfolios && portfolios?.length > 0 ? (
+            <>
+              {portfolios?.reverse().map((project) => (
+                <ProjectOrder
+                  key={project.projectId}
+                  projectId={project.projectId}
+                  amountInvested={project.amountInvested}
+                  createdAt={project.createdAt}
+                />
+              ))}
+            </>
+          ) : (
+            <tr>
+              <td>No project orders</td>
             </tr>
-          ))}
+          )}
         </OrderTable>
       </div>
       <div>
@@ -32,21 +59,53 @@ const Order = () => {
           <tr>
             <th>NFT Name</th>
             <th>Amount</th>
-            <th>Status</th>
             <th>Date</th>
           </tr>
-          {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-            <tr key={item}>
-              <td>#233 JobCrob</td>
-              <td>0.23 ETH</td>
-              <td>Complete</td>
-              <td>1 July, 2023</td>
+          {ownedNfts && ownedNfts.length > 0 ? (
+            <>
+              {ownedNfts?.map((nft) => (
+                <tr key={nft.nftId}>
+                  <td>#233 JobCrob</td>
+                  <td>0.23 ETH</td>
+                  <td>{moment(nft.createdAt).format('DD MMM, YYYY')}</td>
+                </tr>
+              ))}
+            </>
+          ) : (
+            <tr>
+              <td>No NFT orders</td>
             </tr>
-          ))}
+          )}
         </OrderTable>
       </div>
     </OrderSection>
   );
 };
+
+const ProjectOrder = ({
+  projectId,
+  amountInvested,
+  createdAt,
+}: ProjectOrderType) => {
+  const { project } = useGetProjectById({ projectId });
+
+  return (
+    <tr>
+      <td>{project?.project.projectName}</td>
+      <td>{amountInvested.toLocaleString()}</td>
+      <td>{moment(createdAt).format('DD MMM, YYYY')}</td>
+    </tr>
+  );
+};
+
+// const NFTOrder = ({}: NftOrderType) => {
+//   return (
+//     <tr>
+//       <td>#233 JobCrob</td>
+//       <td>0.23 ETH</td>
+//       <td>{moment(nft.createdAt).format('DD MMM, YYYY')}</td>
+//     </tr>
+//   );
+// };
 
 export default Order;

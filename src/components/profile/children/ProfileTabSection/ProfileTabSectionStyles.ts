@@ -54,6 +54,15 @@ export const PortfolioSection = styled.div`
   margin: var(--center-container);
   padding: 20px 0px 50px 0px;
 
+  .empty_message {
+    width: 100% !important;
+    font-size: 1rem;
+
+    a {
+      color: var(--color-accent-100);
+    }
+  }
+
   .portfolio-header {
     margin-bottom: 20px;
   }
@@ -81,6 +90,15 @@ export const NFTCollectionSection = styled.div`
   max-width: var(--max-container);
   margin: var(--center-container);
   padding: 20px 0px 50px 0px;
+
+  .empty_message {
+    width: 100% !important;
+    font-size: 1rem;
+
+    a {
+      color: var(--color-accent-100);
+    }
+  }
 
   .nft-header {
     margin-bottom: 20px;
@@ -110,8 +128,19 @@ export const WatchlistSection = styled.div`
   margin: var(--center-container);
   padding: 20px 0px 50px 0px;
 
+  .empty_message {
+    width: 100% !important;
+    font-size: 1rem;
+
+    a {
+      color: var(--color-accent-100);
+    }
+  }
+
   .portfolio-header {
     margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-border-100);
+    padding-bottom: 1rem;
   }
 
   .portfolio-cards {
@@ -134,6 +163,8 @@ export const WatchlistSection = styled.div`
 
   .nft-header {
     margin: 40px 0px 20px 0px;
+    border-bottom: 1px solid var(--color-border-100);
+    padding-bottom: 1rem;
   }
 
   .nft-cards {

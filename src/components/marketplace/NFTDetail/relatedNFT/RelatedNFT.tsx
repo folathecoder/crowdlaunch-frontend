@@ -16,9 +16,9 @@ const RelatedNFT = () => {
       </div>
       <div>
         <RelatedCards>
-          {NFTData.slice(0, 3).map((item, index) => (
+          {/* {NFTData.slice(0, 3).map((item, index) => (
             <NFTCard key={index} data={item} />
-          ))}
+          ))} */}
         </RelatedCards>
         <RelatedButton>
           {/* <LinkButton handleClick={() => {}} secondaryStyle>

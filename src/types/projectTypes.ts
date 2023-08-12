@@ -58,3 +58,77 @@ export interface ProjectDetailType {
   projectUpdates: UpdateType[];
   projectDetails: DetailsType;
 }
+
+export interface PortfolioType {
+  portfolioId: string;
+  userId: string;
+  projectId: string;
+  status: number;
+  investmentDate: string;
+  amountInvested: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserProfileType {
+  user: UserType;
+  portfolios: PortfolioType[];
+  listedProjects: ProjectType[];
+  ownedNfts: OwnedNFTsType[];
+  projectWatchlist: ProjectType[];
+  nftWatchlist: OwnedNFTsType[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserType {
+  userId: string;
+  userName: string;
+  walletAddress: string;
+  socials: {
+    websiteUrl: string;
+    twitterUrl: string;
+    telegramUrl: string;
+    discordUrl: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface OwnedNFTsType {
+  userNftId: string;
+  userId: string;
+  nftId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProjectWatchlistType {
+  projectLikeId: string;
+  userId: string;
+  projectId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface NftType {
+  nft: {
+    nftId: string;
+    creatorId: string;
+    nftName: string;
+    nftDescription: string;
+    price: number;
+    noOfLikes: number;
+    ownerId: string;
+    categoryId: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  category: {
+    categoryId: string;
+    categoryName: string;
+    categoryDescription: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+}

@@ -1,65 +1,74 @@
 import React, { useContext } from 'react';
-import Link from 'next/link';
+import moment from 'moment';
 import { ProfileInfoContainer } from '@/components/profile/ProfileStyles';
-import { ProfileContext } from '@/components/profile/context/ProfileContext';
-
 import {
-  BsGlobe,
-  BsTwitter,
-  BsDiscord,
-  BsTelegram,
-  BsShare,
-} from 'react-icons/bs';
+  ProfileContext,
+  ProfileReturnTypes,
+} from '@/components/profile/context/ProfileContext';
+import { shortenWalletAddress } from '@/helpers/formatters';
+import { BsGlobe, BsTwitter, BsDiscord, BsTelegram } from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
 
+type SocialIcons = {
+  websiteUrl: typeof BsGlobe;
+  twitterUrl: typeof BsTwitter;
+  discordUrl: typeof BsDiscord;
+  telegramUrl: typeof BsTelegram;
+};
+
 const ProfileInfo = () => {
-  const { toggleSettings, setToggleSettings } = useContext(ProfileContext);
+  const { setToggleSettings, user } = useContext(
+    ProfileContext
+  ) as ProfileReturnTypes;
+  const { userName, walletAddress, createdAt, socials } = user?.user || {};
+
+  const socialIcons: SocialIcons = {
+    websiteUrl: BsGlobe,
+    twitterUrl: BsTwitter,
+    discordUrl: BsDiscord,
+    telegramUrl: BsTelegram,
+  };
 
   return (
     <ProfileInfoContainer>
       <div>
         <div>
           <h1>
-            Ghost Rider
+            {userName || 'Anonymous'}
             <span>
               <i className="fa-solid fa-badge-check"></i>
             </span>
           </h1>
         </div>
         <div className="info_address">
-          <p>0xFC92a..d8</p>
-          <p>Joined July 2023</p>
+          {walletAddress && <p>{shortenWalletAddress(walletAddress)}</p>}
+          {createdAt && (
+            <p>Joined {moment(createdAt).format('DD MMM, YYYY')}</p>
+          )}
         </div>
       </div>
       <div>
         <ul>
-          <li>
-            <Link href={'/'} target="_blank" title="website">
-              <BsGlobe />
-            </Link>
-          </li>
-          <li>
-            <Link href={'/'} target="_blank" title="twitter">
-              <BsTwitter />
-            </Link>
-          </li>
-          <li>
-            <Link href={'/'} target="_blank" title="discord">
-              <BsDiscord />
-            </Link>
-          </li>
-          <li>
-            <Link href={'/'} target="_blank" title="telegram">
-              <BsTelegram />
-            </Link>
-          </li>
+          {socials &&
+            Object.keys(socialIcons).map((key) => {
+              const SocialIcon = socialIcons[key as keyof SocialIcons];
+              return (
+                socials[key as keyof typeof socials] && (
+                  <li key={key}>
+                    <a
+                      href={socials[key as keyof typeof socials]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={key}
+                    >
+                      <SocialIcon />
+                    </a>
+                  </li>
+                )
+              );
+            })}
           <li onClick={() => setToggleSettings(true)}>
             <FiSettings />
-          </li>
-          <li>
-            <Link href={'/'} target="_blank" title="share profile">
-              <BsShare />
-            </Link>
           </li>
         </ul>
       </div>
