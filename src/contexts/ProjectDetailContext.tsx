@@ -13,6 +13,8 @@ export interface ProjectDetailContextReturnTypes {
   isProjectCreator: boolean;
   refetch: () => void;
   projectId: string;
+  updateCount: number;
+  setUpdateCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 interface PropTypes {
@@ -37,6 +39,7 @@ const ProjectDetailProvider = ({
   });
 
   const [isProjectCreator, setIsProjectCreator] = useState(false);
+  const [updateCount, setUpdateCount] = useState(0);
 
   useEffect(() => {
     setIsProjectCreator(
@@ -58,6 +61,8 @@ const ProjectDetailProvider = ({
         isProjectCreator,
         refetch,
         projectId,
+        updateCount,
+        setUpdateCount,
       }}
     >
       {children}

@@ -34,16 +34,23 @@ const ProjectHeader = () => {
 
   const { project: projectData, category } = data || {};
 
-  const { handleLikeProject, userLikes, handleUnLikeProject, likeStatus } =
-    usePostLikeProject({
-      projectId: projectData?.projectId,
-    });
+  const {
+    handleLikeProject,
+    userLikes,
+    handleUnLikeProject,
+    likeStatus,
+    handleUserLike,
+  } = usePostLikeProject({
+    projectId: projectData?.projectId,
+  });
 
   const handleFavoriteClick = () => {
     if (userLikes) {
       handleUnLikeProject();
+      handleUserLike();
     } else {
       handleLikeProject();
+      handleUserLike();
     }
   };
 

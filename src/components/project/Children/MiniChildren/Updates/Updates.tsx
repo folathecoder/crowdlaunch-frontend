@@ -14,8 +14,12 @@ import {
 import usePostProjectUpdate from '@/hooks/RequestHooks/POST/usePostProjectUpdate';
 import { ProjectUpdateType } from '@/types/projectTypes';
 import useGetProjectById from '@/hooks/RequestHooks/GET/useGetProjectById';
+import { Notification } from '@/components/global';
 
 const Updates = () => {
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
+
   // Handle and abstract project update logic
   const {
     submitProjectUpdate,
@@ -24,7 +28,7 @@ const Updates = () => {
     deleteStatus,
   } = usePostProjectUpdate();
 
-  const { projectId, isProjectCreator } = useContext(
+  const { projectId, isProjectCreator, setUpdateCount } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
 
@@ -63,7 +67,19 @@ const Updates = () => {
   // Clear the update form field after submission
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const { projectId, updateTitle, updateMessage } = projectUpdate;
+
+    // Check for empty fields
+    if (!projectId || !updateTitle.trim() || !updateMessage.trim()) {
+      setNotificationMessage('All fields are required');
+      setShowNotification(true);
+      return;
+    }
+
     submitProjectUpdate(projectUpdate);
+
+    // Reset the title and message after successful submission
     setProjectUpdate((prevUpdate) => ({
       ...prevUpdate,
       updateTitle: '',
@@ -75,6 +91,8 @@ const Updates = () => {
   useEffect(() => {
     if (updateStatus === 2) {
       refetch();
+      setShowNotification(true);
+      setNotificationMessage('Update has been added');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateStatus]);
@@ -83,9 +101,18 @@ const Updates = () => {
   useEffect(() => {
     if (deleteStatus === 2) {
       refetch();
+      setShowNotification(true);
+      setNotificationMessage('Update has been deleted');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deleteStatus]);
+
+  useEffect(() => {
+    if (data?.projectUpdates) {
+      setUpdateCount(data.projectUpdates.length);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.projectUpdates]);
 
   return (
     <UpdateSection>
@@ -144,6 +171,11 @@ const Updates = () => {
             </FeedContainer>
           ))}
       </UpdateFeedContainer>
+      <Notification
+        message={notificationMessage}
+        setState={setShowNotification}
+        state={showNotification}
+      />
     </UpdateSection>
   );
 };
