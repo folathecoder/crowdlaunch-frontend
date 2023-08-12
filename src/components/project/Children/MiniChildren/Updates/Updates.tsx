@@ -13,35 +13,39 @@ import {
 } from './UpdatesStyles';
 
 const Updates = () => {
-  const { project: data, fetchingStatus } = useContext(
-    ProjectDetailContext
-  ) as ProjectDetailContextReturnTypes;
+  const {
+    project: data,
+    fetchingStatus,
+    isProjectCreator,
+  } = useContext(ProjectDetailContext) as ProjectDetailContextReturnTypes;
 
   const { register, handleSubmit } = useForm();
 
   return (
     <UpdateSection>
-      <UpdateFormContainer>
-        <h2>Share Latest Update</h2>
-        <form onSubmit={() => {}}>
-          <div>
-            <input
-              id="title"
-              {...register('message')}
-              placeholder="Update Title"
-            />
-            <textarea
-              id="message"
-              {...register('message')}
-              className="custom-textarea"
-              placeholder="Update Message"
-            />
-          </div>
-          <button type="submit" className="update-button">
-            Share Update
-          </button>
-        </form>
-      </UpdateFormContainer>
+      {isProjectCreator && (
+        <UpdateFormContainer>
+          <h2>Share Latest Update</h2>
+          <form onSubmit={() => {}}>
+            <div>
+              <input
+                id="title"
+                {...register('message')}
+                placeholder="Update Title"
+              />
+              <textarea
+                id="message"
+                {...register('message')}
+                className="custom-textarea"
+                placeholder="Update Message"
+              />
+            </div>
+            <button type="submit" className="update-button">
+              Share Update
+            </button>
+          </form>
+        </UpdateFormContainer>
+      )}
       <UpdateFeedContainer>
         {fetchingStatus === 2 && data?.projectUpdates.length === 0 && (
           <FeedContainer>

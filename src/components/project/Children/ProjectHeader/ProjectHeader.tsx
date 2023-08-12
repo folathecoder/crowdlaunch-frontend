@@ -26,9 +26,11 @@ import { APP_URL } from '@/data/appInfo';
 const ProjectHeader = () => {
   const [toggleShareModal, setToggleShareModal] = useState(false);
 
-  const { project: data, fetchingStatus } = useContext(
-    ProjectDetailContext
-  ) as ProjectDetailContextReturnTypes;
+  const {
+    project: data,
+    fetchingStatus,
+    isProjectCreator,
+  } = useContext(ProjectDetailContext) as ProjectDetailContextReturnTypes;
 
   const { project: projectData, category } = data || {};
 
@@ -56,9 +58,11 @@ const ProjectHeader = () => {
                 <h2>{category?.categoryName}</h2>
               </div>
               <IconWrapper>
-                <button aria-label="Edit Button" title="Edit Project">
-                  <MdEdit />
-                </button>
+                {isProjectCreator && (
+                  <button aria-label="Edit Button" title="Edit Project">
+                    <MdEdit />
+                  </button>
+                )}
                 <a
                   href={`${ETHERSCAN_URL}/address/${projectData?.projectWalletAddress}`}
                   target="_blank"
