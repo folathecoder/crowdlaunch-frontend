@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Link from 'next/link';
 import {
   ProfileContext,
   ProfileReturnTypes,
@@ -12,14 +13,21 @@ const ListedProjects = () => {
 
   return (
     <PortfolioSection>
-      <div className="portfolio-cards">
-        {listedProjects?.map((portfolio) => (
-          <PortfolioCard
-            key={portfolio.projectId}
-            projectId={portfolio.projectId}
-          />
-        ))}
-      </div>
+      {listedProjects && listedProjects.length > 0 ? (
+        <div className="portfolio-cards">
+          {listedProjects?.map((portfolio) => (
+            <PortfolioCard
+              key={portfolio.projectId}
+              projectId={portfolio.projectId}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="empty_message">
+          You do not have listed projects,{' '}
+          <Link href="/create-project">create a project.</Link>
+        </p>
+      )}
     </PortfolioSection>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Link from 'next/link';
 import {
   ProfileContext,
   ProfileReturnTypes,
@@ -13,9 +14,17 @@ const NFTCollection = () => {
   return (
     <NFTCollectionSection>
       <div className="nft-cards">
-        {ownedNfts?.map((nft) => (
-          <NFTCard key={nft.nftId} nftId={nft.nftId} />
-        ))}
+        {ownedNfts && ownedNfts.length > 0 ? (
+          <>
+            {ownedNfts?.map((nft) => (
+              <NFTCard key={nft.nftId} nftId={nft.nftId} />
+            ))}
+          </>
+        ) : (
+          <p className="empty_message">
+            You do not own NFTs, <Link href="/marketplace">explore NFTs.</Link>
+          </p>
+        )}
       </div>
     </NFTCollectionSection>
   );

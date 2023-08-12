@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Link from 'next/link';
 import {
   ProfileContext,
   ProfileReturnTypes,
@@ -23,25 +24,40 @@ const Watchlist = () => {
             : 'project'}
         </p>
       </div>
-      <div className="portfolio-cards">
-        {projectWatchlist?.map((project) => (
-          <PortfolioCard
-            key={project.projectId}
-            projectId={project.projectId}
-          />
-        ))}
-      </div>
+      {projectWatchlist && projectWatchlist.length > 0 ? (
+        <div className="portfolio-cards">
+          {projectWatchlist?.map((project) => (
+            <PortfolioCard
+              key={project.projectId}
+              projectId={project.projectId}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="empty_message">
+          Your project watchlist is empty,{' '}
+          <Link href="/explore">explore projects.</Link>{' '}
+        </p>
+      )}
+
       <div className="nft-header">
         <p>
           NFT Watchlist: {nftWatchlist?.length}{' '}
           {nftWatchlist && nftWatchlist?.length > 1 ? 'NFTs' : 'NFT'}
         </p>
       </div>
-      <div className="nft-cards">
-        {nftWatchlist?.map((nft) => (
-          <NFTCard key={nft.nftId} nftId={nft.nftId} />
-        ))}
-      </div>
+      {nftWatchlist && nftWatchlist?.length > 0 ? (
+        <div className="nft-cards">
+          {nftWatchlist?.map((nft) => (
+            <NFTCard key={nft.nftId} nftId={nft.nftId} />
+          ))}
+        </div>
+      ) : (
+        <p className="empty_message">
+          Your NFT watchlist is empty,{' '}
+          <Link href="/marketplace">explore NFT marketplace.</Link>
+        </p>
+      )}
     </WatchlistSection>
   );
 };
