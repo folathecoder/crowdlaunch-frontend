@@ -11,6 +11,8 @@ export interface ProjectDetailContextReturnTypes {
   fetchingStatus: FetchingStatus;
   error: string | null;
   isProjectCreator: boolean;
+  refetch: () => void;
+  projectId: string;
 }
 
 interface PropTypes {
@@ -30,7 +32,7 @@ const ProjectDetailProvider = ({
   const { user } = useGetUserByAddress({
     jwtToken: userData?.token,
   });
-  const { project, fetchingStatus, error } = useGetProjectById({
+  const { project, fetchingStatus, error, refetch } = useGetProjectById({
     projectId: projectId,
   });
 
@@ -49,7 +51,14 @@ const ProjectDetailProvider = ({
 
   return (
     <ProjectDetailContext.Provider
-      value={{ project, fetchingStatus, error, isProjectCreator }}
+      value={{
+        project,
+        fetchingStatus,
+        error,
+        isProjectCreator,
+        refetch,
+        projectId,
+      }}
     >
       {children}
     </ProjectDetailContext.Provider>
