@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   ProjectDetailContext,
   ProjectDetailContextReturnTypes,
@@ -24,9 +24,12 @@ import { ShareModal } from '@/components/global';
 import { APP_URL } from '@/data/appInfo';
 
 const ProjectHeader = () => {
+  const [toggleShareModal, setToggleShareModal] = useState(false);
+
   const { project: data, fetchingStatus } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
+
   const { project: projectData, category } = data || {};
 
   const { handleLikeProject, userLikes, handleUnLikeProject, likeStatus } =
@@ -85,12 +88,19 @@ const ProjectHeader = () => {
                   <MdReport />
                 </button>
                 <div className="share_btn">
-                  <button aria-label="Share Button" title="Share Project">
+                  <button
+                    aria-label="Share Button"
+                    title="Share Project"
+                    onClick={() => setToggleShareModal(!toggleShareModal)}
+                  >
                     <BsShare />
                   </button>
-                  <ShareModal
-                    shareUrl={`${APP_URL}/project/${projectData?.projectId}`}
-                  />
+                  {toggleShareModal && (
+                    <ShareModal
+                      shareUrl={`${APP_URL}/project/${projectData?.projectId}`}
+                      setState={setToggleShareModal}
+                    />
+                  )}
                 </div>
               </IconWrapper>
             </HeaderMinContent>

@@ -14,9 +14,11 @@ import {
   FaLinkedinIn,
   FaLink,
 } from 'react-icons/fa';
+import { ClickAwayListener } from '@mui/material';
 
 interface ShareModalTypes {
   shareUrl: string;
+  setState: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const shareLinks = [
@@ -46,7 +48,7 @@ const shareLinks = [
   },
 ];
 
-const ShareModal = ({ shareUrl }: ShareModalTypes) => {
+const ShareModal = ({ shareUrl, setState }: ShareModalTypes) => {
   const clipboard = useClipboard();
   const [copied, setCopied] = useState(false);
 
@@ -64,28 +66,30 @@ const ShareModal = ({ shareUrl }: ShareModalTypes) => {
   }, [copied]);
 
   return (
-    <ShareModalContainer>
-      {shareLinks.map((link) => (
-        <ShareItem key={link.id}>
-          <link.shareButton url={shareUrl}>
-            <div className="share_item">
-              <div>{link.icon}</div>
-              <div>
-                <p>{link.title}</p>
+    <ClickAwayListener onClickAway={() => setState(false)}>
+      <ShareModalContainer>
+        {shareLinks.map((link) => (
+          <ShareItem key={link.id}>
+            <link.shareButton url={shareUrl}>
+              <div className="share_item">
+                <div>{link.icon}</div>
+                <div>
+                  <p>{link.title}</p>
+                </div>
               </div>
-            </div>
-          </link.shareButton>
-        </ShareItem>
-      ))}
-      <CopyItem onClick={handleCopyClick}>
-        <div>
-          <FaLink />
-        </div>
-        <div>
-          <p>{copied ? 'Copied!' : 'Copy Link'}</p>
-        </div>
-      </CopyItem>
-    </ShareModalContainer>
+            </link.shareButton>
+          </ShareItem>
+        ))}
+        <CopyItem onClick={handleCopyClick}>
+          <div>
+            <FaLink />
+          </div>
+          <div>
+            <p>{copied ? 'Copied!' : 'Copy Link'}</p>
+          </div>
+        </CopyItem>
+      </ShareModalContainer>
+    </ClickAwayListener>
   );
 };
 
