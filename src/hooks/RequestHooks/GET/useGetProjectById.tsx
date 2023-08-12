@@ -7,6 +7,7 @@ interface ProjectReturnType {
   project: ProjectDetailType | null;
   fetchingStatus: FetchingStatus;
   error: string | null;
+  refetch: () => void;
 }
 
 interface PropsType {
@@ -20,7 +21,7 @@ const useGetProjectById = ({ projectId }: PropsType): ProjectReturnType => {
     FetchingStatus.Default
   );
 
-  useEffect(() => {
+  const fetchProject = () => {
     setFetchingStatus(FetchingStatus.Loading);
 
     axios
@@ -41,9 +42,18 @@ const useGetProjectById = ({ projectId }: PropsType): ProjectReturnType => {
         setError(error.message);
         setFetchingStatus(FetchingStatus.Error);
       });
+  };
+
+  const refetch = () => {
+    fetchProject();
+  };
+
+  useEffect(() => {
+    fetchProject();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId]);
 
-  return { project, fetchingStatus, error };
+  return { project, fetchingStatus, error, refetch };
 };
 
 export default useGetProjectById;

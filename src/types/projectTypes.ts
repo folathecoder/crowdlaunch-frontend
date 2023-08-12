@@ -140,3 +140,9 @@ export interface LikedProjectType {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ProjectUpdateType {
+  projectId: string;
+  updateTitle: string;
+  updateMessage: string;
+}

@@ -37,7 +37,7 @@ const internalLinkData: InternalDataTypes[] = [
 ];
 
 const MainProject: React.FC = () => {
-  const { project } = useContext(
+  const { project, updateCount } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
 
@@ -68,7 +68,11 @@ const MainProject: React.FC = () => {
                   >
                     <p>{data.link}</p>
                     {data.value && (
-                      <span>{project?.projectUpdates.length}</span>
+                      <span>
+                        {updateCount === 0
+                          ? project?.projectUpdates.length
+                          : updateCount}
+                      </span>
                     )}
                   </ActiveTab>
                 );

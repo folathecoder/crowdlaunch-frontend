@@ -7,6 +7,7 @@ import ColorButton from '@/components/global/button/colorButton';
 import RichTextEditor from '@/components/global/form/RichTextEditor/RichTextEditor';
 import NFTImageTemplate from '@/components/global/nft/NFTImageTemplate';
 import ShareModal from '@/components/global/shareModal/shareModal';
+import Notification from '@/components/global/notification/notification';
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   RichTextEditor,
   NFTImageTemplate,
   ShareModal,
+  Notification,
 };

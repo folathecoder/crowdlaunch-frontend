@@ -16,6 +16,7 @@ interface ProjectLikeReturnType {
   likeStatusError: string | null;
   handleUnLikeProject: () => void;
   userLikes: boolean;
+  handleUserLike: () => void;
 }
 
 interface PropType {
@@ -108,7 +109,7 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
     }
   };
 
-  useEffect(() => {
+  const handleUserLike = async () => {
     setUserLikes(false);
     setCheckLikeStatus(FetchingStatus.Loading);
 
@@ -134,6 +135,11 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
           setUserLikes(false);
         });
     }
+  };
+
+  useEffect(() => {
+    handleUserLike();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     projectId,
     token,
@@ -152,6 +158,7 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
     checkLikeStatus,
     likeStatusError,
     userLikes,
+    handleUserLike,
   };
 };
 

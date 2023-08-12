@@ -115,6 +115,22 @@ export const FeedContainer = styled.div`
     text-decoration-skip-ink: none;
     text-underline-offset: 10px;
     margin-bottom: 1rem;
+
+    button {
+      border-radius: 100%;
+      height: 2rem;
+      width: 2rem;
+      border: 0.05rem solid var(--color-accent-100);
+      background: transparent;
+      color: var(--color-accent-100);
+      margin-left: 1rem;
+      transform: translateY(0.4rem);
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
   }
 
   .update-date {
