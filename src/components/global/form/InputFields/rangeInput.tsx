@@ -11,8 +11,11 @@ interface FilterType {
 
 interface PropType {
   query: string;
-  filter: ExploreFilterType;
-  setFilter: React.Dispatch<React.SetStateAction<ExploreFilterType>>;
+  // filter: ExploreFilterType;
+  // setFilter: React.Dispatch<React.SetStateAction<ExploreFilterType>>;
+
+  filter: any;
+  setFilter: any;
 }
 
 export const Container = styled.div`
