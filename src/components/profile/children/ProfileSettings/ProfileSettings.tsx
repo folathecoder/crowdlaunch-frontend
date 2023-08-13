@@ -15,19 +15,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { setToggleSettings } from '@/redux/slices/profileSettingSlice';
 import { Button } from '@/components/global';
-
-interface UserUpdateType {
-  userName: string;
-  socials: {
-    websiteUrl: string;
-    twitterUrl: string;
-    telegramUrl: string;
-    discordUrl: string;
-  };
-  updatedAt: string;
-}
+import useGetUserByAddress from '@/hooks/RequestHooks/GET/useGetUserByAddress';
+import usePostAuth from '@/hooks/RequestHooks/POST/usePostAuth';
+import usePatchUser from '@/hooks/RequestHooks/PATCH/usePatchUser';
+import { Notification } from '@/components/global';
+import { UserUpdateType } from '@/types/projectTypes';
 
 const ProfileSettings = () => {
+  const [showNotification, setShowNotification] = useState(false);
+
   const dispatch = useDispatch();
   const profileSettings = useSelector(
     (state: RootState) => state.profileSettings.toggleSettings
@@ -45,6 +41,17 @@ const ProfileSettings = () => {
     }
   }, []);
 
+  // Get the current profile data and render it as the initial state of the form
+  const { userData } = usePostAuth();
+  const { user, fetchingStatus: userFetched } = useGetUserByAddress({
+    jwtToken: userData?.token,
+  });
+
+  // Update the user profile with the new form data
+  const { updateUserData, fetchingStatus: userUpdated } = usePatchUser({
+    jwtToken: userData?.token,
+  });
+
   const [formData, setFormData] = useState<UserUpdateType>({
     userName: '',
     socials: {
@@ -55,6 +62,22 @@ const ProfileSettings = () => {
     },
     updatedAt: new Date().toISOString(),
   });
+
+  // Update formData state when the current profile data is fetched successfully
+  useEffect(() => {
+    if (userFetched === 2 && user) {
+      setFormData({
+        userName: user?.user.userName,
+        socials: {
+          websiteUrl: user?.user.socials.websiteUrl,
+          twitterUrl: user?.user.socials.twitterUrl,
+          telegramUrl: user?.user.socials.telegramUrl,
+          discordUrl: user?.user.socials.discordUrl,
+        },
+        updatedAt: new Date().toISOString(),
+      });
+    }
+  }, [userFetched, user]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -74,10 +97,12 @@ const ProfileSettings = () => {
     }
   };
 
-  const handleUpdateProfile = () => {
-    // Do something with the updated formData
-    console.log(formData);
-  };
+  // Show notification after profile has been updated successfully
+  useEffect(() => {
+    if (userUpdated === 2) {
+      setShowNotification(true);
+    }
+  }, [userUpdated]);
 
   return (
     <>
@@ -171,9 +196,14 @@ const ProfileSettings = () => {
               <Button
                 buttonTitle="Update Profile"
                 buttonType="action"
-                buttonFunction={handleUpdateProfile}
+                buttonFunction={() => updateUserData(formData)}
               />
             </ButtonContainer>
+            <Notification
+              message="Your profile has been updated successfully, please reload your profile page to apply changes!"
+              setState={setShowNotification}
+              state={showNotification}
+            />
           </SettingContainer>
         </AnimatePresence>
       </ClickAwayListener>
