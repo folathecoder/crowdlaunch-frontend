@@ -85,5 +85,5 @@ export const FormSection = styled.div`
 export const ButtonContainer = styled(motion.section)`
   margin-top: 1rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 `;

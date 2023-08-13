@@ -14,11 +14,10 @@ import { FiEdit } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { setToggleSettings } from '@/redux/slices/profileSettingSlice';
-import { Button } from '@/components/global';
 import useGetUserByAddress from '@/hooks/RequestHooks/GET/useGetUserByAddress';
 import usePostAuth from '@/hooks/RequestHooks/POST/usePostAuth';
 import usePatchUser from '@/hooks/RequestHooks/PATCH/usePatchUser';
-import { Notification } from '@/components/global';
+import { Notification, Loader, Button } from '@/components/global';
 import { UserUpdateType } from '@/types/projectTypes';
 
 const ProfileSettings = () => {
@@ -193,11 +192,14 @@ const ProfileSettings = () => {
               </FormSection>
             </Form>
             <ButtonContainer>
-              <Button
-                buttonTitle="Update Profile"
-                buttonType="action"
-                buttonFunction={() => updateUserData(formData)}
-              />
+              <div>{userUpdated === 1 && <Loader />}</div>
+              <div>
+                <Button
+                  buttonTitle="Update Profile"
+                  buttonType="action"
+                  buttonFunction={() => updateUserData(formData)}
+                />
+              </div>
             </ButtonContainer>
             <Notification
               message="Your profile has been updated successfully, please reload your profile page to apply changes!"
