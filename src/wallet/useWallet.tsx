@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAccount, useDisconnect, useBalance } from 'wagmi';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '@/redux/store';
+import { RootState } from '@/redux/store';
 import {
   setActiveWallet,
   clearActiveWallet,

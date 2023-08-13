@@ -146,3 +146,14 @@ export interface ProjectUpdateType {
   updateTitle: string;
   updateMessage: string;
 }
+
+export interface UserUpdateType {
+  userName: string;
+  socials: {
+    websiteUrl: string;
+    twitterUrl: string;
+    telegramUrl: string;
+    discordUrl: string;
+  };
+  updatedAt: string;
+}

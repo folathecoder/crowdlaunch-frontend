@@ -14,11 +14,11 @@ import { NFTCard, NFTSearch } from '@/components/marketplace';
 import { ProjectCard, ExploreSearch } from '@/components/explore';
 import { ColorButton } from '@/components/global';
 import { projectStatus } from '@/data/explore/exploreFilters';
-import ExploreFilter from '@/components/explore/exploreFilter/exploreFilter';
+import ExploreFilter from '@/components/marketplace/children/exploreFilter/exploreFilter';
 import { GoFilter } from 'react-icons/go';
 import { useBreakPointDown } from '@/hooks/useBreakPoint';
 import HoldersSection from '@/components/marketplace/children/HoldersSection/holdersSection';
-import { NFTData, nftStatus } from '@/data/marketplace/marketplaceData';
+import { nftStatus } from '@/data/marketplace/marketplaceData';
 
 const ExplorerLayout = () => {
   const [filterToggle, setFilterToggle] = useState(false);
@@ -78,10 +78,7 @@ const ExplorerLayout = () => {
                   </div>
                 )}
               </ExploreOptions>
-              <ExploreFilter
-                filterToggle={filterToggle}
-                setFilterToggle={setFilterToggle}
-              />
+              <ExploreFilter filterToggle={filterToggle} />
             </div>
           </ExploreFilterContainer>
           <ExploreWrap>
