@@ -8,17 +8,29 @@ import {
 import { filterToggleVariant } from '@/styles/animation/filterToggleVariant';
 import { useBreakPointDown } from '@/hooks/useBreakPoint';
 import { AnimatePresence } from 'framer-motion';
+import { FaChevronDown } from 'react-icons/fa';
+import RangeInput from '@/components/global/form/InputFields/rangeInput';
+import SelectTags from '@/components/global/form/InputFields/selectTags';
+import useGetCategories from '@/hooks/RequestHooks/GET/useGetCategories';
 
 interface ExploreFilterTypes {
   filterToggle: boolean;
-  setFilterToggle: (value: boolean) => void;
 }
 
-const ExploreFilter = ({
-  filterToggle,
-  setFilterToggle,
-}: ExploreFilterTypes) => {
-  const [activeFilter, setActiveFilter] = useState(0);
+const filters = [
+  { id: 1, title: 'Minimum Investment', inputType: 'field' },
+  { id: 2, title: 'Amount Raised', inputType: 'field' },
+  { id: 3, title: 'Target Amount', inputType: 'field' },
+  { id: 4, title: 'Category', inputType: 'select' },
+  { id: 5, title: 'Number of Investors', inputType: 'field' },
+  { id: 6, title: 'Investment Days Left', inputType: 'field' },
+  { id: 7, title: 'Number of Likes', inputType: 'field' },
+];
+
+const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
+  const { categories } = useGetCategories();
+  const [toggleFilter, setToggleFilter] = useState<number | null>(null);
+
   const { breakPoint: switchToggleMode } = useBreakPointDown({
     breakMark: 798,
   });
@@ -31,15 +43,41 @@ const ExploreFilter = ({
         animate={filterToggle ? 'show' : 'hidden'}
         exit="exit"
       >
-        {[1, 2, 3, 4, 5].map((item) => (
-          <FilterItem key={item} removeBorder={item === 5}>
-            <FilterItemShow>{/* <p>Filter by Category</p> */}</FilterItemShow>
-            {/* <FilterItemHidden>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Praesentium sunt repellat ut facere ab. Nisi ullam expedita
-              corporis nam quisquam dolores necessitatibus. Aliquid iste debitis
-              aspernatur laboriosam libero cupiditate eaque.
-            </FilterItemHidden> */}
+        {filters.map((filter, index) => (
+          <FilterItem
+            key={filter.id}
+            removeBorder={index === filters.length - 1}
+          >
+            <FilterItemShow
+              onClick={() =>
+                setToggleFilter(filter.id !== toggleFilter ? filter.id : null)
+              }
+            >
+              <div>
+                <p>{filter.title}</p>
+              </div>
+              <div>
+                <button
+                  className={
+                    toggleFilter === filter.id ? 'rotate_start' : 'rotate_end'
+                  }
+                >
+                  <FaChevronDown />
+                </button>
+              </div>
+            </FilterItemShow>
+            <FilterItemHidden
+              variants={filterToggleVariant(true)}
+              initial="hidden"
+              animate={toggleFilter === filter.id ? 'show' : 'hidden'}
+            >
+              {filter.inputType === 'field' && (
+                <RangeInput query={filter.title} />
+              )}
+              {filter.inputType === 'select' && (
+                <SelectTags data={categories || []} />
+              )}
+            </FilterItemHidden>
           </FilterItem>
         ))}
       </FilterContainer>

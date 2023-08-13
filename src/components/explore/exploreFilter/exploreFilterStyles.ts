@@ -9,6 +9,7 @@ export const FilterContainer = styled(motion.div)`
   position: sticky;
   top: 130px;
   overflow: hidden;
+  width: 280px;
 `;
 
 export const FilterItem = styled.div<{ removeBorder?: boolean }>`
@@ -24,19 +25,35 @@ export const FilterItem = styled.div<{ removeBorder?: boolean }>`
 `;
 
 export const FilterItemShow = styled.div`
-  /* background-color: red; */
   min-height: 50px;
   width: 100%;
   display: flex;
   align-items: center;
   padding: 0px 15px;
+  justify-content: space-between;
+  color: var(--color-bg-400);
+  cursor: pointer;
+
+  button {
+    display: grid;
+    place-items: center;
+    border: none;
+    background-color: transparent;
+    color: var(--color-bg-400);
+  }
+
+  .rotate_start {
+    transform: rotate(180deg);
+  }
+
+  .rotate_end {
+    transform: rotate(0deg);
+  }
 `;
 
-export const FilterItemHidden = styled.div`
-  background-color: blue;
-  min-height: 50px;
-  width: 250px;
+export const FilterItemHidden = styled(motion.div)`
+  width: 100%;
   display: flex;
   align-items: center;
-  padding: 5px;
+  overflow: hidden;
 `;
