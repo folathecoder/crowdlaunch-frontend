@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import {
+  ExploreContext,
+  ExploreContextReturnTypes,
+} from '@/contexts/ExploreContext';
 import {
   FilterContainer,
   FilterItem,
   FilterItemShow,
   FilterItemHidden,
+  FilterMenu,
 } from './exploreFilterStyles';
 import { filterToggleVariant } from '@/styles/animation/filterToggleVariant';
 import { useBreakPointDown } from '@/hooks/useBreakPoint';
@@ -18,16 +23,35 @@ interface ExploreFilterTypes {
 }
 
 const filters = [
-  { id: 1, title: 'Minimum Investment', inputType: 'field' },
-  { id: 2, title: 'Amount Raised', inputType: 'field' },
-  { id: 3, title: 'Target Amount', inputType: 'field' },
-  { id: 4, title: 'Category', inputType: 'select' },
-  { id: 5, title: 'Number of Investors', inputType: 'field' },
-  { id: 6, title: 'Investment Days Left', inputType: 'field' },
-  { id: 7, title: 'Number of Likes', inputType: 'field' },
+  {
+    id: 1,
+    title: 'Minimum Investment',
+    inputType: 'field',
+    query: 'minInvestment',
+  },
+  { id: 2, title: 'Amount Raised', inputType: 'field', query: 'amountRaised' },
+  { id: 3, title: 'Target Amount', inputType: 'field', query: 'targetAmount' },
+  { id: 4, title: 'Category', inputType: 'select', query: 'categoryId' },
+  {
+    id: 5,
+    title: 'Number of Investors',
+    inputType: 'field',
+    query: 'noOfInvestors',
+  },
+  {
+    id: 6,
+    title: 'Investment Days Left',
+    inputType: 'field',
+    query: 'noOfDaysLeft',
+  },
+  { id: 7, title: 'Number of Likes', inputType: 'field', query: 'noOfLikes' },
 ];
 
 const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
+  const { exploreFilter, setExploreFilter } = useContext(
+    ExploreContext
+  ) as ExploreContextReturnTypes;
+
   const { categories } = useGetCategories();
   const [toggleFilter, setToggleFilter] = useState<number | null>(null);
 
@@ -43,10 +67,14 @@ const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
         animate={filterToggle ? 'show' : 'hidden'}
         exit="exit"
       >
-        {filters.map((filter, index) => (
+        <FilterMenu>
+          <button className="apply_btn_active">Apply Filter</button>
+          <button className="clear_btn">Clear Filter</button>
+        </FilterMenu>
+        {filters.map((filter) => (
           <FilterItem
             key={filter.id}
-            removeBorder={index === filters.length - 1}
+            removeBorder={filter.id === filters.length }
           >
             <FilterItemShow
               onClick={() =>
@@ -72,7 +100,11 @@ const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
               animate={toggleFilter === filter.id ? 'show' : 'hidden'}
             >
               {filter.inputType === 'field' && (
-                <RangeInput query={filter.title} />
+                <RangeInput
+                  query={filter.title}
+                  setFilter={setExploreFilter}
+                  filter={exploreFilter}
+                />
               )}
               {filter.inputType === 'select' && (
                 <SelectTags data={categories || []} />

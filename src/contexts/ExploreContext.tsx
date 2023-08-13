@@ -1,37 +1,54 @@
-import React, { ReactElement, ReactNode, useState } from 'react';
+import React, { ReactElement, ReactNode, useState, useEffect } from 'react';
 import { FetchingStatus } from '@/types/fetchingTypes';
 import useGetProjects from '@/hooks/RequestHooks/GET/useGetProjects';
 import { ProjectType } from '@/types/projectTypes';
+import { ExploreFilterType, initialExploreFilter } from '@/types/exploreTypes';
 
 export interface ExploreContextReturnTypes {
   filteredProjects: ProjectType[] | null;
   fetchingStatus: FetchingStatus;
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  exploreFilter: ExploreFilterType;
+  setExploreFilter: React.Dispatch<React.SetStateAction<ExploreFilterType>>;
 }
 
 interface PropTypes {
   children: ReactNode;
 }
 
-// Create ExploreContext with initial value set to null
 export const ExploreContext =
   React.createContext<ExploreContextReturnTypes | null>(null);
 
 const ExploreProvider = ({ children }: PropTypes): ReactElement => {
   const { projects, fetchingStatus } = useGetProjects();
+
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Function to sort projects by name
+  // Initialize exploreFilter state from localStorage or use initialExploreFilter
+  const [exploreFilter, setExploreFilter] = useState<ExploreFilterType>(() => {
+    try {
+      const storedValue = localStorage.getItem('exploreFilter');
+      return storedValue ? JSON.parse(storedValue) : initialExploreFilter;
+    } catch {
+      return initialExploreFilter;
+    }
+  });
+
   const sortProjectsByName = (projects: ProjectType[]): ProjectType[] | [] => {
     return projects.sort((a, b) => a.projectName.localeCompare(b.projectName));
   };
 
-  // Compute filtered projects based on search term
   const filteredProjects = sortProjectsByName(projects || []).filter(
     (project) =>
       project.projectName.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  useEffect(() => {
+    if (exploreFilter) {
+      localStorage.setItem('exploreFilter', JSON.stringify(exploreFilter));
+    }
+  }, [exploreFilter]);
 
   return (
     <ExploreContext.Provider
@@ -40,6 +57,8 @@ const ExploreProvider = ({ children }: PropTypes): ReactElement => {
         fetchingStatus,
         searchTerm,
         setSearchTerm,
+        exploreFilter,
+        setExploreFilter,
       }}
     >
       {children}

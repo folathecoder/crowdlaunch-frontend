@@ -57,3 +57,37 @@ export const FilterItemHidden = styled(motion.div)`
   align-items: center;
   overflow: hidden;
 `;
+
+export const FilterMenu = styled(motion.div)`
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border-100);
+  padding: 0px 15px;
+  gap: 0.5rem;
+
+  button {
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border-100);
+    background: transparent;
+    color: var(--color-font-100);
+    font-size: 1rem;
+    display: grid;
+    place-items: center;
+    font-weight: 500;
+    line-height: 0px;
+    height: 2rem;
+    cursor: pointer;
+  }
+
+  .apply_btn_active {
+    border: 1px solid var(--color-accent-200);
+  }
+
+  .clear_btn {
+    border: 1px solid var(--color-accent-100);
+  }
+`;

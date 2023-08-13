@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
+import { ExploreFilterType } from '@/types/exploreTypes';
 
 interface FilterType {
   field: string;
@@ -10,6 +11,8 @@ interface FilterType {
 
 interface PropType {
   query: string;
+  filter: ExploreFilterType;
+  setFilter: React.Dispatch<React.SetStateAction<ExploreFilterType>>;
 }
 
 export const Container = styled.div`
@@ -57,7 +60,7 @@ const ErrorContainer = styled.div`
   font-size: 12px;
 `;
 
-const RangeInput = ({ query }: PropType) => {
+const RangeInput = ({ query, filter, setFilter }: PropType) => {
   const [value1, setValue1] = useState('');
   const [isError1, setIsError1] = useState(false);
   const [value2, setValue2] = useState('');
@@ -132,7 +135,7 @@ const RangeInput = ({ query }: PropType) => {
             type="text"
             value={value1}
             onChange={handleGteChange}
-            placeholder=""
+            placeholder="0"
             // error={isError1}
             // isValuePresent={value1 !== ''}
           />
@@ -145,7 +148,7 @@ const RangeInput = ({ query }: PropType) => {
             type="text"
             value={value2}
             onChange={handleLtChange}
-            placeholder=""
+            placeholder="0"
             // error={isError2}
             // isValuePresent={value2 !== ''}
           />
