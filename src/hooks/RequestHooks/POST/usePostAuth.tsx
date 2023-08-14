@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { FetchingStatus } from '@/types/fetchingTypes';
 import useWallet from '@/wallet/useWallet';
+import { useDispatch, useSelector } from 'react-redux';
+import { setToggleSettings } from '@/redux/slices/profileSettingSlice';
 
 interface AuthType {
   walletAddress: string;
@@ -19,6 +21,8 @@ interface AuthReturnType {
 }
 
 const usePostAuth = (): AuthReturnType => {
+  const dispatch = useDispatch();
+
   const { wallet } = useWallet();
   const [userData, setUserData] = useState<AuthType | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -60,6 +64,14 @@ const usePostAuth = (): AuthReturnType => {
         });
     }
   }, [wallet]);
+
+  // Show the profile update modal for only newly registered users
+  useEffect(() => {
+    if (fetchingStatus == 2 && userData?.accountExists === false) {
+      dispatch(setToggleSettings(true));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchingStatus, userData]);
 
   return { userData, error, fetchingStatus };
 };

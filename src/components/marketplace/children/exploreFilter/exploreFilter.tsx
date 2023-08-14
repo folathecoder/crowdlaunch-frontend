@@ -9,7 +9,7 @@ import {
   FilterItemShow,
   FilterItemHidden,
   FilterMenu,
-} from './exploreFilterStyles';
+} from '@/components/explore/exploreFilter/exploreFilterStyles';
 import { filterToggleVariant } from '@/styles/animation/filterToggleVariant';
 import { useBreakPointDown } from '@/hooks/useBreakPoint';
 import { AnimatePresence } from 'framer-motion';
@@ -48,10 +48,6 @@ const filters = [
 ];
 
 const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
-  const { exploreFilter, setExploreFilter } = useContext(
-    ExploreContext
-  ) as ExploreContextReturnTypes;
-
   const { categories } = useGetCategories();
   const [toggleFilter, setToggleFilter] = useState<number | null>(null);
 
@@ -74,7 +70,7 @@ const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
         {filters.map((filter) => (
           <FilterItem
             key={filter.id}
-            removeBorder={filter.id === filters.length }
+            removeBorder={filter.id === filters.length}
           >
             <FilterItemShow
               onClick={() =>
@@ -102,8 +98,8 @@ const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
               {filter.inputType === 'field' && (
                 <RangeInput
                   query={filter.title}
-                  setFilter={setExploreFilter}
-                  filter={exploreFilter}
+                  setFilter={setToggleFilter}
+                  filter={toggleFilter}
                 />
               )}
               {filter.inputType === 'select' && (

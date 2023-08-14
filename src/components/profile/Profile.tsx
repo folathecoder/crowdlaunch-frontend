@@ -5,6 +5,7 @@ import {
   ProfileInfo,
   ProfileTabSection,
   ProfileMetrics,
+  ProfileSettings,
 } from '@/components/profile';
 import { ProfileProvider } from '@/components/profile/context/ProfileContext';
 
@@ -16,6 +17,7 @@ const Profile = () => {
         <ProfileInfo />
         <ProfileMetrics />
         <ProfileTabSection />
+        <ProfileSettings />
       </ProfileContainer>
     </ProfileProvider>
   );

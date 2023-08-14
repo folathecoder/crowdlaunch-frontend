@@ -11,7 +11,6 @@ import {
 } from './headerStyles';
 import { AppLogo, ProfileLottie } from 'public/images';
 import { APP_NAME } from '@/data/appInfo';
-import HeaderSearchBar from './children/headerSearch/headerSearch';
 import HeaderMenu from './children/headerMenu/headerMenu';
 import UserMenu from './children/userMenu/userMenu';
 import { Button } from '@/components/global';
@@ -21,11 +20,14 @@ import MobileMenu from './children/mobileMenu/mobileMenu';
 import { useWeb3Modal } from '@web3modal/react';
 import useWallet from '@/wallet/useWallet';
 import Lottie from 'react-lottie';
+import { ProfileSettings } from '@/components/profile';
 
 const Header = () => {
   const { wallet } = useWallet();
-
   const { open } = useWeb3Modal();
+  const openWalletConnectionModal = async () => {
+    await open();
+  };
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -33,16 +35,9 @@ const Header = () => {
   const { breakPoint: removeMenuOnTablet } = useBreakPointUp({
     breakMark: 1117,
   });
-  const { breakPoint: removeSearchOnTablet } = useBreakPointUp({
-    breakMark: 864,
-  });
   const { breakPoint: removeOnMobile } = useBreakPointUp({
     breakMark: 539,
   });
-
-  const openWalletConnectionModal = async () => {
-    await open();
-  };
 
   const animationRef = useRef<any>(null);
 
@@ -117,6 +112,7 @@ const Header = () => {
         />
       )}
       <UserMenu showUserMenu={showUserMenu} setShowUserMenu={setShowUserMenu} />
+      <ProfileSettings />
     </HeaderContainer>
   );
 };

@@ -7,7 +7,9 @@ import {
 } from '@/components/profile/context/ProfileContext';
 import { shortenWalletAddress } from '@/helpers/formatters';
 import { BsGlobe, BsTwitter, BsDiscord, BsTelegram } from 'react-icons/bs';
-import { FiSettings } from 'react-icons/fi';
+import { FiEdit } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
+import { setToggleSettings } from '@/redux/slices/profileSettingSlice';
 
 type SocialIcons = {
   websiteUrl: typeof BsGlobe;
@@ -17,9 +19,9 @@ type SocialIcons = {
 };
 
 const ProfileInfo = () => {
-  const { setToggleSettings, user } = useContext(
-    ProfileContext
-  ) as ProfileReturnTypes;
+  const dispatch = useDispatch();
+
+  const { user } = useContext(ProfileContext) as ProfileReturnTypes;
   const { userName, walletAddress, createdAt, socials } = user?.user || {};
 
   const socialIcons: SocialIcons = {
@@ -67,8 +69,8 @@ const ProfileInfo = () => {
                 )
               );
             })}
-          <li onClick={() => setToggleSettings(true)}>
-            <FiSettings />
+          <li onClick={() => dispatch(setToggleSettings(true))} role="button">
+            <FiEdit />
           </li>
         </ul>
       </div>
