@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { QUERIES } from '@/styles/mediaQueries';
+import Link from 'next/link';
 
 interface UniqueTokenStylesTypes {
   bgColor: string;
@@ -43,7 +44,7 @@ export const UniqueProject = styled.div<UniqueTokenStylesTypes>`
   }
 `;
 
-export const ProjectLink = styled.a`
+export const ProjectLink = styled(Link)`
   display: grid;
   gap: 1.5rem;
 

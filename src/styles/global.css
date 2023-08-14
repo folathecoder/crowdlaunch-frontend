@@ -9,6 +9,7 @@
   -webkit-text-fill-color: transparent;
   animation: waveAnimation 2s linear infinite;
   background-size: 200% auto;
+  color: rgb(9, 6, 6);
 }
 
 @keyframes waveAnimation {

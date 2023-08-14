@@ -1,4 +1,3 @@
-import { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import React from 'react';
 import {
@@ -25,10 +24,7 @@ const ProjectCard = () => {
                 key={project.projectId}
                 bgColor={heroCardColors[index]}
               >
-                <ProjectLink
-                  href={`/project/${project.projectId}`}
-                  target="_blank"
-                >
+                <ProjectLink href={`/project/${project.projectId}`}>
                   <ImageWrapper>
                     <Image
                       src={project.bannerImageUrl}
