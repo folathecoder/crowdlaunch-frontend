@@ -1,4 +1,14 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import React, {
+  useState,
+  useEffect,
+  ChangeEvent,
+  FormEvent,
+  useContext,
+} from 'react';
+import {
+  ExploreContext,
+  ExploreContextReturnTypes,
+} from '@/contexts/ExploreContext';
 import { SearchContainer } from './exploreSearchStyles';
 import LoopCircleLoading from 'react-text-loop';
 import { ClickAwayListener } from '@mui/material';
@@ -52,7 +62,10 @@ const WordSwitcher = ({ prefix }: WordSwitcherTypes) => {
 };
 
 const ExploreSearch = ({ fullWidth }: HeaderSearchTypes) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const { searchTerm, setSearchTerm } = useContext(
+    ExploreContext
+  ) as ExploreContextReturnTypes;
+
   const [showPlaceHolder, setShowPlaceHolder] = useState(true);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +94,7 @@ const ExploreSearch = ({ fullWidth }: HeaderSearchTypes) => {
             placeholder=""
             aria-label="Search for Projects, NFTs..."
           />
-          {showPlaceHolder && (
+          {showPlaceHolder && searchTerm === '' && (
             <div
               className="input-overlay"
               onClick={() => setShowPlaceHolder(false)}

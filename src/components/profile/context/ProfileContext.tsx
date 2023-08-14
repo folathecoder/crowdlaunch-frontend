@@ -3,7 +3,6 @@ import useGetUserByAddress from '@/hooks/RequestHooks/GET/useGetUserByAddress';
 import { FetchingStatus } from '@/types/fetchingTypes';
 import { UserProfileType } from '@/types/projectTypes';
 import usePostAuth from '@/hooks/RequestHooks/POST/usePostAuth';
-import { StdioNull } from 'child_process';
 
 type Props = {
   children: JSX.Element;
