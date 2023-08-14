@@ -163,12 +163,14 @@ const ProjectHeader = () => {
             )}
           </ImageWrapper>
           <FundWrapper>
-            <FundProject {...fundings} />
-            <p>
-              Investments made on this platform are speculative, involve a high
-              level of risk, and you may lose all of your investment; please
-              invest wisely and only as much as you can afford to lose.
-            </p>
+            <div>
+              <FundProject {...fundings} />
+              <p>
+                Investments made on this platform are speculative, involve a
+                high level of risk, and you may lose all of your investment;
+                please invest wisely and only as much as you can afford to lose.
+              </p>
+            </div>
           </FundWrapper>
         </HeaderMainContent>
       </HeaderWrapper>

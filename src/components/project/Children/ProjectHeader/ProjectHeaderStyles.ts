@@ -95,14 +95,21 @@ export const HeaderMainContent = styled.div`
   }
 `;
 export const FundWrapper = styled.div`
-  & > p {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.875rem;
-    text-align: center;
-    margin-top: 1rem;
+  display: grid;
+  place-items: center;
 
-    @media ${QUERIES.tablet} {
-      text-align: left;
+  & > * {
+    max-width: 25rem;
+
+    & > p {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.875rem;
+      text-align: center;
+      margin-top: 1rem;
+
+      @media ${QUERIES.tablet} {
+        text-align: left;
+      }
     }
   }
 `;
@@ -110,6 +117,7 @@ export const FundWrapper = styled.div`
 export const ImageWrapper = styled.div`
   position: relative;
   border-radius: 0.5rem;
+  min-height: 20rem;
 
   img {
     object-fit: fit;
