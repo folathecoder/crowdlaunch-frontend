@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Skeleton } from '@mui/material';
 import {
   ProjectDetailContext,
@@ -19,45 +19,68 @@ import {
 import { MdFavorite, MdReport, MdEdit } from 'react-icons/md';
 import { BsShare } from 'react-icons/bs';
 import { FaEthereum } from 'react-icons/fa';
-import { ETHERSCAN_URL } from '@/data/appInfo';
+import { ETHERSCAN_URL, APP_URL } from '@/data/appInfo';
 import usePostLikeProject from '@/hooks/RequestHooks/POST/usePostLikeProject';
 import { ShareModal } from '@/components/global';
-import { APP_URL } from '@/data/appInfo';
+import { Notification } from '@/components/global';
+import useWallet from '@/wallet/useWallet';
 
 const ProjectHeader = () => {
+  const { wallet } = useWallet();
   const [toggleShareModal, setToggleShareModal] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
 
-  const {
-    project: data,
-    fetchingStatus,
-    isProjectCreator,
-  } = useContext(ProjectDetailContext) as ProjectDetailContextReturnTypes;
+  const { project: data, isProjectCreator } = useContext(
+    ProjectDetailContext
+  ) as ProjectDetailContextReturnTypes;
 
   const { project: projectData, category } = data || {};
 
   const {
     handleLikeProject,
-    userLikes,
     handleUnLikeProject,
     likeStatus,
-    handleUserLike,
+    noOfLikes,
+    handleFetchLikeCount,
+    userUnLikedStatus,
+    userLikedStatus,
+    userLikes,
   } = usePostLikeProject({
     projectId: projectData?.projectId,
   });
 
   const handleFavoriteClick = () => {
-    if (userLikes) {
-      handleUnLikeProject();
-      handleUserLike();
+    if (wallet.walletAddress && wallet.walletStatus.isConnected) {
+      if (userLikes) {
+        if (likeStatus?.projectLikeId)
+          handleUnLikeProject(likeStatus.projectLikeId);
+      } else {
+        handleLikeProject();
+      }
     } else {
-      handleLikeProject();
-      handleUserLike();
+      setShowNotification(true);
+      setNotificationMessage('Please connect your wallet to like this project');
     }
   };
 
-  {
-    /* {fetchingStatus === 2 && data && ( */
-  }
+  // Re-Check the status of a user like after an increment
+  useEffect(() => {
+    if (userLikedStatus === 2) {
+      handleFetchLikeCount();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userLikedStatus]);
+
+  // Re-Check the status of a user like after adecrement
+  useEffect(() => {
+    if (userUnLikedStatus) {
+      handleFetchLikeCount();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userUnLikedStatus]);
+
   return (
     <HeaderSection>
       <HeaderWrapper>
@@ -95,7 +118,7 @@ const ProjectHeader = () => {
               onClick={handleFavoriteClick}
             >
               <MdFavorite />
-              <div>{projectData?.noOfLikes}</div>
+              <div>{noOfLikes}</div>
             </button>
             <button aria-label="Report Button" title="Report Project">
               <MdReport />
@@ -149,6 +172,11 @@ const ProjectHeader = () => {
           </FundWrapper>
         </HeaderMainContent>
       </HeaderWrapper>
+      <Notification
+        message={notificationMessage}
+        state={showNotification}
+        setState={setShowNotification}
+      />
     </HeaderSection>
   );
 };

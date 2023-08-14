@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ClickAwayListener } from '@mui/material';
 
 const Container = styled(motion.div)`
-  background: var(--color-accent-100);
+  background: rgb(9, 6, 6);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -15,6 +15,7 @@ const Container = styled(motion.div)`
   top: 6rem;
   left: 1rem;
   z-index: 9000;
+  border: 1px solid var(--color-border-100);
 
   & > * {
     height: 100%;
@@ -24,6 +25,11 @@ const Container = styled(motion.div)`
 
   p {
     color: var(--color-font-100);
+  }
+
+  .icon {
+    color: var(--color-accent-100);
+    font-size: 1.5rem;
   }
 `;
 
@@ -70,7 +76,7 @@ const Notification = ({ message, state, setState }: PropType) => {
             variants={variants}
             transition={{ duration: 0.5 }}
           >
-            <div>
+            <div className="icon">
               <IoIosNotifications />
             </div>
             <div>

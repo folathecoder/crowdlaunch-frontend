@@ -9,7 +9,6 @@
   -webkit-text-fill-color: transparent;
   animation: waveAnimation 2s linear infinite;
   background-size: 200% auto;
-  color: #c2177e3a;
 }
 
 @keyframes waveAnimation {
