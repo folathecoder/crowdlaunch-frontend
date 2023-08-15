@@ -7,6 +7,7 @@ interface CategoryReturnType {
   categories: CategoryType[] | null;
   fetchingStatus: FetchingStatus;
   error: string | null;
+  getCatgoryById: (categoryId: string) => CategoryType | undefined;
 }
 
 const useGetCategories = (): CategoryReturnType => {
@@ -34,7 +35,11 @@ const useGetCategories = (): CategoryReturnType => {
       });
   }, []);
 
-  return { categories, fetchingStatus, error };
+  const getCatgoryById = (categoryId: string): CategoryType | undefined => {
+    return categories?.find((category) => category.categoryId === categoryId);
+  };
+
+  return { categories, fetchingStatus, error, getCatgoryById };
 };
 
 export default useGetCategories;

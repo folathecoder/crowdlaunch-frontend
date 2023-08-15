@@ -7,12 +7,12 @@ import {
 } from '../ProjectCreationContext';
 
 const FormHeader = () => {
-  const { activeTab, setActiveTab } = useContext(
+  const { activeTab, setActiveTab, formCompleted } = useContext(
     ProjectCreactionContext
   ) as ProjectCreactionContextReturnTypes;
 
   const handleClick = (tab: number) => {
-    setActiveTab(tab);
+    if (formCompleted) setActiveTab(tab);
   };
 
   return (

@@ -157,3 +157,36 @@ export interface UserUpdateType {
   };
   updatedAt: string;
 }
+
+export interface ProjectDetailPostType {
+  projectId: string;
+  overview: string;
+  competitors: string;
+  strategy: string;
+  financials: string;
+  dividend: string;
+  risks: string;
+  performance: string;
+}
+
+export interface ProjectPostType {
+  categoryId: string;
+  projectName: string;
+  bannerImageUrl: string;
+  targetAmount: number;
+  minInvestment: number;
+  noOfDaysLeft: number;
+  projectWalletAddress: string;
+  customColour: {
+    fontColour: string;
+    bgColour1: string;
+    bgColour2: string;
+  };
+  projectStatus: number;
+  amountRaised: number;
+}
+
+export interface ProjectFormType {
+  main: ProjectPostType;
+  detail: ProjectDetailPostType;
+}

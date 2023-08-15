@@ -1,5 +1,16 @@
 import Image from 'next/image';
-import React, { useState, useCallback, useRef, ChangeEvent } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useRef,
+  ChangeEvent,
+  useContext,
+  useEffect,
+} from 'react';
+import {
+  ProjectCreactionContext,
+  ProjectCreactionContextReturnTypes,
+} from '@/components/project/ProjectCreation/ProjectCreationContext';
 import { Button } from '@/components/global';
 import { toPng } from 'html-to-image';
 import {
@@ -11,9 +22,6 @@ import {
 } from './FormStyles';
 import Barcode from 'public/images/global/project/barcode.png';
 
-// to be refactored and removed
-const PROJECT_NAME = 'Orange AI';
-
 export interface NftStylesType {
   fontColor: string;
   backgroundColor: {
@@ -23,71 +31,93 @@ export interface NftStylesType {
 }
 
 const NFTCreatorTab: React.FC = () => {
-  const [nftStyle, setNftStyle] = useState<NftStylesType>({
-    fontColor: '#ffffff',
-    backgroundColor: {
-      color1: '#21d4fd',
-      color2: '#b721ff',
-    },
-  });
+  const { projectFormData, setProjectFormData, setActiveTab } = useContext(
+    ProjectCreactionContext
+  ) as ProjectCreactionContextReturnTypes;
 
+  // Track font color change from input
   const handleFontColorInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNftStyle((prevStyle) => ({
-      ...prevStyle,
-      fontColor: e.target.value,
+    setProjectFormData((prevState) => ({
+      ...prevState,
+      main: {
+        ...prevState.main,
+        customColour: {
+          ...prevState.main.customColour,
+          fontColour: e.target.value,
+        },
+      },
     }));
   };
 
+  // Track font color change from color picker
   const handleFontColorPickerInputChange = (color: string) => {
-    setNftStyle((prevStyle) => ({
-      ...prevStyle,
-      fontColor: color,
+    setProjectFormData((prevState) => ({
+      ...prevState,
+      main: {
+        ...prevState.main,
+        customColour: {
+          ...prevState.main.customColour,
+          fontColour: color,
+        },
+      },
     }));
   };
 
   const handleBgColor1InputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNftStyle((prevStyle) => ({
-      ...prevStyle,
-      backgroundColor: {
-        ...prevStyle.backgroundColor,
-        color1: e.target.value,
+    setProjectFormData((prevState) => ({
+      ...prevState,
+      main: {
+        ...prevState.main,
+        customColour: {
+          ...prevState.main.customColour,
+          bgColour1: e.target.value,
+        },
       },
     }));
   };
 
   const handleBgColorPicker1InputChange = (color: string) => {
-    setNftStyle((prevStyle) => ({
-      ...prevStyle,
-      backgroundColor: {
-        ...prevStyle.backgroundColor,
-        color1: color,
+    setProjectFormData((prevState) => ({
+      ...prevState,
+      main: {
+        ...prevState.main,
+        customColour: {
+          ...prevState.main.customColour,
+          bgColour1: color,
+        },
       },
     }));
   };
 
   const handleBgColor2InputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNftStyle((prevStyle) => ({
-      ...prevStyle,
-      backgroundColor: {
-        ...prevStyle.backgroundColor,
-        color2: e.target.value,
+    setProjectFormData((prevState) => ({
+      ...prevState,
+      main: {
+        ...prevState.main,
+        customColour: {
+          ...prevState.main.customColour,
+          bgColour2: e.target.value,
+        },
       },
     }));
   };
 
   const handleBgColorPicker2InputChange = (color: string) => {
-    setNftStyle((prevStyle) => ({
-      ...prevStyle,
-      backgroundColor: {
-        ...prevStyle.backgroundColor,
-        color2: color,
+    setProjectFormData((prevState) => ({
+      ...prevState,
+      main: {
+        ...prevState.main,
+        customColour: {
+          ...prevState.main.customColour,
+          bgColour2: color,
+        },
       },
     }));
   };
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const onButtonClick = useCallback(() => {
+  const downloadNftTemplate = useCallback(() => {
     if (ref.current === null) {
       return;
     }
@@ -95,7 +125,7 @@ const NFTCreatorTab: React.FC = () => {
     toPng(ref.current, { cacheBust: true })
       .then((dataUrl) => {
         const link = document.createElement('a');
-        link.download = `${PROJECT_NAME}-nft-template.png`;
+        link.download = `${projectFormData.main.projectName}-nft-template.png`;
         link.href = dataUrl;
         link.click();
       })
@@ -104,16 +134,22 @@ const NFTCreatorTab: React.FC = () => {
       });
   }, [ref]);
 
+  const saveAndContinue = () => {
+    if (projectFormData.detail.risks !== '') {
+      setActiveTab(8);
+    }
+  };
+
   return (
     <CreatorContainer>
       <CreatorImage>
         <div
           ref={ref}
           style={{
-            maxWidth: '400px',
-            height: '500px',
-            backgroundColor: nftStyle.backgroundColor.color1,
-            backgroundImage: `linear-gradient(19deg, ${nftStyle.backgroundColor.color1} 0%, ${nftStyle.backgroundColor.color2} 100%)`,
+            maxWidth: '350px',
+            height: '350px',
+            backgroundColor: projectFormData.main.customColour.bgColour1,
+            backgroundImage: `linear-gradient(19deg, ${projectFormData.main.customColour.bgColour1} 0%, ${projectFormData.main.customColour.bgColour2} 100%)`,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
@@ -135,15 +171,15 @@ const NFTCreatorTab: React.FC = () => {
                   fontSize: '12px',
                   lineHeight: '16px',
                   maxWidth: '18rem',
-                  color: nftStyle.fontColor,
+                  color: projectFormData.main.customColour.fontColour,
                 }}
               >
-                {` The holder of this NFT owns $894.90 worth of claimable shares in ${PROJECT_NAME}`}
+                {` The holder of this NFT owns $894.90 worth of claimable shares in ${projectFormData.main.projectName}`}
               </p>
             </div>
             <div
               style={{
-                marginTop: '50px',
+                marginTop: '30px',
               }}
             >
               <Image src={Barcode} alt="barcode" width="150" height="150" />
@@ -156,14 +192,14 @@ const NFTCreatorTab: React.FC = () => {
               padding: '16px',
               borderRadius: '0px 0px 8px 8px',
               textAlign: 'center',
-              color: nftStyle.fontColor,
+              color: projectFormData.main.customColour.fontColour,
               fill: 'rgba(255, 255, 255, 0.744)',
               backdropFilter: 'blur(120px)',
             }}
           >
             <p
               style={{
-                color: nftStyle.fontColor,
+                color: projectFormData.main.customColour.fontColour,
                 fontSize: '30px',
                 marginBottom: '20px',
               }}
@@ -172,16 +208,16 @@ const NFTCreatorTab: React.FC = () => {
             </p>
             <p
               style={{
-                color: nftStyle.fontColor,
+                color: projectFormData.main.customColour.fontColour,
                 fontSize: '16px',
                 marginBottom: '10px',
               }}
             >
-              {PROJECT_NAME}
+              {projectFormData.main.projectName}
             </p>
             <p
               style={{
-                color: nftStyle.fontColor,
+                color: projectFormData.main.customColour.fontColour,
                 fontSize: '14px',
               }}
             >
@@ -189,7 +225,15 @@ const NFTCreatorTab: React.FC = () => {
             </p>
           </div>
         </div>
-        {/* <NFTImageTemplate nftStyle={nftStyle} ref={ref} /> */}
+        <div>
+          <div>
+            <Button
+              buttonTitle="Download Template"
+              buttonType="action"
+              buttonFunction={downloadNftTemplate}
+            />
+          </div>
+        </div>
       </CreatorImage>
       <CreatorContent>
         <h2>Customise your project&apos;s NFT</h2>
@@ -203,12 +247,12 @@ const NFTCreatorTab: React.FC = () => {
             <div className="color_input-container">
               <input
                 type="text"
-                value={nftStyle.fontColor}
+                value={projectFormData.main.customColour.fontColour}
                 onChange={handleFontColorInputChange}
                 placeholder="#000000"
               />
               <ColorPicker
-                color={nftStyle.fontColor}
+                color={projectFormData.main.customColour.fontColour}
                 onChange={handleFontColorPickerInputChange}
               />
             </div>
@@ -220,24 +264,24 @@ const NFTCreatorTab: React.FC = () => {
             <div className="color_input-container">
               <input
                 type="text"
-                value={nftStyle.backgroundColor.color1}
+                value={projectFormData.main.customColour.bgColour1}
                 onChange={handleBgColor1InputChange}
                 placeholder="#000000"
               />
               <ColorPicker
-                color={nftStyle.backgroundColor.color1}
+                color={projectFormData.main.customColour.bgColour1}
                 onChange={handleBgColorPicker1InputChange}
               />
             </div>
             <div className="color_input-container">
               <input
                 type="text"
-                value={nftStyle.backgroundColor.color2}
+                value={projectFormData.main.customColour.bgColour2}
                 onChange={handleBgColor2InputChange}
                 placeholder="#000000"
               />
               <ColorPicker
-                color={nftStyle.backgroundColor.color2}
+                color={projectFormData.main.customColour.bgColour2}
                 onChange={handleBgColorPicker2InputChange}
               />
             </div>
@@ -245,9 +289,14 @@ const NFTCreatorTab: React.FC = () => {
         </div>
         <FormButtonContainer>
           <Button
+            buttonTitle="Previous"
+            buttonType="action"
+            buttonFunction={() => setActiveTab(6)}
+          />
+          <Button
             buttonTitle="Save & Continue"
             buttonType="action"
-            buttonFunction={onButtonClick}
+            buttonFunction={saveAndContinue}
           />
         </FormButtonContainer>
       </CreatorContent>
