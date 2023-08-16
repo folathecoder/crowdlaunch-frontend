@@ -12,3 +12,7 @@ export const durationInSeconds = (endDate: string): number => {
 
   return Math.floor(differenceInMillis / 1000);
 };
+
+export const secondsToDays = (seconds: number) => {
+  return Math.round(seconds / (24 * 60 * 60));
+};

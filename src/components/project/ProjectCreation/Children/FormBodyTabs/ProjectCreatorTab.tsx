@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import {
   ProjectCreactionContext,
   ProjectCreactionContextReturnTypes,
@@ -9,17 +10,28 @@ import {
   ProjectCreatorForm,
   FormButtonContainer,
 } from './FormStyles';
+import usePostProject from '@/hooks/RequestHooks/POST/usePostProject';
+import { Notification } from '@/components/global';
+import { initialProjectFormData } from '@/components/project/ProjectCreation/ProjectCreationContext';
 
 const ProjectCreatorTab = () => {
+  const router = useRouter();
+
+  const [requestCompletionCount, setRequestCompletionCount] = useState(0);
+  const [startProjectCreation, setStartProjectCreation] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
+
   const { projectFormData, setProjectFormData, setActiveTab } = useContext(
     ProjectCreactionContext
   ) as ProjectCreactionContextReturnTypes;
 
-  const [formData, setFormData] = useState({
-    targetAmount: '',
-    minInvestment: '',
-    campaignEndDate: '',
-  });
+  const {
+    createProject,
+    projectCreationStatus,
+    projectDetailCreationStatus,
+    projectData,
+  } = usePostProject({ data: projectFormData });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -28,13 +40,45 @@ const ProjectCreatorTab = () => {
       ...prevState,
       main: {
         ...prevState.main,
-        [name]: value,
+        [name]: name === 'noOfDaysLeft' ? value : Number(value),
       },
     }));
   };
 
   // Get current date in format YYYY-MM-DD
   const currentDate = new Date().toISOString().split('T')[0];
+
+  useEffect(() => {
+    if (projectCreationStatus === 2) {
+      setRequestCompletionCount(1);
+    }
+  }, [projectCreationStatus]);
+
+  useEffect(() => {
+    if (projectDetailCreationStatus === 2) {
+      setRequestCompletionCount(2);
+      setNotificationMessage(
+        'Congratulations, Your project had been created successfully'
+      );
+      setStartProjectCreation(false);
+      setTimeout(() => {
+        router.push(`/project/${projectData?.projectId}`);
+        setProjectFormData(initialProjectFormData);
+        setActiveTab(0);
+      }, 2000);
+    }
+
+    if (projectDetailCreationStatus === 3) {
+      setNotificationMessage('Project creation was not successful');
+      setStartProjectCreation(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectData?.projectId, projectDetailCreationStatus, router]);
+
+  const handleProjectCreation = () => {
+    setStartProjectCreation(true);
+    createProject();
+  };
 
   return (
     <ProjectCreatorContainer>
@@ -54,9 +98,9 @@ const ProjectCreatorTab = () => {
             type="number"
             step="1"
             min="0"
-            pattern="^\d*(\.\d{0,2})?$"
+            pattern="^\d*(\.\d{0,9})?$"
             name="targetAmount"
-            value={projectFormData.main.targetAmount.toLocaleString()}
+            value={projectFormData.main.targetAmount}
             onChange={handleInputChange}
             placeholder="Target Investment Amount (USD)"
           />
@@ -67,9 +111,9 @@ const ProjectCreatorTab = () => {
             type="number"
             step="0.01"
             min="0"
-            pattern="^\d*(\.\d{0,2})?$"
+            pattern="^\d*(\.\d{0,9})?$"
             name="minInvestment"
-            value={projectFormData.main.minInvestment.toLocaleString()}
+            value={projectFormData.main.minInvestment}
             onChange={handleInputChange}
             placeholder="($) Minimum Investment Amount"
           />
@@ -92,11 +136,20 @@ const ProjectCreatorTab = () => {
             buttonFunction={() => setActiveTab(7)}
           />
           <Button
-            buttonTitle="Get Funded"
+            buttonTitle={
+              startProjectCreation
+                ? `Get Funded (${requestCompletionCount}/2)`
+                : `Get Funded`
+            }
             buttonType="action"
-            buttonFunction={() => {}}
+            buttonFunction={handleProjectCreation}
           />
         </FormButtonContainer>
+        <Notification
+          message={notificationMessage}
+          state={showNotification}
+          setState={setShowNotification}
+        />
       </ProjectCreatorForm>
     </ProjectCreatorContainer>
   );

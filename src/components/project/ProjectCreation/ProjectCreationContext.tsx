@@ -1,7 +1,8 @@
 import React, { ReactElement, ReactNode, useState, useEffect } from 'react';
 import { ProjectFormType } from '@/types/projectTypes';
+import useWallet from '@/wallet/useWallet';
 
-const initialProjectFormData: ProjectFormType = {
+export const initialProjectFormData: ProjectFormType = {
   main: {
     categoryId: '',
     projectName: '',
@@ -57,6 +58,7 @@ export const ProjectCreactionContext =
   React.createContext<ProjectCreactionContextReturnTypes | null>(null);
 
 const ProjectCreactionProvider = ({ children }: PropTypes): ReactElement => {
+  const { wallet } = useWallet();
   const [formCompleted, setFormCompleted] = useState(false);
 
   const [activeTab, setActiveTab] = useState(() => {
@@ -81,6 +83,19 @@ const ProjectCreactionProvider = ({ children }: PropTypes): ReactElement => {
   useEffect(() => {
     localStorage.setItem('activeTab', activeTab.toString());
   }, [activeTab]);
+
+  // Set project wallet address
+  useEffect(() => {
+    if (wallet.walletAddress) {
+      setProjectFormData((prevState) => ({
+        ...prevState,
+        main: {
+          ...prevState.main,
+          projectWalletAddress: wallet.walletAddress || '',
+        },
+      }));
+    }
+  }, [wallet.walletAddress]);
 
   console.log(projectFormData);
 
