@@ -10,6 +10,7 @@ import {
 } from './projectCardStyles';
 import useGetProjects from '@/hooks/RequestHooks/GET/useGetProjects';
 import { heroCardColors } from '@/data/home/heroData';
+import { CURRENCY_SYMBOL } from '@/data/appInfo';
 
 const ProjectCard = () => {
   const { projects, fetchingStatus: fetchingProjects } = useGetProjects();
@@ -42,11 +43,11 @@ const ProjectCard = () => {
                     <div>
                       <div>
                         <p>Min Investment</p>
-                        <h3>{`$${project.minInvestment.toLocaleString()}`}</h3>
+                        <h3>{`${project.minInvestment.toLocaleString()} ${CURRENCY_SYMBOL}`}</h3>
                       </div>
                       <div className="amount_raised">
                         <p>Amount Raised</p>
-                        <h3>{`$${project.amountRaised.toLocaleString()}`}</h3>
+                        <h3>{`${project.amountRaised.toLocaleString()} ${CURRENCY_SYMBOL}`}</h3>
                       </div>
                     </div>
                   </ContentWrapper>
