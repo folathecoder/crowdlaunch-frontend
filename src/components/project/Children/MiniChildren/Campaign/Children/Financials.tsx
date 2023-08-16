@@ -15,7 +15,20 @@ const Financials = () => {
     <OverviewContainer>
       <Content>
         {data?.projectDetails?.financials && (
-          <Content>{HTMLReactParser(data?.projectDetails.financials)}</Content>
+          <Content>
+            <h2>What is your projected revenue and expenses?</h2>
+            <div>
+              {HTMLReactParser(data?.projectDetails.financials.split('**')[0])}
+            </div>
+            <h2>What is your expected profitability timeline?</h2>
+            <div>
+              {HTMLReactParser(data?.projectDetails.financials.split('**')[1])}
+            </div>
+            <h2>Explain your key financial metrics and milestones.</h2>
+            <div>
+              {HTMLReactParser(data?.projectDetails.financials.split('**')[2])}
+            </div>
+          </Content>
         )}
       </Content>
     </OverviewContainer>

@@ -15,7 +15,18 @@ const Risks = () => {
     <OverviewContainer>
       <Content>
         {data?.projectDetails?.risks && (
-          <Content>{HTMLReactParser(data?.projectDetails.risks)}</Content>
+          <Content>
+            <h2>
+              What are the major and minor risks associated with your project?
+            </h2>
+            <div>
+              {HTMLReactParser(data?.projectDetails.risks.split('**')[0])}
+            </div>
+            <h2>What are the legal or regulatory terms of the project?</h2>
+            <div>
+              {HTMLReactParser(data?.projectDetails.risks.split('**')[1])}
+            </div>
+          </Content>
         )}
       </Content>
     </OverviewContainer>

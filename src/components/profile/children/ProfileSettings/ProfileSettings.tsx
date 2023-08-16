@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import Backdrop from '@mui/material/Backdrop';
 import {
   SettingContainer,
@@ -22,7 +23,9 @@ import { UserUpdateType } from '@/types/projectTypes';
 
 const ProfileSettings = () => {
   const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
 
+  const router = useRouter();
   const dispatch = useDispatch();
   const profileSettings = useSelector(
     (state: RootState) => state.profileSettings.toggleSettings
@@ -100,8 +103,21 @@ const ProfileSettings = () => {
   useEffect(() => {
     if (userUpdated === 2) {
       setShowNotification(true);
+
+      if (router.pathname === '/profile') {
+        setNotificationMessage(
+          'Your profile has been updated successfully and your profile page will reload in 5 seconds!'
+        );
+        setTimeout(() => {
+          window.location.reload();
+        }, 5000);
+      } else {
+        setNotificationMessage(
+          'Your profile has been updated successfully, please reload your profile page to apply changes!'
+        );
+      }
     }
-  }, [userUpdated]);
+  }, [router.pathname, userUpdated]);
 
   return (
     <>
@@ -202,7 +218,7 @@ const ProfileSettings = () => {
               </div>
             </ButtonContainer>
             <Notification
-              message="Your profile has been updated successfully, please reload your profile page to apply changes!"
+              message={notificationMessage}
               setState={setShowNotification}
               state={showNotification}
             />

@@ -69,8 +69,11 @@ export const Content = styled.div`
     line-height: 1.7rem;
   }
 
-  p {
+  p,
+  span {
     margin: 1rem 0rem;
+    text-decoration: none !important;
+    color: var(--color-font-100) !important;
   }
 
   li {

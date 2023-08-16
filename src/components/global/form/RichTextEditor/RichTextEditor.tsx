@@ -41,14 +41,17 @@ const modules = {
 
 const ReactQuillNoSSR = dynamic(() => import('react-quill'), { ssr: false });
 
-const RichTextEditor = () => {
-  const [value, setValue] = useState('');
+interface PropType {
+  state: string;
+  setState: React.Dispatch<React.SetStateAction<string>>;
+}
 
+const RichTextEditor = ({ state, setState }: PropType) => {
   return (
     <ReactQuillNoSSR
       theme="snow"
-      value={value}
-      onChange={setValue}
+      value={state}
+      onChange={setState}
       modules={modules}
       formats={formats}
     />

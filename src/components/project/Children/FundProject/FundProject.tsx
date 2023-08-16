@@ -9,6 +9,8 @@ import {
   FundItem,
 } from './FundProjectStyles';
 import { ProgressBar } from '@/components/global';
+import { secondsToDays } from '@/helpers/formatters';
+import { CURRENCY_SYMBOL } from '@/data/appInfo';
 
 export const fundings: FundProjectTypes = {
   target: {
@@ -57,13 +59,15 @@ const FundProject = ({
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
 
+  console.log(data?.project.amountRaised);
+
   return (
     <FundingContainer>
       <ProgressWrapper>
-        {data?.project.targetAmount && data?.project.amountRaised && (
+        {data?.project && (
           <ProgressBar
-            max={data.project.targetAmount}
-            value={data.project.amountRaised}
+            max={data.project.targetAmount || 0}
+            value={data.project.amountRaised || 0}
           />
         )}
       </ProgressWrapper>
@@ -71,8 +75,8 @@ const FundProject = ({
         <FundItem>
           <h3>
             {data?.project.targetAmount
-              ? `$
-              ${data?.project.targetAmount.toLocaleString()}`
+              ? `
+              ${data?.project.targetAmount.toLocaleString()} ${CURRENCY_SYMBOL}`
               : '--'}
           </h3>
           <p>{target.title}</p>
@@ -80,8 +84,10 @@ const FundProject = ({
         <FundItem>
           <h3>
             {data?.project.amountRaised
-              ? `$
-              ${data?.project.amountRaised.toLocaleString()}`
+              ? `
+              ${data?.project.amountRaised.toLocaleString()} ${CURRENCY_SYMBOL}`
+              : data?.project.amountRaised === 0
+              ? `0 ${CURRENCY_SYMBOL}`
               : '--'}
           </h3>
           <p>{raised.title}</p>
@@ -89,8 +95,7 @@ const FundProject = ({
         <FundItem>
           <h3>
             {data?.project.minInvestment
-              ? `$
-              ${data?.project.minInvestment.toLocaleString()}`
+              ? `${data?.project.minInvestment.toLocaleString()} ${CURRENCY_SYMBOL}`
               : '--'}
           </h3>
           <p>{investment.title}</p>
@@ -99,6 +104,8 @@ const FundProject = ({
           <h3>
             {data?.project.noOfInvestors
               ? `${data?.project.noOfInvestors.toLocaleString()}`
+              : data?.project.noOfInvestors === 0
+              ? '0'
               : '--'}
           </h3>
           <p>{investors.title}</p>
@@ -106,7 +113,7 @@ const FundProject = ({
         <FundItem>
           <h3>
             {data?.project.noOfDaysLeft
-              ? `${data?.project.noOfDaysLeft.toLocaleString()}`
+              ? `${secondsToDays(data?.project.noOfDaysLeft).toLocaleString()}`
               : '--'}
           </h3>
           <p>{deadline.title}</p>

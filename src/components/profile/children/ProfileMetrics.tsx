@@ -4,6 +4,7 @@ import {
   MetricsCard,
 } from '@/components/profile/ProfileStyles';
 import { Button } from '@/components/global';
+import { CURRENCY_SYMBOL } from '@/data/appInfo';
 
 const ProfileMetrics = () => {
   return (
@@ -11,21 +12,22 @@ const ProfileMetrics = () => {
       <div className="metrics_left">
         <MetricsCard>
           <h3>Total Investment</h3>
-          <h4>$0.0</h4>
+          <h4>0.00 {CURRENCY_SYMBOL}</h4>
         </MetricsCard>
         <MetricsCard>
           <h3>Wallet Balance</h3>
-          <h4>$0.0</h4>
+          <h4>0.00 {CURRENCY_SYMBOL}</h4>
         </MetricsCard>
         <MetricsCard>
           <h3>Total Dividend</h3>
           <h4>
-            $0.0 <span title="dividend percentage gain or loss">+0.0%</span>
+            0.00 {CURRENCY_SYMBOL}
+            <span title="dividend percentage gain or loss">+0.0%</span>
           </h4>
         </MetricsCard>
         <MetricsCard>
           <h3>Claimable Dividend</h3>
-          <h4>$0.0</h4>
+          <h4>0.00 {CURRENCY_SYMBOL}</h4>
         </MetricsCard>
       </div>
       <div>
