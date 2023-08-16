@@ -13,14 +13,18 @@ import {
 import usePostProject from '@/hooks/RequestHooks/POST/usePostProject';
 import { Notification } from '@/components/global';
 import { initialProjectFormData } from '@/components/project/ProjectCreation/ProjectCreationContext';
+import Confetti from 'react-confetti';
+import useWindowSize from 'react-use/lib/useWindowSize';
 
 const ProjectCreatorTab = () => {
   const router = useRouter();
+  const { width, height } = useWindowSize();
 
   const [requestCompletionCount, setRequestCompletionCount] = useState(0);
   const [startProjectCreation, setStartProjectCreation] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
   const [showNotification, setShowNotification] = useState(false);
+  const [projectCreated, setProjectCreated] = useState(false);
 
   const { projectFormData, setProjectFormData, setActiveTab } = useContext(
     ProjectCreactionContext
@@ -61,11 +65,7 @@ const ProjectCreatorTab = () => {
         'Congratulations, Your project had been created successfully'
       );
       setStartProjectCreation(false);
-      setTimeout(() => {
-        router.push(`/project/${projectData?.projectId}`);
-        setProjectFormData(initialProjectFormData);
-        setActiveTab(0);
-      }, 2000);
+      setProjectCreated(true);
     }
 
     if (projectDetailCreationStatus === 3) {
@@ -80,71 +80,94 @@ const ProjectCreatorTab = () => {
     createProject();
   };
 
+  const handleProjectLinkBtn = () => {
+    router.push(`/project/${projectData?.projectId}`);
+    setProjectFormData(initialProjectFormData);
+    setActiveTab(0);
+  };
+
   return (
     <ProjectCreatorContainer>
       <ProjectCreatorForm>
-        <div>
-          <h2>Kickstart Your Vision: Set Your Funding Goals</h2>
-        </div>
-        <div>
-          <p className="project_subtitle">
-            For every project initiation on our platform, a nominal service fee
-            of 0.1 ETH, or its equivalent, will be applied.
-          </p>
-        </div>
-        <div>
-          <label htmlFor="targetAmount">Target Investment (ETH)</label>
-          <input
-            type="number"
-            step="1"
-            min="0"
-            pattern="^\d*(\.\d{0,9})?$"
-            name="targetAmount"
-            value={projectFormData.main.targetAmount}
-            onChange={handleInputChange}
-            placeholder="Target Investment Amount (USD)"
-          />
-        </div>
-        <div>
-          <label htmlFor="minInvestment">Minimum Investment (ETH)</label>
-          <input
-            type="number"
-            step="0.01"
-            min="0"
-            pattern="^\d*(\.\d{0,9})?$"
-            name="minInvestment"
-            value={projectFormData.main.minInvestment}
-            onChange={handleInputChange}
-            placeholder="($) Minimum Investment Amount"
-          />
-        </div>
-        <div>
-          <label htmlFor="dateInput">Funding Completion Date</label>
-          <input
-            type="date"
-            name="noOfDaysLeft"
-            id="dateInput"
-            min={currentDate}
-            value={projectFormData.main.noOfDaysLeft}
-            onChange={handleInputChange}
-          />
-        </div>
-        <FormButtonContainer>
-          <Button
-            buttonTitle="Previous"
-            buttonType="action"
-            buttonFunction={() => setActiveTab(7)}
-          />
-          <Button
-            buttonTitle={
-              startProjectCreation
-                ? `Get Funded (${requestCompletionCount}/2)`
-                : `Get Funded`
-            }
-            buttonType="action"
-            buttonFunction={handleProjectCreation}
-          />
-        </FormButtonContainer>
+        {!projectCreated ? (
+          <>
+            <div>
+              <h2>Kickstart Your Vision: Set Your Funding Goals</h2>
+            </div>
+            <div>
+              <p className="project_subtitle">
+                For every project initiation on our platform, a nominal service
+                fee of 0.1 ETH, or its equivalent, will be applied.
+              </p>
+            </div>
+            <div>
+              <label htmlFor="targetAmount">Target Investment (ETH)</label>
+              <input
+                type="number"
+                step="1"
+                min="0"
+                pattern="^\d*(\.\d{0,9})?$"
+                name="targetAmount"
+                value={projectFormData.main.targetAmount}
+                onChange={handleInputChange}
+                placeholder="Target Investment Amount (USD)"
+              />
+            </div>
+            <div>
+              <label htmlFor="minInvestment">Minimum Investment (ETH)</label>
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                pattern="^\d*(\.\d{0,9})?$"
+                name="minInvestment"
+                value={projectFormData.main.minInvestment}
+                onChange={handleInputChange}
+                placeholder="($) Minimum Investment Amount"
+              />
+            </div>
+            <div>
+              <label htmlFor="dateInput">Funding Completion Date</label>
+              <input
+                type="date"
+                name="noOfDaysLeft"
+                id="dateInput"
+                min={currentDate}
+                value={projectFormData.main.noOfDaysLeft}
+                onChange={handleInputChange}
+              />
+            </div>
+            <FormButtonContainer>
+              <Button
+                buttonTitle="Previous"
+                buttonType="action"
+                buttonFunction={() => setActiveTab(7)}
+              />
+              <Button
+                buttonTitle={
+                  startProjectCreation
+                    ? `Get Funded (${requestCompletionCount}/2)`
+                    : `Get Funded`
+                }
+                buttonType="action"
+                buttonFunction={handleProjectCreation}
+              />
+            </FormButtonContainer>
+          </>
+        ) : (
+          <div className="project_completion">
+            <Confetti width={width} height={height} numberOfPieces={350} />
+            <h2>{`🚀 "Hooray! ${
+              projectData?.projectId ? projectData?.projectName : 'Your project'
+            } is now LIVE and ready to get funded!" 🎉`}</h2>
+            <Button
+              buttonTitle="View Project"
+              buttonType="action"
+              buttonFunction={handleProjectLinkBtn}
+            />
+          </div>
+        )}
+
         <Notification
           message={notificationMessage}
           state={showNotification}

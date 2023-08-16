@@ -219,6 +219,11 @@ export const ProjectCreatorForm = styled.div`
     margin-bottom: 20px;
   }
 
+  .project_completion {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
   input {
     width: 100%;
     height: 50px;

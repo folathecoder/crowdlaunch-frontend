@@ -14,7 +14,20 @@ const Performance = () => {
   return (
     <OverviewContainer>
       {data?.projectDetails?.performance && (
-        <Content>{HTMLReactParser(data?.projectDetails.performance)}</Content>
+        <Content>
+          <h2>How do you plan to track and measure performance?</h2>
+          <div>
+            {HTMLReactParser(data?.projectDetails.performance.split('**')[0])}
+          </div>
+          <h2>How is your project different from other competitors?</h2>
+          <div>
+            {HTMLReactParser(data?.projectDetails.performance.split('**')[1])}
+          </div>
+          <h2>Explain your project&apos;s unique features.</h2>
+          <div>
+            {HTMLReactParser(data?.projectDetails.performance.split('**')[2])}
+          </div>
+        </Content>
       )}
     </OverviewContainer>
   );
