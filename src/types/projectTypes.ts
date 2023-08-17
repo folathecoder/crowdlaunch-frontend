@@ -91,6 +91,7 @@ export interface UserType {
     telegramUrl: string;
     discordUrl: string;
   };
+  userProfileImage: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -155,6 +156,7 @@ export interface UserUpdateType {
     telegramUrl: string;
     discordUrl: string;
   };
+  userProfileImage: string;
   updatedAt: string;
 }
 

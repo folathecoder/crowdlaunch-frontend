@@ -12,6 +12,7 @@ import {
 } from './FormStyles';
 import useGetCategories from '@/hooks/RequestHooks/GET/useGetCategories';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import { Notification } from '@/components/global';
 
 const OverviewTab = () => {
   const { categories } = useGetCategories();
@@ -22,6 +23,7 @@ const OverviewTab = () => {
   const [projectSummary, setProjectSummary] = useState('');
   const [projectProblem, setProjectProblem] = useState('');
   const [projectProposition, setProjectProposition] = useState('');
+  const [showNotifications, setShowNotifications] = useState(false);
 
   const [projectBannerImage, setProjectBannerImage] = useState<
     string | undefined
@@ -140,12 +142,15 @@ const OverviewTab = () => {
 
   const saveAndContinue = () => {
     if (
-      projectFormData.main.projectName !== '' &&
-      projectFormData.main.categoryId !== '' &&
-      projectFormData.main.bannerImageUrl !== '' &&
-      projectFormData.detail.overview !== ''
+      !!projectFormData.main.projectName &&
+      !!projectFormData.main.categoryId &&
+      !!projectFormData.main.bannerImageUrl &&
+      !!projectFormData.detail.overview &&
+      projectFormData.detail.overview !== '****'
     ) {
       setActiveTab(1);
+    } else {
+      setShowNotifications(true);
     }
   };
 
@@ -251,6 +256,11 @@ const OverviewTab = () => {
           buttonFunction={saveAndContinue}
         />
       </FormButtonContainer>
+      <Notification
+        message="Please complete all fields"
+        setState={setShowNotifications}
+        state={showNotifications}
+      />
     </div>
   );
 };
