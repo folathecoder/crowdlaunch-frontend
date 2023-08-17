@@ -1,12 +1,16 @@
-import React, { ReactElement, ReactNode } from 'react';
-import useWallet from '@/wallet/useWallet';
+import React, { ReactElement, ReactNode, useState } from 'react';
+import usePostAuth from '@/hooks/RequestHooks/POST/usePostAuth';
+import useGetUserByAddress from '@/hooks/RequestHooks/GET/useGetUserByAddress';
+import { FetchingStatus } from '@/types/fetchingTypes';
+import { UserProfileType } from '@/types/projectTypes';
 
 export interface AppContextReturnTypes {
-  // activeWallet: ActiveWalletTypes;
-  // walletConnected: boolean;
-  // disconnectWallet: () => void;
-  // isDisconnected: boolean;
-  // connectWallet: (options?: any) => Promise<void>;
+  user: UserProfileType | null;
+  fetchingStatus: FetchingStatus;
+  error: string | null;
+  crop: {
+    aspect: number;
+  };
 }
 
 interface PropTypes {
@@ -18,24 +22,17 @@ export const AppContext = React.createContext<AppContextReturnTypes | null>(
 );
 
 const AppProvider = ({ children }: PropTypes): ReactElement => {
-  // const {
-  //   walletConnected,
-  //   activeWallet,
-  //   isDisconnected,
-  //   disconnectWallet,
-  //   connectWallet,
-  // } = useWallet();
+  const { userData } = usePostAuth();
+  const { user, error, fetchingStatus } = useGetUserByAddress({
+    jwtToken: userData?.token,
+  });
 
-  const appContextValue: AppContextReturnTypes = {
-    // walletConnected,
-    // activeWallet,
-    // isDisconnected,
-    // disconnectWallet,
-    // connectWallet,
-  };
+  const [crop] = useState({
+    aspect: 1 / 1,
+  });
 
   return (
-    <AppContext.Provider value={appContextValue}>
+    <AppContext.Provider value={{ user, error, fetchingStatus, crop }}>
       {children}
     </AppContext.Provider>
   );

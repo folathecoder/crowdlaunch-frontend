@@ -22,6 +22,7 @@ import { Notification, Loader, Button } from '@/components/global';
 import { UserUpdateType } from '@/types/projectTypes';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
+import { RiDeleteBin5Line } from 'react-icons/ri';
 
 const ProfileSettings = () => {
   const [showNotification, setShowNotification] = useState(false);
@@ -182,6 +183,13 @@ const ProfileSettings = () => {
     }
   }
 
+  const handleDeleteProfileImage = () => {
+    setFormData({
+      ...formData,
+      userProfileImage: '',
+    });
+  };
+
   return (
     <>
       <Backdrop
@@ -237,11 +245,17 @@ const ProfileSettings = () => {
                 {formData.userProfileImage !== '' && (
                   <div className="file_upload">
                     <a href={formData.userProfileImage} target="_blank">
-                      View uploaded project banner image{' '}
+                      View profile image{' '}
                       <span>
                         <FaExternalLinkAlt />
                       </span>
                     </a>
+                    <button onClick={handleDeleteProfileImage}>
+                      <span>
+                        <RiDeleteBin5Line />
+                      </span>
+                      Remove Image
+                    </button>
                   </div>
                 )}
                 <label htmlFor="websiteUrl">Website URL:</label>

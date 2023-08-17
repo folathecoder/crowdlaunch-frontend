@@ -35,6 +35,10 @@ export const HeaderLeft = styled.div`
   display: flex;
   gap: 24px;
 
+  img {
+    border-radius: 100%;
+  }
+
   .profile-icon {
     border-radius: 100%;
     border: 2px solid var(--color-accent-100);

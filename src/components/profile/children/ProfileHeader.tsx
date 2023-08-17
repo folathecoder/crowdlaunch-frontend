@@ -1,14 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import Image from 'next/image';
 import {
   ProfileHeader,
   ProfileImage,
 } from '@/components/profile/ProfileStyles';
+import {
+  ProfileContext,
+  ProfileReturnTypes,
+} from '@/components/profile/context/ProfileContext';
 import ProfileWallpaper from 'public/images/profile/wallpaper.png';
 import Lottie from 'react-lottie';
 import { ProfileLottie } from 'public/images';
 
 const ProfileHeaderSection = () => {
+  const { user } = useContext(ProfileContext) as ProfileReturnTypes;
   const animationRef = useRef<any>(null);
 
   useEffect(() => {
@@ -28,16 +33,26 @@ const ProfileHeaderSection = () => {
       />
       <div className="main_section">
         <ProfileImage>
-          <Lottie
-            ref={animationRef}
-            options={{
-              loop: true,
-              autoplay: false,
-              animationData: ProfileLottie,
-            }}
-            width={150}
-            height={150}
-          />
+          {user?.user.userProfileImage && user?.user.userName ? (
+            <Image
+              src={user.user.userProfileImage}
+              alt={user.user.userName}
+              width={150}
+              height={50}
+              layout="responsive"
+            />
+          ) : (
+            <Lottie
+              ref={animationRef}
+              options={{
+                loop: true,
+                autoplay: false,
+                animationData: ProfileLottie,
+              }}
+              width={150}
+              height={150}
+            />
+          )}
         </ProfileImage>
       </div>
     </ProfileHeader>
