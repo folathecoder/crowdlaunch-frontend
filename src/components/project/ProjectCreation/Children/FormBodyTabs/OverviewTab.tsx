@@ -154,8 +154,6 @@ const OverviewTab = () => {
     }
   };
 
-  console.log(projectFormData);
-
   return (
     <div>
       <InputDivider>
