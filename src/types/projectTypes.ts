@@ -112,18 +112,7 @@ export interface ProjectWatchlistType {
 }
 
 export interface NftType {
-  nft: {
-    nftId: string;
-    creatorId: string;
-    nftName: string;
-    nftDescription: string;
-    price: number;
-    noOfLikes: number;
-    ownerId: string;
-    categoryId: string;
-    createdAt: string;
-    updatedAt: string;
-  };
+  nft: NftMainType;
   category: {
     categoryId: string;
     categoryName: string;
@@ -131,6 +120,19 @@ export interface NftType {
     createdAt: string;
     updatedAt: string;
   };
+}
+
+export interface NftMainType {
+  nftId: string;
+  creatorId: string;
+  nftName: string;
+  nftDescription: string;
+  price: number;
+  noOfLikes: number;
+  ownerId: string;
+  categoryId: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface LikedProjectType {

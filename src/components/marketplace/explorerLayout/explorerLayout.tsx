@@ -19,8 +19,11 @@ import { GoFilter } from 'react-icons/go';
 import { useBreakPointDown } from '@/hooks/useBreakPoint';
 import HoldersSection from '@/components/marketplace/children/HoldersSection/holdersSection';
 import { nftStatus } from '@/data/marketplace/marketplaceData';
+import useGetNfts from '@/hooks/RequestHooks/GET/useGetNfts';
 
 const ExplorerLayout = () => {
+  const { nfts, fetchingStatus } = useGetNfts();
+
   const [filterToggle, setFilterToggle] = useState(false);
   const [noOfStatus, setNoOfStatus] = useState(4);
 
@@ -86,9 +89,9 @@ const ExplorerLayout = () => {
               <NFTSearch />
             </ExploreSearchWrap>
             <ExploreCardsContainer>
-              {/* {NFTData.map((nft) => (
-                <NFTCard key={nft.id} data={nft} />
-              ))} */}
+              {nfts?.map((nft) => (
+                <NFTCard key={nft.nftId} nftId={nft.nftId} />
+              ))}
             </ExploreCardsContainer>
           </ExploreWrap>
         </ExploreMain>
