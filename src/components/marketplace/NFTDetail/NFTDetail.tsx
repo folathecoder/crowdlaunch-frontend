@@ -24,6 +24,8 @@ const NFTDetail = () => {
     NFTDetailContext
   ) as NFTDetailContextReturnTypes;
 
+  const { nft: nftData } = nft || {};
+
   return (
     <DetailContainer>
       <div>
@@ -31,10 +33,10 @@ const NFTDetail = () => {
           <NavShare mobile />
           <div>
             <DetailImage>
-              {nftFetchingStatus === 2 ? (
+              {nftFetchingStatus === 2 && nftData?.nftImage ? (
                 <Image
-                  src="https://media.graphassets.com/aDjrS7P6SuON0hcjBGk8"
-                  alt={''}
+                  src={nftData.nftImage}
+                  alt={nftData.nftName}
                   layout="fill"
                   objectFit="cover"
                 />

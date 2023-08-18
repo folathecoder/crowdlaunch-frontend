@@ -134,6 +134,7 @@ export interface NftMainType {
   categoryId: string;
   createdAt: string;
   updatedAt: string;
+  nftImage: string;
 }
 
 export interface LikedProjectType {
@@ -193,4 +194,12 @@ export interface ProjectPostType {
 export interface ProjectFormType {
   main: ProjectPostType;
   detail: ProjectDetailPostType;
+}
+
+export interface LikeReturnType {
+  createdAt: string;
+  nftId: string;
+  nftLikeId: string;
+  updatedAt: string;
+  userId: string;
 }
