@@ -66,7 +66,7 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project-likes/ProjectLike/get-by-projectid?projectId=${projectId}`,
         {
           headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEFAULT_JWT}`,
+        
             accept: 'application/json',
           },
         }

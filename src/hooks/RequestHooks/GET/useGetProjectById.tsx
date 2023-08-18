@@ -29,7 +29,6 @@ const useGetProjectById = ({ projectId }: PropsType): ProjectReturnType => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/projects/Project/${projectId}`,
         {
           headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEFAULT_JWT}`,
             accept: 'application/json',
           },
         }
