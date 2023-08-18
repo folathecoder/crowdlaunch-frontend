@@ -9,6 +9,7 @@ import NFTImageTemplate from '@/components/global/nft/NFTImageTemplate';
 import ShareModal from '@/components/global/shareModal/shareModal';
 import Notification from '@/components/global/notification/notification';
 import Loader from '@/components/global/loader/loader';
+import CustomSkeleton from '@/components/global/customSkeleton/customSkeleton';
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   ShareModal,
   Notification,
   Loader,
+  CustomSkeleton,
 };

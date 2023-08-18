@@ -1,8 +1,6 @@
 import React, { ReactElement, ReactNode, useState, useEffect } from 'react';
 import { ProjectFormType } from '@/types/projectTypes';
 import useWallet from '@/wallet/useWallet';
-// import useGetProjectById from '@/hooks/RequestHooks/GET/useGetProjectById';
-// import { useRouter } from 'next/router';
 
 export const initialProjectFormData: ProjectFormType = {
   main: {

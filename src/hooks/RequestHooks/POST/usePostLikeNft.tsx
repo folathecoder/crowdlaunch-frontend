@@ -2,19 +2,19 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FetchingStatus } from '@/types/fetchingTypes';
 import usePostAuth from './usePostAuth';
-import { LikedProjectType } from '@/types/projectTypes';
+import { LikeReturnType } from '@/types/projectTypes';
 import useWallet from '@/wallet/useWallet';
 import useGetUserByAddress from '../GET/useGetUserByAddress';
 
-interface ProjectLikeReturnType {
-  projectLike: LikedProjectType | null;
+interface NftLikeReturnType {
+  nftLike: LikeReturnType | null;
   error: string | null;
   fetchingStatus: FetchingStatus;
-  handleLikeProject: () => void;
-  likeStatus: LikedProjectType | null;
+  handleLikeNft: () => void;
+  likeStatus: LikeReturnType | null;
   checkLikeStatus: FetchingStatus;
   likeStatusError: string | null;
-  handleUnLikeProject: (projectLikeId: string) => void;
+  handleUnLikeNft: (nftLikeId: string) => void;
   userLikes: boolean;
   noOfLikes: number;
   fetchingLikeStatus: FetchingStatus;
@@ -24,10 +24,10 @@ interface ProjectLikeReturnType {
 }
 
 interface PropType {
-  projectId?: string;
+  nftId?: string;
 }
 
-const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
+const usePostLikeNft = ({ nftId }: PropType): NftLikeReturnType => {
   const { wallet } = useWallet();
   const { userData, fetchingStatus: userFetched } = usePostAuth();
   const { token } = userData || {};
@@ -41,13 +41,13 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
   const [userUnLikedStatus, setUserUnLikedStatus] = useState<FetchingStatus>(
     FetchingStatus.Default
   );
-  const [likeStatus, setLikeStatus] = useState<LikedProjectType | null>(null);
+  const [likeStatus, setLikeStatus] = useState<LikeReturnType | null>(null);
   const [likeStatusError, setLikeStatusError] = useState<string | null>(null);
   const [checkLikeStatus, setCheckLikeStatus] = useState<FetchingStatus>(
     FetchingStatus.Default
   );
   const [userLikes, setUserLikes] = useState(false);
-  const [projectLike, setProjectLike] = useState<LikedProjectType | null>(null);
+  const [nftLike, setnftLike] = useState<LikeReturnType | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [fetchingStatus, setFetchingStatus] = useState<FetchingStatus>(
     FetchingStatus.Default
@@ -62,22 +62,18 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
     setFetchingLikeStatus(FetchingStatus.Loading);
 
     axios
-      .get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project-likes/ProjectLike/get-by-projectid?projectId=${projectId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEFAULT_JWT}`,
-            accept: 'application/json',
-          },
-        }
-      )
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/nftlikes/NftLike`, {
+        headers: {
+          accept: 'application/json',
+        },
+      })
       .then((response) => {
-        setNoOfLikes(response.data.length);
-        setUserLikes(
-          response.data.some(
-            (like: LikedProjectType) => like.userId === user?.user.userId
-          )
+        const likes: LikeReturnType[] = response.data.filter(
+          (item: LikeReturnType) => item.nftId === nftId
         );
+
+        setNoOfLikes(likes.length);
+        setUserLikes(likes.some((like) => like.userId === user?.user.userId));
         setFetchingLikeStatus(FetchingStatus.Fetched);
       })
       .catch((error) => {
@@ -87,19 +83,13 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
   };
 
   useEffect(() => {
-    if (projectId) {
+    if (nftId) {
       handleFetchLikeCount();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    projectId,
-    token,
-    userData?.walletAddress,
-    user?.user.userId,
-    projectLike,
-  ]);
+  }, [nftId, token, userData?.walletAddress, user?.user.userId, nftLike]);
 
-  const handleLikeProject = async () => {
+  const handleLikeNft = async () => {
     if (
       wallet.walletAddress &&
       userFetched === FetchingStatus.Fetched &&
@@ -107,23 +97,20 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
     ) {
       setUserLikedStatus(FetchingStatus.Loading);
 
-      fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project-likes/ProjectLike`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-            projectId: `${projectId}`,
-          },
-          body: JSON.stringify({
-            projectId: `${projectId}`,
-          }),
-        }
-      )
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/nftlikes/NftLike`, {
+        method: 'POST',
+        headers: {
+          accept: '*/*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          nftId: `${nftId}`,
+        }),
+      })
         .then((response) => response.json())
         .then((data) => {
-          setProjectLike(data);
+          setnftLike(data);
           setUserLikedStatus(FetchingStatus.Fetched);
         })
         .catch((err) => {
@@ -133,7 +120,7 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
     }
   };
 
-  const handleUnLikeProject = async (projectLikeId: string) => {
+  const handleUnLikeNft = async (nftLikeId: string) => {
     if (
       wallet.walletAddress &&
       userFetched === FetchingStatus.Fetched &&
@@ -142,7 +129,7 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
       setUserUnLikedStatus(FetchingStatus.Loading);
 
       fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project-likes/ProjectLike/${projectLikeId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/nftlikes/NftLike/${nftLikeId}`,
         {
           method: 'DELETE',
           headers: {
@@ -154,7 +141,7 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
         .then((response) => response.json())
         .then((data) => {
           setUserUnLikedStatus(FetchingStatus.Fetched);
-          setProjectLike(data);
+          setnftLike(data);
         })
         .catch((err) => {
           setError(err.message);
@@ -166,10 +153,10 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
   const handleUserLike = async () => {
     setCheckLikeStatus(FetchingStatus.Loading);
 
-    if (projectId && user?.user?.userId && token) {
+    if (nftId && user?.user?.userId && token) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/project-likes/ProjectLike/get-by-userid-and-projectid?userId=${user.user.userId}&projectId=${projectId}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/nftlikes/NftLike/get-by-user-id-and-nft-id?userId=${user.user.userId}&nftId=${nftId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -191,20 +178,14 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
   useEffect(() => {
     handleUserLike();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    projectId,
-    token,
-    userData?.walletAddress,
-    user?.user.userId,
-    projectLike,
-  ]);
+  }, [nftId, token, userData?.walletAddress, user?.user.userId, nftLike]);
 
   return {
-    projectLike,
+    nftLike,
     fetchingStatus,
     error,
-    handleLikeProject,
-    handleUnLikeProject,
+    handleLikeNft,
+    handleUnLikeNft,
     likeStatus,
     checkLikeStatus,
     likeStatusError,
@@ -217,4 +198,4 @@ const usePostLikeProject = ({ projectId }: PropType): ProjectLikeReturnType => {
   };
 };
 
-export default usePostLikeProject;
+export default usePostLikeNft;

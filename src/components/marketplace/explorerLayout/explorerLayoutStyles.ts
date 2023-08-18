@@ -93,7 +93,6 @@ export const ExploreFilterContainer = styled.section`
 
 export const ExploreCardsContainer = styled.section`
   width: 100%;
-  min-height: 100vh;
   gap: 15px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);

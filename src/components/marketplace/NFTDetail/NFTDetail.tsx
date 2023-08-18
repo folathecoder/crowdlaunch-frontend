@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {
+  NFTDetailContext,
+  NFTDetailContextReturnTypes,
+} from '@/contexts/NFTDetailContext';
 import Image from 'next/image';
 import {
   DetailContainer,
@@ -13,8 +17,15 @@ import {
   NFTInfo,
   NFTTransaction,
 } from '@/components/marketplace/NFTDetail';
+import { CustomSkeleton } from '@/components/global';
 
 const NFTDetail = () => {
+  const { nft, nftFetchingStatus } = useContext(
+    NFTDetailContext
+  ) as NFTDetailContextReturnTypes;
+
+  const { nft: nftData } = nft || {};
+
   return (
     <DetailContainer>
       <div>
@@ -22,12 +33,16 @@ const NFTDetail = () => {
           <NavShare mobile />
           <div>
             <DetailImage>
-              <Image
-                src={image.nft2}
-                alt={''}
-                layout="fill"
-                objectFit="cover"
-              />
+              {nftFetchingStatus === 2 && nftData?.nftImage ? (
+                <Image
+                  src={nftData.nftImage}
+                  alt={nftData.nftName}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              ) : (
+                <CustomSkeleton height="100%" width="100%" marginTop={1} />
+              )}
             </DetailImage>
             <NFTExplorer mobile />
           </div>
