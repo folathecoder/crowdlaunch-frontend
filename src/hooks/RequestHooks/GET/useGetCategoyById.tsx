@@ -28,7 +28,6 @@ const useGetCategoryById = ({ categoryId }: PropsType): CategoryReturnType => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/categories/Category/${categoryId}`,
         {
           headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEFAULT_JWT}`,
             accept: 'application/json',
           },
         }
