@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import { AppContext, AppContextReturnTypes } from '@/contexts/AppContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -21,8 +22,10 @@ import { useWeb3Modal } from '@web3modal/react';
 import useWallet from '@/wallet/useWallet';
 import Lottie from 'react-lottie';
 import { ProfileSettings } from '@/components/profile';
+import ReactCrop from 'react-image-crop';
 
 const Header = () => {
+  const { user, crop } = useContext(AppContext) as AppContextReturnTypes;
   const { wallet } = useWallet();
   const { open } = useWeb3Modal();
   const openWalletConnectionModal = async () => {
@@ -74,16 +77,27 @@ const Header = () => {
                 className="profile-icon"
                 onClick={() => setShowUserMenu(true)}
               >
-                <Lottie
-                  ref={animationRef}
-                  options={{
-                    loop: true,
-                    autoplay: false,
-                    animationData: ProfileLottie,
-                  }}
-                  width={35}
-                  height={35}
-                />
+                {user?.user.userProfileImage && user?.user.userName ? (
+                  <>
+                    <Image
+                      src={user.user.userProfileImage}
+                      alt={user.user.userName}
+                      width={35}
+                      height={35}
+                    />
+                  </>
+                ) : (
+                  <Lottie
+                    ref={animationRef}
+                    options={{
+                      loop: true,
+                      autoplay: false,
+                      animationData: ProfileLottie,
+                    }}
+                    width={35}
+                    height={35}
+                  />
+                )}
               </button>
             ) : (
               <Button

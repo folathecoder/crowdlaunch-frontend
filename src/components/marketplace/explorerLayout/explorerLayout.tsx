@@ -11,7 +11,11 @@ import {
   ExploreWrap,
 } from './explorerLayoutStyles';
 import { NFTCard, NFTSearch } from '@/components/marketplace';
-import { ProjectCard, ExploreSearch } from '@/components/explore';
+import {
+  ProjectCard,
+  ExploreSearch,
+  ProjectCardSkeleton,
+} from '@/components/explore';
 import { ColorButton } from '@/components/global';
 import { projectStatus } from '@/data/explore/exploreFilters';
 import ExploreFilter from '@/components/marketplace/children/exploreFilter/exploreFilter';
@@ -20,10 +24,9 @@ import { useBreakPointDown } from '@/hooks/useBreakPoint';
 import HoldersSection from '@/components/marketplace/children/HoldersSection/holdersSection';
 import { nftStatus } from '@/data/marketplace/marketplaceData';
 import useGetNfts from '@/hooks/RequestHooks/GET/useGetNfts';
+import { BiError } from 'react-icons/bi';
 
 const ExplorerLayout = () => {
-  const { nfts, fetchingStatus } = useGetNfts();
-
   const [filterToggle, setFilterToggle] = useState(false);
   const [noOfStatus, setNoOfStatus] = useState(4);
 
@@ -88,11 +91,7 @@ const ExplorerLayout = () => {
             <ExploreSearchWrap>
               <NFTSearch />
             </ExploreSearchWrap>
-            <ExploreCardsContainer>
-              {nfts?.map((nft) => (
-                <NFTCard key={nft.nftId} nftId={nft.nftId} />
-              ))}
-            </ExploreCardsContainer>
+            <ExploreProject />
           </ExploreWrap>
         </ExploreMain>
       </ExploreWrapper>
@@ -101,3 +100,32 @@ const ExplorerLayout = () => {
 };
 
 export default ExplorerLayout;
+
+const ExploreProject = () => {
+  const { nfts, fetchingStatus } = useGetNfts();
+
+  return (
+    <ExploreCardsContainer>
+      {fetchingStatus === 1 &&
+        new Array(14)
+          .fill(null)
+          .map((item) => <ProjectCardSkeleton key={item} />)}
+      {nfts?.map((nft) => (
+        <NFTCard key={nft.nftId} nftId={nft.nftId} />
+      ))}
+      {fetchingStatus === 2 && nfts?.length === 0 && (
+        <p className="error-msg">
+          Oops! There are no NFTs that match this search term
+        </p>
+      )}
+      {fetchingStatus === 3 && (
+        <p className="error-msg">
+          <span>
+            <BiError />
+          </span>
+          Oops! Projects could not be fetched. Try again later!
+        </p>
+      )}
+    </ExploreCardsContainer>
+  );
+};

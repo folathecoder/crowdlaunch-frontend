@@ -25,7 +25,6 @@ import { projectStatus } from '@/data/explore/exploreFilters';
 import ExploreFilter from '@/components/explore/exploreFilter/exploreFilter';
 import { GoFilter } from 'react-icons/go';
 import { useBreakPointDown } from '@/hooks/useBreakPoint';
-import useGetProjects from '@/hooks/RequestHooks/GET/useGetProjects';
 import { BiError } from 'react-icons/bi';
 import ExploreProvider from '@/contexts/ExploreContext';
 

@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import {
+  ProjectCreactionContext,
+  ProjectCreactionContextReturnTypes,
+} from '@/components/project/ProjectCreation/ProjectCreationContext';
 import { useForm } from 'react-hook-form';
 import { RichTextEditor, Button } from '@/components/global';
 import {
@@ -6,24 +10,149 @@ import {
   InputDivider,
   FormButtonContainer,
 } from './FormStyles';
-import { projectCategories } from '@/data/project/projectCategories';
 import useGetCategories from '@/hooks/RequestHooks/GET/useGetCategories';
+import { FaExternalLinkAlt } from 'react-icons/fa';
+import { Notification } from '@/components/global';
 
 const OverviewTab = () => {
+  const { categories } = useGetCategories();
+  const { projectFormData, setProjectFormData, setActiveTab } = useContext(
+    ProjectCreactionContext
+  ) as ProjectCreactionContextReturnTypes;
+
+  const [projectSummary, setProjectSummary] = useState('');
+  const [projectProblem, setProjectProblem] = useState('');
+  const [projectProposition, setProjectProposition] = useState('');
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  const [projectBannerImage, setProjectBannerImage] = useState<
+    string | undefined
+  >(undefined);
+  const [projectBannerSrc, setProjectBannerSrc] = useState('');
+
   const { register, handleSubmit, control } = useForm();
-  const onSubmit = () => {};
 
   const [selectedOption, setSelectedOption] = useState({
     selectedOption: '',
   });
 
-  const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption({
-      selectedOption: event.target.value,
-    });
+  const handleProjectNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setProjectFormData((prevState) => ({
+      ...prevState,
+      main: {
+        ...prevState.main,
+        projectName: event.target.value,
+      },
+    }));
   };
 
-  const { categories } = useGetCategories();
+  const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setProjectFormData((prevState) => ({
+      ...prevState,
+      main: {
+        ...prevState.main,
+        categoryId: event.target.value,
+      },
+    }));
+  };
+
+  useEffect(() => {
+    setProjectFormData((prevState) => ({
+      ...prevState,
+      detail: {
+        ...prevState.detail,
+        overview: `${projectSummary}**${projectProblem}**${projectProposition}`,
+      },
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectProblem, projectProposition, projectSummary]);
+
+  useEffect(() => {
+    if (projectFormData.detail.overview !== '') {
+      const overview = projectFormData.detail.overview.split('**');
+
+      setProjectSummary(overview[0]);
+      setProjectProblem(overview[1]);
+      setProjectProposition(overview[2]);
+    }
+
+    if (projectFormData.main.categoryId! === '') {
+      setSelectedOption({
+        selectedOption: projectFormData.main.categoryId,
+      });
+    }
+  }, []);
+
+  function handleImageOnChange(
+    changeEvent: React.ChangeEvent<HTMLInputElement>
+  ) {
+    const file = changeEvent.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function (onLoadEvent) {
+        setProjectBannerSrc(onLoadEvent.target?.result as string);
+        setProjectBannerImage(undefined);
+      };
+
+      reader.readAsDataURL(file);
+
+      handleOnSubmit();
+    }
+  }
+
+  async function handleOnSubmit() {
+    const fileInput =
+      document.querySelector<HTMLInputElement>('.project_image');
+
+    if (!fileInput || !fileInput.files || fileInput.files.length === 0) return;
+
+    const formData = new FormData();
+
+    for (let i = 0; i < fileInput.files.length; i++) {
+      const file = fileInput.files[i];
+      formData.append('file', file);
+    }
+
+    formData.append('upload_preset', 'my-uploads');
+
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+
+    setProjectFormData((prevState) => ({
+      ...prevState,
+      main: {
+        ...prevState.main,
+        bannerImageUrl: data.secure_url,
+      },
+    }));
+
+    setProjectBannerSrc(data.secure_url);
+    setProjectBannerImage(data);
+  }
+
+  const saveAndContinue = () => {
+    if (
+      !!projectFormData.main.projectName &&
+      !!projectFormData.main.categoryId &&
+      !!projectFormData.main.bannerImageUrl &&
+      !!projectFormData.detail.overview &&
+      projectFormData.detail.overview !== '****'
+    ) {
+      setActiveTab(1);
+    } else {
+      setShowNotifications(true);
+    }
+  };
 
   return (
     <div>
@@ -37,8 +166,8 @@ const OverviewTab = () => {
               type="text"
               name="projectName"
               placeholder="Innotech AI"
-              value=""
-              onChange={() => {}}
+              value={projectFormData.main.projectName}
+              onChange={handleProjectNameChange}
             />
           </div>
         </InputContainer>
@@ -48,16 +177,13 @@ const OverviewTab = () => {
           </div>
           <div>
             <select
-              value={selectedOption.selectedOption}
+              value={projectFormData.main.categoryId}
               onChange={handleOptionChange}
-              name="projectCategory"
+              name="categoryId"
             >
               <option value="">Select a project category</option>
               {categories?.map((category) => (
-                <option
-                  key={category.categoryId}
-                  value={`option-${category.categoryId}`}
-                >
+                <option key={category.categoryId} value={category.categoryId}>
                   {category.categoryName}
                 </option>
               ))}
@@ -65,7 +191,6 @@ const OverviewTab = () => {
           </div>
         </InputContainer>
       </InputDivider>
-
       <InputContainer>
         <div>
           <label htmlFor="projectImage">Project Banner Image</label>
@@ -76,7 +201,19 @@ const OverviewTab = () => {
             accept="image/*"
             {...register('image', { required: true })}
             name="projectImage"
+            onChange={handleImageOnChange}
+            className="project_image"
           />
+          {projectFormData.main.bannerImageUrl !== '' && (
+            <div className="file_upload">
+              <a href={projectFormData.main.bannerImageUrl} target="_blank">
+                View uploaded project banner image{' '}
+                <span>
+                  <FaExternalLinkAlt />
+                </span>
+              </a>
+            </div>
+          )}
         </div>
       </InputContainer>
       <InputContainer>
@@ -86,7 +223,7 @@ const OverviewTab = () => {
           </label>
         </div>
         <div className="editor_container">
-          <RichTextEditor />
+          <RichTextEditor state={projectSummary} setState={setProjectSummary} />
         </div>
       </InputContainer>
       <InputContainer>
@@ -96,7 +233,7 @@ const OverviewTab = () => {
           </label>
         </div>
         <div className="editor_container">
-          <RichTextEditor />
+          <RichTextEditor state={projectProblem} setState={setProjectProblem} />
         </div>
       </InputContainer>
       <InputContainer>
@@ -106,16 +243,24 @@ const OverviewTab = () => {
           </label>
         </div>
         <div className="editor_container">
-          <RichTextEditor />
+          <RichTextEditor
+            state={projectProposition}
+            setState={setProjectProposition}
+          />
         </div>
       </InputContainer>
       <FormButtonContainer>
         <Button
           buttonTitle="Save & Continue"
           buttonType="action"
-          buttonFunction={() => {}}
+          buttonFunction={saveAndContinue}
         />
       </FormButtonContainer>
+      <Notification
+        message="Please complete all fields"
+        setState={setShowNotifications}
+        state={showNotifications}
+      />
     </div>
   );
 };

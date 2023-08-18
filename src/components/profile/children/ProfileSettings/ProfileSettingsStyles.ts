@@ -59,6 +59,34 @@ export const Form = styled.form`
       outline: 0.1rem solid var(--color-border-100);
     }
   }
+
+  .file_upload {
+    margin-top: -2rem;
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      font-size: 0.8rem;
+    }
+
+    button {
+      font-size: 0.8rem;
+      border: none;
+      background-color: transparent;
+      color: var(--color-font-100);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--color-accent-100);
+      }
+
+      span {
+        transform: translateY(1.2rem);
+        margin-right: 0.2rem;
+        margin-top: -0.1rem;
+      }
+    }
+  }
 `;
 
 export const FormSection = styled.div`

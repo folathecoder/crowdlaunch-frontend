@@ -1,5 +1,5 @@
 import React from 'react';
-import withAuth from '@/components/profile/auth/withAuth';
+import withAuth from '@/auth/withAuth';
 import { ProfileLayout } from '@/components/profile';
 
 const Profile = () => {

@@ -20,7 +20,7 @@ const useGetNfts = (): NftReturnType => {
     setFetchingStatus(FetchingStatus.Loading);
 
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/Nft/`, {
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/Nft`, {
         headers: {
           accept: 'application/json',
         },

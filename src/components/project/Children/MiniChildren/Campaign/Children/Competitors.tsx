@@ -14,7 +14,20 @@ const Competitors = () => {
   return (
     <OverviewContainer>
       {data?.projectDetails?.competitors && (
-        <Content>{HTMLReactParser(data?.projectDetails.competitors)}</Content>
+        <Content>
+          <h2>Who are your core competitors?</h2>
+          <div>
+            {HTMLReactParser(data?.projectDetails.competitors.split('**')[0])}
+          </div>
+          <h2>How is your project different from other competitors?</h2>
+          <div>
+            {HTMLReactParser(data?.projectDetails.competitors.split('**')[1])}
+          </div>
+          <h2>Explain your projectt&apos;s unique features.</h2>
+          <div>
+            {HTMLReactParser(data?.projectDetails.competitors.split('**')[2])}
+          </div>
+        </Content>
       )}
     </OverviewContainer>
   );

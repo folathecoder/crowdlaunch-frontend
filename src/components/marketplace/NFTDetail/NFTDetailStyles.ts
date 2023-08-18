@@ -80,6 +80,7 @@ export const ExplorerButton = styled.button`
 
 export const DetailRight = styled.div`
   max-width: 600px;
+  width: 100%;
 
   @media screen and (min-width: 1000px) {
     padding-left: 40px;
@@ -112,6 +113,10 @@ export const DetailOption = styled.div<Props>`
     &:hover {
       opacity: 0.6;
     }
+  }
+
+  .share_btn {
+    position: relative;
   }
 `;
 

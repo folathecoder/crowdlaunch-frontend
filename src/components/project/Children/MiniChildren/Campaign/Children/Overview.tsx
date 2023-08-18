@@ -15,7 +15,20 @@ const Overview = () => {
   return (
     <OverviewContainer>
       {data?.projectDetails?.overview ? (
-        <Content>{HTMLReactParser(data?.projectDetails.overview)}</Content>
+        <Content>
+          <h2>Project Summary And Objectives</h2>
+          <div>
+            {HTMLReactParser(data?.projectDetails.overview.split('**')[0])}
+          </div>
+          <h2>What is your project&apos;s problem statement?</h2>
+          <div>
+            {HTMLReactParser(data?.projectDetails.overview.split('**')[1])}
+          </div>
+          <h2>Explain your project&apos;s unique value proposition.</h2>
+          <div>
+            {HTMLReactParser(data?.projectDetails.overview.split('**')[2])}
+          </div>
+        </Content>
       ) : (
         <Content>
           <React.Fragment>

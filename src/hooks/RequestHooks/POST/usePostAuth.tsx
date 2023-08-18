@@ -34,6 +34,7 @@ const usePostAuth = (): AuthReturnType => {
     const data = {
       userName: '',
       walletAddress: wallet.walletAddress,
+      userProfileImage: '',
       socials: {
         websiteUrl: '',
         twitterUrl: '',

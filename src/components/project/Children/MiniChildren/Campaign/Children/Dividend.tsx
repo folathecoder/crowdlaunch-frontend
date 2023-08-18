@@ -15,7 +15,16 @@ const Dividend = () => {
     <OverviewContainer>
       <Content>
         {data?.projectDetails?.dividend && (
-          <Content>{HTMLReactParser(data?.projectDetails.dividend)}</Content>
+          <Content>
+            <h2>What are the features of your project&apos;s NFT share?</h2>
+            <div>
+              {HTMLReactParser(data?.projectDetails.dividend.split('**')[0])}
+            </div>
+            <h2>Dividend breakdown and payout period.</h2>
+            <div>
+              {HTMLReactParser(data?.projectDetails.dividend.split('**')[1])}
+            </div>
+          </Content>
         )}
       </Content>
     </OverviewContainer>

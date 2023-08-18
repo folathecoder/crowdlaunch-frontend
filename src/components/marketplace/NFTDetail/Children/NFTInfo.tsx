@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {
+  NFTDetailContext,
+  NFTDetailContextReturnTypes,
+} from '@/contexts/NFTDetailContext';
 import Image from 'next/image';
 import {
   DetailContent,
@@ -8,41 +12,59 @@ import {
 } from '@/components/marketplace/NFTDetail/NFTDetailStyles';
 import image from 'public/images/nft';
 import { Button } from '@/components/global';
+import { CURRENCY_SYMBOL } from '@/data/appInfo';
+import { CustomSkeleton } from '@/components/global';
 
 const NFTInfo = () => {
+  const { nft, nftFetchingStatus } = useContext(
+    NFTDetailContext
+  ) as NFTDetailContextReturnTypes;
+
+  const { nft: nftData } = nft || {};
+
   return (
     <DetailContent>
-      <h1>NFT Name #389</h1>
+      {nftFetchingStatus === 2 ? (
+        <h1>{nftData?.nftName}</h1>
+      ) : (
+        <CustomSkeleton height={25} width={220} marginTop={1} />
+      )}
       <DetailPrice>
         <div>
           <div>
-            <h2>23 ETH</h2>
+            {nftFetchingStatus === 2 ? (
+              <h2>
+                {nftData?.price.toLocaleString()} {CURRENCY_SYMBOL}
+              </h2>
+            ) : (
+              <CustomSkeleton height={25} width={120} marginTop={1} />
+            )}
           </div>
-          <div>
-            <Button buttonTitle="BUY" buttonType="link" buttonLink="/" />
-          </div>
+          {nftFetchingStatus === 2 && (
+            <div>
+              <Button buttonTitle="BUY" buttonType="link" buttonLink="/" />
+            </div>
+          )}
         </div>
       </DetailPrice>
-      <Creator>
-        <div>
-          <CreatorImage>
-            <Image src={image.creator4} alt={''} layout="responsive" />
-          </CreatorImage>
-          <div>
-            <h4>Creator</h4>
-            <p>Ghost Rider</p>
-          </div>
-        </div>
-      </Creator>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo delectus
-        laborum, similique perferendis debitis blanditiis doloribus, minima quia
-        molestias voluptatem repudiandae eaque, illo libero labore enim porro
-        dolorem nam aperiam. Lorem ipsum dolor sit amet, consectetur adipisicing
-        elit. Nemo delectus laborum, similique perferendis debitis blanditiis
-        doloribus, minima quia molestias voluptatem repudiandae eaque, illo
-        libero labore enim porro dolorem nam aperiam.
-      </p>
+      {nftFetchingStatus === 2 ? (
+        <>
+          <Creator>
+            <div>
+              <CreatorImage>
+                <Image src={image.creator4} alt={''} layout="responsive" />
+              </CreatorImage>
+              <div>
+                <h4>Creator</h4>
+                <p>Ghost Rider</p>
+              </div>
+            </div>
+          </Creator>
+          <p>{nftData?.nftDescription}</p>
+        </>
+      ) : (
+        <CustomSkeleton height={200} width="100%" marginTop={1} />
+      )}
     </DetailContent>
   );
 };

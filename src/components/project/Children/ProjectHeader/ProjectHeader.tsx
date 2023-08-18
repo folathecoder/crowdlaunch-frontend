@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Skeleton } from '@mui/material';
 import {
   ProjectDetailContext,
@@ -91,9 +92,11 @@ const ProjectHeader = () => {
           </div>
           <IconWrapper>
             {isProjectCreator && (
-              <button aria-label="Edit Button" title="Edit Project">
-                <MdEdit />
-              </button>
+              <Link href={`/project/update/${projectData?.projectId}`}>
+                <button aria-label="Edit Button" title="Edit Project">
+                  <MdEdit />
+                </button>
+              </Link>
             )}
             <a
               href={`${ETHERSCAN_URL}/address/${projectData?.projectWalletAddress}`}
