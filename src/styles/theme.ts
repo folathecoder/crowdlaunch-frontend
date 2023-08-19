@@ -26,6 +26,7 @@ export const blackTheme = {
   bg300: 'rgba(83, 83, 83, 0.13)',
   bg400: 'hsl(0, 0%, 100%)',
   bg500: '#0f0e0e',
+  bg600: 'hsla(0, 0%, 0%, 1)',
   accent100: '#C2177E',
   accent200: '#13cc71',
   accent300: '#8B44FF',

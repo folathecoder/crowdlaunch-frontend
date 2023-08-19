@@ -46,7 +46,6 @@ const filters = [
     inputType: 'field',
     query: 'noOfDaysLeft',
   },
-  { id: 7, title: 'Number of Likes', inputType: 'field', query: 'noOfLikes' },
 ];
 
 const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {

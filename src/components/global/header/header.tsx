@@ -27,7 +27,9 @@ import ReactCrop from 'react-image-crop';
 const Header = () => {
   const { user, crop } = useContext(AppContext) as AppContextReturnTypes;
   const { wallet } = useWallet();
+  
   const { open } = useWeb3Modal();
+
   const openWalletConnectionModal = async () => {
     await open();
   };

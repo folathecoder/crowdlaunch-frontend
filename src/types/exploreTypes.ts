@@ -4,16 +4,23 @@ export interface RangeType {
 }
 
 export interface ExploreFilterType {
+  newest: boolean;
+  trending: boolean;
+  active: boolean;
+  mostLiked: boolean;
   minInvestment: RangeType;
   amountRaised: RangeType;
   targetAmount: RangeType;
   noOfInvestors: RangeType;
   noOfDaysLeft: RangeType;
-  noOfLikes: RangeType;
   categoryId: string[] | [];
 }
 
 export const initialExploreFilter: ExploreFilterType = {
+  newest: false,
+  trending: false,
+  active: false,
+  mostLiked: false,
   minInvestment: {
     gt: 0,
     lt: 0,
@@ -31,10 +38,6 @@ export const initialExploreFilter: ExploreFilterType = {
     lt: 0,
   },
   noOfDaysLeft: {
-    gt: 0,
-    lt: 0,
-  },
-  noOfLikes: {
     gt: 0,
     lt: 0,
   },

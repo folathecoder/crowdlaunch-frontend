@@ -34,7 +34,8 @@ const SelectTags = ({ data, filter, setFilter }: PropType) => {
   const selectTag = (id: string) => {
     setFilter((prevState) => ({
       ...prevState,
-      categoryId: [...prevState.categoryId, id],
+      categoryId:
+        prevState.categoryId[0] === id ? [] : [id],
     }));
   };
 

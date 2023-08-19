@@ -36,6 +36,7 @@
     "html-react-parser": "^4.2.0",
     "html-to-image": "^1.11.11",
     "lodash": "^4.17.21",
+    "lodash.debounce": "^4.0.8",
     "moment": "^2.29.4",
     "next": "13.4.7",
     "next-redux-wrapper": "^8.1.0",

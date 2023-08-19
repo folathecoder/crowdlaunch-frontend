@@ -109,3 +109,21 @@ export const ExploreCardsContainer = styled.section`
     width: 100%;
   }
 `;
+export const ExploreError = styled.section`
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    font-size: 2rem;
+    line-height: 2.8rem;
+    max-width: 30rem;
+    padding: 2rem 1rem;
+  }
+
+  div {
+    width: 20rem;
+  }
+`;

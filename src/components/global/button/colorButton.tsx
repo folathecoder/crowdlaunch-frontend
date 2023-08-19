@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { useRouter } from 'next/router';
+import { BsCheck } from 'react-icons/bs';
 
 interface ButtonStylesTypes {
   bgColor: string;
@@ -22,6 +23,7 @@ export const ButtonContainer = styled.button<ButtonStylesTypes>`
   line-height: 40px;
   cursor: pointer;
   transition: 0.5s linear;
+  position: relative;
 
   ${({ bgColor, borderColor }) =>
     bgColor &&
@@ -39,6 +41,20 @@ export const ButtonContainer = styled.button<ButtonStylesTypes>`
   &:focus {
     outline: none;
   }
+
+  div {
+    position: absolute;
+    background: hsla(218, 80%, 2%, 0.7);
+    font-size: 2.2rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 8px;
+  }
 `;
 
 interface ButtonTypes {
@@ -48,6 +64,7 @@ interface ButtonTypes {
   buttonFunction?: () => void;
   bgColor: string;
   borderColor: string;
+  checkable?: boolean;
 }
 
 const ColorButton = ({
@@ -57,6 +74,7 @@ const ColorButton = ({
   buttonFunction,
   bgColor,
   borderColor,
+  checkable,
 }: ButtonTypes) => {
   const router = useRouter();
 
@@ -76,6 +94,11 @@ const ColorButton = ({
       borderColor={borderColor}
     >
       {buttonTitle}
+      {checkable && (
+        <div>
+          <BsCheck />
+        </div>
+      )}
     </ButtonContainer>
   );
 };
