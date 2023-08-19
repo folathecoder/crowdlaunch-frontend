@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FetchingStatus } from '@/types/fetchingTypes';
 import { ProjectType } from '@/types/projectTypes';
+import { useRouter } from 'next/router';
 
 interface ProjectReturnType {
   projects: ProjectType[] | null;
@@ -10,6 +11,7 @@ interface ProjectReturnType {
 }
 
 const useGetProjects = (): ProjectReturnType => {
+  const router = useRouter();
   const [projects, setProjects] = useState<ProjectType[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [fetchingStatus, setFetchingStatus] = useState<FetchingStatus>(
@@ -21,7 +23,11 @@ const useGetProjects = (): ProjectReturnType => {
 
     axios
       .get<ProjectType[]>(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/projects/Project`
+        `${
+          process.env.NEXT_PUBLIC_BACKEND_URL
+        }/api/projects/Project/get-with-filters${
+          router.asPath.split('/explore')[1]
+        }`
       )
       .then((response) => {
         setProjects(response.data);
@@ -31,7 +37,7 @@ const useGetProjects = (): ProjectReturnType => {
         setError(error.message);
         setFetchingStatus(FetchingStatus.Error);
       });
-  }, []);
+  }, [router.asPath]);
 
   return { projects, fetchingStatus, error };
 };

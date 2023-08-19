@@ -10,6 +10,7 @@ import ShareModal from '@/components/global/shareModal/shareModal';
 import Notification from '@/components/global/notification/notification';
 import Loader from '@/components/global/loader/loader';
 import CustomSkeleton from '@/components/global/customSkeleton/customSkeleton';
+import LottieImage from '@/components/global/lottieImage/lottieImage';
 
 export {
   Header,
@@ -24,4 +25,5 @@ export {
   Notification,
   Loader,
   CustomSkeleton,
+  LottieImage,
 };

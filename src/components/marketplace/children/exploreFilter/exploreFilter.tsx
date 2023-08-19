@@ -95,7 +95,7 @@ const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
               initial="hidden"
               animate={toggleFilter === filter.id ? 'show' : 'hidden'}
             >
-              {filter.inputType === 'field' && (
+              {/* {filter.inputType === 'field' && (
                 <RangeInput
                   query={filter.title}
                   setFilter={setToggleFilter}
@@ -104,7 +104,7 @@ const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
               )}
               {filter.inputType === 'select' && (
                 <SelectTags data={categories || []} />
-              )}
+              )} */}
             </FilterItemHidden>
           </FilterItem>
         ))}

@@ -17,6 +17,8 @@ import { FaChevronDown } from 'react-icons/fa';
 import RangeInput from '@/components/global/form/InputFields/rangeInput';
 import SelectTags from '@/components/global/form/InputFields/selectTags';
 import useGetCategories from '@/hooks/RequestHooks/GET/useGetCategories';
+import { deepEqual } from '@/helpers/deepEqual';
+import { initialExploreFilter } from '@/types/exploreTypes';
 
 interface ExploreFilterTypes {
   filterToggle: boolean;
@@ -44,13 +46,15 @@ const filters = [
     inputType: 'field',
     query: 'noOfDaysLeft',
   },
-  { id: 7, title: 'Number of Likes', inputType: 'field', query: 'noOfLikes' },
 ];
 
 const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
-  const { exploreFilter, setExploreFilter } = useContext(
+  const { exploreFilter, setExploreFilter, handleClearFilter } = useContext(
     ExploreContext
   ) as ExploreContextReturnTypes;
+
+  // Check if the filter has new values
+  const isFilterEmpty = deepEqual(initialExploreFilter, exploreFilter);
 
   const { categories } = useGetCategories();
   const [toggleFilter, setToggleFilter] = useState<number | null>(null);
@@ -67,14 +71,18 @@ const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
         animate={filterToggle ? 'show' : 'hidden'}
         exit="exit"
       >
-        <FilterMenu>
-          <button className="apply_btn_active">Apply Filter</button>
-          <button className="clear_btn">Clear Filter</button>
-        </FilterMenu>
+        {!isFilterEmpty && (
+          <FilterMenu>
+            <button className="clear_btn" onClick={handleClearFilter}>
+              Clear Filter
+            </button>
+          </FilterMenu>
+        )}
+
         {filters.map((filter) => (
           <FilterItem
             key={filter.id}
-            removeBorder={filter.id === filters.length }
+            removeBorder={filter.id === filters.length}
           >
             <FilterItemShow
               onClick={() =>
@@ -101,13 +109,17 @@ const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
             >
               {filter.inputType === 'field' && (
                 <RangeInput
-                  query={filter.title}
+                  query={filter.query}
                   setFilter={setExploreFilter}
                   filter={exploreFilter}
                 />
               )}
               {filter.inputType === 'select' && (
-                <SelectTags data={categories || []} />
+                <SelectTags
+                  data={categories || []}
+                  setFilter={setExploreFilter}
+                  filter={exploreFilter}
+                />
               )}
             </FilterItemHidden>
           </FilterItem>
