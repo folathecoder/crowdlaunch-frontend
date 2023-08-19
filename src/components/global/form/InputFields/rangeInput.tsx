@@ -72,7 +72,7 @@ const updateFilter = (
     return {
       ...prevState,
       [query]: {
-        ...prevState[query],
+        ...(prevState[query] as object),
         [rangeKey]: Number(numericValue),
       },
     };
@@ -154,7 +154,7 @@ const RangeInput = ({ query, filter, setFilter }: PropType) => {
               filter[query as keyof ExploreFilterType] as RangeType
             ).gt.toString()}
             onChange={handleGteChange}
-            placeholder="0"
+            placeholder="Greater"
             className={isError1 ? 'error_input' : ''}
             name="gt"
           />
@@ -169,7 +169,7 @@ const RangeInput = ({ query, filter, setFilter }: PropType) => {
               filter[query as keyof ExploreFilterType] as RangeType
             ).lt.toString()}
             onChange={handleLtChange}
-            placeholder="0"
+            placeholder="Less"
             className={isError2 ? 'error_input' : ''}
             name="lt"
           />
