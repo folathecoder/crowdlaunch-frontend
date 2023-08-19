@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
-import { ExploreFilterType } from '@/types/exploreTypes';
-
-interface FilterType {
-  field: string;
-  gte: number;
-  lt: number;
-}
+import styled from 'styled-components';
+import { ExploreFilterType, RangeType } from '@/types/exploreTypes';
+import { handleDecimals, sanitizeInputValue } from '@/helpers/inputChecks';
 
 interface PropType {
   query: string;
-  // filter: ExploreFilterType;
-  // setFilter: React.Dispatch<React.SetStateAction<ExploreFilterType>>;
-
-  filter: any;
-  setFilter: any;
+  filter: ExploreFilterType;
+  setFilter: React.Dispatch<React.SetStateAction<ExploreFilterType>>;
 }
 
 export const Container = styled.div`
@@ -25,31 +16,6 @@ export const Container = styled.div`
     display: flex;
     gap: 0.5rem;
 
-    input {
-      width: 7rem;
-      height: 2.5rem;
-      border-radius: 0.5rem;
-      background-color: var(--color-bg-500);
-      border: 0.1rem solid var(--color-border-100);
-      color: white;
-      padding: 0rem 0.5rem;
-
-      &:hover {
-        outline: none;
-        border: 1px solid var(--color-accent-100);
-      }
-
-      &:active {
-        outline: none;
-        border: 1px solid var(--color-accent-200);
-      }
-
-      &:focus {
-        outline: none;
-        border: 1px solid var(--color-accent-300);
-      }
-    }
-
     p {
       height: 100%;
       display: flex;
@@ -58,10 +24,65 @@ export const Container = styled.div`
   }
 `;
 
+const Input = styled.input`
+  width: 7rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-bg-500);
+  border: 0.1rem solid var(--color-border-100);
+  color: white;
+  padding: 0rem 0.5rem;
+
+  &:hover {
+    outline: none;
+    border: 1px solid var(--color-accent-100);
+  }
+
+  &:active {
+    outline: none;
+    border: 1px solid var(--color-accent-200);
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid var(--color-accent-300);
+  }
+
+  .error_input {
+    color: var(--color-accent-400);
+    border: 0.1rem solid var(--color-accent-400);
+  }
+`;
+
 const ErrorContainer = styled.div`
   color: red;
   font-size: 12px;
 `;
+
+// Function to optimally update filter
+type RangeKey = 'gt' | 'lt';
+
+const updateFilter = (
+  prevState: ExploreFilterType,
+  query: keyof ExploreFilterType,
+  numericValue: number,
+  rangeKey: RangeKey
+): ExploreFilterType => {
+  if (typeof prevState[query] === 'object' && prevState[query] !== null) {
+    return {
+      ...prevState,
+      [query]: {
+        ...prevState[query],
+        [rangeKey]: Number(numericValue),
+      },
+    };
+  }
+  return prevState;
+};
+
+function isRangeType(value: any): value is RangeType {
+  return value && typeof value.gt === 'number' && typeof value.lt === 'number';
+}
 
 const RangeInput = ({ query, filter, setFilter }: PropType) => {
   const [value1, setValue1] = useState('');
@@ -71,39 +92,32 @@ const RangeInput = ({ query, filter, setFilter }: PropType) => {
   const [errorMessage, setErrorMessage] = useState(
     'The minimum value cannot be equal to the maximum value'
   );
-  const [filterItem, setFilterItem] = useState<FilterType>({
-    field: query,
-    gte: 0,
-    lt: 0,
-  });
 
-  const handleGteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    const numericValue = inputValue.replace(/[^-0-9.]/g, '');
-    setValue1(numericValue);
+  const handleNumericChange =
+    (rangeKey: RangeKey) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const inputValue = event.target.value;
+      // const numericValue = inputValue.replace(/[^-0-9.]/g, '');
+      const numericValue = sanitizeInputValue(inputValue);
+      setFilter((prevState) =>
+        updateFilter(
+          prevState,
+          query as keyof ExploreFilterType,
+          Number(numericValue),
+          rangeKey
+        )
+      );
 
-    setFilterItem((prevFilterItem) => ({
-      ...prevFilterItem,
-      field: query,
+      if (rangeKey === 'gt') {
+        setValue1(numericValue);
+      } else if (rangeKey === 'lt') {
+        setValue2(numericValue);
+      }
+    };
 
-      gte: Number(numericValue),
-      lt: Number(value2),
-    }));
-  };
+  const handleGteChange = handleNumericChange('gt');
+  const handleLtChange = handleNumericChange('lt');
 
-  const handleLtChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    const numericValue = inputValue.replace(/[^-0-9.]/g, '');
-    setValue2(numericValue);
-
-    setFilterItem((prevFilterItem) => ({
-      ...prevFilterItem,
-      field: query,
-      gte: Number(value1),
-      lt: Number(numericValue),
-    }));
-  };
-
+  // Trigger error based on checks and inputs
   useEffect(() => {
     if (value1 !== '' && value2 !== '') {
       if (Number(value1) === Number(value2)) {
@@ -134,26 +148,30 @@ const RangeInput = ({ query, filter, setFilter }: PropType) => {
     <Container>
       <div className="input_container">
         <div>
-          <input
-            type="text"
-            value={value1}
+          <Input
+            type="number"
+            value={(
+              filter[query as keyof ExploreFilterType] as RangeType
+            ).gt.toString()}
             onChange={handleGteChange}
             placeholder="0"
-            // error={isError1}
-            // isValuePresent={value1 !== ''}
+            className={isError1 ? 'error_input' : ''}
+            name="gt"
           />
         </div>
         <div className="input_range">
           <p>to</p>
         </div>
         <div>
-          <input
-            type="text"
-            value={value2}
+          <Input
+            type="number"
+            value={(
+              filter[query as keyof ExploreFilterType] as RangeType
+            ).lt.toString()}
             onChange={handleLtChange}
             placeholder="0"
-            // error={isError2}
-            // isValuePresent={value2 !== ''}
+            className={isError2 ? 'error_input' : ''}
+            name="lt"
           />
         </div>
       </div>

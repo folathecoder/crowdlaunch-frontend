@@ -1,9 +1,12 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import { CategoryType } from '@/types/projectTypes';
+import { ExploreFilterType } from '@/types/exploreTypes';
 
 interface PropType {
   data: CategoryType[] | null;
+  filter: ExploreFilterType;
+  setFilter: React.Dispatch<React.SetStateAction<ExploreFilterType>>;
 }
 
 export const Container = styled.div`
@@ -27,15 +30,27 @@ export const Container = styled.div`
   }
 `;
 
-const SelectTags = ({ data }: PropType) => {
+const SelectTags = ({ data, filter, setFilter }: PropType) => {
+  const selectTag = (id: string) => {
+    setFilter((prevState) => ({
+      ...prevState,
+      categoryId: [...prevState.categoryId, id],
+    }));
+  };
+
   return (
     <Container>
       {data?.map((item) => (
         <button
           key={item.categoryId}
-          // className="active"
+          className={
+            filter.categoryId.some((category) => category === item.categoryId)
+              ? 'active'
+              : ''
+          }
           id={item.categoryId}
           aria-pressed="false"
+          onClick={() => selectTag(item.categoryId)}
         >
           <div>
             <p>{item.categoryName}</p>

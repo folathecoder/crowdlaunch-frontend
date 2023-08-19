@@ -11,6 +11,7 @@ export interface ExploreContextReturnTypes {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   exploreFilter: ExploreFilterType;
   setExploreFilter: React.Dispatch<React.SetStateAction<ExploreFilterType>>;
+  handleClearFilter: () => void;
 }
 
 interface PropTypes {
@@ -22,7 +23,6 @@ export const ExploreContext =
 
 const ExploreProvider = ({ children }: PropTypes): ReactElement => {
   const { projects, fetchingStatus } = useGetProjects();
-
   const [searchTerm, setSearchTerm] = useState('');
 
   // Initialize exploreFilter state from localStorage or use initialExploreFilter
@@ -50,6 +50,11 @@ const ExploreProvider = ({ children }: PropTypes): ReactElement => {
     }
   }, [exploreFilter]);
 
+  // Function that clears the filter and sets it to initial state
+  const handleClearFilter = () => {
+    setExploreFilter(initialExploreFilter);
+  };
+
   return (
     <ExploreContext.Provider
       value={{
@@ -59,6 +64,7 @@ const ExploreProvider = ({ children }: PropTypes): ReactElement => {
         setSearchTerm,
         exploreFilter,
         setExploreFilter,
+        handleClearFilter,
       }}
     >
       {children}

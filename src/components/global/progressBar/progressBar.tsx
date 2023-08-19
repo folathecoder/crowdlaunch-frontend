@@ -7,7 +7,7 @@ interface ProgressBarProps {
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ value, max }) => {
-  const width = (value / max) * 100;
+  const width = max !== 0 ? (Number(value) / Number(max)) * 100 : 0;
 
   return (
     <ProgressBarContainer>

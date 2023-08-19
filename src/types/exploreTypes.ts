@@ -10,7 +10,7 @@ export interface ExploreFilterType {
   noOfInvestors: RangeType;
   noOfDaysLeft: RangeType;
   noOfLikes: RangeType;
-  categories: string[];
+  categoryId: string[] | [];
 }
 
 export const initialExploreFilter: ExploreFilterType = {
@@ -38,5 +38,5 @@ export const initialExploreFilter: ExploreFilterType = {
     gt: 0,
     lt: 0,
   },
-  categories: [],
+  categoryId: [],
 };

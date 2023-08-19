@@ -29,7 +29,7 @@ export const blackTheme = {
   accent100: '#C2177E',
   accent200: '#13cc71',
   accent300: '#8B44FF',
-  accent400: '#634BFA',
+  accent400: '#e31219',
   font100: 'hsl(0, 0%, 100%)',
   font200: 'hsl(0, 0%, 80%)',
   font300: 'hsl(219, 16%, 61%)',
