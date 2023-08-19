@@ -26,7 +26,7 @@ const useGetProjects = (): ProjectReturnType => {
         `${
           process.env.NEXT_PUBLIC_BACKEND_URL
         }/api/projects/Project/get-with-filters${
-          router.asPath.split('/explore')[1]
+          router.asPath.split('/explore')[1] || ''
         }`
       )
       .then((response) => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ExploreFilterType, RangeType } from '@/types/exploreTypes';
-import { ExploreFilterType as MarketplaceFilterType } from '@/types/marketplaceTypes';
+import { ExploreFilterType, RangeType } from '@/types/marketplaceTypes';
 import { handleDecimals, sanitizeInputValue } from '@/helpers/inputChecks';
 
 interface PropType {
@@ -60,26 +59,7 @@ const ErrorContainer = styled.div`
   font-size: 12px;
 `;
 
-// Function to optimally update filter
-type RangeKey = 'gt' | 'lt';
-
-const updateFilter = (
-  prevState: ExploreFilterType,
-  query: keyof ExploreFilterType,
-  numericValue: number,
-  rangeKey: RangeKey
-): ExploreFilterType => {
-  if (typeof prevState[query] === 'object' && prevState[query] !== null) {
-    return {
-      ...prevState,
-      [query]: {
-        ...(prevState[query] as object),
-        [rangeKey]: Number(numericValue),
-      },
-    };
-  }
-  return prevState;
-};
+type RangeKey = 'min' | 'max';
 
 function isRangeType(value: any): value is RangeType {
   return value && typeof value.gt === 'number' && typeof value.lt === 'number';
@@ -97,26 +77,23 @@ const RangeInput = ({ query, filter, setFilter }: PropType) => {
   const handleNumericChange =
     (rangeKey: RangeKey) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = event.target.value;
-      // const numericValue = inputValue.replace(/[^-0-9.]/g, '');
       const numericValue = sanitizeInputValue(inputValue);
-      setFilter((prevState) =>
-        updateFilter(
-          prevState,
-          query as keyof ExploreFilterType,
-          Number(numericValue),
-          rangeKey
-        )
-      );
+      setFilter((prevState) => ({
+        price: {
+          ...prevState.price,
+          [rangeKey]: numericValue,
+        },
+      }));
 
-      if (rangeKey === 'gt') {
+      if (rangeKey === 'min') {
         setValue1(numericValue);
-      } else if (rangeKey === 'lt') {
+      } else if (rangeKey === 'max') {
         setValue2(numericValue);
       }
     };
 
-  const handleGteChange = handleNumericChange('gt');
-  const handleLtChange = handleNumericChange('lt');
+  const handleGteChange = handleNumericChange('min');
+  const handleLtChange = handleNumericChange('max');
 
   // Trigger error based on checks and inputs
   useEffect(() => {
@@ -153,11 +130,11 @@ const RangeInput = ({ query, filter, setFilter }: PropType) => {
             type="number"
             value={(
               filter[query as keyof ExploreFilterType] as RangeType
-            ).gt.toString()}
+            ).min.toString()}
             onChange={handleGteChange}
-            placeholder="Greater"
+            placeholder="0 ETH"
             className={isError1 ? 'error_input' : ''}
-            name="gt"
+            name="min"
           />
         </div>
         <div className="input_range">
@@ -168,11 +145,11 @@ const RangeInput = ({ query, filter, setFilter }: PropType) => {
             type="number"
             value={(
               filter[query as keyof ExploreFilterType] as RangeType
-            ).lt.toString()}
+            ).max.toString()}
             onChange={handleLtChange}
-            placeholder="Less"
+            placeholder="0 ETH"
             className={isError2 ? 'error_input' : ''}
-            name="lt"
+            name="max"
           />
         </div>
       </div>

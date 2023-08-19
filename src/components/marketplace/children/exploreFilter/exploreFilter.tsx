@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import {
-  ExploreContext,
-  ExploreContextReturnTypes,
-} from '@/contexts/ExploreContext';
+  MarketplaceContextReturnTypes,
+  MarketplaceContext,
+} from '@/contexts/MarketplaceContext';
 import {
   FilterContainer,
   FilterItem,
@@ -14,9 +14,14 @@ import { filterToggleVariant } from '@/styles/animation/filterToggleVariant';
 import { useBreakPointDown } from '@/hooks/useBreakPoint';
 import { AnimatePresence } from 'framer-motion';
 import { FaChevronDown } from 'react-icons/fa';
-import RangeInput from '@/components/global/form/InputFields/rangeInput';
+import RangeInput from '@/components/marketplace/children/exploreFilter/rangeInput';
 import SelectTags from '@/components/global/form/InputFields/selectTags';
 import useGetCategories from '@/hooks/RequestHooks/GET/useGetCategories';
+import { deepEqual } from '@/helpers/deepEqual';
+import {
+  ExploreFilterType,
+  initialExploreFilter,
+} from '@/types/marketplaceTypes';
 
 interface ExploreFilterTypes {
   filterToggle: boolean;
@@ -25,48 +30,43 @@ interface ExploreFilterTypes {
 const filters = [
   {
     id: 1,
-    title: 'Minimum Investment',
+    title: 'Price (ETH)',
     inputType: 'field',
-    query: 'minInvestment',
+    query: 'price',
   },
-  { id: 2, title: 'Amount Raised', inputType: 'field', query: 'amountRaised' },
-  { id: 3, title: 'Target Amount', inputType: 'field', query: 'targetAmount' },
-  { id: 4, title: 'Category', inputType: 'select', query: 'categoryId' },
-  {
-    id: 5,
-    title: 'Number of Investors',
-    inputType: 'field',
-    query: 'noOfInvestors',
-  },
-  {
-    id: 6,
-    title: 'Investment Days Left',
-    inputType: 'field',
-    query: 'noOfDaysLeft',
-  },
-  { id: 7, title: 'Number of Likes', inputType: 'field', query: 'noOfLikes' },
 ];
 
 const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
-  const { categories } = useGetCategories();
-  const [toggleFilter, setToggleFilter] = useState<number | null>(null);
+  const { exploreFilter, setExploreFilter, handleClearFilter } = useContext(
+    MarketplaceContext
+  ) as MarketplaceContextReturnTypes;
+
+  const [toggleFilter, setToggleFilter] = useState<number | null>(1);
 
   const { breakPoint: switchToggleMode } = useBreakPointDown({
     breakMark: 798,
   });
+
+  // Check if the filter has new values
+  const isFilterEmpty = deepEqual(initialExploreFilter, exploreFilter);
 
   return (
     <AnimatePresence>
       <FilterContainer
         variants={filterToggleVariant(switchToggleMode)}
         initial="hidden"
-        animate={filterToggle ? 'show' : 'hidden'}
+        animate={filterToggle ? 'show' : 'show'}
         exit="exit"
       >
-        <FilterMenu>
-          <button className="apply_btn_active">Apply Filter</button>
-          <button className="clear_btn">Clear Filter</button>
-        </FilterMenu>
+        {!isFilterEmpty && (
+          <FilterMenu>
+            <FilterMenu>
+              <button className="clear_btn" onClick={handleClearFilter}>
+                Clear Filter
+              </button>
+            </FilterMenu>
+          </FilterMenu>
+        )}
         {filters.map((filter) => (
           <FilterItem
             key={filter.id}
@@ -95,16 +95,13 @@ const ExploreFilter = ({ filterToggle }: ExploreFilterTypes) => {
               initial="hidden"
               animate={toggleFilter === filter.id ? 'show' : 'hidden'}
             >
-              {/* {filter.inputType === 'field' && (
+              {filter.inputType === 'field' && (
                 <RangeInput
-                  query={filter.title}
-                  setFilter={setToggleFilter}
-                  filter={toggleFilter}
+                  query={filter.query}
+                  setFilter={setExploreFilter}
+                  filter={exploreFilter}
                 />
               )}
-              {filter.inputType === 'select' && (
-                <SelectTags data={categories || []} />
-              )} */}
             </FilterItemHidden>
           </FilterItem>
         ))}
