@@ -13,6 +13,7 @@ import {
 import useGetCategories from '@/hooks/RequestHooks/GET/useGetCategories';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { Notification } from '@/components/global';
+import { isProjectFormComplete } from '@/helpers/inputChecks';
 
 const OverviewTab = () => {
   const { categories } = useGetCategories();
@@ -146,7 +147,8 @@ const OverviewTab = () => {
       !!projectFormData.main.categoryId &&
       !!projectFormData.main.bannerImageUrl &&
       !!projectFormData.detail.overview &&
-      projectFormData.detail.overview !== '****'
+      projectFormData.detail.overview !== '****' &&
+      isProjectFormComplete(projectFormData.detail.overview)
     ) {
       setActiveTab(1);
     } else {

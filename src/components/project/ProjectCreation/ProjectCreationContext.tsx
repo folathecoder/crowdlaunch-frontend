@@ -48,7 +48,6 @@ export interface ProjectCreactionContextReturnTypes {
   setCompletedTabs: React.Dispatch<React.SetStateAction<number[]>>;
   formCompleted: boolean;
   setFormCompleted: React.Dispatch<React.SetStateAction<boolean>>;
-  isUpdatePage: boolean;
 }
 
 interface PropTypes {
@@ -60,22 +59,8 @@ export const ProjectCreactionContext =
 
 const ProjectCreactionProvider = ({ children }: PropTypes): ReactElement => {
   const { wallet } = useWallet();
+
   const [formCompleted, setFormCompleted] = useState(false);
-  // const [projectId, setProjectId] = useState('');
-  const [isUpdatePage, setIsUpdatePage] = useState(false);
-
-  // const { project, fetchingStatus: fetchProjectStatus } = useGetProjectById({
-  //   projectId: projectId,
-  // });
-
-  // const [activeTab, setActiveTab] = useState(() => {
-  //   if (typeof window !== 'undefined') {
-  //     const savedTab = localStorage.getItem('activeTab');
-  //     return savedTab ? Number(savedTab) : 0;
-  //   }
-  //   return 0;
-  // });
-
   const [activeTab, setActiveTab] = useState(0);
   const [completedTabs, setCompletedTabs] = useState<number[] | []>([]);
   const [projectFormData, setProjectFormData] =
@@ -104,22 +89,7 @@ const ProjectCreactionProvider = ({ children }: PropTypes): ReactElement => {
     }
   }, [wallet.walletAddress]);
 
-  // Project update logic
-
-  // TODO: Get the project id from slug
-
-  // const router = useRouter();
-  // const pathSegments = router.pathname.split('/');
-  // const lastSlug = pathSegments[pathSegments.length - 1];
-
-  // Confirm if the page is an update page and get the projectId
-  // useEffect(() => {
-  //   if (router.pathname.includes('/project/update')) {
-  //     const pathSegments = router.asPath.split('/');
-  //     const lastSlug = pathSegments[pathSegments.length - 1];
-  //     setProjectId(lastSlug);
-  //   }
-  // }, [router.pathname, router.asPath]);
+  console.log(projectFormData);
 
   return (
     <ProjectCreactionContext.Provider
@@ -132,7 +102,6 @@ const ProjectCreactionProvider = ({ children }: PropTypes): ReactElement => {
         setCompletedTabs,
         formCompleted,
         setFormCompleted,
-        isUpdatePage,
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { debounce } from 'lodash';
-import Image from 'next/image';
+import { BsPatchCheckFill } from 'react-icons/bs';
 import { ExploreHolders, Holder, ScrollButton } from './HoldersSectionStyles';
 import { ProfileLottie } from 'public/images';
 import { BsArrowRightShort, BsArrowLeftShort } from 'react-icons/bs';
@@ -86,25 +86,32 @@ const HoldersSection = () => {
               />
             ))}
         {fetchingStatus === 2 &&
-          users?.map((user) => (
-            <div key={user?.userId}>
-              <Holder>
-                {user?.userProfileImage ? (
-                  <CroppedImage
-                    src={user?.userProfileImage || ''}
-                    alt={user?.userName}
-                    width={150}
-                    height={150}
-                  />
-                ) : (
-                  <LottieImage animationData={ProfileLottie} />
-                )}
-              </Holder>
-              <div>
-                <h5>{user?.userName || `Anonymous`}</h5>
+          users
+            ?.filter((user) => user.userProfileImage !== '')
+            .map((user) => (
+              <div key={user?.userId}>
+                <Holder>
+                  {user?.userProfileImage ? (
+                    <CroppedImage
+                      src={user?.userProfileImage || ''}
+                      alt={user?.userName}
+                      width={150}
+                      height={150}
+                    />
+                  ) : (
+                    <LottieImage animationData={ProfileLottie} />
+                  )}
+                </Holder>
+                <div>
+                  <h5>
+                    {user?.userName || `Anonymous`}
+                    <span>
+                      <BsPatchCheckFill />
+                    </span>
+                  </h5>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
       </ExploreHolders>
       {!isAtEnd && (
         <ScrollButton onClick={() => scroll(100)} className="right">

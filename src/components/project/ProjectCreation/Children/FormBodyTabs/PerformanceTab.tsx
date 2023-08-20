@@ -5,6 +5,8 @@ import {
 } from '@/components/project/ProjectCreation/ProjectCreationContext';
 import { RichTextEditor, Button } from '@/components/global';
 import { InputContainer, FormButtonContainer } from './FormStyles';
+import { Notification } from '@/components/global';
+import { isProjectFormComplete } from '@/helpers/inputChecks';
 
 const PeformanceTab = () => {
   const { projectFormData, setProjectFormData, setActiveTab } = useContext(
@@ -14,6 +16,7 @@ const PeformanceTab = () => {
   const [state1, setState1] = useState('');
   const [state2, setState2] = useState('');
   const [state3, setState3] = useState('');
+  const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {
     setProjectFormData((prevState) => ({
@@ -37,8 +40,10 @@ const PeformanceTab = () => {
   }, []);
 
   const saveAndContinue = () => {
-    if (projectFormData.detail.performance !== '') {
+    if (isProjectFormComplete(projectFormData.detail.performance)) {
       setActiveTab(6);
+    } else {
+      setShowNotifications(true);
     }
   };
   return (
@@ -85,6 +90,11 @@ const PeformanceTab = () => {
           buttonFunction={saveAndContinue}
         />
       </FormButtonContainer>
+      <Notification
+        message="Please complete all fields"
+        setState={setShowNotifications}
+        state={showNotifications}
+      />
     </div>
   );
 };

@@ -57,6 +57,10 @@ export const NavHeader = styled.div`
     border-radius: 100%;
     border: 2px solid var(--color-accent-100);
     cursor: pointer;
+
+    img {
+      border-radius: 100%;
+    }
   }
 
   .disconnect-button {

@@ -16,6 +16,7 @@ const Container = styled(motion.div)`
   left: 1rem;
   z-index: 9000;
   border: 1px solid var(--color-border-100);
+  max-width: 20rem;
 
   & > * {
     height: 100%;

@@ -10,7 +10,14 @@ interface PropType {
 
 const CroppedImage = ({ src, height, width, alt }: PropType) => {
   return (
-    <CldImage src={src} height={height} width={width} alt={alt} crop="thumb" />
+    <CldImage
+      src={src}
+      height={height}
+      width={width}
+      alt={alt}
+      // crop="thumb"
+      sizes="100vw"
+    />
   );
 };
 

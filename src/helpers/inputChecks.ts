@@ -31,3 +31,23 @@ export const sanitizeInputValue = (inputValue: string): string => {
 
   return numericValue;
 };
+
+export const isProjectFormComplete = (str: string): boolean => {
+  const matches = str.match(/\*\*/g);
+
+  if (!matches) return true;
+
+  for (let i = 0, len = matches.length; i < len; i++) {
+    const index = str.indexOf('**');
+    if (
+      index === 0 ||
+      str[index - 1] === '*' ||
+      index + 2 === str.length ||
+      str[index + 2] === '*'
+    ) {
+      return false;
+    }
+    str = str.substring(index + 2);
+  }
+  return true;
+};

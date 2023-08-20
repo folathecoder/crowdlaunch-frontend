@@ -5,6 +5,8 @@ import {
 } from '@/components/project/ProjectCreation/ProjectCreationContext';
 import { RichTextEditor, Button } from '@/components/global';
 import { InputContainer, FormButtonContainer } from './FormStyles';
+import { Notification } from '@/components/global';
+import { isProjectFormComplete } from '@/helpers/inputChecks';
 
 const RiskTab = () => {
   const { projectFormData, setProjectFormData, setActiveTab } = useContext(
@@ -13,6 +15,7 @@ const RiskTab = () => {
 
   const [state1, setState1] = useState('');
   const [state2, setState2] = useState('');
+  const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {
     setProjectFormData((prevState) => ({
@@ -35,8 +38,10 @@ const RiskTab = () => {
   }, []);
 
   const saveAndContinue = () => {
-    if (projectFormData.detail.risks !== '') {
+    if (isProjectFormComplete(projectFormData.detail.risks)) {
       setActiveTab(7);
+    } else {
+      setShowNotifications(true);
     }
   };
   return (
@@ -73,6 +78,11 @@ const RiskTab = () => {
           buttonFunction={saveAndContinue}
         />
       </FormButtonContainer>
+      <Notification
+        message="Please complete all fields"
+        setState={setShowNotifications}
+        state={showNotifications}
+      />
     </div>
   );
 };

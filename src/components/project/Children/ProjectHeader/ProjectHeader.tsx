@@ -91,13 +91,6 @@ const ProjectHeader = () => {
             <h2>{category?.categoryName}</h2>
           </div>
           <IconWrapper>
-            {isProjectCreator && (
-              <Link href={`/project/update/${projectData?.projectId}`}>
-                <button aria-label="Edit Button" title="Edit Project">
-                  <MdEdit />
-                </button>
-              </Link>
-            )}
             <a
               href={`${ETHERSCAN_URL}/address/${projectData?.projectWalletAddress}`}
               target="_blank"

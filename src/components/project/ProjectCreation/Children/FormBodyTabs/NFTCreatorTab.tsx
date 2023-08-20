@@ -146,8 +146,8 @@ const NFTCreatorTab: React.FC = () => {
         <div
           ref={ref}
           style={{
-            maxWidth: '350px',
-            height: '350px',
+            width: '330px',
+            height: '370px',
             backgroundColor: projectFormData.main.customColour.bgColour1,
             backgroundImage: `linear-gradient(19deg, ${projectFormData.main.customColour.bgColour1} 0%, ${projectFormData.main.customColour.bgColour2} 100%)`,
             display: 'flex',
@@ -174,7 +174,7 @@ const NFTCreatorTab: React.FC = () => {
                   color: projectFormData.main.customColour.fontColour,
                 }}
               >
-                {` The holder of this NFT owns $894.90 worth of claimable shares in ${projectFormData.main.projectName}`}
+                {` The holder of this NFT owns 0 ETH worth of claimable shares in ${projectFormData.main.projectName}`}
               </p>
             </div>
             <div
@@ -221,11 +221,11 @@ const NFTCreatorTab: React.FC = () => {
                 fontSize: '14px',
               }}
             >
-              Share Price: $894.90
+              Share Price: 0 ETH
             </p>
           </div>
         </div>
-        <div>
+        <div className="download">
           <div>
             <Button
               buttonTitle="Download Template"

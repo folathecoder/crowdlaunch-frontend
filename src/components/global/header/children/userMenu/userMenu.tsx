@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
+import { AppContext, AppContextReturnTypes } from '@/contexts/AppContext';
 import Backdrop from '@mui/material/Backdrop';
 import Link from 'next/link';
 import { MdClose } from 'react-icons/md';
@@ -16,6 +17,7 @@ import { profileMenu } from '@/data/menuData';
 import { useRouter } from 'next/router';
 import { FaPowerOff } from 'react-icons/fa';
 import usePostAuth from '@/hooks/RequestHooks/POST/usePostAuth';
+import { CroppedImage } from '@/components/global';
 
 interface UserMenuTypes {
   showUserMenu: boolean;
@@ -24,7 +26,7 @@ interface UserMenuTypes {
 
 const UserMenu = ({ showUserMenu, setShowUserMenu }: UserMenuTypes) => {
   const { wallet, handleClearWallet, disconnectWallet } = useWallet();
-  const { userData, error, fetchingStatus } = usePostAuth();
+  const { user } = useContext(AppContext) as AppContextReturnTypes;
 
   useEscapeKeyToggle({
     state: showUserMenu,
@@ -73,16 +75,27 @@ const UserMenu = ({ showUserMenu, setShowUserMenu }: UserMenuTypes) => {
             <NavHeader>
               <div>
                 <div className="profile-icon">
-                  <Lottie
-                    ref={animationRef}
-                    options={{
-                      loop: true,
-                      autoplay: false,
-                      animationData: ProfileLottie,
-                    }}
-                    width={40}
-                    height={40}
-                  />
+                  {user?.user.userProfileImage && user?.user.userName ? (
+                    <>
+                      <CroppedImage
+                        src={user.user.userProfileImage}
+                        alt={user.user.userName}
+                        width={35}
+                        height={35}
+                      />
+                    </>
+                  ) : (
+                    <Lottie
+                      ref={animationRef}
+                      options={{
+                        loop: true,
+                        autoplay: false,
+                        animationData: ProfileLottie,
+                      }}
+                      width={35}
+                      height={35}
+                    />
+                  )}
                 </div>
                 <div>
                   {wallet.walletAddress && (

@@ -76,14 +76,38 @@ const ProjectCreatorTab = () => {
   }, [projectData?.projectId, projectDetailCreationStatus, router]);
 
   const handleProjectCreation = () => {
-    setStartProjectCreation(true);
-    createProject();
+    const { targetAmount, minInvestment, noOfDaysLeft } = projectFormData.main;
+
+    const isValidTargetAmount =
+      targetAmount !== 0 && targetAmount > minInvestment;
+    const isValidDays = noOfDaysLeft !== 0;
+
+    if (isValidTargetAmount && isValidDays) {
+      setStartProjectCreation(true);
+      createProject();
+    } else {
+      setShowNotification(true);
+      setNotificationMessage(getErrorMessage());
+    }
+  };
+
+  const getErrorMessage = () => {
+    const { targetAmount, minInvestment, noOfDaysLeft } = projectFormData.main;
+
+    if (targetAmount === 0 || targetAmount < minInvestment) {
+      return 'Project creation was not successful: Ensure that the target amount is not set to zero and it must be greater than the minimum investment amount.';
+    }
+
+    if (noOfDaysLeft === 0) {
+      return 'Project creation was not successful: Ensure that the number of days left is not set to zero.';
+    }
+
+    return 'Project creation was not successful: Ensure you complete all fields and try again';
   };
 
   const handleProjectLinkBtn = () => {
-    router.push(`/project/${projectData?.projectId}`);
+    router.push(`/profile#listed-projects`);
     setProjectFormData(initialProjectFormData);
-    setActiveTab(0);
   };
 
   return (
@@ -161,13 +185,12 @@ const ProjectCreatorTab = () => {
               projectData?.projectId ? projectData?.projectName : 'Your project'
             } is now LIVE and ready to get funded!" 🎉`}</h2>
             <Button
-              buttonTitle="View Project"
+              buttonTitle="View Projects"
               buttonType="action"
               buttonFunction={handleProjectLinkBtn}
             />
           </div>
         )}
-
         <Notification
           message={notificationMessage}
           state={showNotification}
