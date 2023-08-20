@@ -9,6 +9,7 @@ import {
   NFTCreator,
 } from './nftCardStyles';
 import useGetNftById from '@/hooks/RequestHooks/GET/useGetNftById';
+import { CroppedImage } from '@/components/global';
 
 interface PropType {
   nftId: string;
@@ -25,7 +26,7 @@ const NFTCard = ({ nftId }: PropType) => {
           <NFTContainer>
             <NFTImageContainer>
               <Image
-                src="https://media.graphassets.com/aDjrS7P6SuON0hcjBGk8"
+                src={data.nftImage}
                 alt={data.nftName}
                 layout="fill"
                 objectFit="cover"

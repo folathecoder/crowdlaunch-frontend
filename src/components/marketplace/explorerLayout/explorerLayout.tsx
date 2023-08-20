@@ -28,10 +28,6 @@ import NotFoundImage from 'public/images/global/not-found.json';
 const ExplorerLayout = () => {
   const [filterToggle, setFilterToggle] = useState(false);
 
-  const { breakPoint: switchToggleMode } = useBreakPointDown({
-    breakMark: 798,
-  });
-
   return (
     <MarketplaceProvider>
       <ExploreContainer>
