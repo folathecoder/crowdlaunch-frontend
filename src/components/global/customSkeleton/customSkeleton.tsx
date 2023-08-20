@@ -6,6 +6,7 @@ interface PropType {
   width: number | string;
   marginTop?: number;
   marginBottom?: number;
+  variant?: 'rounded' | 'circular';
 }
 
 const CustomSkeleton = ({
@@ -13,10 +14,11 @@ const CustomSkeleton = ({
   width,
   marginTop,
   marginBottom,
+  variant,
 }: PropType) => {
   return (
     <Skeleton
-      variant="rounded"
+      variant={variant || 'rounded'}
       height={height}
       width={width}
       animation="wave"
@@ -24,6 +26,7 @@ const CustomSkeleton = ({
         background: 'rgb(211 194 194 / 10%)',
         marginTop: `${marginTop || 0}rem`,
         marginBottom: `${marginBottom || 0}rem`,
+        minWidth: `${width}px`,
       }}
     />
   );

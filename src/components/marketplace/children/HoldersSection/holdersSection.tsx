@@ -2,10 +2,13 @@ import React, { useRef, useState, useEffect } from 'react';
 import { debounce } from 'lodash';
 import Image from 'next/image';
 import { ExploreHolders, Holder, ScrollButton } from './HoldersSectionStyles';
-import { holders } from '@/data/marketplace/marketplaceData';
+import { ProfileLottie } from 'public/images';
 import { BsArrowRightShort, BsArrowLeftShort } from 'react-icons/bs';
+import useGetUsers from '@/hooks/RequestHooks/GET/useGetUsers';
+import { LottieImage, CustomSkeleton } from '@/components/global';
 
 const HoldersSection = () => {
+  const { users, fetchingStatus } = useGetUsers();
   const ref = useRef<HTMLDivElement>(null);
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
@@ -57,7 +60,7 @@ const HoldersSection = () => {
 
     return () => {
       if (ref.current) {
-        ref.current.removeEventListener('scroll', handleScroll);
+        ref.current?.removeEventListener('scroll', handleScroll);
       }
     };
   }, []);
@@ -70,16 +73,37 @@ const HoldersSection = () => {
         </ScrollButton>
       )}
       <ExploreHolders ref={ref}>
-        {holders.map((item) => (
-          <div key={item.id}>
-            <Holder>
-              <Image src={item.collectorImage} alt="featured image" />
-            </Holder>
-            <div>
-              <h5>{item.collectorName}</h5>
+        {fetchingStatus === 1 &&
+          new Array(16)
+            .fill(null)
+            .map((item) => (
+              <CustomSkeleton
+                key={item}
+                height={150}
+                width={150}
+                variant="circular"
+              />
+            ))}
+        {fetchingStatus === 2 &&
+          users?.map((user) => (
+            <div key={user?.userId}>
+              <Holder>
+                {user?.userProfileImage ? (
+                  <Image
+                    src={user?.userProfileImage || ''}
+                    alt={user?.userName}
+                    width={150}
+                    height={150}
+                  />
+                ) : (
+                  <LottieImage animationData={ProfileLottie} />
+                )}
+              </Holder>
+              <div>
+                <h5>{user?.userName || `Anonymous`}</h5>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </ExploreHolders>
       {!isAtEnd && (
         <ScrollButton onClick={() => scroll(100)} className="right">
