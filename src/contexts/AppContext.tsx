@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode, useState } from 'react';
-import usePostAuth from '@/hooks/RequestHooks/POST/usePostAuth';
+import usePostAuth, { AuthType } from '@/hooks/RequestHooks/POST/usePostAuth';
 import useGetUserByAddress from '@/hooks/RequestHooks/GET/useGetUserByAddress';
 import { FetchingStatus } from '@/types/fetchingTypes';
 import { UserProfileType } from '@/types/projectTypes';
@@ -11,6 +11,7 @@ export interface AppContextReturnTypes {
   crop: {
     aspect: number;
   };
+  userData: AuthType | null;
 }
 
 interface PropTypes {
@@ -32,7 +33,9 @@ const AppProvider = ({ children }: PropTypes): ReactElement => {
   });
 
   return (
-    <AppContext.Provider value={{ user, error, fetchingStatus, crop }}>
+    <AppContext.Provider
+      value={{ user, error, fetchingStatus, crop, userData }}
+    >
       {children}
     </AppContext.Provider>
   );

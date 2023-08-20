@@ -33,7 +33,7 @@ export const InputContainer = styled.div`
     border: 0.1rem solid var(--color-border-100);
     background-color: var(--color-bg-200);
     color: var(--color-font-100);
-    margin-bottom: 1rem;
+    margin: 1rem 0rem;
 
     &:active {
       outline: 0.1rem solid var(--color-accent-100);

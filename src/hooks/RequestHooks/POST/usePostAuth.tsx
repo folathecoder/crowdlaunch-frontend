@@ -4,7 +4,7 @@ import useWallet from '@/wallet/useWallet';
 import { useDispatch, useSelector } from 'react-redux';
 import { setToggleSettings } from '@/redux/slices/profileSettingSlice';
 
-interface AuthType {
+export interface AuthType {
   walletAddress: string;
   accountCreated: boolean;
   accountSignedIn: boolean;
