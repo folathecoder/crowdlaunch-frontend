@@ -43,7 +43,7 @@ export const ProfileImage = styled.div`
   max-width: var(--max-container);
   bottom: 0;
   transform: translateY(25px);
-  border-radius: 8px;
+  border-radius: 10px;
   border: 2px solid var(--color-accent-100);
 
   img {

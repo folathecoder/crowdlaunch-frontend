@@ -5,6 +5,8 @@ import {
 } from '@/components/project/ProjectCreation/ProjectCreationContext';
 import { RichTextEditor, Button } from '@/components/global';
 import { InputContainer, FormButtonContainer } from './FormStyles';
+import { isProjectFormComplete } from '@/helpers/inputChecks';
+import { Notification } from '@/components/global';
 
 const CompetitorTab = () => {
   const { projectFormData, setProjectFormData, setActiveTab } = useContext(
@@ -13,6 +15,7 @@ const CompetitorTab = () => {
   const [coreCompetitors, setCoreCompetitors] = useState('');
   const [differentCompetitor, setDifferentCompetitor] = useState('');
   const [uniqueFeatures, setUniqueFeatures] = useState('');
+  const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {
     setProjectFormData((prevState) => ({
@@ -36,8 +39,10 @@ const CompetitorTab = () => {
   }, []);
 
   const saveAndContinue = () => {
-    if (projectFormData.detail.competitors !== '') {
+    if (isProjectFormComplete(projectFormData.detail.competitors)) {
       setActiveTab(2);
+    } else {
+      setShowNotifications(true);
     }
   };
 
@@ -91,6 +96,11 @@ const CompetitorTab = () => {
           buttonFunction={saveAndContinue}
         />
       </FormButtonContainer>
+      <Notification
+        message="Please complete all fields"
+        setState={setShowNotifications}
+        state={showNotifications}
+      />
     </div>
   );
 };

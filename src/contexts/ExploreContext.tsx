@@ -156,7 +156,7 @@ const ExploreProvider = ({ children }: PropTypes): ReactElement => {
       }
     }
 
-    // Since 'ascending' is always set to false in your example:
+    // Since 'ascending' is always set to false
     query.ascending = false;
 
     router.push({

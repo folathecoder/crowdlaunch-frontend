@@ -18,12 +18,15 @@ export const NFTContainer = styled.div`
 
 export const NFTImageContainer = styled.div`
   width: 100%;
-  height: 267px;
+  min-height: 300px;
   border-radius: 8px;
   position: relative;
+  background-color: var(--color-accent-100);
 
   img {
     border-radius: 8px;
+    width: 100% !important;
+    height: auto;
   }
 `;
 

@@ -5,11 +5,15 @@ import {
 } from '@/components/project/ProjectCreation/ProjectCreationContext';
 import { RichTextEditor, Button } from '@/components/global';
 import { InputContainer, FormButtonContainer } from './FormStyles';
+import { isProjectFormComplete } from '@/helpers/inputChecks';
+import { Notification } from '@/components/global';
 
 const StrategyTab = () => {
   const { projectFormData, setProjectFormData, setActiveTab } = useContext(
     ProjectCreactionContext
   ) as ProjectCreactionContextReturnTypes;
+
+  const [showNotifications, setShowNotifications] = useState(false);
 
   const [state1, setState1] = useState('');
   const [state2, setState2] = useState('');
@@ -39,8 +43,10 @@ const StrategyTab = () => {
   }, []);
 
   const saveAndContinue = () => {
-    if (projectFormData.detail.strategy !== '') {
+    if (isProjectFormComplete(projectFormData.detail.strategy)) {
       setActiveTab(3);
+    } else {
+      setShowNotifications(true);
     }
   };
 
@@ -98,6 +104,11 @@ const StrategyTab = () => {
           buttonFunction={saveAndContinue}
         />
       </FormButtonContainer>
+      <Notification
+        message="Please complete all fields"
+        setState={setShowNotifications}
+        state={showNotifications}
+      />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 export interface RangeType {
-  gt: number;
-  lt: number;
+  gt: number | '';
+  lt: number | '';
 }
 
 export interface ExploreFilterType {
@@ -22,24 +22,24 @@ export const initialExploreFilter: ExploreFilterType = {
   active: false,
   mostLiked: false,
   minInvestment: {
-    gt: 0,
-    lt: 0,
+    gt: '',
+    lt: '',
   },
   amountRaised: {
-    gt: 0,
-    lt: 0,
+    gt: '',
+    lt: '',
   },
   targetAmount: {
-    gt: 0,
-    lt: 0,
+    gt: '',
+    lt: '',
   },
   noOfInvestors: {
-    gt: 0,
-    lt: 0,
+    gt: '',
+    lt: '',
   },
   noOfDaysLeft: {
-    gt: 0,
-    lt: 0,
+    gt: '',
+    lt: '',
   },
   categoryId: [],
 };

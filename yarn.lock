@@ -1071,6 +1071,19 @@
     "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
+"@cloudinary-util/url-loader@^3.10.0":
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-3.10.0.tgz#30dbed4d60968687c9161a60b246da62d42c3e33"
+  integrity sha512-RNp6WayU6e5ikA7yCRqNhp0lOwLl82vLco9EwpES2si6Hb+g9yEaeTYvobD44ISQeJUnPl6e1c/AEYVSjfzwrg==
+  dependencies:
+    "@cloudinary-util/util" "2.2.1"
+    "@cloudinary/url-gen" "^1.10.2"
+
+"@cloudinary-util/util@2.2.1", "@cloudinary-util/util@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/util/-/util-2.2.1.tgz#c482d9321d37d921b347858a121c161b68782bd3"
+  integrity sha512-MEIqn5WtPP3mxSMTNNfpqlGS1UquAXcjmVdY/t/edD/ZWVjI85viBiOMIuF0W6n6UF5gTstLymfQNYx0YO/GZg==
+
 "@cloudinary/html@^1.11.2":
   version "1.11.2"
   resolved "https://registry.yarnpkg.com/@cloudinary/html/-/html-1.11.2.tgz#a906234880ffad3b6e0666a650157b885204375e"
@@ -1097,7 +1110,14 @@
   dependencies:
     "@cloudinary/url-gen" "^1.7.0"
 
-"@cloudinary/url-gen@^1.11.1", "@cloudinary/url-gen@^1.7.0":
+"@cloudinary/url-gen@^1.10.2", "@cloudinary/url-gen@^1.11.2":
+  version "1.11.2"
+  resolved "https://registry.yarnpkg.com/@cloudinary/url-gen/-/url-gen-1.11.2.tgz#a454dc77f9efb58c6f2c2f61b84d0d3e2dce9405"
+  integrity sha512-9yL3BlThh3PfyRg/zS8cQVic3FdFaIOp361YrDrQ4fqYbYE47SGWF4ji9KoFxYF4ejfDEptayeG9jF2C465KRQ==
+  dependencies:
+    "@cloudinary/transformation-builder-sdk" "^1.5.1"
+
+"@cloudinary/url-gen@^1.7.0":
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/@cloudinary/url-gen/-/url-gen-1.11.1.tgz#751ac0d6101d687433f631e848700fd722ae5d69"
   integrity sha512-j5nYZOMeB4Ht1W8C6RXEvVNJVME1sObxtdgtnJDiGcBQmwI1EsCedSQSzkJoely3jhx+yI6WGCLGniF/PE+Idw==
@@ -5435,6 +5455,19 @@ natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
+
+next-cloudinary@^4.18.0:
+  version "4.18.0"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-4.18.0.tgz#6ee87882f87d7a42784b5cd648bf469b2d8a6d35"
+  integrity sha512-CSEaDBjuEa+eTYns4i5ieK4sm72woNwBk8820V5i93/OduRBcT521SvDDnICX+h40LW2xsOQQF9aRIQcGteOlw==
+  dependencies:
+    "@cloudinary-util/url-loader" "^3.10.0"
+    "@cloudinary-util/util" "^2.2.1"
+
+next-image-loader@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/next-image-loader/-/next-image-loader-3.0.0.tgz#cfc23e688b2c5d58c6f3ca5e7f0b341da633211d"
+  integrity sha512-yhnFYRu3MQn3ai/YmJCSrU0oK0DpCv2jy2gxEJnDQFOiiks+CRa4GSvWiBr8n2Chs4bA5NJJhqVXix4+mA5nMg==
 
 next-redux-wrapper@^8.1.0:
   version "8.1.0"

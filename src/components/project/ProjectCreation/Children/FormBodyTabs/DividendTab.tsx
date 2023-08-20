@@ -5,6 +5,8 @@ import {
 } from '@/components/project/ProjectCreation/ProjectCreationContext';
 import { RichTextEditor, Button } from '@/components/global';
 import { InputContainer, FormButtonContainer } from './FormStyles';
+import { Notification } from '@/components/global';
+import { isProjectFormComplete } from '@/helpers/inputChecks';
 
 const DividendTab = () => {
   const { projectFormData, setProjectFormData, setActiveTab } = useContext(
@@ -13,6 +15,7 @@ const DividendTab = () => {
 
   const [state1, setState1] = useState('');
   const [state2, setState2] = useState('');
+  const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {
     setProjectFormData((prevState) => ({
@@ -35,8 +38,10 @@ const DividendTab = () => {
   }, []);
 
   const saveAndContinue = () => {
-    if (projectFormData.detail.dividend !== '') {
+    if (isProjectFormComplete(projectFormData.detail.dividend)) {
       setActiveTab(5);
+    } else {
+      setShowNotifications(true);
     }
   };
 
@@ -74,6 +79,11 @@ const DividendTab = () => {
           buttonFunction={saveAndContinue}
         />
       </FormButtonContainer>
+      <Notification
+        message="Please complete all fields"
+        setState={setShowNotifications}
+        state={showNotifications}
+      />
     </div>
   );
 };

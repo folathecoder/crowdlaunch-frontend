@@ -1,4 +1,14 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import React, {
+  useState,
+  useEffect,
+  ChangeEvent,
+  FormEvent,
+  useContext,
+} from 'react';
+import {
+  MarketplaceContextReturnTypes,
+  MarketplaceContext,
+} from '@/contexts/MarketplaceContext';
 import { SearchContainer } from './nftSearchStyles';
 import LoopCircleLoading from 'react-text-loop';
 import { ClickAwayListener } from '@mui/material';
@@ -45,7 +55,10 @@ const WordSwitcher = ({ prefix }: WordSwitcherTypes) => {
 };
 
 const NFTSearch = ({ fullWidth }: HeaderSearchTypes) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const { searchTerm, setSearchTerm } = useContext(
+    MarketplaceContext
+  ) as MarketplaceContextReturnTypes;
+
   const [showPlaceHolder, setShowPlaceHolder] = useState(true);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +67,6 @@ const NFTSearch = ({ fullWidth }: HeaderSearchTypes) => {
 
   const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Search term:', searchTerm);
     setSearchTerm('');
   };
 

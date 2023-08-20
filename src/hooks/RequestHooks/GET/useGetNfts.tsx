@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FetchingStatus } from '@/types/fetchingTypes';
 import { NftMainType } from '@/types/projectTypes';
+import { useRouter } from 'next/router';
 
 interface NftReturnType {
   nfts: NftMainType[] | null;
@@ -10,6 +11,7 @@ interface NftReturnType {
 }
 
 const useGetNfts = (): NftReturnType => {
+  const router = useRouter();
   const [nfts, setNfts] = useState<NftMainType[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [fetchingStatus, setFetchingStatus] = useState<FetchingStatus>(
@@ -20,11 +22,16 @@ const useGetNfts = (): NftReturnType => {
     setFetchingStatus(FetchingStatus.Loading);
 
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/Nft`, {
-        headers: {
-          accept: 'application/json',
-        },
-      })
+      .get(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/Nft/with-price-filter${
+          router.asPath.split('/marketplace')[1]
+        }`,
+        {
+          headers: {
+            accept: 'application/json',
+          },
+        }
+      )
       .then((response) => {
         setNfts(response.data);
         setFetchingStatus(FetchingStatus.Fetched);
@@ -33,7 +40,7 @@ const useGetNfts = (): NftReturnType => {
         setError(error);
         setFetchingStatus(FetchingStatus.Error);
       });
-  }, []);
+  }, [router.asPath]);
 
   return { nfts, error, fetchingStatus };
 };

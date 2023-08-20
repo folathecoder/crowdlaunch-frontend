@@ -203,3 +203,18 @@ export interface LikeReturnType {
   updatedAt: string;
   userId: string;
 }
+
+export interface UserType {
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
+  userName: string;
+  userProfileImage: string;
+  walletAddress: string;
+  socials: {
+    websiteUrl: string;
+    twitterUrl: string;
+    telegramUrl: string;
+    discordUrl: string;
+  };
+}

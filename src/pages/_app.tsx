@@ -1,5 +1,6 @@
 import '@/styles/global.css';
 import 'react-image-crop/dist/ReactCrop.css';
+import { Cloudinary } from '@cloudinary/url-gen';
 import type { AppProps } from 'next/app';
 import { GlobalStyles } from '@/styles/globalStyles';
 import { blackTheme } from '@/styles/theme';

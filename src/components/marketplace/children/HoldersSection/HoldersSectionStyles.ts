@@ -6,6 +6,7 @@ export const ExploreHolders = styled.section`
   flex-wrap: nowrap;
   width: 100%;
   overflow-x: scroll !important;
+  overflow-y: hidden;
   white-space: nowrap;
   margin-bottom: 70px;
   -ms-overflow-style: none;
@@ -25,12 +26,17 @@ export const ExploreHolders = styled.section`
     justify-content: center;
     text-align: center;
   }
+
+  span {
+    color: var(--color-accent-100);
+    margin-left: 0.2rem;
+  }
 `;
 
 export const Holder = styled.div`
-  height: 150px;
-  min-width: 150px;
-  background-color: black;
+  height: 154px;
+  min-width: 154px;
+  background-color: var(--color-bg-300);
   border-radius: 100%;
   border: 2px solid var(--color-accent-100);
   position: relative;
