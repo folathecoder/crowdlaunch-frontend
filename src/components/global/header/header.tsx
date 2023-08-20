@@ -22,12 +22,12 @@ import { useWeb3Modal } from '@web3modal/react';
 import useWallet from '@/wallet/useWallet';
 import Lottie from 'react-lottie';
 import { ProfileSettings } from '@/components/profile';
-import ReactCrop from 'react-image-crop';
+import { CroppedImage } from '@/components/global';
 
 const Header = () => {
   const { user, crop } = useContext(AppContext) as AppContextReturnTypes;
   const { wallet } = useWallet();
-  
+
   const { open } = useWeb3Modal();
 
   const openWalletConnectionModal = async () => {
@@ -81,7 +81,7 @@ const Header = () => {
               >
                 {user?.user.userProfileImage && user?.user.userName ? (
                   <>
-                    <Image
+                    <CroppedImage
                       src={user.user.userProfileImage}
                       alt={user.user.userName}
                       width={35}

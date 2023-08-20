@@ -11,6 +11,7 @@ import {
 import ProfileWallpaper from 'public/images/profile/wallpaper.png';
 import Lottie from 'react-lottie';
 import { ProfileLottie } from 'public/images';
+import { CroppedImage } from '@/components/global';
 
 const ProfileHeaderSection = () => {
   const { user } = useContext(ProfileContext) as ProfileReturnTypes;
@@ -34,12 +35,11 @@ const ProfileHeaderSection = () => {
       <div className="main_section">
         <ProfileImage>
           {user?.user.userProfileImage && user?.user.userName ? (
-            <Image
+            <CroppedImage
               src={user.user.userProfileImage}
               alt={user.user.userName}
               width={150}
-              height={50}
-              layout="responsive"
+              height={150}
             />
           ) : (
             <Lottie

@@ -11,6 +11,7 @@ import Notification from '@/components/global/notification/notification';
 import Loader from '@/components/global/loader/loader';
 import CustomSkeleton from '@/components/global/customSkeleton/customSkeleton';
 import LottieImage from '@/components/global/lottieImage/lottieImage';
+import CroppedImage from '@/components/global/images/croppedImage';
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   Loader,
   CustomSkeleton,
   LottieImage,
+  CroppedImage,
 };

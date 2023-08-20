@@ -6,6 +6,7 @@ import { ProfileLottie } from 'public/images';
 import { BsArrowRightShort, BsArrowLeftShort } from 'react-icons/bs';
 import useGetUsers from '@/hooks/RequestHooks/GET/useGetUsers';
 import { LottieImage, CustomSkeleton } from '@/components/global';
+import { CroppedImage } from '@/components/global';
 
 const HoldersSection = () => {
   const { users, fetchingStatus } = useGetUsers();
@@ -89,7 +90,7 @@ const HoldersSection = () => {
             <div key={user?.userId}>
               <Holder>
                 {user?.userProfileImage ? (
-                  <Image
+                  <CroppedImage
                     src={user?.userProfileImage || ''}
                     alt={user?.userName}
                     width={150}
