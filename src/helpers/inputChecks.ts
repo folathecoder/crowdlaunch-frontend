@@ -20,10 +20,8 @@ export const handleDecimals = (str: string): string => {
  * @returns A sanitized string containing only numbers and at most one decimal point.
  */
 export const sanitizeInputValue = (inputValue: string): string => {
-  // Allow only numbers and a single period.
   let numericValue = inputValue.replace(/[^0-9.]/g, '');
 
-  // If there are multiple decimal points, keep only the first one.
   const parts = numericValue.split('.');
   if (parts.length > 2) {
     numericValue = parts.shift() + '.' + parts.join('');
@@ -31,6 +29,22 @@ export const sanitizeInputValue = (inputValue: string): string => {
 
   return numericValue;
 };
+
+/**
+ * Validates if a given project form string is complete. The string is deemed complete
+ * if it does not have any standalone '**' sequences, which are presumably placeholders.
+ * The function ensures that '**' does not occur at the beginning, end, or adjacent to other '*'.
+ *
+ * @param {string} str - The project form string to be validated.
+ * @returns {boolean} Returns true if the string is complete, false otherwise.
+ *
+ * @example
+ * const isValid = isProjectFormComplete("This is a valid **project** form.");
+ * console.log(isValid); // Expected output: true
+ *
+ * const isNotValid = isProjectFormComplete("**This is an invalid project form.");
+ * console.log(isNotValid); // Expected output: false
+ */
 
 export const isProjectFormComplete = (str: string): boolean => {
   const matches = str.match(/\*\*/g);
