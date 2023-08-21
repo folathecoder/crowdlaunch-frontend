@@ -13,7 +13,7 @@ import { ProjectType } from '@/types/projectTypes';
 export const fetchAllProjects = async (): Promise<ProjectType[] | null> => {
   try {
     const response = await axios.get<ProjectType[]>(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/projects/Project`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/projects/Project/get-with-filters`
     );
     return response.data;
   } catch (error) {
