@@ -43,6 +43,9 @@ export const HeaderLeft = styled.div`
     border-radius: 100%;
     border: 2px solid var(--color-accent-100);
     cursor: pointer;
+    overflow: hidden;
+    height: 35px;
+    width: 35px;
   }
 
   .mobile-nav_btn {

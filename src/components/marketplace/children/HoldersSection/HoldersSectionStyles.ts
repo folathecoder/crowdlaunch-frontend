@@ -36,14 +36,16 @@ export const ExploreHolders = styled.section`
 export const Holder = styled.div`
   height: 154px;
   min-width: 154px;
-  background-color: var(--color-bg-300);
+  background-color: var(--color-accent-100);
   border-radius: 100%;
   border: 2px solid var(--color-accent-100);
   position: relative;
   margin-bottom: 10px;
+  overflow: hidden;
 
   img {
     border-radius: 100%;
+    overflow: hidden;
   }
 `;
 

@@ -38,6 +38,7 @@ export const ProfileHeader = styled.section<Props>`
 export const ProfileImage = styled.div`
   width: 150px;
   height: 150px;
+  overflow: hidden;
   background-color: var(--color-bg-400);
   position: absolute;
   max-width: var(--max-container);
