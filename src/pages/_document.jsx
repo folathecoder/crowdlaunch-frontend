@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import { OG_URL } from '@/data/appInfo';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -33,32 +34,32 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="public/AppLogo.svg"
-          />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
           <meta name="theme-color" content="#000000" />
-          <meta name="twitter:card" content="summary" key="twcard" />
-          <meta name="twitter:creator" content="crowdlaunch" key="twhandle" />
           <meta
             property="og:url"
             content="https://crowdlaunch.vercel.app/"
             key="ogurl"
           />
           <meta
-            property="og:image"
-            content="public/images/open-graphs/home-og-image.png"
-            key="ogimage"
-          />
-          <meta
             property="og:site_name"
             content="crowdlaunch"
             key="ogsitename"
           />
+          <meta property="og:image" content={OG_URL} />
+          <meta property="og:image:type" content={OG_URL} />
+          <meta property="og:image:width" content={OG_URL} />
+          <meta property="og:image:height" content={OG_URL} />
+          <meta name="twitter:image" content={OG_URL} />
+          <meta name="twitter:image:type" content={OG_URL} />
+          <meta name="twitter:image:width" content={OG_URL} />
+          <meta name="twitter:image:height" content={OG_URL} />
+          <meta name="twitter:card" content="summary" key="twcard" />
+          <meta name="twitter:creator" content="crowdlaunch" key="twhandle" />
+          <meta property="og:image:alt" content="Crowdlaunch" />
+          <meta property="twitter:image:alt" content="Crowdlaunch" />
           <meta property="og:image:width" content="1200" />
-          <meta property="og:image:height" content="630" />
+          <meta property="og:image:height" content="540" />
           <link
             rel="apple-touch-icon"
             href="/public/images/header/AppLogo.svg"

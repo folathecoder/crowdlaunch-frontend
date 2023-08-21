@@ -251,3 +251,17 @@ export const ProjectCreatorForm = styled.div`
     }
   }
 `;
+
+export const ProjectInfo = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 3rem;
+
+  span {
+    color: var(--color-accent-100);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;

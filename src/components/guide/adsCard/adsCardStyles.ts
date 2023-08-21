@@ -7,7 +7,6 @@ interface AdCardStylesTypes {
 export const CardContainer = styled.div`
   background-color: var(--color-bg-300);
   width: 18.75rem;
-  min-height: 18.75rem;
   position: sticky;
   top: 6.25rem;
   border-radius: 0.5rem;
@@ -18,7 +17,6 @@ export const CardContainer = styled.div`
 
 export const CardImage = styled.div`
   width: 100%;
-  height: 17.625rem;
   border-radius: 0.5rem;
 `;
 

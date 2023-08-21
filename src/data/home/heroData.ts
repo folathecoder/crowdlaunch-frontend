@@ -6,15 +6,15 @@ import growthIcon from 'public/images/home/chart-icon.svg';
 
 export const heroCardColors = [
   '#C2177E',
-  '#8A4505',
+  '#9c2f94',
   '#1C2D87',
   '#851D07',
-  '#8A4505',
+  '#9c2f94',
   '#C2177E',
-  '#8A4505',
+  '#9c2f94',
   '#1C2D87',
   '#851D07',
-  '#8A4505',
+  '#9c2f94',
 ];
 
 export const stepsData = [

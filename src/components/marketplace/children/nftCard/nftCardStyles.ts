@@ -21,7 +21,6 @@ export const NFTImageContainer = styled.div`
   min-height: 300px;
   border-radius: 8px;
   position: relative;
-  background-color: var(--color-accent-100);
 
   img {
     border-radius: 8px;
