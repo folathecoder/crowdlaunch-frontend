@@ -1,38 +1,50 @@
+import '@rainbow-me/rainbowkit/styles.css';
 import {
-  EthereumClient,
-  w3mConnectors,
-  w3mProvider,
-} from '@web3modal/ethereum';
-import { Web3Modal, useWeb3Modal } from '@web3modal/react';
+  getDefaultWallets,
+  RainbowKitProvider,
+  darkTheme,
+} from '@rainbow-me/rainbowkit';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import { mainnet } from 'wagmi/chains';
+import { SessionProvider } from 'next-auth/react';
 import {
-  arbitrum,
-  mainnet,
-  polygon,
-  bsc,
-  avalanche,
-  fantom,
-} from 'wagmi/chains';
+  RainbowKitSiweNextAuthProvider,
+  GetSiweMessageOptions,
+} from '@rainbow-me/rainbowkit-siwe-next-auth';
 
-const chains = [arbitrum, mainnet, polygon, bsc, avalanche, fantom];
-const projectId = '201547027406abdbd2521d63a4c827af';
+const { chains, publicClient } = configureChains(
+  [mainnet],
+  [
+    alchemyProvider({ apiKey: `${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}` }),
+    publicProvider(),
+  ]
+);
 
-const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
+const { connectors } = getDefaultWallets({
+  appName: 'CrowdLaunch',
+  projectId: `${process.env.NEXT_PUBLIC_WALLET_CONNECT_CLOUD_KEY}`,
+  chains,
+});
 
 const wagmiConfig = createConfig({
   autoConnect: true,
-  connectors: w3mConnectors({ projectId, chains }),
+  connectors,
   publicClient,
 });
 
-const ethereumClient = new EthereumClient(wagmiConfig, chains);
+const getSiweMessageOptions: GetSiweMessageOptions = () => ({
+  statement: 'Sign in to Crowdlaunch to create projects or fund projects.',
+});
 
 export {
   chains,
-  ethereumClient,
-  projectId,
   wagmiConfig,
-  Web3Modal,
   WagmiConfig,
-  useWeb3Modal,
+  RainbowKitProvider,
+  darkTheme,
+  SessionProvider,
+  RainbowKitSiweNextAuthProvider,
+  getSiweMessageOptions,
 };

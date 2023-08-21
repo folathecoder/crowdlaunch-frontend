@@ -23,16 +23,15 @@ import useWallet from '@/wallet/useWallet';
 import Lottie from 'react-lottie';
 import { ProfileSettings } from '@/components/profile';
 import { CroppedImage } from '@/components/global';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
 
 const Header = () => {
+  const { openConnectModal } = useConnectModal();
+
   const { user, crop } = useContext(AppContext) as AppContextReturnTypes;
   const { wallet } = useWallet();
 
   const { open } = useWeb3Modal();
-
-  const openWalletConnectionModal = async () => {
-    await open();
-  };
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -102,11 +101,13 @@ const Header = () => {
                 )}
               </button>
             ) : (
-              <Button
-                buttonTitle={removeOnMobile ? 'connect wallet' : 'connect'}
-                buttonType="action"
-                buttonFunction={openWalletConnectionModal}
-              />
+              <>
+                <Button
+                  buttonTitle={removeOnMobile ? 'connect wallet' : 'connect'}
+                  buttonType="action"
+                  buttonFunction={openConnectModal}
+                />
+              </>
             )}
           </div>
           {!removeMenuOnTablet && (
