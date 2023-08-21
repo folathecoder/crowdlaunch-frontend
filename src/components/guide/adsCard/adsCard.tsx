@@ -8,26 +8,40 @@ import {
 } from './adsCardStyles';
 import { AuthorPlaceholder } from 'public/images';
 
-const AdsCard = () => {
+interface PropTypes {
+  postImage: string;
+  postTitle: string;
+  postDescription: string;
+  postUrl: string;
+}
+
+const AdsCard = ({
+  postImage,
+  postTitle,
+  postDescription,
+  postUrl,
+}: PropTypes) => {
   const [hoverCard, setHoverCard] = useState(false);
 
   return (
-    <a href="/guide/guide" rel="noreferrer" target="_blank">
+    <a href={postUrl} rel="noreferrer" target="_blank">
       <CardContainer
         onMouseEnter={() => setHoverCard(true)}
         onMouseLeave={() => setHoverCard(false)}
       >
         <CardImage>
           <CardImageInner hoverCard={hoverCard}>
-            <Image src={AuthorPlaceholder} alt="featured image" />
+            <Image
+              src={postImage}
+              alt={postTitle}
+              objectFit="cover"
+              layout="fill"
+            />
           </CardImageInner>
         </CardImage>
         <CardContent>
-          <h3>Featured Project</h3>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore
-            debitis temporibus nulla doloremque ducimus dignissimos.
-          </p>
+          <h3>{postTitle}</h3>
+          <p>{postDescription}</p>
         </CardContent>
       </CardContainer>
     </a>

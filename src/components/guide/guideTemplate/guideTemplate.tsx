@@ -31,6 +31,7 @@ import CtaSection from '@/components/global/ctaSection/ctaSection';
 import HTMLReactParser from 'html-react-parser';
 import { PostDetailDataType } from '@/types/blogTypes';
 import { APP_URL } from '@/data/appInfo';
+import MetaData from '@/seo/metaData';
 
 const GuideTemplate = ({
   title,
@@ -39,9 +40,15 @@ const GuideTemplate = ({
   coverImage,
   content,
   author,
+  excerpt,
 }: PostDetailDataType) => {
+  const firstRelatedArticle = author?.posts?.filter(
+    (post) => post.slug !== slug
+  )[0];
+
   return (
     <>
+      <MetaData title={title} description={excerpt} />
       <ArticleContainer>
         <ArticleMainWrap>
           <ArticleInnerWrap>
@@ -101,7 +108,12 @@ const GuideTemplate = ({
               </ArticleInner>
             </Article>
             <ArticleSidebar>
-              <AdsCard />
+              <AdsCard
+                postDescription={firstRelatedArticle?.excerpt || ''}
+                postImage={firstRelatedArticle?.coverImage?.url || ''}
+                postTitle={firstRelatedArticle?.title || ''}
+                postUrl={firstRelatedArticle?.slug || ''}
+              />
             </ArticleSidebar>
           </ArticleInnerWrap>
         </ArticleMainWrap>

@@ -34,7 +34,7 @@ export const benefitData = {
   subHeading: 'Benefits',
   mainHeading: 'Why CrowdLaunch?',
   description:
-    'Developers can now build on a custom dedicated blockchain serving only their application. With scalability issues out of the way, devs can focus on creating dApps that defy expectations.',
+    'Embrace Crowdlaunch, the decentralized crowdfunding platform that leverages Non-Fungible Tokens (NFTs), unlocking unprecedented global investment opportunities for startups.',
   mainBenefit: [
     {
       id: 1,
@@ -92,9 +92,9 @@ export const benefitData = {
       ],
     },
     revenueContent: {
-      heading: 'Collect gas fee revenues.',
+      heading: 'NFT Marketplace.',
       title:
-        'Become a network owner, not a renter. Collect a cut of global gas fees from the validation process and create a revenue stream to power your project.',
+        'Our platform redefines the landscape of startup funding by enabling the issuance and trading of vesting NFT shares. Buy, Sell, Track NFT shares from your dashboard with ease.',
     },
   },
 };

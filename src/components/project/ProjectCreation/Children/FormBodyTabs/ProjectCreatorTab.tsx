@@ -9,6 +9,7 @@ import {
   ProjectCreatorContainer,
   ProjectCreatorForm,
   FormButtonContainer,
+  ProjectInfo,
 } from './FormStyles';
 import usePostProject from '@/hooks/RequestHooks/POST/usePostProject';
 import { Notification } from '@/components/global';
@@ -110,6 +111,12 @@ const ProjectCreatorTab = () => {
     setProjectFormData(initialProjectFormData);
   };
 
+  // Clear the project form data and change to the first tab
+  const handleRestartRegisteration = () => {
+    setProjectFormData(initialProjectFormData);
+    setActiveTab(0);
+  };
+
   return (
     <ProjectCreatorContainer>
       <ProjectCreatorForm>
@@ -177,6 +184,21 @@ const ProjectCreatorTab = () => {
                 buttonFunction={handleProjectCreation}
               />
             </FormButtonContainer>
+            <ProjectInfo>
+              <p>
+                Edits to this project will be locked after creation and during
+                the funding round to ensure transparency.
+              </p>
+
+              <p>
+                Not ready to create a project? Your project will be saved as a
+                draft as long as you don&apos;t clear your browser&apos;s data.
+                Made a mistake?{' '}
+                <span onClick={handleRestartRegisteration} role="button">
+                  Start Over.
+                </span>
+              </p>
+            </ProjectInfo>
           </>
         ) : (
           <div className="project_completion">
