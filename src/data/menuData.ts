@@ -18,15 +18,7 @@ export const headerMenu = [
 
 export const footerMenu = {
   copyright: `Copyright © ${APP_NAME}, ${currentYear}`,
-  footerLinks: [
-    { id: 1, title: 'Terms', link: '/terms' },
-    { id: 2, title: 'Privacy Policy', link: '/privacy-policy' },
-    {
-      id: 3,
-      title: 'Risk Disclosure',
-      link: '/risk-disclosure',
-    },
-  ],
+  footerLinks: [],
   socials: [
     {
       id: 1,

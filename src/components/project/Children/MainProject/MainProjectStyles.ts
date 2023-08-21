@@ -67,9 +67,11 @@ export const TabContentLayout = styled.section`
   flex-direction: column;
   max-width: 83rem;
   margin: 0 auto;
+  justify-content: space-between;
 
   @media ${QUERIES.tablet} {
     flex-direction: row;
+    justify-content: space-between;
   }
 `;
 
@@ -79,7 +81,7 @@ export const TabContentsWrapper = styled.div`
   padding: 0 20px;
 
   @media ${QUERIES.tablet} {
-    width: min(60%, 83rem);
+    width: 100%;
   }
 `;
 
@@ -87,11 +89,25 @@ export const VotingWrapper = styled.div`
   max-width: 100%;
   padding: 20px;
   position: relative;
+  margin: 2rem 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   & > div {
     display: grid;
     gap: 1.5rem;
     position: sticky;
     top: 90px;
+  }
+
+  img {
+    border-radius: 0.5rem;
+  }
+
+  .nft_info {
+    max-width: 320px;
+    margin-top: 30px;
+    font-style: italic;
   }
 `;

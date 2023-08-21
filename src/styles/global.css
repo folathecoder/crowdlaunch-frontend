@@ -131,3 +131,13 @@ main {
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
   stroke: #c2177e !important;
 }
+
+.tilt-container {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.tilt-container:hover {
+  transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+}

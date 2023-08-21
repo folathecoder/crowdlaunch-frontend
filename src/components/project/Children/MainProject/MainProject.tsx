@@ -6,11 +6,7 @@ import {
 import Link from 'next/link';
 import Campaign from '../MiniChildren/Campaign/Campaign';
 import Updates from '../MiniChildren/Updates/Updates';
-import { VoteProject } from '@/components/project';
-import {
-  votingData,
-  votingData2,
-} from '@/components/project/Children/VoteProject/VoteProject';
+import Image from 'next/image';
 import {
   MajorSection,
   TabsContainer,
@@ -20,6 +16,8 @@ import {
   TabContentLayout,
   VotingWrapper,
 } from './MainProjectStyles';
+import Tilt from 'react-parallax-tilt';
+import { NFTImageTemplate } from '@/components/global';
 
 interface InternalDataTypes {
   link: string;
@@ -41,7 +39,7 @@ const MainProject: React.FC = () => {
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
 
-  const [contents, setContents] = useState<React.ReactNode[]>([
+  const [contents] = useState<React.ReactNode[]>([
     <Campaign key="campaign" />,
     <Updates key="updates" />,
   ]);
@@ -86,10 +84,26 @@ const MainProject: React.FC = () => {
         <TabContentLayout>
           <TabContentsWrapper>{contents[activeContent]}</TabContentsWrapper>
           <VotingWrapper>
-            <div>
-              <VoteProject {...votingData} />
-              <VoteProject {...votingData2} />
-            </div>
+            <Tilt glareEnable glareMaxOpacity={0.4}>
+              <NFTImageTemplate
+                projectName={project?.project.projectName || ''}
+                nftStyle={{
+                  fontColor: project?.project.customColour.fontColour || '',
+                  backgroundColor: {
+                    color1: project?.project.customColour.bgColour1 || '',
+                    color2: project?.project.customColour.bgColour2 || '',
+                  },
+                }}
+              />
+            </Tilt>
+            {project?.project.projectName && (
+              <p className="nft_info">
+                {`This is a unique design of ${project?.project.projectName} Shares NFT. When you get one,
+              it will have all your investment info, like share price and ID.
+              The NFT also has a one-of-a-kind barcode that links to an ether
+              scanner.`}
+              </p>
+            )}
           </VotingWrapper>
         </TabContentLayout>
       </div>
