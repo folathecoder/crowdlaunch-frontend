@@ -39,7 +39,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       projects?.map((project) => ({
         params: { projectId: project.projectId },
       })) || [],
-    fallback: false,
+    fallback: true,
   };
 };
 

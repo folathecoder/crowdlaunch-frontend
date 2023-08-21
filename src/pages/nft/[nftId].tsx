@@ -41,7 +41,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       nfts?.map((nft) => ({
         params: { nftId: nft.nftId },
       })) || [],
-    fallback: false,
+    fallback: true,
   };
 };
 

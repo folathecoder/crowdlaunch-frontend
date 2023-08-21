@@ -44,7 +44,10 @@ const MobileMenu = ({ showMobileMenu, setShowMobileMenu }: MobileMenuTypes) => {
             exit="exit"
           >
             <NavHeader>
-              <div className="gradient-link">
+              <div
+                className="gradient-link"
+                onClick={() => setShowMobileMenu(false)}
+              >
                 <Link href="/marketplace" className="gradient-link">
                   Marketplace
                 </Link>
