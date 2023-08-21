@@ -84,26 +84,28 @@ const MainProject: React.FC = () => {
         <TabContentLayout>
           <TabContentsWrapper>{contents[activeContent]}</TabContentsWrapper>
           <VotingWrapper>
-            <Tilt glareEnable glareMaxOpacity={0.4}>
-              <NFTImageTemplate
-                projectName={project?.project.projectName || ''}
-                nftStyle={{
-                  fontColor: project?.project.customColour.fontColour || '',
-                  backgroundColor: {
-                    color1: project?.project.customColour.bgColour1 || '',
-                    color2: project?.project.customColour.bgColour2 || '',
-                  },
-                }}
-              />
-            </Tilt>
-            {project?.project.projectName && (
-              <p className="nft_info">
-                {`This is a unique design of ${project?.project.projectName} Shares NFT. When you get one,
+            <div>
+              <Tilt glareEnable glareMaxOpacity={0.4}>
+                <NFTImageTemplate
+                  projectName={project?.project.projectName || ''}
+                  nftStyle={{
+                    fontColor: project?.project.customColour.fontColour || '',
+                    backgroundColor: {
+                      color1: project?.project.customColour.bgColour1 || '',
+                      color2: project?.project.customColour.bgColour2 || '',
+                    },
+                  }}
+                />
+              </Tilt>
+              {project?.project.projectName && (
+                <p className="nft_info">
+                  {`This is a unique design of ${project?.project.projectName} Shares NFT. When you get one,
               it will have all your investment info, like share price and ID.
               The NFT also has a one-of-a-kind barcode that links to an ether
               scanner.`}
-              </p>
-            )}
+                </p>
+              )}
+            </div>
           </VotingWrapper>
         </TabContentLayout>
       </div>

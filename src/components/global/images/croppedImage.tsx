@@ -15,8 +15,11 @@ const CroppedImage = ({ src, height, width, alt }: PropType) => {
       height={height}
       width={width}
       alt={alt}
-      // crop="thumb"
+      crop="limit"
       sizes="100vw"
+      preserveTransformations
+      zoom="0"
+      
     />
   );
 };
