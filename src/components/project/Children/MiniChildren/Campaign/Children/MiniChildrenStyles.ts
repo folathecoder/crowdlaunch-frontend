@@ -66,7 +66,7 @@ export const EBookWrapper = styled.div`
 export const Content = styled.div`
   h2 {
     font-size: 1.5rem;
-    line-height: 1.7rem;
+    line-height:2.5rem;
     text-decoration: underline;
     text-decoration: underline;
     text-decoration-color: var(--color-accent-100);

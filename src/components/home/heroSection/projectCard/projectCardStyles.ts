@@ -15,27 +15,15 @@ export const ProjectWrapperScroll = styled.div`
   width: 100%;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 100%;
   gap: 1rem;
   overflow-x: auto;
-
-  @media only screen and (min-width: 500px) {
-    grid-auto-columns: 48%;
-  }
-
-  @media ${QUERIES.tablet} {
-    grid-auto-columns: 32%;
-  }
-
-  @media screen and (min-width: 1380px) {
-    grid-auto-columns: 23.5%;
-  }
 `;
 
 export const UniqueProject = styled.div<UniqueTokenStylesTypes>`
   padding: 0.5rem 0.5rem 1.25rem 0.5rem;
   border-radius: 0.5rem;
   background: ${(props) => props.bgColor};
+  min-width: 17rem;
 
   &:hover {
     img {
