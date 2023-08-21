@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import Link from 'next/link';
 import { Skeleton } from '@mui/material';
 import {
   ProjectDetailContext,

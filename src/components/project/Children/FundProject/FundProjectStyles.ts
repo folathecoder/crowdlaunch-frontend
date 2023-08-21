@@ -37,12 +37,36 @@ export const FundingContainer = styled.div`
   .fund-item_container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.6rem;
   }
 `;
 
-export const FundItem = styled.div`
+export const FundItem = styled.div<{ spaceUp?: boolean }>`
   width: 100%;
+  margin-top: ${({ spaceUp }) => (spaceUp ? '1.5rem' : '0rem')};
+
+  input {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border-radius: 0.5rem;
+    border: 0.1rem solid var(--color-border-100);
+    background-color: var(--color-bg-200);
+    color: var(--color-font-100);
+    margin-bottom: 1rem;
+
+    &:active {
+      outline: 0.1rem solid var(--color-accent-100);
+    }
+
+    &:focus {
+      outline: 0.1rem solid var(--color-border-100);
+    }
+
+    &:hover {
+      outline: 0.1rem solid var(--color-border-100);
+    }
+  }
 `;
 
 export const ProgressWrapper = styled.div`

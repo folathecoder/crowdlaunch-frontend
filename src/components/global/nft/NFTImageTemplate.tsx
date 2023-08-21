@@ -5,21 +5,21 @@ import Barcode from 'public/images/global/project/barcode.png';
 
 interface NFTImageTypes {
   nftStyle: NftStylesType;
-  ref: Ref<HTMLDivElement>;
+  projectName: string;
 }
 
-const NFTImageTemplate = ({ nftStyle, ref }: NFTImageTypes) => {
+const NFTImageTemplate = ({ nftStyle, projectName }: NFTImageTypes) => {
   return (
     <div
-      ref={ref}
       style={{
-        maxWidth: '400px',
-        height: '500px',
+        width: '330px',
+        height: '370px',
         backgroundColor: nftStyle.backgroundColor.color1,
         backgroundImage: `linear-gradient(19deg, ${nftStyle.backgroundColor.color1} 0%, ${nftStyle.backgroundColor.color2} 100%)`,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
+        borderRadius: '8px',
       }}
     >
       <div
@@ -41,13 +41,12 @@ const NFTImageTemplate = ({ nftStyle, ref }: NFTImageTypes) => {
               color: nftStyle.fontColor,
             }}
           >
-            The holder of this NFT owns $894.90 worth of claimable shares in
-            Orange AI
+            {` The holder of this NFT owns 0 ETH worth of claimable shares in ${projectName}`}
           </p>
         </div>
         <div
           style={{
-            marginTop: '50px',
+            marginTop: '30px',
           }}
         >
           <Image src={Barcode} alt="barcode" width="150" height="150" />
@@ -81,7 +80,7 @@ const NFTImageTemplate = ({ nftStyle, ref }: NFTImageTypes) => {
             marginBottom: '10px',
           }}
         >
-          Orange AI
+          {projectName}
         </p>
         <p
           style={{
@@ -89,7 +88,7 @@ const NFTImageTemplate = ({ nftStyle, ref }: NFTImageTypes) => {
             fontSize: '14px',
           }}
         >
-          Share Price: $894.90
+          Share Price: 0 ETH
         </p>
       </div>
     </div>

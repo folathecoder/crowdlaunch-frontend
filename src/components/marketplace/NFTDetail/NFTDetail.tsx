@@ -18,6 +18,8 @@ import {
   NFTTransaction,
 } from '@/components/marketplace/NFTDetail';
 import { CustomSkeleton } from '@/components/global';
+import Tilt from 'react-parallax-tilt';
+import MetaData from '@/seo/metaData';
 
 const NFTDetail = () => {
   const { nft, nftFetchingStatus } = useContext(
@@ -27,34 +29,42 @@ const NFTDetail = () => {
   const { nft: nftData } = nft || {};
 
   return (
-    <DetailContainer>
-      <div>
-        <DetailLeft>
-          <NavShare mobile />
-          <div>
-            <DetailImage>
-              {nftFetchingStatus === 2 && nftData?.nftImage ? (
-                <Image
-                  src={nftData.nftImage}
-                  alt={nftData.nftName}
-                  layout="fill"
-                  objectFit="cover"
-                />
-              ) : (
-                <CustomSkeleton height="100%" width="100%" marginTop={1} />
-              )}
-            </DetailImage>
-            <NFTExplorer mobile />
-          </div>
-        </DetailLeft>
-        <DetailRight>
-          <NavShare />
-          <NFTInfo />
-          <NFTExplorer />
-          <NFTTransaction />
-        </DetailRight>
-      </div>
-    </DetailContainer>
+    <>
+      <MetaData
+        title={nftData?.nftName || ''}
+        description={nftData?.nftDescription || ''}
+      />
+      <DetailContainer>
+        <div>
+          <DetailLeft>
+            <NavShare mobile />
+            <div>
+              <Tilt glareEnable glareMaxOpacity={0.4}>
+                <DetailImage>
+                  {nftFetchingStatus === 2 && nftData?.nftImage ? (
+                    <Image
+                      src={nftData.nftImage}
+                      alt={nftData.nftName}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  ) : (
+                    <CustomSkeleton height="100%" width="100%" marginTop={1} />
+                  )}
+                </DetailImage>
+              </Tilt>
+              <NFTExplorer mobile />
+            </div>
+          </DetailLeft>
+          <DetailRight>
+            <NavShare />
+            <NFTInfo />
+            <NFTExplorer />
+            <NFTTransaction />
+          </DetailRight>
+        </div>
+      </DetailContainer>
+    </>
   );
 };
 

@@ -142,18 +142,19 @@ const OverviewTab = () => {
   }
 
   const saveAndContinue = () => {
-    if (
-      !!projectFormData.main.projectName &&
-      !!projectFormData.main.categoryId &&
-      !!projectFormData.main.bannerImageUrl &&
-      !!projectFormData.detail.overview &&
-      projectFormData.detail.overview !== '****' &&
-      isProjectFormComplete(projectFormData.detail.overview)
-    ) {
-      setActiveTab(1);
-    } else {
-      setShowNotifications(true);
-    }
+    if (projectFormData?.detail?.overview)
+      if (
+        !!projectFormData.main.projectName &&
+        !!projectFormData.main.categoryId &&
+        !!projectFormData.main.bannerImageUrl &&
+        !!projectFormData.detail.overview &&
+        projectFormData.detail.overview !== '****' &&
+        isProjectFormComplete(projectFormData.detail.overview || '')
+      ) {
+        setActiveTab(1);
+      } else {
+        setShowNotifications(true);
+      }
   };
 
   return (

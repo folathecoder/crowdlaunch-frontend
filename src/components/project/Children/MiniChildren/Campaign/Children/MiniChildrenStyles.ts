@@ -67,6 +67,11 @@ export const Content = styled.div`
   h2 {
     font-size: 1.5rem;
     line-height: 1.7rem;
+    text-decoration: underline;
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent-100);
+    text-decoration-skip-ink: none;
+    text-underline-offset: 10px;
   }
 
   p,
