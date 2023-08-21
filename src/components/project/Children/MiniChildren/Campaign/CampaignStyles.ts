@@ -20,8 +20,10 @@ export const MiniTabContainer = styled.div`
   overflow-x: auto;
   margin-bottom: 1.5rem;
   position: relative;
+  border-bottom: 1px solid var(--color-border-100);
 
   @media ${QUERIES.desktop} {
+    border-bottom: 1px solid transparent;
     width: 7.69rem;
     height: 28rem;
   }
@@ -34,8 +36,6 @@ export const MiniTabContainer = styled.div`
 
     @media ${QUERIES.desktop} {
       height: 100%;
-
-      //Any Idea why this sticky is'nt working. I've been trying a lot.
       position: sticky;
       top: 2rem;
     }
@@ -54,11 +54,9 @@ export const ActiveMiniTab = styled.li<UniqueLinkType>`
   height: 2.3125rem;
   width: 7.69rem;
   cursor: pointer;
-  border-bottom: 1px solid rgba(220, 222, 221, 0.3);
   transition: all ease-out 0.2s;
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.75rem;
-
   display: flex;
   justify-content: center;
 
@@ -70,6 +68,7 @@ export const ActiveMiniTab = styled.li<UniqueLinkType>`
 
   @media ${QUERIES.desktop} {
     justify-content: flex-start;
+    border-bottom: 1px solid var(--color-border-100);
   }
 `;
 
