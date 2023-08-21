@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.6",
     "@mui/styled-engine-sc": "^5.12.0",
+    "@openzeppelin/contracts": "^4.9.3",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/draft-js": "^0.11.12",
     "@types/node": "20.3.1",
@@ -25,6 +26,7 @@
     "@web3modal/react": "^2.4.7",
     "@zeit/next-css": "^1.0.1",
     "axios": "^1.4.0",
+    "chai": "^4.3.7",
     "cloudinary-react": "^1.8.1",
     "draft-js": "^0.11.7",
     "eslint": "8.43.0",
@@ -69,9 +71,11 @@
     "wagmi": "^1.2.1"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
     "@testing-library/react": "^14.0.0",
     "@types/lodash": "^4.14.195",
     "@types/react-share": "^4.0.0",
-    "@types/styled-components": "^5.1.26"
+    "@types/styled-components": "^5.1.26",
+    "hardhat": "^2.16.1"
   }
 }
