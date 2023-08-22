@@ -89,4 +89,13 @@ export const Content = styled.div`
     font-weight: 400;
     margin: 1rem 0rem 1rem 1rem;
   }
+
+  br {
+    display: none;
+  }
+
+  iframe {
+    width: 100% !important;
+    height: 20rem;
+  }
 `;

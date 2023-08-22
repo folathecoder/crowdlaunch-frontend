@@ -33,6 +33,7 @@ const NFTDetail = () => {
       <MetaData
         title={nftData?.nftName || ''}
         description={nftData?.nftDescription || ''}
+        ogImageUrl={nftData?.nftImage || ''}
       />
       <DetailContainer>
         <div>
