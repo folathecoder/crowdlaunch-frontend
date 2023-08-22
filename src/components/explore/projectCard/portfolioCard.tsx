@@ -6,9 +6,7 @@ import {
   ProjectImage,
   ProjectTitle,
   ProjectInfo,
-  ProjectProgress,
 } from './projectCardStyles';
-import { ProgressBar } from '@/components/global';
 import useGetProjectById from '@/hooks/RequestHooks/GET/useGetProjectById';
 import ProjectCardSkeleton from './projectCardSkeleton';
 import { CURRENCY_SYMBOL } from '@/data/appInfo';
@@ -46,7 +44,7 @@ const PortfolioCard = ({ projectId }: ProjectCardTypes) => {
               )}
               <h4 aria-label="project name">{project?.project?.projectName}</h4>
             </ProjectTitle>
-            <ProjectProgress>
+            {/* <ProjectProgress>
               {project?.project?.targetAmount &&
                 project?.project?.amountRaised && (
                   <ProgressBar
@@ -54,7 +52,7 @@ const PortfolioCard = ({ projectId }: ProjectCardTypes) => {
                     value={project.project.amountRaised}
                   />
                 )}
-            </ProjectProgress>
+            </ProjectProgress> */}
             <ProjectInfo>
               <div>
                 <h5>Min Investment</h5>

@@ -9,7 +9,7 @@ import { PortfolioCard } from '@/components/explore';
 
 const Portfolio = () => {
   const { user } = useContext(ProfileContext) as ProfileReturnTypes;
-  const { portfolios } = user || {};
+  const { portfolios } = user ?? {};
 
   return (
     <PortfolioSection>

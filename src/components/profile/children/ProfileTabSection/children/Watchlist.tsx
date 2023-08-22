@@ -6,13 +6,11 @@ import {
 } from '@/components/profile/context/ProfileContext';
 import { WatchlistSection } from '@/components/profile/children/ProfileTabSection/ProfileTabSectionStyles';
 import { NFTCard } from '@/components/marketplace';
-import { NFTData } from '@/data/marketplace/marketplaceData';
-import { ProjectCard } from '@/components/explore';
 import { PortfolioCard } from '@/components/explore';
 
 const Watchlist = () => {
   const { user } = useContext(ProfileContext) as ProfileReturnTypes;
-  const { nftWatchlist, projectWatchlist } = user || {};
+  const { nftWatchlist, projectWatchlist } = user ?? {};
 
   return (
     <WatchlistSection>
