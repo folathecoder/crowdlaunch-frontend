@@ -107,7 +107,7 @@ const ProjectCreatorTab = () => {
   };
 
   const handleProjectLinkBtn = () => {
-    router.push(`/profile#listed-projects`);
+    router.push(`/project/${projectData?.projectId}`);
     setProjectFormData(initialProjectFormData);
   };
 
@@ -207,7 +207,7 @@ const ProjectCreatorTab = () => {
               projectData?.projectId ? projectData?.projectName : 'Your project'
             } is now LIVE and ready to get funded!" 🎉`}</h2>
             <Button
-              buttonTitle="View Projects"
+              buttonTitle="View Project"
               buttonType="action"
               buttonFunction={handleProjectLinkBtn}
             />

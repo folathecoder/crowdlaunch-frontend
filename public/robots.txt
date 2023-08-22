@@ -1,0 +1,16 @@
+# This section allows all web crawlers to access all parts of the site
+User-agent: *
+Disallow:
+
+# This section disallows the Google Image crawler from indexing any images on the site
+User-agent: Googlebot-Image
+Disallow: /
+
+# Disallow all web crawlers from accessing the admin and private directories
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+
+# Disallow all web crawlers from accessing a specific file
+User-agent: *
+Disallow: /do-not-index-this-file.html

@@ -16,6 +16,7 @@ const ProjectPageTemplate = () => {
       <MetaData
         title={project?.project.projectName || ''}
         description={project?.projectDetails.overview || ''}
+        ogImageUrl={project?.project.bannerImageUrl}
       />
       <main>
         <ProjectHeader />

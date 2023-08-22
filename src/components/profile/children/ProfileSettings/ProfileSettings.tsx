@@ -233,7 +233,7 @@ const ProfileSettings = () => {
                   value={formData.userName}
                   onChange={handleInputChange}
                 />
-                <label htmlFor="projectImage">Project Image:</label>
+                <label htmlFor="projectImage">Profile Image:</label>
                 <input
                   type="file"
                   accept="image/*"
