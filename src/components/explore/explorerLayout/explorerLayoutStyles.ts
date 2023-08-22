@@ -125,5 +125,7 @@ export const ExploreError = styled.section`
 
   div {
     width: 20rem;
+    display: grid;
+    place-items: center;
   }
 `;

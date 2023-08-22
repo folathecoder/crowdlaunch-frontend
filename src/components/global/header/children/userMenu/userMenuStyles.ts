@@ -57,6 +57,9 @@ export const NavHeader = styled.div`
     border-radius: 100%;
     border: 2px solid var(--color-accent-100);
     cursor: pointer;
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
 
     img {
       border-radius: 100%;
