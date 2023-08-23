@@ -6,6 +6,7 @@ import {
 import Link from 'next/link';
 import Campaign from '../MiniChildren/Campaign/Campaign';
 import Updates from '../MiniChildren/Updates/Updates';
+import Wallet from '../MiniChildren/Wallet/Wallet';
 import Image from 'next/image';
 import {
   MajorSection,
@@ -32,6 +33,9 @@ const internalLinkData: InternalDataTypes[] = [
     link: 'Updates',
     value: 2,
   },
+  {
+    link: 'Wallet',
+  },
 ];
 
 const MainProject: React.FC = () => {
@@ -42,6 +46,7 @@ const MainProject: React.FC = () => {
   const [contents] = useState<React.ReactNode[]>([
     <Campaign key="campaign" />,
     <Updates key="updates" />,
+    <Wallet key="wallet" />,
   ]);
 
   const [activeContent, setActiveContent] = useState<number>(0);

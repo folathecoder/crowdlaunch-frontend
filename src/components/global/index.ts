@@ -12,6 +12,7 @@ import Loader from '@/components/global/loader/loader';
 import CustomSkeleton from '@/components/global/customSkeleton/customSkeleton';
 import LottieImage from '@/components/global/lottieImage/lottieImage';
 import CroppedImage from '@/components/global/images/croppedImage';
+import BarcodeGenerator from '@/components/global/barcode/barcode';
 
 export {
   Header,
@@ -28,4 +29,5 @@ export {
   CustomSkeleton,
   LottieImage,
   CroppedImage,
+  BarcodeGenerator,
 };
