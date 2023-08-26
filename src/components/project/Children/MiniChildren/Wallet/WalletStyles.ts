@@ -57,7 +57,6 @@ export const WalletInfoCard = styled.div`
 export const WalletTransaction = styled.div`
   display: grid;
   width: 100%;
-  /* min-height: 10rem; */
   grid-template-columns: 1fr;
   gap: 1rem;
 
@@ -243,5 +242,33 @@ export const Transactions = styled.ul`
     text-decoration-color: var(--color-accent-100);
     text-decoration-skip-ink: none;
     text-underline-offset: 5px;
+  }
+`;
+
+export const WalletDividend = styled.div`
+  min-height: 92px;
+  width: 100%;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--color-bg-300);
+  margin: 1rem 0rem;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  position: relative;
+
+  .access {
+    background-color: hsla(218, 80%, 2%, 0.8);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 0.1rem solid var(--color-border-100);
+    border-radius: 0.5rem;
+    display: grid;
+    place-items: center;
   }
 `;
