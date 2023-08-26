@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
+import {
+  ProjectDetailContext,
+  ProjectDetailContextReturnTypes,
+} from '@/contexts/ProjectDetailContext';
 import Image from 'next/image';
 import { useClipboard } from 'use-clipboard-copy';
 import {
@@ -10,17 +14,17 @@ import {
   WalletDeposit,
   WalletWithdraw,
   Transactions,
+  WalletDividend,
 } from './WalletStyles';
-import { Notification } from '@/components/global';
 import { BsInfoCircle } from 'react-icons/bs';
 import { BiCopy } from 'react-icons/bi';
 import Tooltip from '@mui/material/Tooltip';
 import { CURRENCY_SYMBOL } from '@/data/appInfo';
-import { BarcodeGenerator } from '@/components/global';
+import { BarcodeGenerator, Button, Notification } from '@/components/global';
 import { shortenWalletAddress } from '@/helpers/formatters';
-import { Button } from '@/components/global';
 import DepositIcon from 'public/images/global/wallet/deposit-icon.png';
 import LockIcon from 'public/images/global/wallet/lock.png';
+import useWallet from '@/wallet/useWallet';
 
 const walletInfoData = {
   currentBalance: 'Current ETH balance in the wallet.',
@@ -73,11 +77,12 @@ const Wallet = () => {
             description={walletInfoData.outstandingDividend}
           />
         </WalletInfo>
+        <DividendDisbursement />
         <WalletTransaction>
           <WalletDepositCard />
           <WalletWithdrawCard />
         </WalletTransaction>
-        <AllTransactions />
+        {/* <AllTransactions /> */}
       </WalletContainer>
       <Notification
         message={notificationMessage}
@@ -163,6 +168,11 @@ const WalletDepositCard = () => {
 };
 
 const WalletWithdrawCard = () => {
+  const { wallet } = useWallet();
+  const { project } = useContext(
+    ProjectDetailContext
+  ) as ProjectDetailContextReturnTypes;
+
   const [withdrawal, setWithdrawal] = useState({
     message: '',
     amount: '',
@@ -173,6 +183,13 @@ const WalletWithdrawCard = () => {
 
     setWithdrawal((prevState) => ({ ...prevState, [name]: value }));
   };
+
+  const handleWithdraw = () => {
+    if (wallet.walletAddress === project?.project.projectWalletAddress) {
+      console.log('withdraw');
+    }
+  };
+
   return (
     <WalletWithdraw>
       <div>
@@ -209,7 +226,7 @@ const WalletWithdrawCard = () => {
           <Button
             buttonTitle="Withdraw"
             buttonType="action"
-            buttonFunction={() => {}}
+            buttonFunction={handleWithdraw}
           />
         </div>
         {false && (
@@ -227,17 +244,22 @@ const WalletWithdrawCard = () => {
           </div>
         )}
       </div>
-
-      <div className="access">
-        <div>
-          <Image src={LockIcon} alt="locked" height={50} width={50} />
-        </div>
-      </div>
+      {wallet.walletAddress !== project?.project.projectWalletAddress && (
+        <Tooltip
+          title="You are not authorised to withdraw funds from this wallet"
+          placement="top"
+        >
+          <div className="access">
+            <div>
+              <Image src={LockIcon} alt="locked" height={30} width={30} />
+            </div>
+          </div>
+        </Tooltip>
+      )}
     </WalletWithdraw>
   );
 };
 
-// Deposit, Withdraw, Dividend
 const AllTransactions = () => {
   return (
     <Transactions>
@@ -268,6 +290,46 @@ const AllTransactions = () => {
         </li>
       ))}
     </Transactions>
+  );
+};
+
+const DividendDisbursement = () => {
+  const { wallet } = useWallet();
+  const { project } = useContext(
+    ProjectDetailContext
+  ) as ProjectDetailContextReturnTypes;
+
+  const handleDisburseDividend = () => {
+    if (wallet.walletAddress === project?.project.projectWalletAddress) {
+      console.log('disbursement');
+    }
+  };
+
+  return (
+    <WalletDividend>
+      <div>
+        <h3>Disburse dividends to investors</h3>
+      </div>
+      <div>
+        <Button
+          buttonTitle="Pay Dividend"
+          buttonType="action"
+          buttonFunction={handleDisburseDividend}
+        />
+      </div>
+      {wallet.walletAddress !== project?.project.projectWalletAddress && (
+        <Tooltip
+          title="You are not authorised to disburse dividends"
+          placement="top"
+        >
+          <div className="access">
+            <div>
+              <Image src={LockIcon} alt="locked" height={30} width={30} />
+            </div>
+          </div>
+        </Tooltip>
+      )}
+    </WalletDividend>
   );
 };
 

@@ -19,7 +19,7 @@ const ProjectCard = () => {
     <ProjectContainer>
       <ProjectWrapperScroll>
         {fetchingProjects === 2 &&
-          projects?.slice(0, 6).map((project, index) => {
+          projects?.slice(-6).map((project, index) => {
             return (
               <UniqueProject
                 key={project.projectId}
