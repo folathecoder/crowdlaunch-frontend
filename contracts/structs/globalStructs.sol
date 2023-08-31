@@ -75,7 +75,6 @@ struct Backer {
     uint256 backedAmount;
     uint256 dividendAmount;
     uint256 tokenId;
-
     uint256 claimedDividendRounds;
 }
 
