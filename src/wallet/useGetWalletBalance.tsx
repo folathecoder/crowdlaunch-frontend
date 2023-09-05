@@ -28,6 +28,7 @@ const useGetWalletBalance = ({ userWalletAddress }: PropType): ReturnType => {
       address: userWalletAddress,
       watch: true,
       chainId: 11155111,
+      formatUnits: 'ether',
     });
 
   return { data, isError, isLoading, isSuccess, isFetching, isFetched };
