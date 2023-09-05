@@ -7,7 +7,7 @@ import {
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { mainnet } from 'wagmi/chains';
+import { sepolia } from 'wagmi/chains';
 import { SessionProvider } from 'next-auth/react';
 import {
   RainbowKitSiweNextAuthProvider,
@@ -15,7 +15,7 @@ import {
 } from '@rainbow-me/rainbowkit-siwe-next-auth';
 
 const { chains, publicClient } = configureChains(
-  [mainnet],
+  [sepolia],
   [
     alchemyProvider({ apiKey: `${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}` }),
     publicProvider(),

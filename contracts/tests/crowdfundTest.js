@@ -190,7 +190,7 @@ describe('CrowdfundContract Test', function () {
     });
 
     const campaignData = await contract.campaigns(user1.address);
-    accountContractAddress = campaignData[8];
+    accountContractAddress = campaignData[7];
 
     expect(accountContractAddress.toString()).to.have.lengthOf(42);
   });
