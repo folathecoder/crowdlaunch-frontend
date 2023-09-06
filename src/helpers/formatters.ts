@@ -46,3 +46,25 @@ export const durationInSeconds = (endDate: string): number => {
 export const secondsToDays = (seconds: number) => {
   return Math.round(seconds / (24 * 60 * 60));
 };
+
+export const secondsFutureDate = (futureDateString: string): number => {
+  // Parse the future date string into a Date object
+  const futureDate = new Date(futureDateString);
+
+  // Check if the parsed date is valid
+  if (isNaN(futureDate.getTime())) {
+    console.error(`Invalid date format: ${futureDateString}`);
+    return NaN; // Return NaN to indicate an error
+  }
+
+  // Get the current date and time
+  const currentDate = new Date();
+
+  // Calculate the time difference in milliseconds
+  const timeDifferenceMillis = futureDate.getTime() - currentDate.getTime();
+
+  // Convert milliseconds to seconds
+  const secondsDifference = Math.floor(timeDifferenceMillis / 1000);
+
+  return secondsDifference;
+};

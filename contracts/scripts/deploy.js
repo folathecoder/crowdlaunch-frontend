@@ -1,3 +1,5 @@
+const { ethers } = require('hardhat');
+
 const CAMPAIGN_FEE = ethers.utils.parseEther('0.00001');
 const NFT_LISTING_FEE = ethers.utils.parseEther('0.00001');
 

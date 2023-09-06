@@ -17,6 +17,7 @@ interface ReturnType {
   isRegisterError: boolean;
   isReadingUserError: boolean;
   isReadingUserLoading: boolean;
+  isUserRegistered: boolean;
 }
 
 const useRegisterUser = (): ReturnType => {
@@ -68,7 +69,7 @@ const useRegisterUser = (): ReturnType => {
     if (readData) {
       setIsUserRegistered(checkAddressIsValid(readData[2] as `0x${string}`));
     }
-  }, [readData]);
+  }, [readData, isRegisterSuccess, isRegisterError]);
 
   // Function to register a user on the blockchain via the contract
   const handleRegisterUser = async () => {
@@ -85,6 +86,7 @@ const useRegisterUser = (): ReturnType => {
     isRegisterError,
     isReadingUserError,
     isReadingUserLoading,
+    isUserRegistered,
   };
 };
 

@@ -22,7 +22,7 @@ const ProfileMetrics = () => {
         <MetricsCard>
           <h3>Wallet Balance</h3>
           <h4>
-            {walletBalance} {CURRENCY_SYMBOL}
+            {Number(walletBalance).toFixed(3)} {CURRENCY_SYMBOL}
           </h4>
         </MetricsCard>
         <MetricsCard>
