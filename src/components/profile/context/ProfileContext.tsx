@@ -57,7 +57,6 @@ export const ProfileProvider = ({ children }: Props): ReactElement => {
     }
   }, [isFetched, walletMetrics?.value]);
 
-  // console.log(profileMetrics);
 
   return (
     <ProfileContext.Provider

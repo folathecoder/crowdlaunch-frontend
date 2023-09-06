@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FetchingStatus } from '@/types/fetchingTypes';
 import useWallet from '@/wallet/useWallet';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setToggleSettings } from '@/redux/slices/profileSettingSlice';
 
 export interface AuthType {
@@ -24,6 +24,7 @@ const usePostAuth = (): AuthReturnType => {
   const dispatch = useDispatch();
 
   const { wallet } = useWallet();
+
   const [userData, setUserData] = useState<AuthType | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [fetchingStatus, setFetchingStatus] = useState<FetchingStatus>(

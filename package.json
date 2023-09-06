@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "npx hardhat run contracts/scripts/deploy.js --network sepolia"
   },
   "dependencies": {
     "@cloudinary/react": "^1.11.2",
@@ -35,6 +36,7 @@
     "axios": "^1.4.0",
     "chai": "^4.3.7",
     "cloudinary-react": "^1.8.1",
+    "dotenv": "^16.3.1",
     "draft-js": "^0.11.7",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
