@@ -27,6 +27,12 @@ export const FundingContainer = styled.div`
     text-transform: uppercase;
     border-radius: 0.75rem;
     border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+
+    span {
+      margin-left: 1rem;
+    }
 
     &:hover {
       background: black;

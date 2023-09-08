@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   ProjectDetailContext,
   ProjectDetailContextReturnTypes,
@@ -9,11 +9,13 @@ import {
   ProgressWrapper,
   FundItem,
 } from './FundProjectStyles';
-import { ProgressBar } from '@/components/global';
-import { secondsToDays } from '@/helpers/formatters';
+import { ProgressBar, TransactionLoader, Timer } from '@/components/global';
 import { CURRENCY_SYMBOL } from '@/data/appInfo';
 import useWallet from '@/wallet/useWallet';
 import { Notification } from '@/components/global';
+import useRegisterUser from '@/hooks/ContractHooks/useRegisterUser';
+import useGetCampaign from '@/hooks/ContractHooks/useGetCmapaign';
+import { weiConverter, weiToEther } from '@/helpers/weiConverter';
 
 export const fundings: FundProjectTypes = {
   target: {
@@ -60,13 +62,47 @@ const FundProject = ({
 }: FundProjectTypes) => {
   const { wallet } = useWallet();
   const { userData } = useContext(AppContext) as AppContextReturnTypes;
-  const [fundAmount, setFundAmount] = useState<number | ''>('');
+  const { fundAmount, setFundAmount, generateNftImage, project } = useContext(
+    ProjectDetailContext
+  ) as ProjectDetailContextReturnTypes;
+
   const [notificationMessage, setNotificationMessage] = useState('');
   const [showNotification, setShowNotification] = useState(false);
+  const [showFundButton, setShowFundButton] = useState(false);
 
+  // Get the project data from the backend
   const { project: data } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
+
+  // Handle user registeration on the smart contract before user funds a campaign
+  const {
+    handleRegisterUser,
+    isRegisterSuccess,
+    isRegisterLoading,
+    isUserRegistered,
+  } = useRegisterUser();
+
+  // Get updated campaign funding data from the smart contract
+  const { campaign } = useGetCampaign({
+    projectAddress: project?.project.projectWalletAddress as `0x${string}`,
+  });
+
+  useEffect(() => {
+    if (isUserRegistered) {
+      setShowFundButton(isUserRegistered);
+    }
+  }, [isUserRegistered]);
+
+  useEffect(() => {
+    if (isRegisterSuccess) {
+      setShowFundButton(isRegisterSuccess);
+      setShowNotification(true);
+      setNotificationMessage(
+        'Congratulations! You have successfully registered an account on the blockchain. You can now fund the campaign.'
+      );
+    }
+  }, [isRegisterSuccess]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -77,9 +113,11 @@ const FundProject = ({
     if (
       fundAmount !== 0 &&
       fundAmount !== '' &&
-      wallet.walletStatus.isConnected
+      wallet.walletStatus.isConnected &&
+      campaign?.campaignStatus === 1
     ) {
-      // Fund project logic
+      // Generate NFT URL
+      generateNftImage();
     } else {
       setShowNotification(true);
       fundErrorMessage();
@@ -105,29 +143,29 @@ const FundProject = ({
   return (
     <FundingContainer>
       <ProgressWrapper>
-        {data?.project && (
+        {campaign && (
           <ProgressBar
-            max={data.project.targetAmount || 0}
-            value={data.project.amountRaised || 0}
+            max={Number(campaign?.targetAmount) || 0}
+            value={Number(campaign?.raisedAmount) || 0}
           />
         )}
       </ProgressWrapper>
       <div className="fund-item_container">
         <FundItem>
           <h3>
-            {data?.project.targetAmount
+            {Number(campaign?.targetAmount)
               ? `
-              ${data?.project.targetAmount.toLocaleString()} ${CURRENCY_SYMBOL}`
+              ${Number(campaign?.targetAmount).toFixed(3)} ${CURRENCY_SYMBOL}`
               : '--'}
           </h3>
           <p>{target.title}</p>
         </FundItem>
         <FundItem>
           <h3>
-            {data?.project.amountRaised
+            {Number(campaign?.raisedAmount)
               ? `
-              ${data?.project.amountRaised.toLocaleString()} ${CURRENCY_SYMBOL}`
-              : data?.project.amountRaised === 0
+              ${Number(campaign?.raisedAmount).toFixed(3)} ${CURRENCY_SYMBOL}`
+              : Number(campaign?.raisedAmount) === 0
               ? `0 ${CURRENCY_SYMBOL}`
               : '--'}
           </h3>
@@ -135,17 +173,17 @@ const FundProject = ({
         </FundItem>
         <FundItem>
           <h3>
-            {data?.project.minInvestment
-              ? `${data?.project.minInvestment.toLocaleString()} ${CURRENCY_SYMBOL}`
+            {Number(campaign?.minFunding)
+              ? `${Number(campaign?.minFunding).toFixed(3)} ${CURRENCY_SYMBOL}`
               : '--'}
           </h3>
           <p>{investment.title}</p>
         </FundItem>
         <FundItem>
           <h3>
-            {data?.project.noOfInvestors
-              ? `${data?.project.noOfInvestors.toLocaleString()}`
-              : data?.project.noOfInvestors === 0
+            {campaign?.backersCount
+              ? `${campaign?.backersCount}`
+              : campaign?.backersCount === 0
               ? '0'
               : '--'}
           </h3>
@@ -153,28 +191,54 @@ const FundProject = ({
         </FundItem>
         <FundItem>
           <h3>
-            {data?.project.noOfDaysLeft
-              ? `${secondsToDays(data?.project.noOfDaysLeft).toLocaleString()}`
-              : '--'}
+            {data?.project.createdAt && campaign?.targetDeadline ? (
+              <Timer
+                startDate={data?.project.createdAt}
+                targetSeconds={900000}
+              ></Timer>
+            ) : (
+              '--'
+            )}
           </h3>
           <p>{deadline.title}</p>
         </FundItem>
         <FundItem spaceUp>
           {userData?.token &&
             wallet.walletAddress &&
-            wallet.walletStatus.isConnected && (
+            wallet.walletStatus.isConnected &&
+            campaign?.campaignStatus === 1 && (
               <input
                 type="number"
-                step="0.1"
+                step="0.000000000001"
                 min="0"
-                pattern="^\d*(\.\d{0,9})?$"
+                pattern="^\d+(\.\d+)?$"
                 name="fundAmount"
-                value={fundAmount.toLocaleString()}
+                value={fundAmount}
                 onChange={handleInputChange}
                 placeholder="Investment Amount (ETH)"
               />
             )}
-          <button onClick={handleFundProject}>Fund project</button>
+          {showFundButton ? (
+            <button onClick={handleFundProject}>
+              {campaign?.campaignStatus === 1
+                ? 'Fund Project'
+                : 'Funding Closed'}
+              {isRegisterLoading && (
+                <span>
+                  <TransactionLoader />
+                </span>
+              )}
+            </button>
+          ) : (
+            <button onClick={handleRegisterUser}>
+              Create Account
+              {isRegisterLoading && (
+                <span>
+                  <TransactionLoader />
+                </span>
+              )}
+            </button>
+          )}
         </FundItem>
       </div>
       <Notification

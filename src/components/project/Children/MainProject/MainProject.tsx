@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Campaign from '../MiniChildren/Campaign/Campaign';
 import Updates from '../MiniChildren/Updates/Updates';
 import Wallet from '../MiniChildren/Wallet/Wallet';
-import Image from 'next/image';
+import { APP_URL } from '@/data/appInfo';
 import {
   MajorSection,
   TabsContainer,
@@ -19,6 +19,8 @@ import {
 } from './MainProjectStyles';
 import Tilt from 'react-parallax-tilt';
 import { NFTImageTemplate } from '@/components/global';
+import useGetCampaign from '@/hooks/ContractHooks/useGetCmapaign';
+import { checkAddressIsValid } from '@/helpers/checkAddressIsValid';
 
 interface InternalDataTypes {
   link: string;
@@ -39,7 +41,7 @@ const internalLinkData: InternalDataTypes[] = [
 ];
 
 const MainProject: React.FC = () => {
-  const { project, updateCount } = useContext(
+  const { project, updateCount, fundAmount } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
 
@@ -55,13 +57,25 @@ const MainProject: React.FC = () => {
     setActiveContent(active);
   };
 
+  // Get updated campaign funding data from the smart contract
+  const { campaign } = useGetCampaign({
+    projectAddress: project?.project.projectWalletAddress as `0x${string}`,
+  });
+
+  const isWalletAvailable = campaign?.depositAddress
+    ? checkAddressIsValid(campaign.depositAddress)
+    : false;
+
   return (
     <MajorSection>
       <div>
         <TabsWrapper>
           <TabsContainer>
             <ul>
-              {internalLinkData.map((data, index) => {
+              {(isWalletAvailable
+                ? internalLinkData
+                : internalLinkData.slice(0, 2)
+              ).map((data, index) => {
                 const isActive = activeContent === index;
                 return (
                   <ActiveTab
@@ -100,6 +114,8 @@ const MainProject: React.FC = () => {
                       color2: project?.project.customColour.bgColour2 || '',
                     },
                   }}
+                  projectURL={`${APP_URL}/project/${project?.project.projectId}`}
+                  nftValue={fundAmount}
                 />
               </Tilt>
               {project?.project.projectName && (

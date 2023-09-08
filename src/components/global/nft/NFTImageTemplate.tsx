@@ -1,16 +1,32 @@
-import React, { Ref } from 'react';
-import Image from 'next/image';
+import React, { useContext } from 'react';
+import { toPng } from 'html-to-image';
 import { NftStylesType } from '@/components/project/ProjectCreation/Children/FormBodyTabs/NFTCreatorTab';
-import Barcode from 'public/images/global/project/barcode.png';
+import { BarcodeGenerator } from '@/components/global';
+import { CURRENCY_SYMBOL } from '@/data/appInfo';
+import {
+  ProjectDetailContext,
+  ProjectDetailContextReturnTypes,
+} from '@/contexts/ProjectDetailContext';
 
 interface NFTImageTypes {
   nftStyle: NftStylesType;
   projectName: string;
+  projectURL: string;
+  nftValue: number | '';
 }
 
-const NFTImageTemplate = ({ nftStyle, projectName }: NFTImageTypes) => {
+const NFTImageTemplate = ({
+  nftStyle,
+  projectName,
+  projectURL,
+  nftValue,
+}: NFTImageTypes) => {
+  const { rawNftImageUrl, nftImageRef } = useContext(
+    ProjectDetailContext
+  ) as ProjectDetailContextReturnTypes;
   return (
     <div
+      ref={nftImageRef}
       style={{
         width: '330px',
         height: '370px',
@@ -41,7 +57,9 @@ const NFTImageTemplate = ({ nftStyle, projectName }: NFTImageTypes) => {
               color: nftStyle.fontColor,
             }}
           >
-            {` The holder of this NFT owns 0 ETH worth of claimable shares in ${projectName}`}
+            {`The holder of this NFT owns ${
+              nftValue === '' ? 0 : nftValue
+            } ${CURRENCY_SYMBOL} worth of claimable shares in ${projectName}`}
           </p>
         </div>
         <div
@@ -49,7 +67,7 @@ const NFTImageTemplate = ({ nftStyle, projectName }: NFTImageTypes) => {
             marginTop: '30px',
           }}
         >
-          <Image src={Barcode} alt="barcode" width="150" height="150" />
+          <BarcodeGenerator value={projectURL} />
         </div>
       </div>
       <div
@@ -88,7 +106,7 @@ const NFTImageTemplate = ({ nftStyle, projectName }: NFTImageTypes) => {
             fontSize: '14px',
           }}
         >
-          Share Price: 0 ETH
+          Share Price: {nftValue === '' ? 0 : nftValue} {CURRENCY_SYMBOL}
         </p>
       </div>
     </div>
