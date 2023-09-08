@@ -14,8 +14,9 @@ import { CURRENCY_SYMBOL } from '@/data/appInfo';
 import useWallet from '@/wallet/useWallet';
 import { Notification } from '@/components/global';
 import useRegisterUser from '@/hooks/ContractHooks/useRegisterUser';
-import useGetCampaign from '@/hooks/ContractHooks/useGetCmapaign';
+import useGetCampaign from '@/hooks/ContractHooks/useGetCampaign';
 import { weiConverter, weiToEther } from '@/helpers/weiConverter';
+import useGetTokenId from '@/hooks/ContractHooks/useGetTokenId';
 
 export const fundings: FundProjectTypes = {
   target: {

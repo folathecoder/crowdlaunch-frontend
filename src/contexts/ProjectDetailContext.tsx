@@ -3,11 +3,8 @@ import React, {
   ReactNode,
   useState,
   useEffect,
-  Ref,
   useCallback,
   useRef,
-  ChangeEvent,
-  useContext,
 } from 'react';
 import { toPng } from 'html-to-image';
 import useGetProjectById from '@/hooks/RequestHooks/GET/useGetProjectById';
@@ -50,6 +47,7 @@ const ProjectDetailProvider = ({
   const { user } = useGetUserByAddress({
     jwtToken: userData?.token,
   });
+
   const { project, fetchingStatus, error, refetch } = useGetProjectById({
     projectId: projectId,
   });

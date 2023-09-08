@@ -19,7 +19,7 @@ import {
 } from './MainProjectStyles';
 import Tilt from 'react-parallax-tilt';
 import { NFTImageTemplate } from '@/components/global';
-import useGetCampaign from '@/hooks/ContractHooks/useGetCmapaign';
+import useGetCampaign from '@/hooks/ContractHooks/useGetCampaign';
 import { checkAddressIsValid } from '@/helpers/checkAddressIsValid';
 
 interface InternalDataTypes {

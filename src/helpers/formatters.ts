@@ -68,3 +68,21 @@ export const secondsFutureDate = (futureDateString: string): number => {
 
   return secondsDifference;
 };
+
+export const formatNumberWithDashes = (num: number): string => {
+  // Convert the number to a string and pad it with zeros to a length of 4
+  const paddedNum = num.toString().padStart(4, '0');
+
+  // Split the number into parts: "0000" "0000" "000" "0001"
+  const parts = [
+    paddedNum.slice(0, 4),
+    paddedNum.slice(4, 8),
+    paddedNum.slice(8, 11),
+    paddedNum.slice(11),
+  ].filter((part) => part !== ''); // Remove empty parts
+
+  // Join the parts with dashes
+  const formattedNumber = parts.join('-');
+
+  return formattedNumber;
+};

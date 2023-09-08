@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { toPng } from 'html-to-image';
+import useGetTokenId from '@/hooks/ContractHooks/useGetTokenId';
 import { NftStylesType } from '@/components/project/ProjectCreation/Children/FormBodyTabs/NFTCreatorTab';
 import { BarcodeGenerator } from '@/components/global';
 import { CURRENCY_SYMBOL } from '@/data/appInfo';
@@ -7,6 +7,7 @@ import {
   ProjectDetailContext,
   ProjectDetailContextReturnTypes,
 } from '@/contexts/ProjectDetailContext';
+import { formatNumberWithDashes } from '@/helpers/formatters';
 
 interface NFTImageTypes {
   nftStyle: NftStylesType;
@@ -21,9 +22,13 @@ const NFTImageTemplate = ({
   projectURL,
   nftValue,
 }: NFTImageTypes) => {
-  const { rawNftImageUrl, nftImageRef } = useContext(
+  const { nftImageRef } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
+
+  // Get the next available NFT token ID from the smart contract
+  const { nextTokenId } = useGetTokenId();
+
   return (
     <div
       ref={nftImageRef}
@@ -89,7 +94,7 @@ const NFTImageTemplate = ({
             marginBottom: '20px',
           }}
         >
-          000-0000-000-0000
+          {formatNumberWithDashes(nextTokenId)}
         </p>
         <p
           style={{
