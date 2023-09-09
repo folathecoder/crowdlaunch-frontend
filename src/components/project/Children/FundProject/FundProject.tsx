@@ -17,6 +17,9 @@ import useRegisterUser from '@/hooks/ContractHooks/useRegisterUser';
 import useGetCampaign from '@/hooks/ContractHooks/useGetCampaign';
 import { weiConverter, weiToEther } from '@/helpers/weiConverter';
 import useGetTokenId from '@/hooks/ContractHooks/useGetTokenId';
+import useFundCampaign from '@/hooks/ContractHooks/useFundCampaign';
+import usePostNft from '@/hooks/RequestHooks/POST/usePostNft';
+import usePostPortfolio from '@/hooks/RequestHooks/POST/usePostPortfolio';
 
 export const fundings: FundProjectTypes = {
   target: {
@@ -63,13 +66,14 @@ const FundProject = ({
 }: FundProjectTypes) => {
   const { wallet } = useWallet();
   const { userData } = useContext(AppContext) as AppContextReturnTypes;
-  const { fundAmount, setFundAmount, generateNftImage, project } = useContext(
-    ProjectDetailContext
-  ) as ProjectDetailContextReturnTypes;
+  const { fundAmount, setFundAmount, generateNftImage, project, tokenURI } =
+    useContext(ProjectDetailContext) as ProjectDetailContextReturnTypes;
 
   const [notificationMessage, setNotificationMessage] = useState('');
   const [showNotification, setShowNotification] = useState(false);
   const [showFundButton, setShowFundButton] = useState(false);
+  const [fundingLoading, setFundingLoading] = useState(false);
+  const [hasStartedFunding, setHasStartedFunding] = useState(false);
 
   // Get the project data from the backend
   const { project: data } = useContext(
@@ -88,6 +92,28 @@ const FundProject = ({
   const { campaign } = useGetCampaign({
     projectAddress: project?.project.projectWalletAddress as `0x${string}`,
   });
+
+  // Fund a campaign on the blockchain
+  const {
+    fundCampaign,
+    isFundingSuccess,
+    isFundingLoading,
+    isFundingError,
+    isFundingIdle,
+  } = useFundCampaign({
+    campaignAddress: project?.project.projectWalletAddress as `0x${string}`,
+    fundAmount: Number(fundAmount),
+    tokenURI: tokenURI || '',
+  });
+
+  // Create a new NFT
+  const { nftData, fetchError, fetchStatus, createNFT } = usePostNft({
+    tokenURI: tokenURI || '',
+    projectCategoryId: project?.category.categoryId || '',
+  });
+
+  // Add Project to Portfolio
+  const { addProjectToPortfolio } = usePostPortfolio();
 
   useEffect(() => {
     if (isUserRegistered) {
@@ -110,20 +136,40 @@ const FundProject = ({
     setFundAmount(Number(value));
   };
 
-  const handleFundProject = () => {
+  // Function to generate NFT Metadata and fund a project
+  const handleFundProject = async () => {
     if (
+      project?.project.minInvestment &&
       fundAmount !== 0 &&
       fundAmount !== '' &&
       wallet.walletStatus.isConnected &&
-      campaign?.campaignStatus === 1
+      campaign?.campaignStatus === 1 &&
+      fundAmount >= project?.project.minInvestment
     ) {
-      // Generate NFT URL
-      generateNftImage();
+      setFundingLoading(true);
+      await generateNftImage();
     } else {
+      setFundingLoading(false);
       setShowNotification(true);
       fundErrorMessage();
     }
   };
+
+  // Initiate the funding process then the tokenURI is avaiable
+  useEffect(() => {
+    if (tokenURI && !hasStartedFunding) {
+      console.log('Yeasss 1');
+      const startFunding = async () => {
+        await fundCampaign();
+        setHasStartedFunding(true); // Mark as started
+
+        console.log('Yeasss 2');
+      };
+
+      startFunding();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tokenURI, hasStartedFunding]);
 
   const fundErrorMessage = () => {
     if (fundAmount === 0) {
@@ -139,7 +185,49 @@ const FundProject = ({
         'Please connect your wallet to fund this project.'
       );
     }
+    if (
+      project?.project.minInvestment &&
+      Number(fundAmount) < project?.project.minInvestment
+    ) {
+      setNotificationMessage(
+        `The minimum funding amount is ${
+          project?.project.minInvestment || 0
+        } ETH. Please enter an amount greater or equal to this amount.`
+      );
+    }
   };
+
+  // Show campaign funding success message
+  useEffect(() => {
+    if (isFundingSuccess) {
+      setFundingLoading(false);
+
+      // Create NFT
+      createNFT();
+
+      //Add Project to User Portfolio
+      addProjectToPortfolio(project?.project.projectId || '', fundAmount || 0);
+
+      setShowNotification(true);
+      setNotificationMessage(
+        `Congratuations, you have successfully funded ${project?.project.projectName} with ${fundAmount} ETH. Your newly minted share NFT has been added to your collection.`
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    fundAmount,
+    isFundingSuccess,
+    project?.project.projectId,
+    project?.project.projectName,
+  ]);
+
+  useEffect(() => {
+    if (isFundingError) {
+      setFundingLoading(false);
+    }
+  }, [isFundingError]);
+
+  console.log(tokenURI, isFundingSuccess, isFundingError);
 
   return (
     <FundingContainer>
@@ -224,7 +312,7 @@ const FundProject = ({
               {campaign?.campaignStatus === 1
                 ? 'Fund Project'
                 : 'Funding Closed'}
-              {isRegisterLoading && (
+              {fundingLoading && (
                 <span>
                   <TransactionLoader />
                 </span>

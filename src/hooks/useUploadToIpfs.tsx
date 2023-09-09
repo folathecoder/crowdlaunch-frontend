@@ -1,38 +1,50 @@
 import { useState } from 'react';
-import { create as ipfsHttpClient } from 'ipfs-http-client';
+import { create as ipfsHttpClient, Options } from 'ipfs-http-client';
 
-// Replace with your IPFS HTTP API endpoint
-const ipfsOptions = {
-  url: 'https://ipfs.infura.io:5001/api/v0',
+//IPFS project information
+const authorization =
+  'Basic ' +
+  Buffer.from(
+    process.env.NEXT_PUBLIC_IPFS_API_KEY +
+      ':' +
+      process.env.NEXT_PUBLIC_IPFS_SECRET_KEY
+  ).toString('base64');
+
+// Define your options
+const options: Options = {
+  url: 'https://ipfs.infura.io:5001',
+  headers: {
+    authorization,
+  },
 };
 
-const client = ipfsHttpClient(ipfsOptions);
+// Create an IPFS client with the provided options
+const client = ipfsHttpClient(options);
 
 interface UploadToIpfsResult {
-  ipfsUrl: string | null;
   uploading: boolean;
-  uploadFileToIpfs: (file: File) => Promise<void>;
+  uploadFileToIpfs: (file: string) => Promise<string | null>;
 }
 
 const useUploadToIpfs = (): UploadToIpfsResult => {
-  const [ipfsUrl, setIpfsUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
 
-  const uploadFileToIpfs = async (file: File): Promise<void> => {
+  const uploadFileToIpfs = async (file: string): Promise<string | null> => {
     try {
       setUploading(true);
 
       const added = await client.add({ content: file });
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
-      setIpfsUrl(url);
+      const url = `https://crowdlaunch.infura-ipfs.io/ipfs/${added.path}`;
+      return url;
     } catch (err) {
       console.log(err || 'An error occurred while uploading to IPFS');
+      return null;
     } finally {
       setUploading(false);
     }
   };
 
-  return { ipfsUrl, uploading, uploadFileToIpfs };
+  return { uploading, uploadFileToIpfs };
 };
 
 export default useUploadToIpfs;

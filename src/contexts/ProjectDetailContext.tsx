@@ -13,6 +13,9 @@ import { FetchingStatus } from '@/types/fetchingTypes';
 import usePostAuth from '@/hooks/RequestHooks/POST/usePostAuth';
 import useGetUserByAddress from '@/hooks/RequestHooks/GET/useGetUserByAddress';
 import useWallet from '@/wallet/useWallet';
+import useUploadToIpfs from '@/hooks/useUploadToIpfs';
+import useNftMetadataCreator from '@/hooks/useNftMetadataCreator';
+import useGetTokenId from '@/hooks/ContractHooks/useGetTokenId';
 
 export interface ProjectDetailContextReturnTypes {
   project: ProjectDetailType | null;
@@ -28,6 +31,7 @@ export interface ProjectDetailContextReturnTypes {
   rawNftImageUrl: string;
   nftImageRef: React.RefObject<HTMLDivElement>;
   generateNftImage: () => void;
+  tokenURI: string | null;
 }
 
 interface PropTypes {
@@ -47,7 +51,6 @@ const ProjectDetailProvider = ({
   const { user } = useGetUserByAddress({
     jwtToken: userData?.token,
   });
-
   const { project, fetchingStatus, error, refetch } = useGetProjectById({
     projectId: projectId,
   });
@@ -56,6 +59,19 @@ const ProjectDetailProvider = ({
   const [updateCount, setUpdateCount] = useState(0);
   const [fundAmount, setFundAmount] = useState<number | ''>('');
   const [rawNftImageUrl, setRawNftImageUrl] = useState('');
+  const [ipfsUrl, setIpfsUrl] = useState<string | null>(null);
+  const [tokenURI, setTokenURI] = useState<string | null>(null);
+
+  const { nextTokenId } = useGetTokenId();
+  const { uploading, uploadFileToIpfs } = useUploadToIpfs();
+  const { generateMetaData } = useNftMetadataCreator({
+    companyName: project?.project.projectName,
+    industry: project?.category.categoryName,
+    totalShare: project?.project.targetAmount,
+    sharePrice: fundAmount,
+    shareId: nextTokenId,
+    nftImage: ipfsUrl,
+  });
 
   // Check if the project creator is the active view for the project
   // Make creator functionalities accessible to the user if, a creator
@@ -72,26 +88,50 @@ const ProjectDetailProvider = ({
 
   const nftImageRef = useRef<HTMLDivElement>(null);
 
-  // Callback used to generate NFT image template URl for IPFS
-  const generateNftImage = useCallback(() => {
+  // Callback used to generate NFT image template URL for IPFS
+  const generateNftImage = useCallback(async () => {
     if (nftImageRef.current === null) {
       return;
     }
 
-    toPng(nftImageRef.current, { cacheBust: true })
-      .then((dataUrl) => {
-        const link = document.createElement('a');
-        link.href = dataUrl;
-        link.download = `nft-template.png`;
-        link.click();
-        setRawNftImageUrl(dataUrl);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const dataUrl = await toPng(nftImageRef.current, { cacheBust: true });
+
+      const link = document.createElement('a');
+      link.href = dataUrl;
+      link.download = `nft-template.png`;
+      link.click();
+      setRawNftImageUrl(dataUrl);
+
+      // Upload to IPFS
+      const url = await uploadFileToIpfs(dataUrl);
+      setIpfsUrl(url);
+    } catch (err) {
+      console.error(err);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nftImageRef]);
 
-  console.log(rawNftImageUrl);
+  // Callback user to generate tokenURI will all required metadata in JSON
+  const generateTokenUri = useCallback(async () => {
+    if (ipfsUrl)
+      try {
+        const metaData = JSON.stringify(generateMetaData(), null, 2);
+        const url = await uploadFileToIpfs(metaData);
+        setTokenURI(url);
+      } catch (err) {
+        console.error(err);
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ipfsUrl]);
+
+  // Initiates the token URI generation when the ipfsUrl is available
+  useEffect(() => {
+    if (ipfsUrl) {
+      generateTokenUri();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ipfsUrl]);
 
   return (
     <ProjectDetailContext.Provider
@@ -109,6 +149,7 @@ const ProjectDetailProvider = ({
         rawNftImageUrl,
         nftImageRef,
         generateNftImage,
+        tokenURI,
       }}
     >
       {children}

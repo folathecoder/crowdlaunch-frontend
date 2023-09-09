@@ -11,7 +11,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ value, max }) => {
 
   return (
     <ProgressBarContainer>
-      <Bar style={{ width: `${width}%` }} />
+      <Bar style={{ width: `${width > 100 ? 100 : width}%` }} />
     </ProgressBarContainer>
   );
 };

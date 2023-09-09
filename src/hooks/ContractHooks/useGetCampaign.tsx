@@ -47,6 +47,7 @@ const useGetCampaign = ({ projectAddress }: PropType): ReturnType => {
     functionName: 'campaigns',
     chainId: 11155111,
     args: [projectAddress as `0x${string}`],
+    watch: true,
   });
 
   const campaignReadData = campaignData as Array<any>;

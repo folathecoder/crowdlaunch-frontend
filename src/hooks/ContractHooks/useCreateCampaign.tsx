@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
 import useWallet from '@/wallet/useWallet';
 import CrowdfundContractABI from 'contracts/abi/crowdfundContractABI.json';
 import {
   usePrepareContractWrite,
   useContractWrite,
-  useContractRead,
   useWaitForTransaction,
 } from 'wagmi';
 import { weiConverter } from '@/helpers/weiConverter';

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { IpfsImage } from 'react-ipfs-image';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -9,7 +10,7 @@ import {
   NFTCreator,
 } from './nftCardStyles';
 import useGetNftById from '@/hooks/RequestHooks/GET/useGetNftById';
-import { CroppedImage } from '@/components/global';
+import { renderIPFSImage } from '@/helpers/ipfsImageReader';
 
 interface PropType {
   nftId: string;
@@ -19,6 +20,30 @@ const NFTCard = ({ nftId }: PropType) => {
   const { nft, fetchingStatus } = useGetNftById({ nftId });
   const { nft: data } = nft || {};
 
+  const [imageData, setImageData] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  function fetchAndReadContent(linkUrl: string) {
+    fetch(linkUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((content) => {
+        setImageData(content);
+      })
+      .catch((error) => {
+        console.error('Error fetching and reading content:', error);
+      });
+  }
+
+  useEffect(() => {
+    if (data?.nftImage) fetchAndReadContent(data?.nftImage);
+  }, [data?.nftImage]);
+
   return (
     <>
       {fetchingStatus === 2 && data && (
@@ -26,7 +51,7 @@ const NFTCard = ({ nftId }: PropType) => {
           <NFTContainer>
             <NFTImageContainer>
               <Image
-                src={data.nftImage}
+                src={imageData ?? ''}
                 alt={data.nftName}
                 layout="fill"
                 objectFit="cover"
