@@ -53,8 +53,6 @@ const usePostPortfolio = (): ReturnType => {
       });
   };
 
-  console.log('portfolio', portfolioData, fetchError, fetchStatus);
-
   return { addProjectToPortfolio };
 };
 

@@ -15,4 +15,5 @@ export interface NFTPostData {
   nftImage: string;
   nftWalletAddress: string;
   categoryId: string;
+  nftId: string;
 }

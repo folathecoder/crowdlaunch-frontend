@@ -58,8 +58,6 @@ const useFundCampaign = ({
     await writeCampaignFund?.();
   };
 
-  console.log('campaign funding data', campaignFundData, isFundingError);
-
   return {
     fundCampaign,
     isFundingSuccess,

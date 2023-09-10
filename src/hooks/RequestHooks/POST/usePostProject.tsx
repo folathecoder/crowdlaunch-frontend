@@ -146,13 +146,6 @@ const usePostProject = ({ data }: PropType): PostProjectReturnType => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectData?.projectId]);
 
-  console.log(
-    'project creation: ',
-    projectCreationError,
-    'project detail creation: ',
-    projectDetailCreationError
-  );
-
   return {
     projectCreationStatus,
     projectCreationError,

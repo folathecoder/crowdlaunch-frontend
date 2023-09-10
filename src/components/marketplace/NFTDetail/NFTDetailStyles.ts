@@ -9,6 +9,7 @@ export const DetailContainer = styled.section`
   margin: var(--center-container);
   min-height: 500px;
   padding: 20px;
+  position: relative;
 
   & > * {
     display: flex;
@@ -17,6 +18,7 @@ export const DetailContainer = styled.section`
 
     @media screen and (min-width: 1000px) {
       flex-direction: row;
+      align-items: flex-start;
     }
 
     & > * {
@@ -31,6 +33,7 @@ export const DetailContainer = styled.section`
 
 export const DetailLeft = styled.div`
   width: calc(100vw - 40px);
+  height: 100%;
 
   @media screen and (min-width: 499px) {
     width: 450px;
@@ -38,6 +41,8 @@ export const DetailLeft = styled.div`
 
   @media screen and (min-width: 1000px) {
     padding-right: 40px;
+    position: sticky;
+    top: 100px;
   }
 `;
 
@@ -159,6 +164,8 @@ export const DetailOption = styled.div<Props>`
 `;
 
 export const DetailContent = styled.div`
+  margin-top: 20px;
+
   h1 {
     font-size: 30px;
     line-height: 35px;
@@ -177,7 +184,7 @@ export const DetailContent = styled.div`
   }
 
   p {
-    margin: 10px 0px 20px 0px;
+    margin: 30px 0px 20px 0px;
   }
 `;
 

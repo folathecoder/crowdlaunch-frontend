@@ -9,8 +9,10 @@ import {
   ExplorerButton,
 } from '@/components/marketplace/NFTDetail/NFTDetailStyles';
 import { BsBoxArrowUpRight } from 'react-icons/bs';
-import { FiCopy } from 'react-icons/fi';
 import { CustomSkeleton } from '@/components/global';
+import useGetUsers from '@/hooks/RequestHooks/GET/useGetUsers';
+import { shortenWalletAddress } from '@/helpers/formatters';
+import { ETHERSCAN_URL } from '@/data/appInfo';
 
 type Props = {
   mobile?: boolean;
@@ -21,10 +23,18 @@ const NFTExplorer = ({ mobile }: Props) => {
     NFTDetailContext
   ) as NFTDetailContextReturnTypes;
 
+  const { users } = useGetUsers();
+
+  const owner = users?.filter((user) => user.userId === nft?.nft.ownerId)[0];
+
   return (
     <DetailExplorer mobile={mobile}>
       {nftFetchingStatus === 2 ? (
-        <Link href="http://" target="_blank" rel="noreferrer">
+        <Link
+          href={`${ETHERSCAN_URL}/address/${owner?.walletAddress}`}
+          target="_blank"
+          rel="noreferrer"
+        >
           <ExplorerButton>
             <div>Scan on Ethereum Explorer</div>
             <div>
@@ -41,11 +51,18 @@ const NFTExplorer = ({ mobile }: Props) => {
         />
       )}
       {nftFetchingStatus === 2 ? (
-        <Link href="http://" target="_blank" rel="noreferrer">
+        <Link
+          href={`${ETHERSCAN_URL}/address/${owner?.walletAddress}`}
+          target="_blank"
+          rel="noreferrer"
+        >
           <ExplorerButton>
-            <div>Contract Address (0x..324)</div>
             <div>
-              <FiCopy />
+              Contract Address (
+              {shortenWalletAddress(owner?.walletAddress ?? '')})
+            </div>
+            <div>
+              <BsBoxArrowUpRight />
             </div>
           </ExplorerButton>
         </Link>

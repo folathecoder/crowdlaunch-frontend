@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useContractRead } from 'wagmi';
 import CrowdfundContractABI from 'contracts/abi/crowdfundContractABI.json';
 import { weiToEther } from '@/helpers/weiConverter';
+import { ProjectDetailType, ProjectPostType } from '@/types/projectTypes';
+import usePatchProject from '@/hooks/RequestHooks/PATCH/usePatchProject';
 
 interface ReturnType {
   campaign: CampaignDataType | null;
@@ -11,6 +13,8 @@ interface ReturnType {
 
 interface PropType {
   projectAddress: `0x${string}`;
+  project: ProjectDetailType | null;
+  token: string;
 }
 
 interface CampaignStatus {
@@ -33,8 +37,17 @@ interface CampaignDataType {
   depositAddress: `0x${string}`;
 }
 
-const useGetCampaign = ({ projectAddress }: PropType): ReturnType => {
+const useGetCampaign = ({
+  projectAddress,
+  project,
+  token,
+}: PropType): ReturnType => {
   const [campaign, setCampaign] = useState<CampaignDataType | null>(null);
+
+  // Update Project Details after Funding
+  const { updateProjectData } = usePatchProject({
+    jwtToken: token ?? '',
+  });
 
   // Read campaign data from the contract
   const {
@@ -66,6 +79,32 @@ const useGetCampaign = ({ projectAddress }: PropType): ReturnType => {
         depositAddress: campaignReadData[7],
       });
   }, [campaignReadData]);
+
+  // Update the project data on the backend on every contract read
+  useEffect(() => {
+    if (campaign && project) {
+      updateProjectData(
+        {
+          categoryId: project?.category.categoryId ?? '',
+          projectName: project?.project.projectName ?? '',
+          bannerImageUrl: project?.project.bannerImageUrl ?? '',
+          targetAmount: Number(campaign.targetAmount),
+          minInvestment: Number(campaign.minFunding),
+          noOfDaysLeft: campaign.targetDeadline,
+          projectWalletAddress: project?.project.projectWalletAddress ?? '',
+          customColour: {
+            fontColour: project?.project.customColour.fontColour ?? '',
+            bgColour1: project?.project.customColour.bgColour1 ?? '',
+            bgColour2: project?.project.customColour.bgColour2 ?? '',
+          },
+          projectStatus: campaign.campaignStatus,
+          amountRaised: Number(campaign.raisedAmount),
+        },
+        project?.project.projectId
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [campaign, project]);
 
   return { campaign, isCampaignDataError, isCampaignDataLoading };
 };

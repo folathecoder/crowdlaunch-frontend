@@ -18,8 +18,6 @@ import {
 import { NFTCard, NFTSearch } from '@/components/marketplace';
 import { ProjectCardSkeleton } from '@/components/explore';
 import ExploreFilter from '@/components/marketplace/children/exploreFilter/exploreFilter';
-import { GoFilter } from 'react-icons/go';
-import { useBreakPointDown } from '@/hooks/useBreakPoint';
 import HoldersSection from '@/components/marketplace/children/HoldersSection/holdersSection';
 import MarketplaceProvider from '@/contexts/MarketplaceContext';
 import { LottieImage } from '@/components/global';
@@ -72,9 +70,11 @@ const ExploreProject = () => {
           new Array(14)
             .fill(null)
             .map((item) => <ProjectCardSkeleton key={item} />)}
-        {filteredNfts?.map((nft) => (
-          <NFTCard key={nft.nftId} nftId={nft.nftId} />
-        ))}
+        {filteredNfts
+          .filter((nft) => nft.price !== 0)
+          ?.map((nft) => (
+            <NFTCard key={nft.nftId} nftId={nft.nftId} />
+          ))}
       </ExploreCardsContainer>
       <ExploreError>
         {fetchingStatus === 2 && filteredNfts?.length === 0 && (

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { IpfsImage } from 'react-ipfs-image';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -7,10 +6,10 @@ import {
   NFTImageContainer,
   NFTTitle,
   NFTInfo,
-  NFTCreator,
 } from './nftCardStyles';
 import useGetNftById from '@/hooks/RequestHooks/GET/useGetNftById';
-import { renderIPFSImage } from '@/helpers/ipfsImageReader';
+import { formatPriceValue } from '@/helpers/formatters';
+import { CURRENCY_SYMBOL } from '@/data/appInfo';
 
 interface PropType {
   nftId: string;
@@ -18,12 +17,11 @@ interface PropType {
 
 const NFTCard = ({ nftId }: PropType) => {
   const { nft, fetchingStatus } = useGetNftById({ nftId });
-  const { nft: data } = nft || {};
+  const { nft: data } = nft ?? {};
 
   const [imageData, setImageData] = useState<any>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
+  // Function to fetch the content of ipfs image url and render the base64 erncoding to the frontend
   function fetchAndReadContent(linkUrl: string) {
     fetch(linkUrl)
       .then((response) => {
@@ -72,7 +70,9 @@ const NFTCard = ({ nftId }: PropType) => {
               </div>
               <div>
                 <h5>Price</h5>
-                <p>{data.price.toLocaleString()} ETH</p>
+                <p>
+                  {formatPriceValue(data.price)} {CURRENCY_SYMBOL}
+                </p>
               </div>
             </NFTInfo>
           </NFTContainer>

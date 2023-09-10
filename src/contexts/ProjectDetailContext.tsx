@@ -32,6 +32,7 @@ export interface ProjectDetailContextReturnTypes {
   nftImageRef: React.RefObject<HTMLDivElement>;
   generateNftImage: () => void;
   tokenURI: string | null;
+  tokenURILoading: boolean;
 }
 
 interface PropTypes {
@@ -61,9 +62,10 @@ const ProjectDetailProvider = ({
   const [rawNftImageUrl, setRawNftImageUrl] = useState('');
   const [ipfsUrl, setIpfsUrl] = useState<string | null>(null);
   const [tokenURI, setTokenURI] = useState<string | null>(null);
+  const [tokenURILoading, setTokenURILoading] = useState(false);
 
   const { nextTokenId } = useGetTokenId();
-  const { uploading, uploadFileToIpfs } = useUploadToIpfs();
+  const { uploadFileToIpfs } = useUploadToIpfs();
   const { generateMetaData } = useNftMetadataCreator({
     companyName: project?.project.projectName,
     industry: project?.category.categoryName,
@@ -99,8 +101,6 @@ const ProjectDetailProvider = ({
 
       const link = document.createElement('a');
       link.href = dataUrl;
-      link.download = `nft-template.png`;
-      link.click();
       setRawNftImageUrl(dataUrl);
 
       // Upload to IPFS
@@ -116,9 +116,12 @@ const ProjectDetailProvider = ({
   const generateTokenUri = useCallback(async () => {
     if (ipfsUrl)
       try {
+        setTokenURILoading(true);
         const metaData = JSON.stringify(generateMetaData(), null, 2);
         const url = await uploadFileToIpfs(metaData);
         setTokenURI(url);
+
+        if (url) setTokenURILoading(false);
       } catch (err) {
         console.error(err);
       }
@@ -150,6 +153,7 @@ const ProjectDetailProvider = ({
         nftImageRef,
         generateNftImage,
         tokenURI,
+        tokenURILoading,
       }}
     >
       {children}

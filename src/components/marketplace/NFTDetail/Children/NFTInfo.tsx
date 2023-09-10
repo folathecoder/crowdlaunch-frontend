@@ -11,9 +11,8 @@ import {
   CreatorImage,
 } from '@/components/marketplace/NFTDetail/NFTDetailStyles';
 import image from 'public/images/nft';
-import { Button } from '@/components/global';
+import { Button, CustomSkeleton } from '@/components/global';
 import { CURRENCY_SYMBOL } from '@/data/appInfo';
-import { CustomSkeleton } from '@/components/global';
 
 const NFTInfo = () => {
   const { nft, nftFetchingStatus } = useContext(
@@ -48,20 +47,7 @@ const NFTInfo = () => {
         </div>
       </DetailPrice>
       {nftFetchingStatus === 2 ? (
-        <>
-          <Creator>
-            <div>
-              <CreatorImage>
-                <Image src={image.creator4} alt={''} layout="responsive" />
-              </CreatorImage>
-              <div>
-                <h4>Creator</h4>
-                <p>Ghost Rider</p>
-              </div>
-            </div>
-          </Creator>
-          <p>{nftData?.nftDescription}</p>
-        </>
+        <p>{nftData?.nftDescription}</p>
       ) : (
         <CustomSkeleton height={200} width="100%" marginTop={1} />
       )}

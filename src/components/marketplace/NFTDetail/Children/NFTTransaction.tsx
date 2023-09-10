@@ -1,4 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
+import Lottie from 'react-lottie';
+import moment from 'moment';
 import {
   NFTDetailContext,
   NFTDetailContextReturnTypes,
@@ -11,14 +13,21 @@ import {
   OwnerImage,
   Owner,
 } from '@/components/marketplace/NFTDetail/NFTDetailStyles';
-import image from 'public/images/nft';
 import { CustomSkeleton } from '@/components/global';
+import useGetUsers from '@/hooks/RequestHooks/GET/useGetUsers';
+import { ProfileLottie } from 'public/images';
+import { convertToDecimal } from '@/helpers/formatters';
 
 const NFTTransaction = () => {
-  const { nftFetchingStatus } = useContext(
+  const { nftFetchingStatus, tokenURIData, nft } = useContext(
     NFTDetailContext
   ) as NFTDetailContextReturnTypes;
 
+  const { users } = useGetUsers();
+
+  const animationRef = useRef<any>(null);
+
+  const owner = users?.filter((user) => user.userId === nft?.nft.ownerId)[0];
   return (
     <>
       {nftFetchingStatus === 2 ? (
@@ -35,15 +44,30 @@ const NFTTransaction = () => {
                       <Owner>
                         <div>
                           <OwnerImage>
-                            <Image
-                              src={image.creator4}
-                              alt={''}
-                              layout="responsive"
-                            />
+                            {owner?.userProfileImage ? (
+                              <Image
+                                src={owner?.userProfileImage ?? ''}
+                                alt={owner?.userName ?? ''}
+                                layout="responsive"
+                                width={20}
+                                height={20}
+                              />
+                            ) : (
+                              <Lottie
+                                ref={animationRef}
+                                options={{
+                                  loop: true,
+                                  autoplay: false,
+                                  animationData: ProfileLottie,
+                                }}
+                                width={20}
+                                height={20}
+                              />
+                            )}
                           </OwnerImage>
                           <div>
                             <h4>Owner</h4>
-                            <p>Apollo Jordan</p>
+                            <p>{owner?.userName ?? ''}</p>
                           </div>
                         </div>
                       </Owner>
@@ -58,47 +82,43 @@ const NFTTransaction = () => {
           </DetailInfo>
           <DetailInfo>
             <div>
-              <h3>Transactions</h3>
+              <h3>Attributes</h3>
             </div>
             <div>
-              <Link href={'/'} target="_blank" rel="noreferrer">
-                <DetailOwner>
+              {tokenURIData?.attributes.map((attribute, index) => (
+                <DetailOwner key={index}>
                   <div>
                     <div>
-                      <Owner>
-                        <div>
+                      {attribute && (
+                        <Owner>
                           <div>
-                            <h4>12 days ago</h4>
-                            <p>Bought by Apollo Jordan for $23.89</p>
+                            <div>
+                              <p>{attribute.trait_type}</p>
+                            </div>
                           </div>
-                        </div>
-                      </Owner>
+                        </Owner>
+                      )}
                     </div>
                     <div>
-                      <h5>View Details</h5>
+                      {attribute && (
+                        <p>
+                          {attribute.trait_type === 'Share Price' &&
+                            `${attribute.value} ETH`}
+                          {attribute.trait_type === 'Total Shares' &&
+                            `${attribute.value} ETH`}
+                          {attribute.trait_type === 'Ownership Percentage' &&
+                            `${convertToDecimal(attribute.value as string)} %`}
+                          {attribute.trait_type === 'Date Issued' &&
+                            moment(attribute.value).format('MMMM Do YYYY')}
+                          {['Company', 'Industry', 'Share Class'].includes(
+                            attribute.trait_type
+                          ) && `${attribute.value as string}`}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </DetailOwner>
-              </Link>
-              <Link href={'/'} target="_blank" rel="noreferrer">
-                <DetailOwner>
-                  <div>
-                    <div>
-                      <Owner>
-                        <div>
-                          <div>
-                            <h4>42 days ago</h4>
-                            <p>Minted by Ghost Rider</p>
-                          </div>
-                        </div>
-                      </Owner>
-                    </div>
-                    <div>
-                      <h5>View Details</h5>
-                    </div>
-                  </div>
-                </DetailOwner>
-              </Link>
+              ))}
             </div>
           </DetailInfo>
         </>

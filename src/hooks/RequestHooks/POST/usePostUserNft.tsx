@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import useReadTokenURI from '@/hooks/useReadTokenURI';
 import { FetchingStatus } from '@/types/fetchingTypes';
 import usePostAuth from './usePostAuth';
 import { NFTPostData } from '@/types/nftTypes';
@@ -8,18 +7,12 @@ interface ReturnType {
   nftData: NFTPostData | null;
   fetchError: string | null;
   fetchStatus: FetchingStatus;
-  createNFT: () => Promise<void>;
+  addNftToCollection: (nftId: string) => Promise<void>;
 }
 
-interface PropType {
-  tokenURI: string;
-  projectCategoryId: string;
-}
-
-const usePostNft = ({ tokenURI, projectCategoryId }: PropType): ReturnType => {
-  const { data, loading: loadingURI } = useReadTokenURI({ tokenURI: tokenURI });
+const usePostNft = (): ReturnType => {
   const { userData } = usePostAuth();
-  const { token } = userData || {};
+  const { token } = userData ?? {};
 
   const [nftData, setNftData] = useState<NFTPostData | null>(null);
   const [fetchError, setFetchError] = useState<string | null>(null);
@@ -27,11 +20,11 @@ const usePostNft = ({ tokenURI, projectCategoryId }: PropType): ReturnType => {
     FetchingStatus.Default
   );
 
-  const createNFT = async () => {
-    if (data && !loadingURI) {
+  const addNftToCollection = async (nftId: string) => {
+    if (nftId) {
       setFetchStatus(FetchingStatus.Loading);
 
-      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/Nft`, {
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user-nfts/UserNft`, {
         method: 'POST',
         headers: {
           accept: '*/*',
@@ -39,12 +32,7 @@ const usePostNft = ({ tokenURI, projectCategoryId }: PropType): ReturnType => {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          nftName: data.name,
-          nftDescription: data.description,
-          price: 0,
-          nftImage: data.image,
-          nftWalletAddress: tokenURI,
-          categoryId: projectCategoryId,
+          nftId: nftId,
         }),
       })
         .then((response) => response.json())
@@ -59,7 +47,7 @@ const usePostNft = ({ tokenURI, projectCategoryId }: PropType): ReturnType => {
     }
   };
 
-  return { nftData, fetchError, fetchStatus, createNFT };
+  return { nftData, fetchError, fetchStatus, addNftToCollection };
 };
 
 export default usePostNft;

@@ -86,3 +86,33 @@ export const formatNumberWithDashes = (num: number): string => {
 
   return formattedNumber;
 };
+
+export function convertToDecimal(
+  scientificNotationString: string,
+  fixedDecimalPlaces: number = 20
+): string {
+  const decimalNumber: number = parseFloat(scientificNotationString);
+  let decimalString: string = decimalNumber.toFixed(fixedDecimalPlaces);
+
+  // Remove trailing zeros
+  if (decimalString.indexOf('.') > 0) {
+    decimalString = decimalString.replace(/0+$/, '');
+  }
+
+  // Remove the decimal point if there are no decimal digits left
+  if (decimalString.endsWith('.')) {
+    decimalString = decimalString.substring(0, decimalString.length - 1);
+  }
+
+  return decimalString;
+}
+
+export function formatPriceValue(num: number): string {
+  // Format number to 6 decimal places
+  let formatted = num.toFixed(6);
+
+  // Remove trailing zeros
+  formatted = formatted.replace(/\.?0+$/, '');
+
+  return formatted.toLocaleString();
+}

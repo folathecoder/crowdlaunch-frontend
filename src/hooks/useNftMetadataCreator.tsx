@@ -35,20 +35,20 @@ const useNftMetadataCreator = ({
   const generateMetaData = (): MetadataType => {
     return {
       name: `${companyName} Share #${shareId}`,
-      description: `"This NFT represents shares in ${companyName}, a renowned and innovative ${industry} company with a history of pioneering advancements in ${industry}-specific technology/innovations. As a shareholder, you'll have a stake in the company's future, allowing you to participate in important decisions, receive dividends, and benefit from the potential growth of your investment. Join us in shaping the future of the ${industry} sector with your ownership stake in ${companyName}."`,
-      image: nftImage || '',
+      description: `This NFT represents shares in ${companyName}, a renowned and innovative ${industry} company with a history of pioneering advancements in ${industry}-specific technology/innovations. As a shareholder, you will have a stake in the company's future, allowing you to participate in important decisions, receive dividends, and benefit from the potential growth of your investment. Join us in shaping the future of the ${industry} sector with your ownership stake in ${companyName}.`,
+      image: nftImage ?? '',
       attributes: [
         {
           trait_type: 'Company',
-          value: companyName || '',
+          value: companyName ?? '',
         },
         {
           trait_type: 'Industry',
-          value: industry || '',
+          value: industry ?? '',
         },
         {
           trait_type: 'Total Shares',
-          value: totalShare || '',
+          value: totalShare ?? '',
         },
         {
           trait_type: 'Ownership Percentage',

@@ -9,17 +9,20 @@ import {
   ProgressWrapper,
   FundItem,
 } from './FundProjectStyles';
-import { ProgressBar, TransactionLoader, Timer } from '@/components/global';
+import {
+  ProgressBar,
+  TransactionLoader,
+  Timer,
+  Notification,
+} from '@/components/global';
 import { CURRENCY_SYMBOL } from '@/data/appInfo';
 import useWallet from '@/wallet/useWallet';
-import { Notification } from '@/components/global';
 import useRegisterUser from '@/hooks/ContractHooks/useRegisterUser';
 import useGetCampaign from '@/hooks/ContractHooks/useGetCampaign';
-import { weiConverter, weiToEther } from '@/helpers/weiConverter';
-import useGetTokenId from '@/hooks/ContractHooks/useGetTokenId';
 import useFundCampaign from '@/hooks/ContractHooks/useFundCampaign';
 import usePostNft from '@/hooks/RequestHooks/POST/usePostNft';
 import usePostPortfolio from '@/hooks/RequestHooks/POST/usePostPortfolio';
+import { formatPriceValue } from '@/helpers/formatters';
 
 export const fundings: FundProjectTypes = {
   target: {
@@ -66,14 +69,18 @@ const FundProject = ({
 }: FundProjectTypes) => {
   const { wallet } = useWallet();
   const { userData } = useContext(AppContext) as AppContextReturnTypes;
-  const { fundAmount, setFundAmount, generateNftImage, project, tokenURI } =
-    useContext(ProjectDetailContext) as ProjectDetailContextReturnTypes;
+  const {
+    fundAmount,
+    setFundAmount,
+    generateNftImage,
+    project,
+    tokenURI,
+    tokenURILoading,
+  } = useContext(ProjectDetailContext) as ProjectDetailContextReturnTypes;
 
   const [notificationMessage, setNotificationMessage] = useState('');
   const [showNotification, setShowNotification] = useState(false);
   const [showFundButton, setShowFundButton] = useState(false);
-  const [fundingLoading, setFundingLoading] = useState(false);
-  const [hasStartedFunding, setHasStartedFunding] = useState(false);
 
   // Get the project data from the backend
   const { project: data } = useContext(
@@ -91,23 +98,19 @@ const FundProject = ({
   // Get updated campaign funding data from the smart contract
   const { campaign } = useGetCampaign({
     projectAddress: project?.project.projectWalletAddress as `0x${string}`,
+    project: data,
+    token: tokenURI || '',
   });
 
   // Fund a campaign on the blockchain
-  const {
-    fundCampaign,
-    isFundingSuccess,
-    isFundingLoading,
-    isFundingError,
-    isFundingIdle,
-  } = useFundCampaign({
+  const { fundCampaign, isFundingSuccess, isFundingLoading } = useFundCampaign({
     campaignAddress: project?.project.projectWalletAddress as `0x${string}`,
     fundAmount: Number(fundAmount),
     tokenURI: tokenURI || '',
   });
 
   // Create a new NFT
-  const { nftData, fetchError, fetchStatus, createNFT } = usePostNft({
+  const { createNFT } = usePostNft({
     tokenURI: tokenURI || '',
     projectCategoryId: project?.category.categoryId || '',
   });
@@ -136,7 +139,24 @@ const FundProject = ({
     setFundAmount(Number(value));
   };
 
-  // Function to generate NFT Metadata and fund a project
+  // Function to generate NFT Metadata
+  const handleGenerateNft = async () => {
+    if (
+      project?.project.minInvestment &&
+      fundAmount !== 0 &&
+      fundAmount !== '' &&
+      wallet.walletStatus.isConnected &&
+      campaign?.campaignStatus === 1 &&
+      fundAmount >= project?.project.minInvestment
+    ) {
+      generateNftImage();
+    } else {
+      setShowNotification(true);
+      fundErrorMessage();
+    }
+  };
+
+  // Function initialize the fundCampaign function on the smart contract
   const handleFundProject = async () => {
     if (
       project?.project.minInvestment &&
@@ -146,30 +166,12 @@ const FundProject = ({
       campaign?.campaignStatus === 1 &&
       fundAmount >= project?.project.minInvestment
     ) {
-      setFundingLoading(true);
-      await generateNftImage();
+      await fundCampaign();
     } else {
-      setFundingLoading(false);
       setShowNotification(true);
       fundErrorMessage();
     }
   };
-
-  // Initiate the funding process then the tokenURI is avaiable
-  useEffect(() => {
-    if (tokenURI && !hasStartedFunding) {
-      console.log('Yeasss 1');
-      const startFunding = async () => {
-        await fundCampaign();
-        setHasStartedFunding(true); // Mark as started
-
-        console.log('Yeasss 2');
-      };
-
-      startFunding();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tokenURI, hasStartedFunding]);
 
   const fundErrorMessage = () => {
     if (fundAmount === 0) {
@@ -197,37 +199,23 @@ const FundProject = ({
     }
   };
 
-  // Show campaign funding success message
+  // Series of events that occurs when camapaign is successfully funded
   useEffect(() => {
     if (isFundingSuccess) {
-      setFundingLoading(false);
-
-      // Create NFT
+      // Create an NFT data on the backend
       createNFT();
 
-      //Add Project to User Portfolio
-      addProjectToPortfolio(project?.project.projectId || '', fundAmount || 0);
+      // Add Project to User Portfolio
+      addProjectToPortfolio(project?.project.projectId ?? '', fundAmount || 0);
 
+      // Render notification
       setShowNotification(true);
       setNotificationMessage(
         `Congratuations, you have successfully funded ${project?.project.projectName} with ${fundAmount} ETH. Your newly minted share NFT has been added to your collection.`
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    fundAmount,
-    isFundingSuccess,
-    project?.project.projectId,
-    project?.project.projectName,
-  ]);
-
-  useEffect(() => {
-    if (isFundingError) {
-      setFundingLoading(false);
-    }
-  }, [isFundingError]);
-
-  console.log(tokenURI, isFundingSuccess, isFundingError);
+  }, [isFundingSuccess]);
 
   return (
     <FundingContainer>
@@ -244,7 +232,9 @@ const FundProject = ({
           <h3>
             {Number(campaign?.targetAmount)
               ? `
-              ${Number(campaign?.targetAmount).toFixed(3)} ${CURRENCY_SYMBOL}`
+              ${formatPriceValue(
+                Number(campaign?.targetAmount)
+              )} ${CURRENCY_SYMBOL}`
               : '--'}
           </h3>
           <p>{target.title}</p>
@@ -253,7 +243,9 @@ const FundProject = ({
           <h3>
             {Number(campaign?.raisedAmount)
               ? `
-              ${Number(campaign?.raisedAmount).toFixed(3)} ${CURRENCY_SYMBOL}`
+              ${formatPriceValue(
+                Number(campaign?.raisedAmount)
+              )} ${CURRENCY_SYMBOL}`
               : Number(campaign?.raisedAmount) === 0
               ? `0 ${CURRENCY_SYMBOL}`
               : '--'}
@@ -263,7 +255,9 @@ const FundProject = ({
         <FundItem>
           <h3>
             {Number(campaign?.minFunding)
-              ? `${Number(campaign?.minFunding).toFixed(3)} ${CURRENCY_SYMBOL}`
+              ? `${formatPriceValue(
+                  Number(campaign?.minFunding)
+                )} ${CURRENCY_SYMBOL}`
               : '--'}
           </h3>
           <p>{investment.title}</p>
@@ -271,7 +265,7 @@ const FundProject = ({
         <FundItem>
           <h3>
             {campaign?.backersCount
-              ? `${campaign?.backersCount}`
+              ? `${formatPriceValue(campaign?.backersCount)}`
               : campaign?.backersCount === 0
               ? '0'
               : '--'}
@@ -283,7 +277,7 @@ const FundProject = ({
             {data?.project.createdAt && campaign?.targetDeadline ? (
               <Timer
                 startDate={data?.project.createdAt}
-                targetSeconds={900000}
+                targetSeconds={campaign.targetDeadline}
               ></Timer>
             ) : (
               '--'
@@ -308,16 +302,31 @@ const FundProject = ({
               />
             )}
           {showFundButton ? (
-            <button onClick={handleFundProject}>
-              {campaign?.campaignStatus === 1
-                ? 'Fund Project'
-                : 'Funding Closed'}
-              {fundingLoading && (
-                <span>
-                  <TransactionLoader />
-                </span>
+            <>
+              {!tokenURI ? (
+                <button onClick={handleGenerateNft}>
+                  {campaign?.campaignStatus === 1
+                    ? 'Fund Project'
+                    : 'Funding Closed'}
+                  {tokenURILoading && (
+                    <span>
+                      <TransactionLoader />
+                    </span>
+                  )}
+                </button>
+              ) : (
+                <button onClick={handleFundProject}>
+                  {campaign?.campaignStatus === 1
+                    ? 'Confirm Funding'
+                    : 'Funding Closed'}
+                  {isFundingLoading && (
+                    <span>
+                      <TransactionLoader />
+                    </span>
+                  )}
+                </button>
               )}
-            </button>
+            </>
           ) : (
             <button onClick={handleRegisterUser}>
               Create Account

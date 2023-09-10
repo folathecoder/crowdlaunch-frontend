@@ -135,6 +135,7 @@ export interface NftMainType {
   createdAt: string;
   updatedAt: string;
   nftImage: string;
+  nftWalletAddress: string;
 }
 
 export interface LikedProjectType {
