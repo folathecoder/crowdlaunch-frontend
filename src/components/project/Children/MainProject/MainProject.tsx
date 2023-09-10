@@ -58,13 +58,14 @@ const MainProject: React.FC = () => {
   };
 
   // Get updated campaign funding data from the smart contract
-  const { campaign } = useGetCampaign({
-    projectAddress: project?.project.projectWalletAddress as `0x${string}`,
-  });
 
-  const isWalletAvailable = campaign?.depositAddress
-    ? checkAddressIsValid(campaign.depositAddress)
-    : false;
+  // const { campaign } = useGetCampaign({
+  //   projectAddress: project?.project.projectWalletAddress as `0x${string}`,
+  //   project: data,
+  //   token: tokenURI || '',
+  // });
+
+  const isWalletAvailable = false;
 
   return (
     <MajorSection>

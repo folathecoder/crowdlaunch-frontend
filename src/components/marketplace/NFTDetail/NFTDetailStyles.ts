@@ -194,6 +194,11 @@ export const DetailPrice = styled.div`
     align-items: center;
     justify-content: space-between;
   }
+
+  P {
+    font-style: italic;
+    color: var(--color-font-300)
+  }
 `;
 
 export const Creator = styled.div`
@@ -291,5 +296,57 @@ export const OwnerImage = styled.div`
 
   img {
     border-radius: 100%;
+  }
+`;
+
+export const TransactionContainer = styled.div`
+  width: 100%;
+  margin: 2rem 0rem;
+
+  input {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border-radius: 0.5rem;
+    border: 0.1rem solid var(--color-border-100);
+    background-color: var(--color-bg-200);
+    color: var(--color-font-100);
+    margin-bottom: 1rem;
+
+    &:active {
+      outline: 0.1rem solid var(--color-accent-100);
+    }
+
+    &:focus {
+      outline: 0.1rem solid var(--color-border-100);
+    }
+
+    &:hover {
+      outline: 0.1rem solid var(--color-border-100);
+    }
+  }
+
+  button {
+    width: 100%;
+    padding-block: 1rem;
+    text-transform: uppercase;
+    border-radius: 0.75rem;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+
+    span {
+      margin-left: 1rem;
+    }
+
+    &:hover {
+      background: black;
+      color: #fff;
+    }
+  }
+
+  P {
+    font-style: italic;
+    color: var(--color-font-300)
   }
 `;

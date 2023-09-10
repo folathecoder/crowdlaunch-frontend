@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useContractRead } from 'wagmi';
 import CrowdfundContractABI from 'contracts/abi/crowdfundContractABI.json';
 import { weiToEther } from '@/helpers/weiConverter';
-import { ProjectDetailType, ProjectPostType } from '@/types/projectTypes';
+import { ProjectDetailType } from '@/types/projectTypes';
 import usePatchProject from '@/hooks/RequestHooks/PATCH/usePatchProject';
 
 interface ReturnType {

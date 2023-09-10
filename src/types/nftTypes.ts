@@ -17,3 +17,11 @@ export interface NFTPostData {
   categoryId: string;
   nftId: string;
 }
+
+export interface NFTPostType {
+  nftName: string;
+  nftDescription: string;
+  nftImage: string;
+  price: number;
+  ownerId: string;
+}

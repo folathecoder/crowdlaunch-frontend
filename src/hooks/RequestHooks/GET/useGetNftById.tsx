@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FetchingStatus } from '@/types/fetchingTypes';
 import { NftType } from '@/types/projectTypes';
 
@@ -11,6 +11,7 @@ interface NftReturnType {
   nft: NftType | null;
   fetchingStatus: FetchingStatus;
   error: string | null;
+  refetch: () => void;
 }
 
 const useGetNftById = ({ nftId }: PropsType): NftReturnType => {
@@ -20,7 +21,8 @@ const useGetNftById = ({ nftId }: PropsType): NftReturnType => {
     FetchingStatus.Default
   );
 
-  useEffect(() => {
+  // Refactored fetching logic into a separate function
+  const fetchNft = useCallback(() => {
     setFetchingStatus(FetchingStatus.Loading);
 
     axios
@@ -39,7 +41,11 @@ const useGetNftById = ({ nftId }: PropsType): NftReturnType => {
       });
   }, [nftId]);
 
-  return { nft, error, fetchingStatus };
+  useEffect(() => {
+    fetchNft();
+  }, [fetchNft]);
+
+  return { nft, error, fetchingStatus, refetch: fetchNft };
 };
 
 export default useGetNftById;

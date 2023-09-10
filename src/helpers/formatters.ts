@@ -116,3 +116,16 @@ export function formatPriceValue(num: number): string {
 
   return formatted.toLocaleString();
 }
+
+export function extractNumberBehindLastHash(input: string): number | null {
+  // Regular expression to find the last '#' followed by numbers
+  const match = input.match(/#(\d+)(?!.*#\d+)/);
+
+  // If there's a match, return the number behind the last '#' as a number.
+  if (match && match[1]) {
+    return parseInt(match[1], 10);
+  }
+
+  // Return null if no matching number is found.
+  return null;
+}

@@ -9,6 +9,7 @@ export interface NFTDetailContextReturnTypes {
   nft: NftType | null;
   nftFetchingStatus: FetchingStatus;
   tokenURIData: MetadataType | null;
+  refetch: () => void;
 }
 
 interface PropTypes {
@@ -20,7 +21,11 @@ export const NFTDetailContext =
   React.createContext<NFTDetailContextReturnTypes | null>(null);
 
 const NFTDetailProvider = ({ children, nftId }: PropTypes): ReactElement => {
-  const { nft, fetchingStatus: nftFetchingStatus } = useGetNftById({
+  const {
+    nft,
+    fetchingStatus: nftFetchingStatus,
+    refetch,
+  } = useGetNftById({
     nftId: nftId,
   });
 
@@ -29,7 +34,9 @@ const NFTDetailProvider = ({ children, nftId }: PropTypes): ReactElement => {
   });
 
   return (
-    <NFTDetailContext.Provider value={{ nft, nftFetchingStatus, tokenURIData }}>
+    <NFTDetailContext.Provider
+      value={{ nft, nftFetchingStatus, tokenURIData, refetch }}
+    >
       {children}
     </NFTDetailContext.Provider>
   );
