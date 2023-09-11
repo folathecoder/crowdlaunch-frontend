@@ -47,10 +47,6 @@ type Tab = {
   content: string;
 };
 
-type TabsProps = {
-  tabs: Tab[];
-};
-
 const ProfileTabSection = () => {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 

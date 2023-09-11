@@ -80,11 +80,11 @@ const MarketplaceProvider = ({ children }: PropTypes): ReactElement => {
   }, [exploreFilter]);
 
   const sortNftsByName = (nfts: NftMainType[]): NftMainType[] | [] => {
-    return nfts.sort((a, b) => a.nftName.localeCompare(b.nftName));
+    return nfts.sort((a, b) => a.nftName?.localeCompare(b.nftName));
   };
 
   const filteredNfts = sortNftsByName(nfts || []).filter((project) =>
-    project.nftName.toLowerCase().includes(searchTerm.toLowerCase())
+    project.nftName?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (

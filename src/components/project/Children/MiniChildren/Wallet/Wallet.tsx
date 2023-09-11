@@ -13,18 +13,24 @@ import {
   WalletTransaction,
   WalletDeposit,
   WalletWithdraw,
-  Transactions,
   WalletDividend,
 } from './WalletStyles';
 import { BsInfoCircle } from 'react-icons/bs';
 import { BiCopy } from 'react-icons/bi';
 import Tooltip from '@mui/material/Tooltip';
 import { CURRENCY_SYMBOL } from '@/data/appInfo';
-import { BarcodeGenerator, Button, Notification } from '@/components/global';
+import {
+  BarcodeGenerator,
+  Button,
+  Notification,
+  Timer,
+} from '@/components/global';
 import { shortenWalletAddress } from '@/helpers/formatters';
-import DepositIcon from 'public/images/global/wallet/deposit-icon.png';
 import LockIcon from 'public/images/global/wallet/lock.png';
 import useWallet from '@/wallet/useWallet';
+import useGetWalletInfo from '@/hooks/ContractHooks/useGetWalletInfo';
+import useGetCampaign from '@/hooks/ContractHooks/useGetCampaign';
+import { formatPriceValue } from '@/helpers/formatters';
 
 const walletInfoData = {
   currentBalance: 'Current ETH balance in the wallet.',
@@ -35,9 +41,51 @@ const walletInfoData = {
   outstandingDividend: 'Pending dividend amount due to investors.',
 };
 
+interface DepositPropType {
+  depositAddress: `0x${string}`;
+}
+
+interface WithdrawPropType {
+  withdraw: (amount: number) => Promise<void>;
+  isWithdrawalSuccess: boolean;
+  isWithdrawalLoading: boolean;
+  isWithdrawalError: boolean;
+  currentBalance: string | undefined;
+}
+
 const Wallet = () => {
+  const { project, tokenURI, withdrawal } = useContext(
+    ProjectDetailContext
+  ) as ProjectDetailContextReturnTypes;
+
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
+
+  // Get updated campaign funding data from the smart contract
+  const { campaign } = useGetCampaign({
+    projectAddress: project?.project.projectWalletAddress as `0x${string}`,
+    project: project,
+    token: tokenURI || '',
+  });
+
+  // Get all wallet information
+  const {
+    startBalance,
+    totalDeposits,
+    totalWithdrawals,
+    paidDividends,
+    currentBalance,
+    walletAddress,
+    withdraw,
+    isWithdrawalSuccess,
+    isWithdrawalLoading,
+    isWithdrawalError,
+  } = useGetWalletInfo({
+    contractAddress: campaign?.depositAddress as `0x${string}`,
+    withdrawAmount: withdrawal.amount,
+  });
+
+  const outstandingDividends = Number(currentBalance) - Number(startBalance);
 
   return (
     <WalletSection>
@@ -48,41 +96,50 @@ const Wallet = () => {
         <WalletInfo>
           <InfoCard
             title="Current balance"
-            value={23290}
+            value={Number(formatPriceValue(Number(currentBalance)))}
             description={walletInfoData.currentBalance}
           />
           <InfoCard
             title="Start balance"
-            value={23290}
+            value={Number(formatPriceValue(Number(startBalance)))}
             description={walletInfoData.startBalance}
           />
           <InfoCard
             title="Withdrawals"
-            value={23290}
+            value={Number(formatPriceValue(Number(totalWithdrawals)))}
             description={walletInfoData.withdrawals}
           />
           <InfoCard
             title="Deposits"
-            value={23290}
+            value={Number(formatPriceValue(Number(totalDeposits)))}
             description={walletInfoData.deposits}
           />
           <InfoCard
             title="Dividends paid"
-            value={23290}
+            value={Number(formatPriceValue(Number(paidDividends)))}
             description={walletInfoData.dividendPaid}
           />
           <InfoCard
             title="Outstanding dividend"
-            value={23290}
+            value={
+              Number(formatPriceValue(outstandingDividends)) !== 0
+                ? Number(formatPriceValue(outstandingDividends))
+                : 0
+            }
             description={walletInfoData.outstandingDividend}
           />
         </WalletInfo>
         <DividendDisbursement />
         <WalletTransaction>
-          <WalletDepositCard />
-          <WalletWithdrawCard />
+          <WalletDepositCard depositAddress={walletAddress} />
+          <WalletWithdrawCard
+            withdraw={withdraw}
+            isWithdrawalSuccess={isWithdrawalSuccess}
+            isWithdrawalLoading={isWithdrawalLoading}
+            isWithdrawalError={isWithdrawalError}
+            currentBalance={currentBalance}
+          />
         </WalletTransaction>
-        {/* <AllTransactions /> */}
       </WalletContainer>
       <Notification
         message={notificationMessage}
@@ -112,24 +169,21 @@ const InfoCard = ({ title, value, description }: InfoCardProps) => {
           </h3>
         </Tooltip>
         <h4>
-          {value.toLocaleString()} {CURRENCY_SYMBOL}
+          {value} {CURRENCY_SYMBOL}
         </h4>
       </div>
     </WalletInfoCard>
   );
 };
 
-const WalletDepositCard = () => {
+const WalletDepositCard = ({ depositAddress }: DepositPropType) => {
   const clipboard = useClipboard();
   const [copied, setCopied] = useState(false);
-  const [address, setAddress] = useState(
-    '0x3eccc70b6396d8428338d77b71d35c5ff2bd6bed'
-  );
 
   const handleCopyClick = useCallback(() => {
     setCopied(true);
-    clipboard.copy(address);
-  }, [clipboard, address]);
+    clipboard.copy(depositAddress);
+  }, [clipboard, depositAddress]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -153,11 +207,19 @@ const WalletDepositCard = () => {
         </ol>
       </div>
       <div className="qrcode">
-        <BarcodeGenerator value="0x287y9274948379" />
+        {depositAddress && <BarcodeGenerator value={depositAddress} />}
       </div>
       <div className="copy">
         <button onClick={handleCopyClick}>
-          {copied ? <>Copied!</> : <>{shortenWalletAddress(address)}</>}
+          {copied ? (
+            <>Copied!</>
+          ) : (
+            <>
+              {depositAddress
+                ? shortenWalletAddress(depositAddress?.toString())
+                : ''}
+            </>
+          )}
           <span>
             <BiCopy />
           </span>
@@ -167,16 +229,20 @@ const WalletDepositCard = () => {
   );
 };
 
-const WalletWithdrawCard = () => {
+const WalletWithdrawCard = ({
+  withdraw,
+  isWithdrawalSuccess,
+  isWithdrawalLoading,
+  isWithdrawalError,
+  currentBalance,
+}: WithdrawPropType) => {
   const { wallet } = useWallet();
-  const { project } = useContext(
+  const { project, withdrawal, setWithdrawal } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
 
-  const [withdrawal, setWithdrawal] = useState({
-    message: '',
-    amount: '',
-  });
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -186,9 +252,57 @@ const WalletWithdrawCard = () => {
 
   const handleWithdraw = () => {
     if (wallet.walletAddress === project?.project.projectWalletAddress) {
-      console.log('withdraw');
+      if (withdrawal.amount !== 0 && withdrawal.amount) {
+        if (currentBalance && withdrawal.amount <= Number(currentBalance)) {
+          withdraw(withdrawal.amount);
+        } else {
+          setShowNotification(true);
+          setNotificationMessage(
+            'This wallet does not have sufficient balance to complete this transaction.'
+          );
+        }
+      } else {
+        setShowNotification(true);
+        setNotificationMessage('You cannot withdraw 0 ETH from your wallet. ');
+      }
+    } else {
+      setShowNotification(true);
+      setNotificationMessage(
+        'Wallet address does not have the required authorisation to withdraw funds from this wallet.'
+      );
     }
   };
+
+  useEffect(() => {
+    if (isWithdrawalSuccess) {
+      setShowNotification(true);
+      setNotificationMessage(
+        'Successful withdrawal: The authorised wallet address has been credited.'
+      );
+    }
+  }, [isWithdrawalSuccess]);
+
+  useEffect(() => {
+    if (isWithdrawalError) {
+      setShowNotification(true);
+      setNotificationMessage(
+        'An error occurred: The error might be due any of the following: Insufficient Gas, Authorisation, or Internet Connectivity.'
+      );
+    }
+  }, [isWithdrawalError]);
+
+  // Hide notification message after 7 seconds
+  useEffect(() => {
+    if (showNotification) {
+      const timer = setTimeout(() => {
+        setShowNotification(false);
+      }, 7000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [showNotification]);
 
   return (
     <WalletWithdraw>
@@ -201,7 +315,7 @@ const WalletWithdrawCard = () => {
       </div>
       <div>
         <div>
-          <label htmlFor="message">Withdrawal Message</label>
+          <label htmlFor="message">Withdrawal Message (Optional)</label>
           <input
             type="text"
             name="message"
@@ -227,20 +341,12 @@ const WalletWithdrawCard = () => {
             buttonTitle="Withdraw"
             buttonType="action"
             buttonFunction={handleWithdraw}
+            showLoader={isWithdrawalLoading}
           />
         </div>
-        {false && (
+        {showNotification && (
           <div className="withdraw_message" role="alert">
-            <p>Transaction message:</p>
-            {/* <p>Withdrawal successful</p> */}
-            <p>
-              Wallet address does not have the required authorisation to
-              withdraw funds from this wallet.
-            </p>
-            {/* <p>
-            This wallet does not have sufficient balance to complete this
-            transaction.
-          </p> */}
+            <p>{notificationMessage}</p>
           </div>
         )}
       </div>
@@ -260,48 +366,21 @@ const WalletWithdrawCard = () => {
   );
 };
 
-const AllTransactions = () => {
-  return (
-    <Transactions>
-      <h3>Transactions</h3>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((transaction) => (
-        <li key={transaction}>
-          <div>
-            <div className="tnx_header">
-              <div className="txn_icon">
-                <Image src={DepositIcon} alt="deposit" width={35} height={35} />
-              </div>
-              <div>
-                <p>Deposit</p>
-              </div>
-              <div>
-                <p className="txn_amount">1,200 {CURRENCY_SYMBOL}</p>
-              </div>
-            </div>
-            <div>
-              <p className="txn_msg">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
-          <div>
-            <p>12 Sept, 2023</p>
-          </div>
-        </li>
-      ))}
-    </Transactions>
-  );
-};
-
 const DividendDisbursement = () => {
   const { wallet } = useWallet();
   const { project } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
 
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
+
   const handleDisburseDividend = () => {
     if (wallet.walletAddress === project?.project.projectWalletAddress) {
-      console.log('disbursement');
+      setShowNotification(true);
+      setNotificationMessage(
+        'Dividend disbursement is currently unavailable as the project requires time to generate profits.'
+      );
     }
   };
 
@@ -309,6 +388,15 @@ const DividendDisbursement = () => {
     <WalletDividend>
       <div>
         <h3>Disburse dividends to investors</h3>
+        <p>
+          Next disbursement round is in{' '}
+          <span>
+            <Timer
+              startDate={project?.project.createdAt ?? ''}
+              targetSeconds={13000000}
+            />
+          </span>
+        </p>
       </div>
       <div>
         <Button
@@ -329,6 +417,11 @@ const DividendDisbursement = () => {
           </div>
         </Tooltip>
       )}
+      <Notification
+        message={notificationMessage}
+        setState={setShowNotification}
+        state={showNotification}
+      />
     </WalletDividend>
   );
 };

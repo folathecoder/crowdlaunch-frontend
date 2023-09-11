@@ -64,7 +64,6 @@ const Campaign = (props: Props) => {
           </ul>
         </div>
       </MiniTabContainer>
-
       <ActiveContentWrapper>{contents[activeContent]}</ActiveContentWrapper>
     </CampaignContainer>
   );

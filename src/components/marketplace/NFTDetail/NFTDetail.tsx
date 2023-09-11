@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   NFTDetailContext,
   NFTDetailContextReturnTypes,
@@ -10,7 +10,6 @@ import {
   DetailRight,
   DetailImage,
 } from '@/components/marketplace/NFTDetail/NFTDetailStyles';
-import image from 'public/images/nft';
 import {
   NavShare,
   NFTExplorer,
@@ -26,35 +25,64 @@ const NFTDetail = () => {
     NFTDetailContext
   ) as NFTDetailContextReturnTypes;
 
-  const { nft: nftData } = nft || {};
+  const { nft: nftData } = nft ?? {};
+
+  const [imageData, setImageData] = useState<any>(null);
+
+  // Function to fetch the content of ipfs image url and render the base64 erncoding to the frontend
+  function fetchAndReadContent(linkUrl: string) {
+    fetch(linkUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((content) => {
+        setImageData(content);
+      })
+      .catch((error) => {
+        console.error('Error fetching and reading content:', error);
+      });
+  }
+
+  useEffect(() => {
+    if (nftData?.nftImage) fetchAndReadContent(nftData?.nftImage);
+  }, [nftData?.nftImage]);
 
   return (
     <>
       <MetaData
-        title={nftData?.nftName || ''}
-        description={nftData?.nftDescription || ''}
-        ogImageUrl={nftData?.nftImage || ''}
+        title={nftData?.nftName ?? ''}
+        description={nftData?.nftDescription ?? ''}
+        ogImageUrl={nftData?.nftImage ?? ''}
       />
       <DetailContainer>
         <div>
           <DetailLeft>
-            <NavShare mobile />
             <div>
-              <Tilt glareEnable glareMaxOpacity={0.4}>
-                <DetailImage>
-                  {nftFetchingStatus === 2 && nftData?.nftImage ? (
-                    <Image
-                      src={nftData.nftImage}
-                      alt={nftData.nftName}
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  ) : (
-                    <CustomSkeleton height="100%" width="100%" marginTop={1} />
-                  )}
-                </DetailImage>
-              </Tilt>
-              <NFTExplorer mobile />
+              <NavShare mobile />
+              <div>
+                <Tilt glareEnable glareMaxOpacity={0.4}>
+                  <DetailImage>
+                    {nftFetchingStatus === 2 && nftData?.nftImage ? (
+                      <Image
+                        src={imageData ?? ''}
+                        alt={nftData.nftName}
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    ) : (
+                      <CustomSkeleton
+                        height="100%"
+                        width="100%"
+                        marginTop={1}
+                      />
+                    )}
+                  </DetailImage>
+                </Tilt>
+                <NFTExplorer mobile />
+              </div>
             </div>
           </DetailLeft>
           <DetailRight>

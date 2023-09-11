@@ -74,7 +74,7 @@ const ExploreSearch = ({ fullWidth }: HeaderSearchTypes) => {
 
   const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Search term:', searchTerm);
+
     setSearchTerm('');
   };
 

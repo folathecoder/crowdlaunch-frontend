@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { QUERIES } from '@/styles/mediaQueries';
+import { TransactionLoader } from '@/components/global';
 
 export const ButtonContainer = styled.button`
   display: inline-flex;
@@ -30,6 +31,10 @@ export const ButtonContainer = styled.button`
     outline: none;
   }
 
+  span {
+    margin-left: 8px;
+  }
+
   @media ${QUERIES.mobile} {
     height: 40px;
     padding: 11px 12.703px 12px 17px;
@@ -41,6 +46,7 @@ interface ButtonTypes {
   buttonType: 'link' | 'action';
   buttonLink?: string;
   buttonFunction?: () => void;
+  showLoader?: boolean;
 }
 
 const Button = ({
@@ -48,6 +54,7 @@ const Button = ({
   buttonType,
   buttonLink,
   buttonFunction,
+  showLoader,
 }: ButtonTypes) => {
   const router = useRouter();
 
@@ -62,6 +69,11 @@ const Button = ({
   return (
     <ButtonContainer onClick={handleButtonClick} type="button" role="button">
       {buttonTitle}
+      {showLoader && (
+        <span>
+          <TransactionLoader />
+        </span>
+      )}
     </ButtonContainer>
   );
 };

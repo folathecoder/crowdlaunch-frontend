@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Campaign from '../MiniChildren/Campaign/Campaign';
 import Updates from '../MiniChildren/Updates/Updates';
 import Wallet from '../MiniChildren/Wallet/Wallet';
-import Image from 'next/image';
+import { APP_URL } from '@/data/appInfo';
 import {
   MajorSection,
   TabsContainer,
@@ -19,6 +19,8 @@ import {
 } from './MainProjectStyles';
 import Tilt from 'react-parallax-tilt';
 import { NFTImageTemplate } from '@/components/global';
+import useGetCampaign from '@/hooks/ContractHooks/useGetCampaign';
+import { checkAddressIsValid } from '@/helpers/checkAddressIsValid';
 
 interface InternalDataTypes {
   link: string;
@@ -39,7 +41,7 @@ const internalLinkData: InternalDataTypes[] = [
 ];
 
 const MainProject: React.FC = () => {
-  const { project, updateCount } = useContext(
+  const { project, updateCount, fundAmount, tokenURI } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
 
@@ -55,13 +57,28 @@ const MainProject: React.FC = () => {
     setActiveContent(active);
   };
 
+  // Get updated campaign funding data from the smart contract
+  const { campaign } = useGetCampaign({
+    projectAddress: project?.project.projectWalletAddress as `0x${string}`,
+    project: project,
+    token: tokenURI || '',
+  });
+
+  // Check if the campaign has a wallet activated by the smart contract
+  const isWalletAvailable = campaign?.depositAddress
+    ? checkAddressIsValid(campaign.depositAddress)
+    : false;
+
   return (
     <MajorSection>
       <div>
         <TabsWrapper>
           <TabsContainer>
             <ul>
-              {internalLinkData.map((data, index) => {
+              {(isWalletAvailable
+                ? internalLinkData
+                : internalLinkData.slice(0, 2)
+              ).map((data, index) => {
                 const isActive = activeContent === index;
                 return (
                   <ActiveTab
@@ -90,7 +107,7 @@ const MainProject: React.FC = () => {
           <TabContentsWrapper>{contents[activeContent]}</TabContentsWrapper>
           <VotingWrapper>
             <div>
-              <Tilt glareEnable glareMaxOpacity={0.4}>
+              <Tilt glareEnable glareMaxOpacity={0.4} >
                 <NFTImageTemplate
                   projectName={project?.project.projectName || ''}
                   nftStyle={{
@@ -100,14 +117,15 @@ const MainProject: React.FC = () => {
                       color2: project?.project.customColour.bgColour2 || '',
                     },
                   }}
+                  projectURL={`${APP_URL}/project/${project?.project.projectId}`}
+                  nftValue={fundAmount}
                 />
               </Tilt>
               {project?.project.projectName && (
                 <p className="nft_info">
                   {`This is a unique design of ${project?.project.projectName} Shares NFT. When you get one,
-              it will have all your investment info, like share price and ID.
-              The NFT also has a one-of-a-kind barcode that links to an ether
-              scanner.`}
+              it will have all your investment details, like share price and ID.
+              The NFT also has a one-of-a-kind barcode that links to the project on Crowdlaunch.`}
                 </p>
               )}
             </div>

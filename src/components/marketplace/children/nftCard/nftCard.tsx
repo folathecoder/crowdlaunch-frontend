@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -6,10 +6,10 @@ import {
   NFTImageContainer,
   NFTTitle,
   NFTInfo,
-  NFTCreator,
 } from './nftCardStyles';
 import useGetNftById from '@/hooks/RequestHooks/GET/useGetNftById';
-import { CroppedImage } from '@/components/global';
+import { formatPriceValue } from '@/helpers/formatters';
+import { CURRENCY_SYMBOL } from '@/data/appInfo';
 
 interface PropType {
   nftId: string;
@@ -17,7 +17,30 @@ interface PropType {
 
 const NFTCard = ({ nftId }: PropType) => {
   const { nft, fetchingStatus } = useGetNftById({ nftId });
-  const { nft: data } = nft || {};
+  const { nft: data } = nft ?? {};
+
+  const [imageData, setImageData] = useState<any>(null);
+
+  // Function to fetch the content of ipfs image url and render the base64 erncoding to the frontend
+  function fetchAndReadContent(linkUrl: string) {
+    fetch(linkUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((content) => {
+        setImageData(content);
+      })
+      .catch((error) => {
+        console.error('Error fetching and reading content:', error);
+      });
+  }
+
+  useEffect(() => {
+    if (data?.nftImage) fetchAndReadContent(data?.nftImage);
+  }, [data?.nftImage]);
 
   return (
     <>
@@ -26,7 +49,7 @@ const NFTCard = ({ nftId }: PropType) => {
           <NFTContainer>
             <NFTImageContainer>
               <Image
-                src={data.nftImage}
+                src={imageData ?? ''}
                 alt={data.nftName}
                 layout="fill"
                 objectFit="cover"
@@ -47,7 +70,9 @@ const NFTCard = ({ nftId }: PropType) => {
               </div>
               <div>
                 <h5>Price</h5>
-                <p>{data.price.toLocaleString()} ETH</p>
+                <p>
+                  {formatPriceValue(data.price)} {CURRENCY_SYMBOL}
+                </p>
               </div>
             </NFTInfo>
           </NFTContainer>

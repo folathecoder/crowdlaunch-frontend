@@ -11,6 +11,7 @@ import {
 import { ProgressBar } from '@/components/global';
 import useGetCategoryById from '@/hooks/RequestHooks/GET/useGetCategoyById';
 import { CURRENCY_SYMBOL } from '@/data/appInfo';
+import { formatPriceValue } from '@/helpers/formatters';
 
 interface ProjectCardTypes {
   projectName: string;
@@ -59,12 +60,14 @@ const ProjectCard = ({
         <ProjectInfo>
           <div>
             <h5>Min Investment</h5>
-            {minInvestment && <p>{`> ${minInvestment} ${CURRENCY_SYMBOL}`}</p>}
+            {minInvestment && (
+              <p>{`> ${formatPriceValue(minInvestment)} ${CURRENCY_SYMBOL}`}</p>
+            )}
           </div>
           <div>
             <h5>Amount Raised</h5>
             {amountRaised ? (
-              <p>{`${amountRaised.toLocaleString()} ${CURRENCY_SYMBOL}`}</p>
+              <p>{`${formatPriceValue(amountRaised)} ${CURRENCY_SYMBOL}`}</p>
             ) : (
               amountRaised === 0 && <p>{`0 ${CURRENCY_SYMBOL}`}</p>
             )}

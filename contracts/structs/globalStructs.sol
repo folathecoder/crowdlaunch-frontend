@@ -52,7 +52,6 @@ struct Campaign {
     address payable creatorAddress;
     uint256 backersCount;
     Backer[] backers;
-    uint256 reportCount;
     address payable depositAddress;
     uint256[] dividendAmount;
 }

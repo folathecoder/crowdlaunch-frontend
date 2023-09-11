@@ -10,6 +10,7 @@ import {
 import useGetProjectById from '@/hooks/RequestHooks/GET/useGetProjectById';
 import ProjectCardSkeleton from './projectCardSkeleton';
 import { CURRENCY_SYMBOL } from '@/data/appInfo';
+import { formatPriceValue } from '@/helpers/formatters';
 
 interface ProjectCardTypes {
   projectId: string;
@@ -44,26 +45,21 @@ const PortfolioCard = ({ projectId }: ProjectCardTypes) => {
               )}
               <h4 aria-label="project name">{project?.project?.projectName}</h4>
             </ProjectTitle>
-            {/* <ProjectProgress>
-              {project?.project?.targetAmount &&
-                project?.project?.amountRaised && (
-                  <ProgressBar
-                    max={project.project.targetAmount}
-                    value={project.project.amountRaised}
-                  />
-                )}
-            </ProjectProgress> */}
             <ProjectInfo>
               <div>
                 <h5>Min Investment</h5>
                 {project?.project?.minInvestment && (
-                  <p>{`> ${project.project.minInvestment} ${CURRENCY_SYMBOL}`}</p>
+                  <p>{`> ${formatPriceValue(
+                    project.project.minInvestment
+                  )} ${CURRENCY_SYMBOL}`}</p>
                 )}
               </div>
               <div>
                 <h5>Amount Raised</h5>
                 {project?.project?.amountRaised ? (
-                  <p>{`${project.project.amountRaised.toLocaleString()} ${CURRENCY_SYMBOL}`}</p>
+                  <p>{`${formatPriceValue(
+                    project.project.amountRaised
+                  )} ${CURRENCY_SYMBOL}`}</p>
                 ) : (
                   project?.project?.amountRaised === 0 && (
                     <p>{`0 ${CURRENCY_SYMBOL}`}</p>

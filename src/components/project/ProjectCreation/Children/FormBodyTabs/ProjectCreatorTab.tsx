@@ -16,6 +16,10 @@ import { Notification } from '@/components/global';
 import { initialProjectFormData } from '@/components/project/ProjectCreation/ProjectCreationContext';
 import Confetti from 'react-confetti';
 import useWindowSize from 'react-use/lib/useWindowSize';
+import useRegisterUser from '@/hooks/ContractHooks/useRegisterUser';
+import Tooltip from '@mui/material/Tooltip';
+import useCreateCampaign from '@/hooks/ContractHooks/useCreateCampaign';
+import { CAMPAIGN_FEE } from '@/data/appInfo';
 
 const ProjectCreatorTab = () => {
   const router = useRouter();
@@ -26,10 +30,13 @@ const ProjectCreatorTab = () => {
   const [notificationMessage, setNotificationMessage] = useState('');
   const [showNotification, setShowNotification] = useState(false);
   const [projectCreated, setProjectCreated] = useState(false);
+  const [showFundButton, setShowFundButton] = useState(false);
 
   const { projectFormData, setProjectFormData, setActiveTab } = useContext(
     ProjectCreactionContext
   ) as ProjectCreactionContextReturnTypes;
+
+  const { main } = projectFormData;
 
   const {
     createProject,
@@ -37,6 +44,25 @@ const ProjectCreatorTab = () => {
     projectDetailCreationStatus,
     projectData,
   } = usePostProject({ data: projectFormData });
+
+  const {
+    handleRegisterUser,
+    isRegisterSuccess,
+    isRegisterLoading,
+    isRegisterError,
+    isUserRegistered,
+  } = useRegisterUser();
+
+  const {
+    createCampaign,
+    isCreationSuccess,
+    isCreationLoading,
+    isCreationError,
+  } = useCreateCampaign({
+    targetAmount: main.targetAmount,
+    minInvestment: main.minInvestment,
+    endDate: main.noOfDaysLeft,
+  });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -52,6 +78,31 @@ const ProjectCreatorTab = () => {
 
   // Get current date in format YYYY-MM-DD
   const currentDate = new Date().toISOString().split('T')[0];
+
+  useEffect(() => {
+    if (isUserRegistered) {
+      setShowFundButton(isUserRegistered);
+    }
+  }, [isUserRegistered]);
+
+  useEffect(() => {
+    if (isRegisterSuccess) {
+      setShowFundButton(isRegisterSuccess);
+      setShowNotification(true);
+      setNotificationMessage(
+        'Congratulations! You have successfully registered an account on the blockchain. You can now create a campaign.'
+      );
+    }
+  }, [isRegisterSuccess]);
+
+  useEffect(() => {
+    if (isRegisterError) {
+      setShowNotification(true);
+      setNotificationMessage(
+        'An error has occurred while registering your account. Check that you have enough gas to complete the transaction.'
+      );
+    }
+  }, [isRegisterError]);
 
   useEffect(() => {
     if (projectCreationStatus === 2) {
@@ -117,6 +168,25 @@ const ProjectCreatorTab = () => {
     setActiveTab(0);
   };
 
+  useEffect(() => {
+    if (isCreationSuccess) {
+      handleProjectCreation();
+      setShowNotification(true);
+      setNotificationMessage(
+        'Congratulations, your campaign has been created on the blockchain. We are preparing your campaign for funding.'
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCreationSuccess]);
+
+  useEffect(() => {
+    if (isCreationError) {
+      setNotificationMessage(
+        'Project creation was not successful: Ensure you have enough funds for a campaign fee and gas.'
+      );
+    }
+  }, [isCreationError]);
+
   return (
     <ProjectCreatorContainer>
       <ProjectCreatorForm>
@@ -127,8 +197,8 @@ const ProjectCreatorTab = () => {
             </div>
             <div>
               <p className="project_subtitle">
-                For every project initiation on our platform, a nominal service
-                fee of 0.1 ETH, or its equivalent, will be applied.
+                {`For every project initiation on our platform, a nominal service
+                fee of ${CAMPAIGN_FEE} ETH, or its equivalent, will be applied.`}
               </p>
             </div>
             <div>
@@ -174,22 +244,41 @@ const ProjectCreatorTab = () => {
                 buttonType="action"
                 buttonFunction={() => setActiveTab(7)}
               />
-              <Button
-                buttonTitle={
-                  startProjectCreation
-                    ? `Get Funded (${requestCompletionCount}/2)`
-                    : `Get Funded`
-                }
-                buttonType="action"
-                buttonFunction={handleProjectCreation}
-              />
+              {showFundButton ? (
+                <Button
+                  buttonTitle={
+                    startProjectCreation
+                      ? `Get Funded (${requestCompletionCount}/2)`
+                      : `Get Funded`
+                  }
+                  buttonType="action"
+                  buttonFunction={createCampaign}
+                  showLoader={isCreationLoading}
+                />
+              ) : (
+                <Tooltip
+                  title="To initiate a campaign, you must also possess a blockchain account for verification purposes"
+                  placement="top"
+                  arrow
+                >
+                  <Button
+                    buttonTitle="Create Account"
+                    buttonType="action"
+                    buttonFunction={handleRegisterUser}
+                    showLoader={isRegisterLoading}
+                  />
+                </Tooltip>
+              )}
             </FormButtonContainer>
             <ProjectInfo>
+              <p>
+                Please note that, to initiate a campaign, you must also possess
+                a blockchain account for verification purposes.
+              </p>
               <p>
                 Edits to this project will be locked after creation and during
                 the funding round to ensure transparency.
               </p>
-
               <p>
                 Not ready to create a project? Your project will be saved as a
                 draft as long as you don&apos;t clear your browser&apos;s data.

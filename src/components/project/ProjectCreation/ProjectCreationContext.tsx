@@ -89,8 +89,6 @@ const ProjectCreactionProvider = ({ children }: PropTypes): ReactElement => {
     }
   }, [wallet.walletAddress]);
 
-  console.log(projectFormData);
-
   return (
     <ProjectCreactionContext.Provider
       value={{

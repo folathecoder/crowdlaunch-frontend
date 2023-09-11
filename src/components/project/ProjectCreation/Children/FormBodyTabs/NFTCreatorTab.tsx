@@ -1,12 +1,5 @@
 import Image from 'next/image';
-import React, {
-  useState,
-  useCallback,
-  useRef,
-  ChangeEvent,
-  useContext,
-  useEffect,
-} from 'react';
+import React, { useCallback, useRef, ChangeEvent, useContext } from 'react';
 import {
   ProjectCreactionContext,
   ProjectCreactionContextReturnTypes,

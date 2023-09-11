@@ -9,6 +9,7 @@ export const DetailContainer = styled.section`
   margin: var(--center-container);
   min-height: 500px;
   padding: 20px;
+  position: relative;
 
   & > * {
     display: flex;
@@ -17,6 +18,7 @@ export const DetailContainer = styled.section`
 
     @media screen and (min-width: 1000px) {
       flex-direction: row;
+      align-items: flex-start;
     }
 
     & > * {
@@ -31,6 +33,7 @@ export const DetailContainer = styled.section`
 
 export const DetailLeft = styled.div`
   width: calc(100vw - 40px);
+  height: 100%;
 
   @media screen and (min-width: 499px) {
     width: 450px;
@@ -38,6 +41,8 @@ export const DetailLeft = styled.div`
 
   @media screen and (min-width: 1000px) {
     padding-right: 40px;
+    position: sticky;
+    top: 100px;
   }
 `;
 
@@ -159,6 +164,8 @@ export const DetailOption = styled.div<Props>`
 `;
 
 export const DetailContent = styled.div`
+  margin-top: 20px;
+
   h1 {
     font-size: 30px;
     line-height: 35px;
@@ -177,7 +184,7 @@ export const DetailContent = styled.div`
   }
 
   p {
-    margin: 10px 0px 20px 0px;
+    margin: 30px 0px 20px 0px;
   }
 `;
 
@@ -186,6 +193,11 @@ export const DetailPrice = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  P {
+    font-style: italic;
+    color: var(--color-font-300)
   }
 `;
 
@@ -284,5 +296,57 @@ export const OwnerImage = styled.div`
 
   img {
     border-radius: 100%;
+  }
+`;
+
+export const TransactionContainer = styled.div`
+  width: 100%;
+  margin: 2rem 0rem;
+
+  input {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border-radius: 0.5rem;
+    border: 0.1rem solid var(--color-border-100);
+    background-color: var(--color-bg-200);
+    color: var(--color-font-100);
+    margin-bottom: 1rem;
+
+    &:active {
+      outline: 0.1rem solid var(--color-accent-100);
+    }
+
+    &:focus {
+      outline: 0.1rem solid var(--color-border-100);
+    }
+
+    &:hover {
+      outline: 0.1rem solid var(--color-border-100);
+    }
+  }
+
+  button {
+    width: 100%;
+    padding-block: 1rem;
+    text-transform: uppercase;
+    border-radius: 0.75rem;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+
+    span {
+      margin-left: 1rem;
+    }
+
+    &:hover {
+      background: black;
+      color: #fff;
+    }
+  }
+
+  P {
+    font-style: italic;
+    color: var(--color-font-300)
   }
 `;

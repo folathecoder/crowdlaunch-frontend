@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { FetchingStatus } from '@/types/fetchingTypes';
 import { UserUpdateType } from '@/types/projectTypes';
 
+
 interface UserReturnType {
   fetchingStatus: FetchingStatus;
   error: any;
