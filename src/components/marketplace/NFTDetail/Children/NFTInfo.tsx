@@ -82,12 +82,9 @@ const NFTInfo = () => {
 
   const handleBuying = () => {
     if (isUserRegistered) {
-      console.log(1);
       if (wallet.walletAddress && wallet.walletStatus.isConnected) {
-        console.log(2);
         if (user?.user.userId !== nft?.nft.ownerId) {
           buyListedNFT();
-          console.log(3);
         } else {
           setShowNotification(true);
           setNotificationMessage(
@@ -222,10 +219,12 @@ const NFTInfo = () => {
                 </div>
               )}
             </div>
-            <p>
-              Create an account on the blockchain to verify your wallet address
-              for all future NFT purchases.
-            </p>
+            {!showBuyButton && (
+              <p>
+                Create an account on the blockchain to verify your wallet
+                address for all future NFT purchases.
+              </p>
+            )}
           </DetailPrice>
         )}
       {user?.user.userId === nft?.nft.ownerId &&

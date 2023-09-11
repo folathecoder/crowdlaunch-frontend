@@ -33,6 +33,13 @@ export interface ProjectDetailContextReturnTypes {
   generateNftImage: () => void;
   tokenURI: string | null;
   tokenURILoading: boolean;
+  withdrawal: WithdrawalType;
+  setWithdrawal: React.Dispatch<React.SetStateAction<WithdrawalType>>;
+}
+
+interface WithdrawalType {
+  message: string;
+  amount: number;
 }
 
 interface PropTypes {
@@ -63,6 +70,10 @@ const ProjectDetailProvider = ({
   const [ipfsUrl, setIpfsUrl] = useState<string | null>(null);
   const [tokenURI, setTokenURI] = useState<string | null>(null);
   const [tokenURILoading, setTokenURILoading] = useState(false);
+  const [withdrawal, setWithdrawal] = useState({
+    message: '',
+    amount: 0,
+  });
 
   const { nextTokenId } = useGetTokenId();
   const { uploadFileToIpfs } = useUploadToIpfs();
@@ -154,6 +165,8 @@ const ProjectDetailProvider = ({
         generateNftImage,
         tokenURI,
         tokenURILoading,
+        withdrawal,
+        setWithdrawal,
       }}
     >
       {children}

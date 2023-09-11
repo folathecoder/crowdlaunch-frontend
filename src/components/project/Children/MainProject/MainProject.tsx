@@ -41,7 +41,7 @@ const internalLinkData: InternalDataTypes[] = [
 ];
 
 const MainProject: React.FC = () => {
-  const { project, updateCount, fundAmount } = useContext(
+  const { project, updateCount, fundAmount, tokenURI } = useContext(
     ProjectDetailContext
   ) as ProjectDetailContextReturnTypes;
 
@@ -58,14 +58,16 @@ const MainProject: React.FC = () => {
   };
 
   // Get updated campaign funding data from the smart contract
+  const { campaign } = useGetCampaign({
+    projectAddress: project?.project.projectWalletAddress as `0x${string}`,
+    project: project,
+    token: tokenURI || '',
+  });
 
-  // const { campaign } = useGetCampaign({
-  //   projectAddress: project?.project.projectWalletAddress as `0x${string}`,
-  //   project: data,
-  //   token: tokenURI || '',
-  // });
-
-  const isWalletAvailable = false;
+  // Check if the campaign has a wallet activated by the smart contract
+  const isWalletAvailable = campaign?.depositAddress
+    ? checkAddressIsValid(campaign.depositAddress)
+    : false;
 
   return (
     <MajorSection>
@@ -105,7 +107,7 @@ const MainProject: React.FC = () => {
           <TabContentsWrapper>{contents[activeContent]}</TabContentsWrapper>
           <VotingWrapper>
             <div>
-              <Tilt glareEnable glareMaxOpacity={0.4}>
+              <Tilt glareEnable glareMaxOpacity={0.4} >
                 <NFTImageTemplate
                   projectName={project?.project.projectName || ''}
                   nftStyle={{
@@ -122,9 +124,8 @@ const MainProject: React.FC = () => {
               {project?.project.projectName && (
                 <p className="nft_info">
                   {`This is a unique design of ${project?.project.projectName} Shares NFT. When you get one,
-              it will have all your investment info, like share price and ID.
-              The NFT also has a one-of-a-kind barcode that links to an ether
-              scanner.`}
+              it will have all your investment details, like share price and ID.
+              The NFT also has a one-of-a-kind barcode that links to the project on Crowdlaunch.`}
                 </p>
               )}
             </div>

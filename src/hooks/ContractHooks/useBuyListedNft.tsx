@@ -10,7 +10,7 @@ import { extractNumberBehindLastHash } from '@/helpers/formatters';
 import { weiConverter } from '@/helpers/weiConverter';
 
 interface ReturnType {
-  buyListedNFT: () => void;
+  buyListedNFT: () => Promise<void>;
   isBuyingSuccess: boolean;
   isBuyingLoading: boolean;
   isBuyingIdle: boolean;
@@ -50,7 +50,7 @@ const useBuyListedNft = ({ nftName, nftPrice }: PropType): ReturnType => {
     hash: buyListedNFTData?.hash,
   });
 
-  const buyListedNFT = async () => {
+  const buyListedNFT = async (): Promise<void> => {
     await writeBuyListedNFT?.();
   };
 

@@ -271,4 +271,10 @@ export const WalletDividend = styled.div`
     display: grid;
     place-items: center;
   }
+
+  span {
+    h3 {
+      color: var(--color-accent-100);
+    }
+  }
 `;

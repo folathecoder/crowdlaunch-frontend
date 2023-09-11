@@ -197,6 +197,12 @@ const FundProject = ({
         } ETH. Please enter an amount greater or equal to this amount.`
       );
     }
+
+    if (campaign?.campaignStatus !== 1) {
+      setNotificationMessage(
+        'The funding round is closed, please explore other projects on the platform.'
+      );
+    }
   };
 
   // Series of events that occurs when camapaign is successfully funded
