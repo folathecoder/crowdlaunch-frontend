@@ -19,29 +19,29 @@ This project aims to develop an advanced NFT-based decentralised crowdfunding pl
 
 Clone the repository:
 
-\`\`\`bash
-git clone https://github.com/yourusername/your-project-name.git
-\`\`\`
+```bash
+git clone https://github.com/folathecoder/crowdlaunch-frontend
+```
 
 Navigate to the project directory:
 
-\`\`\`bash
+```bash
 cd your-project-name
-\`\`\`
+```
 
 Install dependencies:
 
-\`\`\`bash
+```bash
 yarn install
-\`\`\`
+```
 
 ## Running the App
 
 Start the development server:
 
-\`\`\`bash
+```bash
 yarn dev
-\`\`\`
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
@@ -49,17 +49,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 To create a production build, run:
 
-\`\`\`bash
+```bash
 yarn build
-\`\`\`
+```
 
-Then to start the production server:
+Then, to start the production server:
 
-\`\`\`bash
+```bash
 yarn start
-\`\`\`
-
+```
 
 ## Copyright
 
-Images used in this project are for demmentation purposes only and do not belong to the creator of this project.
+Images used in this project are for demmostration purposes only and do not belong to the creator of this project.
