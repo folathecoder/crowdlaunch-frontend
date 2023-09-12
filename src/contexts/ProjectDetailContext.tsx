@@ -108,6 +108,7 @@ const ProjectDetailProvider = ({
     }
 
     try {
+      setTokenURILoading(true);
       const dataUrl = await toPng(nftImageRef.current, { cacheBust: true });
 
       const link = document.createElement('a');
@@ -127,7 +128,6 @@ const ProjectDetailProvider = ({
   const generateTokenUri = useCallback(async () => {
     if (ipfsUrl)
       try {
-        setTokenURILoading(true);
         const metaData = JSON.stringify(generateMetaData(), null, 2);
         const url = await uploadFileToIpfs(metaData);
         setTokenURI(url);

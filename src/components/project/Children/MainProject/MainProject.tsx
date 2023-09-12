@@ -61,7 +61,7 @@ const MainProject: React.FC = () => {
   const { campaign } = useGetCampaign({
     projectAddress: project?.project.projectWalletAddress as `0x${string}`,
     project: project,
-    token: tokenURI || '',
+    token: tokenURI ?? '',
   });
 
   // Check if the campaign has a wallet activated by the smart contract
@@ -98,7 +98,7 @@ const MainProject: React.FC = () => {
                 );
               })}
             </ul>
-            <Link href="/explore" className="gradient-link">
+            <Link href="/marketplace" className="gradient-link">
               Explore NFTs
             </Link>
           </TabsContainer>
@@ -107,14 +107,14 @@ const MainProject: React.FC = () => {
           <TabContentsWrapper>{contents[activeContent]}</TabContentsWrapper>
           <VotingWrapper>
             <div>
-              <Tilt glareEnable glareMaxOpacity={0.4} >
+              <Tilt glareEnable glareMaxOpacity={0.4}>
                 <NFTImageTemplate
-                  projectName={project?.project.projectName || ''}
+                  projectName={project?.project.projectName ?? ''}
                   nftStyle={{
-                    fontColor: project?.project.customColour.fontColour || '',
+                    fontColor: project?.project.customColour.fontColour ?? '',
                     backgroundColor: {
-                      color1: project?.project.customColour.bgColour1 || '',
-                      color2: project?.project.customColour.bgColour2 || '',
+                      color1: project?.project.customColour.bgColour1 ?? '',
+                      color2: project?.project.customColour.bgColour2 ?? '',
                     },
                   }}
                   projectURL={`${APP_URL}/project/${project?.project.projectId}`}

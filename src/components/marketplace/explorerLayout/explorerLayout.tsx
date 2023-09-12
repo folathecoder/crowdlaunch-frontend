@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import {
+import MarketplaceProvider, {
   MarketplaceContextReturnTypes,
   MarketplaceContext,
 } from '@/contexts/MarketplaceContext';
@@ -11,7 +11,6 @@ import {
   ExploreFilterContainer,
   ExploreCardsContainer,
   ExploreSearchWrap,
-  ExploreOptions,
   ExploreWrap,
   ExploreError,
 } from './explorerLayoutStyles';
@@ -19,7 +18,6 @@ import { NFTCard, NFTSearch } from '@/components/marketplace';
 import { ProjectCardSkeleton } from '@/components/explore';
 import ExploreFilter from '@/components/marketplace/children/exploreFilter/exploreFilter';
 import HoldersSection from '@/components/marketplace/children/HoldersSection/holdersSection';
-import MarketplaceProvider from '@/contexts/MarketplaceContext';
 import { LottieImage } from '@/components/global';
 import NotFoundImage from 'public/images/global/not-found.json';
 

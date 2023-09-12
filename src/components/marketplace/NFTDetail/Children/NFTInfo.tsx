@@ -62,7 +62,7 @@ const NFTInfo = () => {
 
   const { updateNftData } = usePatchNft();
 
-  const { nft: nftData } = nft || {};
+  const { nft: nftData } = nft ?? {};
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
