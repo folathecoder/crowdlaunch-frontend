@@ -3,9 +3,8 @@ import {
   ProjectCreactionContext,
   ProjectCreactionContextReturnTypes,
 } from '@/components/project/ProjectCreation/ProjectCreationContext';
-import { RichTextEditor, Button } from '@/components/global';
+import { RichTextEditor, Button, Notification } from '@/components/global';
 import { InputContainer, FormButtonContainer } from './FormStyles';
-import { Notification } from '@/components/global';
 import { isProjectFormComplete } from '@/helpers/inputChecks';
 
 const DividendTab = () => {
@@ -35,6 +34,7 @@ const DividendTab = () => {
       setState1(dividend[0]);
       setState2(dividend[1]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const saveAndContinue = () => {
